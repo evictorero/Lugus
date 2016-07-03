@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65DD64FE-0ECF-4119-84C0-6C79C1546A7A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Interfaz.My.MyApplication</StartupObject>
+    <RootNamespace>Interfaz</RootNamespace>
+    <AssemblyName>Interfaz</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Interfaz.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Interfaz.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backup.Designer.vb">
+      <DependentUpon>Backup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Backup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bebida.Designer.vb">
+      <DependentUpon>Bebida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Bebida.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BebidaABM.Designer.vb">
+      <DependentUpon>BebidaABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BebidaABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bitacora.Designer.vb">
+      <DependentUpon>Bitacora.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Bitacora.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiarContraseña.Designer.vb">
+      <DependentUpon>CambiarContraseña.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CambiarContraseña.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsocUsuarioFamilia.Designer.vb">
+      <DependentUpon>AsocUsuarioFamilia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AsocUsuarioFamilia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Familia.Designer.vb">
+      <DependentUpon>Familia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Familia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FamiliaABM.Designer.vb">
+      <DependentUpon>FamiliaABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FamiliaABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogIn.Designer.vb">
+      <DependentUpon>LogIn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="msgBaja.Designer.vb">
+      <DependentUpon>msgBaja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="msgBaja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="msgContraseña.Designer.vb">
+      <DependentUpon>msgContraseña.vb</DependentUpon>
+    </Compile>
+    <Compile Include="msgContraseña.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="msgRehabilitar.Designer.vb">
+      <DependentUpon>msgRehabilitar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="msgRehabilitar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsocUsuarioPatente.Designer.vb">
+      <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AsocUsuarioPatente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Patente.Designer.vb">
+      <DependentUpon>Patente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Patente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatenteABM.Designer.vb">
+      <DependentUpon>PatenteABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PatenteABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedido.Designer.vb">
+      <DependentUpon>Pedido.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pedido.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PedidoABM.Designer.vb">
+      <DependentUpon>PedidoABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PedidoABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Platos.Designer.vb">
+      <DependentUpon>Platos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Platos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlatosABM.Designer.vb">
+      <DependentUpon>PlatosABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PlatosABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.Designer.vb">
+      <DependentUpon>Principal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Principal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Restore.Designer.vb">
+      <DependentUpon>Restore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Restore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuario.Designer.vb">
+      <DependentUpon>Usuario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsuarioABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsuarioABM.Designer.vb">
+      <DependentUpon>UsuarioABM.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Backup.resx">
+      <DependentUpon>Backup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bebida.resx">
+      <DependentUpon>Bebida.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BebidaABM.resx">
+      <DependentUpon>BebidaABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bitacora.resx">
+      <DependentUpon>Bitacora.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CambiarContraseña.resx">
+      <DependentUpon>CambiarContraseña.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AsocUsuarioFamilia.resx">
+      <DependentUpon>AsocUsuarioFamilia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Familia.resx">
+      <DependentUpon>Familia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FamiliaABM.resx">
+      <DependentUpon>FamiliaABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogIn.resx">
+      <DependentUpon>LogIn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="msgBaja.resx">
+      <DependentUpon>msgBaja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="msgContraseña.resx">
+      <DependentUpon>msgContraseña.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="msgRehabilitar.resx">
+      <DependentUpon>msgRehabilitar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AsocUsuarioPatente.resx">
+      <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Patente.resx">
+      <DependentUpon>Patente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatenteABM.resx">
+      <DependentUpon>PatenteABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedido.resx">
+      <DependentUpon>Pedido.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedidoABM.resx">
+      <DependentUpon>PedidoABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Platos.resx">
+      <DependentUpon>Platos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlatosABM.resx">
+      <DependentUpon>PlatosABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Restore.resx">
+      <DependentUpon>Restore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usuario.resx">
+      <DependentUpon>Usuario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsuarioABM.resx">
+      <DependentUpon>UsuarioABM.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

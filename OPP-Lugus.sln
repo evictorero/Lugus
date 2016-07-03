@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.CapaInterfaz", "1.CapaInterfaz", "{97679AA2-7084-4FD7-91AA-45B950627528}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Interfaz", "Interfaz\Interfaz.vbproj", "{65DD64FE-0ECF-4119-84C0-6C79C1546A7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.CapaNegocio", "2.CapaNegocio", "{2B5327F5-FD6E-4BF3-9D31-BFC0318A0F45}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.CapaDTO", "3.CapaDTO", "{00FA6EDF-301E-4274-ADC7-EE5A48701787}"
+	ProjectSection(SolutionItems) = preProject
+		UsuarioDTO.vb = UsuarioDTO.vb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.CapaDatos", "4.CapaDatos", "{9FA531BA-A3FC-4904-9C01-3C6FF7D5BE02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65DD64FE-0ECF-4119-84C0-6C79C1546A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65DD64FE-0ECF-4119-84C0-6C79C1546A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65DD64FE-0ECF-4119-84C0-6C79C1546A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65DD64FE-0ECF-4119-84C0-6C79C1546A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65DD64FE-0ECF-4119-84C0-6C79C1546A7A} = {97679AA2-7084-4FD7-91AA-45B950627528}
+	EndGlobalSection
+EndGlobal

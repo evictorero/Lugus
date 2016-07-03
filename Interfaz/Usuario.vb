@@ -1,0 +1,14 @@
+﻿Public Class Usuario
+
+    Private Sub Nuevo_Click(sender As Object, e As EventArgs) Handles Nuevo.Click
+        AsocUsuarioPatente.Show()
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        AsocUsuarioFamilia.Show()
+    End Sub
+End Class
