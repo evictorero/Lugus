@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.CapaNegocio", "2.CapaNego
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.CapaDTO", "3.CapaDTO", "{00FA6EDF-301E-4274-ADC7-EE5A48701787}"
 	ProjectSection(SolutionItems) = preProject
+		IdiomaDTO.vb = IdiomaDTO.vb
 		UsuarioDTO.vb = UsuarioDTO.vb
 	EndProjectSection
 EndProject
