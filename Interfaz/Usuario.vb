@@ -11,4 +11,11 @@
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         AsocUsuarioFamilia.Show()
     End Sub
+
+    Private Sub Usuario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.cbId_Propietario.DataSource = (New Negocio.Negocio.Propietario).Listar
+
+
+
+    End Sub
 End Class
