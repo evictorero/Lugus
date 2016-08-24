@@ -13,7 +13,7 @@
     End Sub
 
     Private Sub Usuario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.cbId_Propietario.DataSource = (New Negocio.Negocio.Propietario).Listar
+        'Me.cbId_Propietario.DataSource = (New Negocio.Negocio.Propietario).Listar
 
 
 
