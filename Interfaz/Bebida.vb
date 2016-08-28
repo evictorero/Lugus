@@ -1,7 +1,7 @@
-﻿Imports Negocio.
+﻿'Imports Negocio.
 
 Public Class Bebida
-    Dim mBebida As Negocio.Bebida
+    'Dim mBebida As Negocio.Bebida
 
     Friend mOperacion As TipoOperacion
     Friend Enum TipoOperacion

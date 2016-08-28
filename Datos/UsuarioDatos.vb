@@ -1,6 +1,6 @@
 ﻿Imports Datos.ProveedorDeDatos
 
-Imports DTO.UsuarioDTO
+Imports DTO.usuariodto
 
 Public Class UsuarioDatos
     Private Shared ProximoId As Integer

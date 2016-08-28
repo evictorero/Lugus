@@ -1,4 +1,5 @@
-﻿Public Class BebidaABM
+﻿Imports 
+Public Class BebidaABM
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         msgMensaje.Show()
