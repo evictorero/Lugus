@@ -4,9 +4,7 @@ Imports Datos.ProveedorDeDatos
 
 
 Namespace Negocio
-
     Public Class Usuario
-
 #Region "Declaraciones"
 
         Dim mUombre As String
@@ -67,9 +65,9 @@ Namespace Negocio
 
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.UsuarioDTO)
-            mId = pDTO.Id
-            mNombre = pDTO.Nombre
-            mApellido = pDTO.Apellido
+            mId = pDTO.id
+            mNombre = pDTO.nombre
+            mApellido = pDTO.apellido
         End Sub
 
         Private Shared Function ObtenerProximoId() As Integer
@@ -98,6 +96,4 @@ Namespace Negocio
 #End Region
 
     End Class
-
-
 End Namespace

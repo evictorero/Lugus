@@ -1,7 +1,7 @@
-﻿'Imports Negocio.
+﻿Imports Negocio.Negocio
 
 Public Class Bebida
-    'Dim mBebida As Negocio.Bebida
+    Dim mBebida As Negocio.Negocio.Bebida
 
     Friend mOperacion As TipoOperacion
     Friend Enum TipoOperacion
@@ -19,20 +19,17 @@ Public Class Bebida
         Select Case mOperacion
             Case TipoOperacion.Alta, TipoOperacion.Modificacion
                 If IsNothing(mBebida) Then
-                    mPropietario = New Negocio.Negocio.Propietario
+                    mBebida = New Negocio.Negocio.Bebida
                 End If
 
-                mPropietario.Nombre = Me.txtNombre.Text
-                mPropietario.Apellido = Me.txtApellido.Text
-                mPropietario.Guardar()
+                mBebida.descripcionCorta = Me.txtDescripcion_corta.Text
+                mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
+                mBebida.Guardar()
                 Me.Close()
             Case TipoOperacion.Baja
-                mPropietario.Eliminar()
+                mBebida.Eliminar()
                 Me.Close()
         End Select
     End Sub
 
-    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
-
-    End Sub
 End Class
