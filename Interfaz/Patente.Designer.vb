@@ -25,10 +25,10 @@ Partial Class Patente
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtFecha_baja = New System.Windows.Forms.TextBox()
+        Me.txtDescripcion_larga = New System.Windows.Forms.TextBox()
+        Me.txtDescripcion_corta = New System.Windows.Forms.TextBox()
+        Me.txtId_patente = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -58,10 +58,10 @@ Partial Class Patente
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox4)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.txtFecha_baja)
+        Me.GroupBox1.Controls.Add(Me.txtDescripcion_larga)
+        Me.GroupBox1.Controls.Add(Me.txtDescripcion_corta)
+        Me.GroupBox1.Controls.Add(Me.txtId_patente)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
@@ -74,39 +74,41 @@ Partial Class Patente
         Me.GroupBox1.TabIndex = 24
         Me.GroupBox1.TabStop = False
         '
-        'TextBox4
+        'txtFecha_baja
         '
-        Me.TextBox4.Location = New System.Drawing.Point(157, 174)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(108, 22)
-        Me.TextBox4.TabIndex = 10
+        Me.txtFecha_baja.Location = New System.Drawing.Point(157, 174)
+        Me.txtFecha_baja.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtFecha_baja.Name = "txtFecha_baja"
+        Me.txtFecha_baja.Size = New System.Drawing.Size(108, 22)
+        Me.txtFecha_baja.TabIndex = 10
         '
-        'TextBox3
+        'txtDescripcion_larga
         '
-        Me.TextBox3.Location = New System.Drawing.Point(157, 99)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(296, 71)
-        Me.TextBox3.TabIndex = 8
+        Me.txtDescripcion_larga.Location = New System.Drawing.Point(157, 99)
+        Me.txtDescripcion_larga.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtDescripcion_larga.MaxLength = 200
+        Me.txtDescripcion_larga.Multiline = True
+        Me.txtDescripcion_larga.Name = "txtDescripcion_larga"
+        Me.txtDescripcion_larga.Size = New System.Drawing.Size(296, 71)
+        Me.txtDescripcion_larga.TabIndex = 8
         '
-        'TextBox2
+        'txtDescripcion_corta
         '
-        Me.TextBox2.Location = New System.Drawing.Point(157, 70)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(296, 22)
-        Me.TextBox2.TabIndex = 7
+        Me.txtDescripcion_corta.Location = New System.Drawing.Point(157, 70)
+        Me.txtDescripcion_corta.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtDescripcion_corta.MaxLength = 30
+        Me.txtDescripcion_corta.Name = "txtDescripcion_corta"
+        Me.txtDescripcion_corta.Size = New System.Drawing.Size(296, 22)
+        Me.txtDescripcion_corta.TabIndex = 7
         '
-        'TextBox1
+        'txtId_patente
         '
-        Me.TextBox1.Location = New System.Drawing.Point(157, 34)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(89, 22)
-        Me.TextBox1.TabIndex = 6
+        Me.txtId_patente.Location = New System.Drawing.Point(157, 34)
+        Me.txtId_patente.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtId_patente.Name = "txtId_patente"
+        Me.txtId_patente.ReadOnly = True
+        Me.txtId_patente.Size = New System.Drawing.Size(89, 22)
+        Me.txtId_patente.TabIndex = 6
         '
         'Label5
         '
@@ -164,10 +166,10 @@ Partial Class Patente
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtFecha_baja As TextBox
+    Friend WithEvents txtDescripcion_larga As TextBox
+    Friend WithEvents txtDescripcion_corta As TextBox
+    Friend WithEvents txtId_patente As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label

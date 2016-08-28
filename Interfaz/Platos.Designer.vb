@@ -29,7 +29,7 @@ Partial Class Platos
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtId_Plato = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -40,18 +40,20 @@ Partial Class Platos
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(319, 320)
+        Me.Button2.Location = New System.Drawing.Point(284, 256)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(124, 39)
+        Me.Button2.Size = New System.Drawing.Size(110, 31)
         Me.Button2.TabIndex = 16
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(170, 320)
+        Me.Button1.Location = New System.Drawing.Point(151, 256)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(124, 39)
+        Me.Button1.Size = New System.Drawing.Size(110, 31)
         Me.Button1.TabIndex = 15
         Me.Button1.Text = "Guardar"
         Me.Button1.UseVisualStyleBackColor = True
@@ -62,107 +64,116 @@ Partial Class Platos
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.TextBox3)
         Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.txtId_Plato)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(59, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(52, 10)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(509, 291)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox1.Size = New System.Drawing.Size(452, 233)
         Me.GroupBox1.TabIndex = 17
         Me.GroupBox1.TabStop = False
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(146, 218)
+        Me.TextBox4.Location = New System.Drawing.Point(130, 174)
+        Me.TextBox4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(121, 26)
+        Me.TextBox4.Size = New System.Drawing.Size(108, 22)
         Me.TextBox4.TabIndex = 10
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(146, 172)
+        Me.ComboBox1.Location = New System.Drawing.Point(130, 138)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 28)
+        Me.ComboBox1.Size = New System.Drawing.Size(108, 24)
         Me.ComboBox1.TabIndex = 9
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(146, 127)
+        Me.TextBox3.Location = New System.Drawing.Point(130, 102)
+        Me.TextBox3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(332, 26)
+        Me.TextBox3.Size = New System.Drawing.Size(296, 22)
         Me.TextBox3.TabIndex = 8
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(146, 88)
+        Me.TextBox2.Location = New System.Drawing.Point(130, 70)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox2.Size = New System.Drawing.Size(89, 22)
         Me.TextBox2.TabIndex = 7
         '
-        'TextBox1
+        'txtId_Plato
         '
-        Me.TextBox1.Location = New System.Drawing.Point(146, 42)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 26)
-        Me.TextBox1.TabIndex = 6
+        Me.txtId_Plato.Location = New System.Drawing.Point(130, 34)
+        Me.txtId_Plato.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtId_Plato.Name = "txtId_Plato"
+        Me.txtId_Plato.ReadOnly = True
+        Me.txtId_Plato.Size = New System.Drawing.Size(89, 22)
+        Me.txtId_Plato.TabIndex = 6
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(42, 225)
+        Me.Label5.Location = New System.Drawing.Point(37, 180)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(90, 20)
+        Me.Label5.Size = New System.Drawing.Size(79, 17)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Fecha Baja"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(42, 181)
+        Me.Label4.Location = New System.Drawing.Point(37, 145)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(69, 20)
+        Me.Label4.Size = New System.Drawing.Size(61, 17)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "En carta"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(42, 134)
+        Me.Label3.Location = New System.Drawing.Point(37, 107)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 20)
+        Me.Label3.Size = New System.Drawing.Size(52, 17)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Detalle"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(42, 95)
+        Me.Label2.Location = New System.Drawing.Point(37, 76)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 20)
+        Me.Label2.Size = New System.Drawing.Size(58, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Nombre"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(42, 42)
+        Me.Label1.Location = New System.Drawing.Point(37, 34)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(59, 20)
+        Me.Label1.Size = New System.Drawing.Size(52, 17)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Codigo"
         '
         'Platos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(625, 379)
+        Me.ClientSize = New System.Drawing.Size(556, 303)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Platos"
         Me.Text = "Platos"
         Me.GroupBox1.ResumeLayout(False)
@@ -174,7 +185,7 @@ Partial Class Platos
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtId_Plato As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label

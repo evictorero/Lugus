@@ -27,9 +27,9 @@ Partial Class FamiliaABM
         Me.Descripcion_corta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion_Larga = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fecha_baja = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnRehabilitar = New System.Windows.Forms.Button()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -73,35 +73,35 @@ Partial Class FamiliaABM
         Me.fecha_baja.ReadOnly = True
         Me.fecha_baja.Width = 50
         '
-        'Button1
+        'btnRehabilitar
         '
-        Me.Button1.Location = New System.Drawing.Point(557, 159)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 38)
-        Me.Button1.TabIndex = 26
-        Me.Button1.Text = "Rehabilitar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnRehabilitar.Location = New System.Drawing.Point(557, 159)
+        Me.btnRehabilitar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRehabilitar.Name = "btnRehabilitar"
+        Me.btnRehabilitar.Size = New System.Drawing.Size(142, 38)
+        Me.btnRehabilitar.TabIndex = 26
+        Me.btnRehabilitar.Text = "Rehabilitar"
+        Me.btnRehabilitar.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnEliminar
         '
-        Me.Button3.Location = New System.Drawing.Point(410, 159)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(142, 38)
-        Me.Button3.TabIndex = 25
-        Me.Button3.Text = "Eliminar"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnEliminar.Location = New System.Drawing.Point(410, 159)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(142, 38)
+        Me.btnEliminar.TabIndex = 25
+        Me.btnEliminar.Text = "Eliminar"
+        Me.btnEliminar.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnModificar
         '
-        Me.Button2.Location = New System.Drawing.Point(262, 159)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(142, 38)
-        Me.Button2.TabIndex = 24
-        Me.Button2.Text = "Modificar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnModificar.Location = New System.Drawing.Point(262, 159)
+        Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(142, 38)
+        Me.btnModificar.TabIndex = 24
+        Me.btnModificar.Text = "Modificar"
+        Me.btnModificar.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
@@ -119,9 +119,9 @@ Partial Class FamiliaABM
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(818, 218)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnRehabilitar)
+        Me.Controls.Add(Me.btnEliminar)
+        Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.btnNuevo)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FamiliaABM"
@@ -132,9 +132,9 @@ Partial Class FamiliaABM
     End Sub
 
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnRehabilitar As Button
+    Friend WithEvents btnEliminar As Button
+    Friend WithEvents btnModificar As Button
     Friend WithEvents btnNuevo As Button
     Friend WithEvents Id_plato As DataGridViewTextBoxColumn
     Friend WithEvents Descripcion_corta As DataGridViewTextBoxColumn

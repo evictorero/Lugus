@@ -29,7 +29,7 @@ Partial Class PatenteABM
         Me.fecha_baja = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -93,15 +93,15 @@ Partial Class PatenteABM
         Me.Button3.Text = "Eliminar"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnModificar
         '
-        Me.Button2.Location = New System.Drawing.Point(243, 162)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(142, 38)
-        Me.Button2.TabIndex = 29
-        Me.Button2.Text = "Modificar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnModificar.Location = New System.Drawing.Point(243, 162)
+        Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(142, 38)
+        Me.btnModificar.TabIndex = 29
+        Me.btnModificar.Text = "Modificar"
+        Me.btnModificar.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
@@ -121,7 +121,7 @@ Partial Class PatenteABM
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.btnNuevo)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "PatenteABM"
@@ -138,6 +138,6 @@ Partial Class PatenteABM
     Friend WithEvents fecha_baja As DataGridViewTextBoxColumn
     Friend WithEvents Button1 As Button
     Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnModificar As Button
     Friend WithEvents btnNuevo As Button
 End Class

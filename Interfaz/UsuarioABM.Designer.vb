@@ -29,13 +29,13 @@ Partial Class UsuarioABM
         Me.Apellido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DNI = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaBaja = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnModificar = New System.Windows.Forms.Button()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnRehabilitar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnBlanquear = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -87,35 +87,35 @@ Partial Class UsuarioABM
         Me.FechaBaja.Name = "FechaBaja"
         Me.FechaBaja.ReadOnly = True
         '
-        'Button2
+        'btnModificar
         '
-        Me.Button2.Location = New System.Drawing.Point(236, 166)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(142, 38)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Modificar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnModificar.Location = New System.Drawing.Point(236, 166)
+        Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(142, 38)
+        Me.btnModificar.TabIndex = 2
+        Me.btnModificar.Text = "Modificar"
+        Me.btnModificar.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnEliminar
         '
-        Me.Button3.Location = New System.Drawing.Point(383, 166)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(142, 38)
-        Me.Button3.TabIndex = 3
-        Me.Button3.Text = "Eliminar"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnEliminar.Location = New System.Drawing.Point(383, 166)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(142, 38)
+        Me.btnEliminar.TabIndex = 3
+        Me.btnEliminar.Text = "Eliminar"
+        Me.btnEliminar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnRehabilitar
         '
-        Me.Button1.Location = New System.Drawing.Point(531, 166)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 38)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Rehabilitar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnRehabilitar.Location = New System.Drawing.Point(531, 166)
+        Me.btnRehabilitar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRehabilitar.Name = "btnRehabilitar"
+        Me.btnRehabilitar.Size = New System.Drawing.Size(142, 38)
+        Me.btnRehabilitar.TabIndex = 5
+        Me.btnRehabilitar.Text = "Rehabilitar"
+        Me.btnRehabilitar.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
@@ -127,25 +127,25 @@ Partial Class UsuarioABM
         Me.btnNuevo.Text = "Nuevo"
         Me.btnNuevo.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnBlanquear
         '
-        Me.Button4.Location = New System.Drawing.Point(678, 166)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(142, 38)
-        Me.Button4.TabIndex = 6
-        Me.Button4.Text = "Blanquear Clave"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnBlanquear.Location = New System.Drawing.Point(678, 166)
+        Me.btnBlanquear.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnBlanquear.Name = "btnBlanquear"
+        Me.btnBlanquear.Size = New System.Drawing.Size(142, 38)
+        Me.btnBlanquear.TabIndex = 6
+        Me.btnBlanquear.Text = "Blanquear Clave"
+        Me.btnBlanquear.UseVisualStyleBackColor = True
         '
         'UsuarioABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 237)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnBlanquear)
+        Me.Controls.Add(Me.btnRehabilitar)
+        Me.Controls.Add(Me.btnEliminar)
+        Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.btnNuevo)
         Me.Controls.Add(Me.DataGridView1)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -157,9 +157,9 @@ Partial Class UsuarioABM
     End Sub
 
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnModificar As Button
+    Friend WithEvents btnEliminar As Button
+    Friend WithEvents btnRehabilitar As Button
     Friend WithEvents Id As DataGridViewTextBoxColumn
     Friend WithEvents Usuario As DataGridViewTextBoxColumn
     Friend WithEvents Nombre As DataGridViewTextBoxColumn
@@ -169,5 +169,5 @@ Partial Class UsuarioABM
     Friend WithEvents btnNuevo As Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents Button4 As Button
+    Friend WithEvents btnBlanquear As Button
 End Class

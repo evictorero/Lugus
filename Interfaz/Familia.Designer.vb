@@ -25,10 +25,10 @@ Partial Class Familia
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtFecha_baja = New System.Windows.Forms.TextBox()
+        Me.txtDescripcion_larga = New System.Windows.Forms.TextBox()
+        Me.txtDescripcion_corta = New System.Windows.Forms.TextBox()
+        Me.txtId_familia = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -46,100 +46,111 @@ Partial Class Familia
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(312, 585)
+        Me.Button2.Location = New System.Drawing.Point(277, 468)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(124, 39)
+        Me.Button2.Size = New System.Drawing.Size(110, 31)
         Me.Button2.TabIndex = 23
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(163, 585)
+        Me.Button1.Location = New System.Drawing.Point(145, 468)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(124, 39)
+        Me.Button1.Size = New System.Drawing.Size(110, 31)
         Me.Button1.TabIndex = 22
         Me.Button1.Text = "Guardar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox4)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.txtFecha_baja)
+        Me.GroupBox1.Controls.Add(Me.txtDescripcion_larga)
+        Me.GroupBox1.Controls.Add(Me.txtDescripcion_corta)
+        Me.GroupBox1.Controls.Add(Me.txtId_familia)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(49, 21)
+        Me.GroupBox1.Location = New System.Drawing.Point(44, 17)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(526, 291)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox1.Size = New System.Drawing.Size(468, 233)
         Me.GroupBox1.TabIndex = 21
         Me.GroupBox1.TabStop = False
         '
-        'TextBox4
+        'txtFecha_baja
         '
-        Me.TextBox4.Location = New System.Drawing.Point(177, 218)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(121, 26)
-        Me.TextBox4.TabIndex = 10
+        Me.txtFecha_baja.Location = New System.Drawing.Point(157, 174)
+        Me.txtFecha_baja.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtFecha_baja.Name = "txtFecha_baja"
+        Me.txtFecha_baja.Size = New System.Drawing.Size(108, 22)
+        Me.txtFecha_baja.TabIndex = 10
         '
-        'TextBox3
+        'txtDescripcion_larga
         '
-        Me.TextBox3.Location = New System.Drawing.Point(177, 124)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(332, 88)
-        Me.TextBox3.TabIndex = 8
+        Me.txtDescripcion_larga.Location = New System.Drawing.Point(157, 99)
+        Me.txtDescripcion_larga.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtDescripcion_larga.MaxLength = 200
+        Me.txtDescripcion_larga.Multiline = True
+        Me.txtDescripcion_larga.Name = "txtDescripcion_larga"
+        Me.txtDescripcion_larga.Size = New System.Drawing.Size(296, 71)
+        Me.txtDescripcion_larga.TabIndex = 8
         '
-        'TextBox2
+        'txtDescripcion_corta
         '
-        Me.TextBox2.Location = New System.Drawing.Point(177, 88)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(332, 26)
-        Me.TextBox2.TabIndex = 7
+        Me.txtDescripcion_corta.Location = New System.Drawing.Point(157, 70)
+        Me.txtDescripcion_corta.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtDescripcion_corta.MaxLength = 30
+        Me.txtDescripcion_corta.Name = "txtDescripcion_corta"
+        Me.txtDescripcion_corta.Size = New System.Drawing.Size(296, 22)
+        Me.txtDescripcion_corta.TabIndex = 7
         '
-        'TextBox1
+        'txtId_familia
         '
-        Me.TextBox1.Location = New System.Drawing.Point(177, 42)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 26)
-        Me.TextBox1.TabIndex = 6
+        Me.txtId_familia.Location = New System.Drawing.Point(157, 34)
+        Me.txtId_familia.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtId_familia.Name = "txtId_familia"
+        Me.txtId_familia.ReadOnly = True
+        Me.txtId_familia.Size = New System.Drawing.Size(89, 22)
+        Me.txtId_familia.TabIndex = 6
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(24, 224)
+        Me.Label5.Location = New System.Drawing.Point(21, 179)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(90, 20)
+        Me.Label5.Size = New System.Drawing.Size(79, 17)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Fecha Baja"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 130)
+        Me.Label3.Location = New System.Drawing.Point(13, 104)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(137, 20)
+        Me.Label3.Size = New System.Drawing.Size(123, 17)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Descripcion Larga"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(15, 94)
+        Me.Label2.Location = New System.Drawing.Point(13, 75)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(135, 20)
+        Me.Label2.Size = New System.Drawing.Size(120, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Descripcion Corta"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(15, 48)
+        Me.Label1.Location = New System.Drawing.Point(13, 38)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(59, 20)
+        Me.Label1.Size = New System.Drawing.Size(52, 17)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Codigo"
         '
@@ -148,27 +159,31 @@ Partial Class Familia
         Me.GroupBox2.Controls.Add(Me.Button5)
         Me.GroupBox2.Controls.Add(Me.Nuevo)
         Me.GroupBox2.Controls.Add(Me.DataGridView1)
-        Me.GroupBox2.Location = New System.Drawing.Point(33, 318)
+        Me.GroupBox2.Location = New System.Drawing.Point(29, 254)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(567, 261)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox2.Size = New System.Drawing.Size(504, 209)
         Me.GroupBox2.TabIndex = 24
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Patentes"
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(463, 150)
+        Me.Button5.Location = New System.Drawing.Point(412, 120)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(95, 39)
+        Me.Button5.Size = New System.Drawing.Size(84, 31)
         Me.Button5.TabIndex = 6
         Me.Button5.Text = "Eliminar"
         Me.Button5.UseVisualStyleBackColor = True
         '
         'Nuevo
         '
-        Me.Nuevo.Location = New System.Drawing.Point(463, 94)
+        Me.Nuevo.Location = New System.Drawing.Point(412, 75)
+        Me.Nuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Nuevo.Name = "Nuevo"
-        Me.Nuevo.Size = New System.Drawing.Size(95, 39)
+        Me.Nuevo.Size = New System.Drawing.Size(84, 31)
         Me.Nuevo.TabIndex = 4
         Me.Nuevo.Text = "Agregar"
         Me.Nuevo.UseVisualStyleBackColor = True
@@ -177,10 +192,11 @@ Partial Class Familia
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cod_Patente, Me.Descripcion})
-        Me.DataGridView1.Location = New System.Drawing.Point(14, 37)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 30)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(440, 198)
+        Me.DataGridView1.Size = New System.Drawing.Size(391, 158)
         Me.DataGridView1.TabIndex = 0
         '
         'Cod_Patente
@@ -196,13 +212,14 @@ Partial Class Familia
         '
         'Familia
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(621, 637)
+        Me.ClientSize = New System.Drawing.Size(552, 510)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Familia"
         Me.Text = "Familia"
         Me.GroupBox1.ResumeLayout(False)
@@ -216,10 +233,10 @@ Partial Class Familia
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtFecha_baja As TextBox
+    Friend WithEvents txtDescripcion_larga As TextBox
+    Friend WithEvents txtDescripcion_corta As TextBox
+    Friend WithEvents txtId_familia As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label

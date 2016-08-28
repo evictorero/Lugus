@@ -143,10 +143,10 @@
     <Compile Include="LogIn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="msgBaja.Designer.vb">
-      <DependentUpon>msgBaja.vb</DependentUpon>
+    <Compile Include="msgMensaje.Designer.vb">
+      <DependentUpon>msgMensaje.vb</DependentUpon>
     </Compile>
-    <Compile Include="msgBaja.vb">
+    <Compile Include="msgMensaje.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="msgContraseña.Designer.vb">
@@ -272,8 +272,8 @@
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="msgBaja.resx">
-      <DependentUpon>msgBaja.vb</DependentUpon>
+    <EmbeddedResource Include="msgMensaje.resx">
+      <DependentUpon>msgMensaje.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="msgContraseña.resx">
       <DependentUpon>msgContraseña.vb</DependentUpon>

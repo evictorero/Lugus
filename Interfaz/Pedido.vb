@@ -10,4 +10,9 @@
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
 
     End Sub
+
+    Private Sub Pedido_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Visible = True
+        Me.TextBox2.Focus()
+    End Sub
 End Class
