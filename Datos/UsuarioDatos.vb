@@ -1,6 +1,6 @@
 ﻿Imports Datos.ProveedorDeDatos
 
-Imports DTO.usuariodto
+Imports DTO.UsuarioDTO
 
 Public Class UsuarioDatos
     Private Shared ProximoId As Integer
@@ -40,7 +40,7 @@ Public Class UsuarioDatos
         Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_usuario, nombre, apellido, email, dni, fecha_nacimiento FROM dbo.busuario "))
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
-            Dim mDTO As New UsuarioDTO
+            Dim mDTO As New DTO.UsuarioDTO
 
             CargarDTO(mDTO, mDr)
 

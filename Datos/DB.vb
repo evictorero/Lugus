@@ -5,7 +5,7 @@ Namespace ProveedorDeDatos
     Public Class DB
         Shared mCon As SqlConnection
 
-        Public Shared StrConnection As String = "Data Source=.\SQLEXPRESS;Initial Catalog=Negocio_Inmobiliario;Integrated Security=True"
+        Public Shared StrConnection As String = "Data Source=.\SQLEXPRESS;Initial Catalog=lugus;Integrated Security=True"
 
         Public Shared Function ExecuteDataset(ByVal pCommandText As String) As DataSet
             Dim mDs As New DataSet

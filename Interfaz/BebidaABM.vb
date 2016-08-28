@@ -13,11 +13,19 @@
     End Sub
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        Bebida.Show()
+        'Bebida.Show()
+        Dim mForm As New Bebida
+        mForm.mOperacion = Bebida.TipoOperacion.Alta
+        mForm.StartPosition = FormStartPosition.CenterParent
+        mForm.ShowDialog(Me)
+        ' ActualizarGrilla()
     End Sub
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         Bebida.Show()
     End Sub
 
+    Private Sub BebidaABM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

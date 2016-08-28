@@ -37,40 +37,40 @@ Partial Class BebidaABM
         '
         'btnRehabiliatar
         '
-        Me.btnRehabiliatar.Location = New System.Drawing.Point(557, 162)
-        Me.btnRehabiliatar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRehabiliatar.Location = New System.Drawing.Point(418, 132)
+        Me.btnRehabiliatar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnRehabiliatar.Name = "btnRehabiliatar"
-        Me.btnRehabiliatar.Size = New System.Drawing.Size(142, 38)
+        Me.btnRehabiliatar.Size = New System.Drawing.Size(106, 31)
         Me.btnRehabiliatar.TabIndex = 21
         Me.btnRehabiliatar.Text = "Rehabilitar"
         Me.btnRehabiliatar.UseVisualStyleBackColor = True
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(410, 162)
-        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnEliminar.Location = New System.Drawing.Point(308, 132)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(142, 38)
+        Me.btnEliminar.Size = New System.Drawing.Size(106, 31)
         Me.btnEliminar.TabIndex = 20
         Me.btnEliminar.Text = "Eliminar"
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(262, 162)
-        Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnModificar.Location = New System.Drawing.Point(196, 132)
+        Me.btnModificar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Size = New System.Drawing.Size(142, 38)
+        Me.btnModificar.Size = New System.Drawing.Size(106, 31)
         Me.btnModificar.TabIndex = 19
         Me.btnModificar.Text = "Modificar"
         Me.btnModificar.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(115, 162)
-        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnNuevo.Location = New System.Drawing.Point(86, 132)
+        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(142, 38)
+        Me.btnNuevo.Size = New System.Drawing.Size(106, 31)
         Me.btnNuevo.TabIndex = 18
         Me.btnNuevo.Text = "Nuevo"
         Me.btnNuevo.UseVisualStyleBackColor = True
@@ -79,12 +79,12 @@ Partial Class BebidaABM
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id_plato, Me.Descripcion_corta, Me.Descripcion_Larga, Me.habilitado, Me.fecha_baja})
-        Me.DataGridView1.Location = New System.Drawing.Point(45, 26)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DataGridView1.Location = New System.Drawing.Point(34, 21)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(732, 120)
+        Me.DataGridView1.Size = New System.Drawing.Size(549, 98)
         Me.DataGridView1.TabIndex = 22
         '
         'Id_plato
@@ -119,15 +119,15 @@ Partial Class BebidaABM
         '
         'BebidaABM
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(840, 222)
+        Me.ClientSize = New System.Drawing.Size(630, 180)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnRehabiliatar)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.btnNuevo)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "BebidaABM"
         Me.Text = "Bebida"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
