@@ -25,23 +25,25 @@ Partial Class AsocUsuarioFamilia
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cbDescripcionFamilia = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(341, 92)
+        Me.Button2.Location = New System.Drawing.Point(303, 74)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(124, 39)
+        Me.Button2.Size = New System.Drawing.Size(110, 31)
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(192, 92)
+        Me.Button1.Location = New System.Drawing.Point(171, 74)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(124, 39)
+        Me.Button1.Size = New System.Drawing.Size(110, 31)
         Me.Button1.TabIndex = 7
         Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
@@ -49,31 +51,33 @@ Partial Class AsocUsuarioFamilia
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(81, 30)
+        Me.Label1.Location = New System.Drawing.Point(72, 24)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(92, 20)
+        Me.Label1.Size = New System.Drawing.Size(82, 17)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Descripcion"
         '
-        'ComboBox1
+        'cbDescripcionFamilia
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
-        Me.ComboBox1.Location = New System.Drawing.Point(184, 27)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(410, 28)
-        Me.ComboBox1.TabIndex = 5
+        Me.cbDescripcionFamilia.FormattingEnabled = True
+        Me.cbDescripcionFamilia.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
+        Me.cbDescripcionFamilia.Location = New System.Drawing.Point(164, 22)
+        Me.cbDescripcionFamilia.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cbDescripcionFamilia.Name = "cbDescripcionFamilia"
+        Me.cbDescripcionFamilia.Size = New System.Drawing.Size(365, 24)
+        Me.cbDescripcionFamilia.TabIndex = 5
         '
-        'Familia
+        'AsocUsuarioFamilia
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(696, 174)
+        Me.ClientSize = New System.Drawing.Size(619, 139)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Name = "Familia"
+        Me.Controls.Add(Me.cbDescripcionFamilia)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Name = "AsocUsuarioFamilia"
         Me.Text = "Familia"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -83,5 +87,5 @@ Partial Class AsocUsuarioFamilia
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbDescripcionFamilia As ComboBox
 End Class

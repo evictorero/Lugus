@@ -23,45 +23,48 @@ Partial Class AsocUsuarioPatente
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chbM_Negada = New System.Windows.Forms.CheckBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cbDescripcionPatente = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(94, 84)
+        Me.Label2.Location = New System.Drawing.Point(84, 67)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 20)
+        Me.Label2.Size = New System.Drawing.Size(58, 17)
         Me.Label2.TabIndex = 16
         Me.Label2.Text = "Negada"
         '
-        'CheckBox1
+        'chbM_Negada
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(193, 84)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(22, 21)
-        Me.CheckBox1.TabIndex = 15
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chbM_Negada.AutoSize = True
+        Me.chbM_Negada.Location = New System.Drawing.Point(172, 67)
+        Me.chbM_Negada.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.chbM_Negada.Name = "chbM_Negada"
+        Me.chbM_Negada.Size = New System.Drawing.Size(18, 17)
+        Me.chbM_Negada.TabIndex = 15
+        Me.chbM_Negada.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(395, 117)
+        Me.Button2.Location = New System.Drawing.Point(351, 94)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(124, 39)
+        Me.Button2.Size = New System.Drawing.Size(110, 31)
         Me.Button2.TabIndex = 14
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(246, 117)
+        Me.Button1.Location = New System.Drawing.Point(219, 94)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(124, 39)
+        Me.Button1.Size = New System.Drawing.Size(110, 31)
         Me.Button1.TabIndex = 13
         Me.Button1.Text = "Guardar"
         Me.Button1.UseVisualStyleBackColor = True
@@ -69,33 +72,35 @@ Partial Class AsocUsuarioPatente
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(90, 37)
+        Me.Label1.Location = New System.Drawing.Point(80, 30)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(92, 20)
+        Me.Label1.Size = New System.Drawing.Size(82, 17)
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "Descripcion"
         '
-        'ComboBox1
+        'cbDescripcionPatente
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
-        Me.ComboBox1.Location = New System.Drawing.Point(193, 34)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(410, 28)
-        Me.ComboBox1.TabIndex = 11
+        Me.cbDescripcionPatente.FormattingEnabled = True
+        Me.cbDescripcionPatente.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
+        Me.cbDescripcionPatente.Location = New System.Drawing.Point(172, 27)
+        Me.cbDescripcionPatente.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cbDescripcionPatente.Name = "cbDescripcionPatente"
+        Me.cbDescripcionPatente.Size = New System.Drawing.Size(365, 24)
+        Me.cbDescripcionPatente.TabIndex = 11
         '
-        'Patente
+        'AsocUsuarioPatente
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(693, 190)
+        Me.ClientSize = New System.Drawing.Size(616, 152)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.chbM_Negada)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Name = "Patente"
+        Me.Controls.Add(Me.cbDescripcionPatente)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Name = "AsocUsuarioPatente"
         Me.Text = "Patente"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -103,9 +108,9 @@ Partial Class AsocUsuarioPatente
     End Sub
 
     Friend WithEvents Label2 As Label
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chbM_Negada As CheckBox
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbDescripcionPatente As ComboBox
 End Class
