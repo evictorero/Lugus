@@ -37,36 +37,40 @@ Partial Class BebidaABM
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(627, 202)
+        Me.Button1.Location = New System.Drawing.Point(557, 162)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(160, 48)
+        Me.Button1.Size = New System.Drawing.Size(142, 38)
         Me.Button1.TabIndex = 21
         Me.Button1.Text = "Rehabilitar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(461, 202)
+        Me.Button3.Location = New System.Drawing.Point(410, 162)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(160, 48)
+        Me.Button3.Size = New System.Drawing.Size(142, 38)
         Me.Button3.TabIndex = 20
         Me.Button3.Text = "Eliminar"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(295, 202)
+        Me.Button2.Location = New System.Drawing.Point(262, 162)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(160, 48)
+        Me.Button2.Size = New System.Drawing.Size(142, 38)
         Me.Button2.TabIndex = 19
         Me.Button2.Text = "Modificar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(129, 202)
+        Me.btnNuevo.Location = New System.Drawing.Point(115, 162)
+        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(160, 48)
+        Me.btnNuevo.Size = New System.Drawing.Size(142, 38)
         Me.btnNuevo.TabIndex = 18
         Me.btnNuevo.Text = "Nuevo"
         Me.btnNuevo.UseVisualStyleBackColor = True
@@ -75,47 +79,55 @@ Partial Class BebidaABM
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id_plato, Me.Descripcion_corta, Me.Descripcion_Larga, Me.habilitado, Me.fecha_baja})
-        Me.DataGridView1.Location = New System.Drawing.Point(51, 32)
+        Me.DataGridView1.Location = New System.Drawing.Point(45, 26)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(824, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(732, 120)
         Me.DataGridView1.TabIndex = 22
         '
         'Id_plato
         '
         Me.Id_plato.HeaderText = "Codigo"
         Me.Id_plato.Name = "Id_plato"
+        Me.Id_plato.ReadOnly = True
         '
         'Descripcion_corta
         '
         Me.Descripcion_corta.HeaderText = "Nombre"
         Me.Descripcion_corta.Name = "Descripcion_corta"
+        Me.Descripcion_corta.ReadOnly = True
         '
         'Descripcion_Larga
         '
         Me.Descripcion_Larga.HeaderText = "Detalle"
         Me.Descripcion_Larga.Name = "Descripcion_Larga"
+        Me.Descripcion_Larga.ReadOnly = True
         '
         'habilitado
         '
         Me.habilitado.HeaderText = "En carta"
         Me.habilitado.Name = "habilitado"
+        Me.habilitado.ReadOnly = True
         '
         'fecha_baja
         '
         Me.fecha_baja.HeaderText = "Fecha Baja"
         Me.fecha_baja.Name = "fecha_baja"
+        Me.fecha_baja.ReadOnly = True
         '
         'BebidaABM
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(945, 278)
+        Me.ClientSize = New System.Drawing.Size(840, 222)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnNuevo)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "BebidaABM"
         Me.Text = "Bebida"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()

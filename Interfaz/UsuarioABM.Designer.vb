@@ -43,98 +43,112 @@ Partial Class UsuarioABM
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id, Me.Usuario, Me.Nombre, Me.Apellido, Me.DNI, Me.FechaBaja})
-        Me.DataGridView1.Location = New System.Drawing.Point(34, 35)
+        Me.DataGridView1.Location = New System.Drawing.Point(30, 28)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(943, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(838, 120)
         Me.DataGridView1.TabIndex = 0
         '
         'Id
         '
         Me.Id.HeaderText = "Cod"
         Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
         '
         'Usuario
         '
         Me.Usuario.HeaderText = "Usuario"
         Me.Usuario.Name = "Usuario"
+        Me.Usuario.ReadOnly = True
         '
         'Nombre
         '
         Me.Nombre.HeaderText = "Nombre"
         Me.Nombre.Name = "Nombre"
+        Me.Nombre.ReadOnly = True
         '
         'Apellido
         '
         Me.Apellido.HeaderText = "Apellido"
         Me.Apellido.Name = "Apellido"
+        Me.Apellido.ReadOnly = True
         '
         'DNI
         '
         Me.DNI.HeaderText = "DNI"
         Me.DNI.Name = "DNI"
+        Me.DNI.ReadOnly = True
         '
         'FechaBaja
         '
         Me.FechaBaja.HeaderText = "Fecha Baja"
         Me.FechaBaja.Name = "FechaBaja"
+        Me.FechaBaja.ReadOnly = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(265, 208)
+        Me.Button2.Location = New System.Drawing.Point(236, 166)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(160, 48)
+        Me.Button2.Size = New System.Drawing.Size(142, 38)
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "Modificar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(431, 208)
+        Me.Button3.Location = New System.Drawing.Point(383, 166)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(160, 48)
+        Me.Button3.Size = New System.Drawing.Size(142, 38)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Eliminar"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(597, 208)
+        Me.Button1.Location = New System.Drawing.Point(531, 166)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(160, 48)
+        Me.Button1.Size = New System.Drawing.Size(142, 38)
         Me.Button1.TabIndex = 5
         Me.Button1.Text = "Rehabilitar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(99, 208)
+        Me.btnNuevo.Location = New System.Drawing.Point(88, 166)
+        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(160, 48)
+        Me.btnNuevo.Size = New System.Drawing.Size(142, 38)
         Me.btnNuevo.TabIndex = 1
         Me.btnNuevo.Text = "Nuevo"
         Me.btnNuevo.UseVisualStyleBackColor = True
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(763, 208)
+        Me.Button4.Location = New System.Drawing.Point(678, 166)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(160, 48)
+        Me.Button4.Size = New System.Drawing.Size(142, 38)
         Me.Button4.TabIndex = 6
         Me.Button4.Text = "Blanquear Clave"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'UsuarioABM
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1013, 296)
+        Me.ClientSize = New System.Drawing.Size(900, 237)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnNuevo)
         Me.Controls.Add(Me.DataGridView1)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "UsuarioABM"
         Me.Text = "Usuarios"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
