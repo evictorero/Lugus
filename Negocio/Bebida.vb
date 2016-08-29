@@ -11,7 +11,7 @@ Namespace Negocio
         Dim mDescripcionCorta As String
         Dim mDescripcionLarga As String
         Dim mHabilitado As String
-        Dim mFechaBaja As Date
+        Dim mFechaBaja As Nullable(Of DateTime)
         Dim mIdUsuario As Integer
         Dim mDvh As Integer
         Dim mFechaModif As Date
@@ -70,11 +70,11 @@ Namespace Negocio
             End Set
         End Property
 
-        Public Property fechaBaja() As Date
+        Public Property fechaBaja() As Nullable(Of DateTime)
             Get
                 Return mFechaBaja
             End Get
-            Set(ByVal value As Date)
+            Set(ByVal value As Nullable(Of DateTime))
                 mFechaBaja = value
             End Set
         End Property
@@ -116,7 +116,7 @@ Namespace Negocio
             mDTO.descripcionCorta = Me.descripcionCorta
             mDTO.descripcionLarga = Me.descripcionLarga
             mDTO.habilitado = Me.habilitado
-            'mDTO.fechaBaja = Me.fechaBaja
+            mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
             mDTO.dvh = Me.dvh
