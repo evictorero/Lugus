@@ -82,8 +82,23 @@ Namespace ProveedorDeDatos
 
         Public Shared Function ObtenerId(ByVal pTabla As String) As Integer
             Try
+                Dim mId As String
+                ' obtengo nombre de id según tabla
+                Select Case pTabla
+                    Case "bBebida"
+                        mId = "id_bebida"
+                    Case "bPlato"
+                        mId = "id_plato"
+                    Case "rPedidoBebida"
+                        mId = "id_pedidobebida"
+                    Case "rPedidoPlato"
+                        mId = "id_pedidoplato"
+                    Case Else
+                        mId = "id"
+                End Select
+
                 mCon = New SqlConnection(StrConnection)
-                Dim mCom As New SqlCommand("SELECT ISNULL(MAX(Id),0) FROM " & pTabla, mCon)
+                Dim mCom As New SqlCommand("SELECT ISNULL(MAX(" & mId & "),0) FROM " & pTabla, mCon)
                 mCon.Open()
                 Return mCom.ExecuteScalar
             Catch ex As Exception

@@ -51,9 +51,9 @@ Partial Class Bebida
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(30, 22)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(339, 189)
         Me.GroupBox1.TabIndex = 18
         Me.GroupBox1.TabStop = False
@@ -61,7 +61,7 @@ Partial Class Bebida
         'txtFecha_Baja
         '
         Me.txtFecha_Baja.Location = New System.Drawing.Point(98, 141)
-        Me.txtFecha_Baja.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtFecha_Baja.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFecha_Baja.Name = "txtFecha_Baja"
         Me.txtFecha_Baja.Size = New System.Drawing.Size(82, 20)
         Me.txtFecha_Baja.TabIndex = 10
@@ -70,7 +70,7 @@ Partial Class Bebida
         '
         Me.cboxHabilitado.FormattingEnabled = True
         Me.cboxHabilitado.Location = New System.Drawing.Point(98, 112)
-        Me.cboxHabilitado.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cboxHabilitado.Margin = New System.Windows.Forms.Padding(2)
         Me.cboxHabilitado.Name = "cboxHabilitado"
         Me.cboxHabilitado.Size = New System.Drawing.Size(82, 21)
         Me.cboxHabilitado.TabIndex = 9
@@ -78,7 +78,7 @@ Partial Class Bebida
         'txtDescripcion_larga
         '
         Me.txtDescripcion_larga.Location = New System.Drawing.Point(98, 83)
-        Me.txtDescripcion_larga.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtDescripcion_larga.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion_larga.MaxLength = 200
         Me.txtDescripcion_larga.Name = "txtDescripcion_larga"
         Me.txtDescripcion_larga.Size = New System.Drawing.Size(223, 20)
@@ -87,7 +87,7 @@ Partial Class Bebida
         'txtDescripcion_corta
         '
         Me.txtDescripcion_corta.Location = New System.Drawing.Point(98, 57)
-        Me.txtDescripcion_corta.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtDescripcion_corta.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion_corta.MaxLength = 30
         Me.txtDescripcion_corta.Name = "txtDescripcion_corta"
         Me.txtDescripcion_corta.Size = New System.Drawing.Size(223, 20)
@@ -96,7 +96,7 @@ Partial Class Bebida
         'txtId_bebida
         '
         Me.txtId_bebida.Location = New System.Drawing.Point(98, 28)
-        Me.txtId_bebida.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtId_bebida.Margin = New System.Windows.Forms.Padding(2)
         Me.txtId_bebida.Name = "txtId_bebida"
         Me.txtId_bebida.ReadOnly = True
         Me.txtId_bebida.Size = New System.Drawing.Size(68, 20)
@@ -155,7 +155,7 @@ Partial Class Bebida
         'btnCancelar
         '
         Me.btnCancelar.Location = New System.Drawing.Point(203, 222)
-        Me.btnCancelar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnCancelar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(82, 25)
         Me.btnCancelar.TabIndex = 20
@@ -165,7 +165,7 @@ Partial Class Bebida
         'btnGuardar
         '
         Me.btnGuardar.Location = New System.Drawing.Point(104, 222)
-        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(82, 25)
         Me.btnGuardar.TabIndex = 19
@@ -180,7 +180,7 @@ Partial Class Bebida
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Bebida"
         Me.Text = "Bebida"
         Me.GroupBox1.ResumeLayout(False)

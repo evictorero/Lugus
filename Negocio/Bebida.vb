@@ -116,7 +116,7 @@ Namespace Negocio
             mDTO.descripcionCorta = Me.descripcionCorta
             mDTO.descripcionLarga = Me.descripcionLarga
             mDTO.habilitado = Me.habilitado
-            mDTO.fechaBaja = Me.fechaBaja
+            'mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
             mDTO.dvh = Me.dvh

@@ -13,6 +13,9 @@ Public Class Bebida
     Private Sub Bebida_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Visible = True
         Me.txtDescripcion_corta.Focus()
+        Me.cboxHabilitado.Items.Add("S")
+        Me.cboxHabilitado.Items.Add("N")
+        Me.cboxHabilitado.SelectedValue = "S"
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -24,6 +27,10 @@ Public Class Bebida
 
                 mBebida.descripcionCorta = Me.txtDescripcion_corta.Text
                 mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
+                mBebida.habilitado = Me.cboxHabilitado.Text
+                'mBebida.fechaBaja = Me.txtFecha_Baja
+                mBebida.idUsuario = 1
+                mBebida.dvh = 1
                 mBebida.Guardar()
                 Me.Close()
             Case TipoOperacion.Baja

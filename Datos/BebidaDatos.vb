@@ -9,7 +9,7 @@ Public Class BebidaDatos
 
         mStrCom = "INSERT INTO dbo.bBebida (id_bebida, descripcion_corta, descripcion_larga, habilitado, fecha_baja, id_usuario, dvh, fecha_modif)" & _
         " VALUES " & _
-        "(" & pDTO.id & ", '" & pDTO.descripcionCorta & "' , " & pDTO.descripcionLarga & " , " & pDTO.habilitado & ", " & pDTO.fechaBaja & ", " & pDTO.idUsuario & ", " & pDTO.dvh & ", " & DateTime.Now & ")"
+        "(" & pDTO.id & ", '" & pDTO.descripcionCorta & "' , '" & pDTO.descripcionLarga & "' , '" & pDTO.habilitado & "', '" & pDTO.fechaBaja & "', " & pDTO.idUsuario & ", " & pDTO.dvh & ", '" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "')"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
@@ -84,7 +84,7 @@ Public Class BebidaDatos
 
     Public Shared Function ObtenerProximoId() As Integer
         If ProximoId = 0 Then
-            ProximoId = Datos.ProveedorDeDatos.DB.ObtenerId("Inmueble")
+            ProximoId = Datos.ProveedorDeDatos.DB.ObtenerId("bBebida")
         End If
         ProximoId += 1
         Return ProximoId
