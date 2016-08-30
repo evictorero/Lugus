@@ -137,7 +137,7 @@ Namespace Negocio
                 Dim mDTO As DTO.BebidaDTO = Datos.BebidaDatos.Obtener(mId)
                 MyClass.Cargar(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Ambiente sin Id especificado")
+                Throw New ApplicationException("Se intentó cargar un Bebida sin Id especificado")
 
             End If
         End Sub
@@ -164,7 +164,7 @@ Namespace Negocio
                 Dim mDTO As DTO.BebidaDTO = Datos.BebidaDatos.Obtener(pId)
                 MyClass.Cargar(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Ambiente sin Id especificado")
+                Throw New ApplicationException("Se intentó cargar un Bebida sin Id especificado")
             End If
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.BebidaDTO)
