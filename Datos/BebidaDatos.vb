@@ -69,7 +69,7 @@ Public Class BebidaDatos
 
     Public Shared Function Listar() As List(Of DTO.BebidaDTO)
         Dim mCol As New List(Of DTO.BebidaDTO)
-        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id, direccion, precio, id_propietario FROM dbo.Inmueble")
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif FROM dbo.bBebida")
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.BebidaDTO
@@ -91,7 +91,8 @@ Public Class BebidaDatos
     End Function
 
     Private Shared Sub CargarDTO(ByVal pDTO As DTO.BebidaDTO, ByVal pDr As DataRow)
-        pDTO.id = pDr("id")
+        ' id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif
+        pDTO.id = pDr("id_bebida")
         pDTO.descripcionCorta = pDr("descripcion_corta")
         pDTO.descripcionLarga = pDr("descripcion_larga")
         pDTO.habilitado = pDr("habilitado")
