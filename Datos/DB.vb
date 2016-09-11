@@ -20,8 +20,8 @@ Namespace ProveedorDeDatos
                 For Each mErr As SqlError In ex.Errors
                     mStr &= mErr.Message & ControlChars.CrLf
                 Next
-                MsgBox("Ocurrió un error en el acceso a la base de datos" & ControlChars.CrLf & _
-                "MENSAJE: " & ex.Message & ControlChars.CrLf & _
+                MsgBox("Ocurrió un error en el acceso a la base de datos" & ControlChars.CrLf &
+                "MENSAJE: " & ex.Message & ControlChars.CrLf &
                 "ERRORES DEL SERVIDOR SQL: " & mStr)
                 Return Nothing
             Catch ex As Exception
@@ -48,8 +48,8 @@ Namespace ProveedorDeDatos
                 For Each mErr As SqlError In ex.Errors
                     mStr &= mErr.Message & ControlChars.CrLf
                 Next
-                MsgBox("Ocurrió un error en el acceso a la base de datos" & ControlChars.CrLf & _
-                "MENSAJE: " & ex.Message & ControlChars.CrLf & _
+                MsgBox("Ocurrió un error en el acceso a la base de datos" & ControlChars.CrLf &
+                "MENSAJE: " & ex.Message & ControlChars.CrLf &
                 "ERRORES DEL SERVIDOR SQL: " & mStr)
                 Return Nothing
             Catch ex As Exception
@@ -79,6 +79,50 @@ Namespace ProveedorDeDatos
                 mCon.Dispose()
             End Try
         End Function
+
+        Public Shared Function ExecuteScalar(ByVal pCommandText As String) As Integer
+            Try
+                mCon = New SqlConnection(StrConnection)
+                Dim mCom As New SqlCommand(pCommandText, mCon)
+                mCon.Open()
+                Return mCom.ExecuteScalar
+            Catch ex As Exception
+                '       MsgBox(ex.Message & "  METODO: ExecuteScalar, CLASE: DB")
+                Return 0
+            Finally
+                mCon.Close()
+                mCon.Dispose()
+            End Try
+        End Function
+        Public Shared Function Exec_Function(ByVal nomfun As String, ByVal pDTO As DTO.UsuarioDTO) As Object
+            Dim cn As New SqlConnection(StrConnection)
+            Dim cmd As New SqlCommand("SELECT " & nomfun, cn)   'Para ejecutar "SELECT <nombrefuncion>
+
+            cmd.CommandType = CommandType.Text
+
+            cn.Open()
+
+            Dim param As System.Data.SqlClient.SqlParameter
+            param = New System.Data.SqlClient.SqlParameter()
+            param.ParameterName = “@pUsuario”
+            param.SqlDbType = SqlDbType.VarChar
+            param.Size = 20
+            param.Value = pDTO.usuario
+
+            cmd.Parameters.Add(param)
+            Dim param2 As System.Data.SqlClient.SqlParameter
+            param2 = New System.Data.SqlClient.SqlParameter()
+            param2.ParameterName = “@pPassword”
+            param2.SqlDbType = SqlDbType.VarChar
+            param2.Size = 20
+            param2.Value = pDTO.contrasenia
+
+            cmd.Parameters.Add(param2)
+            Dim resultado As Integer = cmd.ExecuteScalar()
+            cn.Close()
+            Return resultado
+        End Function
+
 
         Public Shared Function ObtenerId(ByVal pTabla As String) As Integer
             Try

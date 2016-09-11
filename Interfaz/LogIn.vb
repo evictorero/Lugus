@@ -1,6 +1,36 @@
-﻿Public Class LogIn
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Principal.Show()
+﻿Imports Negocio.Negocio.Usuario
+
+Public Class LogIn
+
+    Dim mUsuario As Negocio.Negocio.Usuario
+    'test
+    Private Sub btnIniciarSesion_Click(sender As Object, e As EventArgs) Handles btnIniciarSesion.Click
+
+        Dim rta As Integer = -1
+        mUsuario = New Negocio.Negocio.Usuario
+        If txtPassword.Text = "" Or txtUsuario.Text = "" Then
+            'debe ingresar ambos campos
+            MsgBox("Debe Ingresar Usuario y Contrase;a para poder avanzar")
+        Else
+            mUsuario.usuario = Me.txtUsuario.Text
+            mUsuario.password = Me.txtPassword.Text
+            rta = mUsuario.ValidarLogin()
+            If rta = 1 Then
+                'Cargar Perfil del Usuario Logueado
+                Principal.estaAutenticado = True
+                Principal.UsuarioEnSesion = mUsuario
+                'mUsuario.RegistrarSesionUsuario(u.Id)
+                Principal.Show()
+                'Me.Close() Celeste
+            ElseIf rta = 2 Then
+                MsgBox("Contrase;a Incorrecta.")
+                'Update al usuario Celeste
+            ElseIf rta = 3 Then
+                MsgBox("El usuario ingresado es Incorrecto.")
+            End If
+        End If
+
+
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
