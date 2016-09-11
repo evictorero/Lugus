@@ -168,10 +168,13 @@ Namespace Negocio
             End If
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.BebidaDTO)
+            mId = pDTO.id
             mDescripcionCorta = pDTO.descripcionCorta
             mDescripcionLarga = pDTO.descripcionLarga
             mHabilitado = pDTO.habilitado
-            mFechaBaja = pDTO.fechaBaja
+            If pDTO.fechaBaja <> "1900-01-01" Then
+                mFechaBaja = pDTO.fechaBaja
+            End If
             mIdUsuario = pDTO.idUsuario
             mFechaModif = pDTO.fechaModif
             mDvh = pDTO.dvh
@@ -208,6 +211,16 @@ Namespace Negocio
                 Throw New ApplicationException("Debe completar el campo habilitado.")
             End If
         End Sub
+        Public Overridable Function Listar() As Collections.Generic.List(Of Bebida)
+            Dim mCol As New Collections.Generic.List(Of Bebida)
+            Dim mColDTO As List(Of DTO.BebidaDTO) = Datos.BebidaDatos.Listar()
+
+            For Each mDTO As DTO.BebidaDTO In mColDTO
+                mCol.Add(New Negocio.Bebida(mDTO))
+            Next
+
+            Return mCol
+        End Function
 #End Region
 
         'IMPLEMENTACION DE LOS MIEMBROS DE LA INTERFAZ ICOLECCIONABLE

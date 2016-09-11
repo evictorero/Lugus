@@ -1,5 +1,9 @@
 ﻿Public Class Principal
-    Private Sub AdministrarUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+
+    Public estaAutenticado As Boolean = False
+    Public UsuarioEnSesion As New Negocio.Negocio.Usuario
+
+    Private Sub AdministrarUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs)
         UsuarioABM.Show()
     End Sub
 
@@ -71,6 +75,10 @@
     End Sub
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        If estaAutenticado Then
+            Me.WindowState = FormWindowState.Maximized
+        Else
+            Me.Close()
+        End If
     End Sub
 End Class

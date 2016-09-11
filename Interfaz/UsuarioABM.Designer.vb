@@ -48,7 +48,7 @@ Partial Class UsuarioABM
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(838, 120)
+        Me.DataGridView1.Size = New System.Drawing.Size(858, 502)
         Me.DataGridView1.TabIndex = 0
         '
         'Id
@@ -89,7 +89,7 @@ Partial Class UsuarioABM
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(236, 166)
+        Me.btnModificar.Location = New System.Drawing.Point(240, 552)
         Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(142, 38)
@@ -99,7 +99,7 @@ Partial Class UsuarioABM
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(383, 166)
+        Me.btnEliminar.Location = New System.Drawing.Point(387, 552)
         Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(142, 38)
@@ -109,7 +109,7 @@ Partial Class UsuarioABM
         '
         'btnRehabilitar
         '
-        Me.btnRehabilitar.Location = New System.Drawing.Point(531, 166)
+        Me.btnRehabilitar.Location = New System.Drawing.Point(535, 552)
         Me.btnRehabilitar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRehabilitar.Name = "btnRehabilitar"
         Me.btnRehabilitar.Size = New System.Drawing.Size(142, 38)
@@ -119,7 +119,7 @@ Partial Class UsuarioABM
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(88, 166)
+        Me.btnNuevo.Location = New System.Drawing.Point(92, 552)
         Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnNuevo.Name = "btnNuevo"
         Me.btnNuevo.Size = New System.Drawing.Size(142, 38)
@@ -129,7 +129,7 @@ Partial Class UsuarioABM
         '
         'btnBlanquear
         '
-        Me.btnBlanquear.Location = New System.Drawing.Point(678, 166)
+        Me.btnBlanquear.Location = New System.Drawing.Point(682, 552)
         Me.btnBlanquear.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnBlanquear.Name = "btnBlanquear"
         Me.btnBlanquear.Size = New System.Drawing.Size(142, 38)
@@ -141,7 +141,7 @@ Partial Class UsuarioABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(900, 237)
+        Me.ClientSize = New System.Drawing.Size(923, 626)
         Me.Controls.Add(Me.btnBlanquear)
         Me.Controls.Add(Me.btnRehabilitar)
         Me.Controls.Add(Me.btnEliminar)

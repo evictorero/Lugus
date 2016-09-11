@@ -1,5 +1,5 @@
 ﻿Imports Datos.ProveedorDeDatos
-
+Imports System.Data.SqlClient
 Imports DTO.usuariodto
 
 Public Class UsuarioDatos
@@ -48,5 +48,25 @@ Public Class UsuarioDatos
         Next
 
         Return mCol
+    End Function
+    Public Shared Function VerificarLogin(pDTO As DTO.UsuarioDTO) As Integer
+        Dim mFuncion As String = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
+        Dim rta As Integer = -1
+        rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+        If rta > 0 Then
+            Return 1 ' USuario y contrase;a correcto
+        End If
+        mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "'"
+        rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+        If rta > 0 Then
+            mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña <> '" & pDTO.contrasenia & "' "
+            rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+            If rta > 0 Then
+                Return 2  ' USuario OK  y contrase;a NOK
+            End If
+        Else
+            Return 3 'Usuario NOK
+        End If
+        Return rta
     End Function
 End Class

@@ -7,9 +7,10 @@ Namespace Negocio
     Public Class Usuario
 #Region "Declaraciones"
 
-        Dim mUombre As String
+        Dim mUSuario As String
         Dim mNombre As String
         Dim mApellido As String
+        Dim mPassword As String
         Dim mDNI As Integer
         Dim mFechaNacimiento As Date
         Dim mEmail As String
@@ -29,7 +30,32 @@ Namespace Negocio
         Public Sub New(ByVal pDTO As DTO.UsuarioDTO)
             Me.Cargar(pDTO)
         End Sub
+        Public Sub New()
+
+        End Sub
 #End Region
+
+#Region "Propiedades"
+        Public Property usuario() As String
+            Get
+                Return mUSuario
+            End Get
+            Set(ByVal value As String)
+                mUSuario = value
+            End Set
+        End Property
+
+        Public Property password() As String
+            Get
+                Return mPassword
+            End Get
+            Set(ByVal value As String)
+                mPassword = value
+            End Set
+        End Property
+#End Region
+
+
 #Region "Métodos"
 
         Public Overridable Sub Cargar()
@@ -68,6 +94,8 @@ Namespace Negocio
             mId = pDTO.id
             mNombre = pDTO.nombre
             mApellido = pDTO.apellido
+            mDNI = pDTO.dni
+            mPassword = pDTO.contrasenia
         End Sub
 
         Private Shared Function ObtenerProximoId() As Integer
@@ -93,6 +121,25 @@ Namespace Negocio
 
             Return mCol
         End Function
+        Public Shared Function ValidarFormato(pUsuario As String, pContrasenia As String) As Boolean
+            'Celeste
+            Return True
+        End Function
+
+        Public Function ValidarLogin() As Integer
+            Dim mDTO As New DTO.UsuarioDTO
+            Dim rta As Integer
+            mDTO.usuario = mUSuario
+            mDTO.contrasenia = mPassword
+
+            If ValidarFormato(mDTO.usuario, mDTO.contrasenia) Then
+                rta = Datos.UsuarioDatos.VerificarLogin(mDTO)
+            End If
+            Return rta
+
+        End Function
+
+
 #End Region
 
     End Class
