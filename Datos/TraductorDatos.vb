@@ -11,13 +11,17 @@ Public Class TraductorDatos
     Public Shared Function ObtenerTraduccion(ByVal pIdIdioma As String,
                                              ByVal pMensaje As String) As String
         If Not IsNothing(pIdIdioma) Then
-            Dim mDs As DataSet = DB.ExecuteDataset("SELECT traduccion FROM dbo.btraductor WHERE id_idioma = '" & pIdIdioma & "' AND mensaje = '" & pMensaje & "'")
+            Dim mDs As DataSet
+            Try
+                mDs = DB.ExecuteDataset("SELECT traduccion FROM dbo.btraductor WHERE id_idioma = '" & pIdIdioma & "' AND mensaje = '" & pMensaje & "'")
+            Catch ex As Exception
+                Throw New ApplicationException("Fallo al obtener traducción", ex)
+            End Try
 
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Return mDs.Tables(0).Rows(0)("traduccion")
             Else
-                Throw New ApplicationException("Fallo al obtener la traducción.")
-                Return Nothing
+                Return mDs.Tables(0).Rows(0)("{{" & pMensaje & "}}")
             End If
         Else
             Throw New ApplicationException("Se intentó obtener traduccion sin id de idioma")

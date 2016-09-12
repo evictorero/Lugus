@@ -86,20 +86,8 @@ Public Class Principal
 
     Public Sub Traducir()
         Try
-
-            If UsuarioEnSesion.id_idioma <> 2 Then
-                Dim traductor As New Negocio.Negocio.Traductor
-                traductor.TraducirForm(Me)
-
-                'Dim BLLMENSAJEIDIOMA As New BLL.MENSAJEIDIOMA(Usuariologueado.IDIOMA)
-                'BLLMENSAJEIDIOMA.TraducirForm(Me)
-                'AltaDeUsuarioToolStripMenuItem.Text = "New User"
-                'ModificarUsuarioToolStripMenuItem.Text = "Modify User"
-                'BajaDeUsuarioToolStripMenuItem.Text = "User Delete"
-                'ReseteoDeContraseñasToolStripMenuItem.Text = "Password Reset"
-
-            End If
-
+            Dim traductor As New Negocio.Negocio.Traductor
+            traductor.TraducirForm(Me, UsuarioEnSesion.id_idioma)
         Catch ex As Exception
             MessageBox.Show("IMPOSIBLE CAMBIAR EL IDIOMA")
         End Try
