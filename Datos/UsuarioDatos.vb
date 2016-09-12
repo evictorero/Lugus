@@ -24,6 +24,26 @@ Public Class UsuarioDatos
         End If
 
     End Function
+
+    Public Shared Function ObtenerPorUsuario(ByVal pUsuario As String) As DTO.UsuarioDTO
+        If Not IsNothing(pUsuario) Then
+            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario, nombre, apellido, dni, email, id_idioma,fecha_nacimiento FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
+            If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+                Dim mDTO As New DTO.UsuarioDTO
+
+                CargarDTO(mDTO, mDs.Tables(0).Rows(0))
+
+                Return mDTO
+            Else
+                Throw New ApplicationException("Fallo al cargar el Usuario.")
+                Return Nothing
+            End If
+        Else
+            Throw New ApplicationException("Se intentó cargar el Usuario sin Id especificado")
+            Return Nothing
+        End If
+
+    End Function
     Private Shared Sub CargarDTO(ByVal pDTO As DTO.UsuarioDTO, ByVal pDr As DataRow)
         pDTO.id = pDr("id_usuario")
         pDTO.usuario = pDr("usuario")
@@ -31,6 +51,7 @@ Public Class UsuarioDatos
         pDTO.apellido = pDr("apellido")
         pDTO.email = pDr("email")
         pDTO.dni = pDr("dni")
+        pDTO.id_idioma = pDr("id_idioma")
         ' probando 
         pDTO.fechaNacimiento = pDr("fecha_nacimiento")
     End Sub

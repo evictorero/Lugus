@@ -1,4 +1,6 @@
-﻿Public Class Principal
+﻿Imports Negocio
+
+Public Class Principal
 
     Public estaAutenticado As Boolean = False
     Public UsuarioEnSesion As New Negocio.Negocio.Usuario
@@ -80,5 +82,27 @@
         Else
             Me.Close()
         End If
+    End Sub
+
+    Public Sub Traducir()
+        Try
+
+            If UsuarioEnSesion.id_idioma <> 2 Then
+                Dim traductor As New Negocio.Negocio.Traductor
+                traductor.TraducirForm(Me)
+
+                'Dim BLLMENSAJEIDIOMA As New BLL.MENSAJEIDIOMA(Usuariologueado.IDIOMA)
+                'BLLMENSAJEIDIOMA.TraducirForm(Me)
+                'AltaDeUsuarioToolStripMenuItem.Text = "New User"
+                'ModificarUsuarioToolStripMenuItem.Text = "Modify User"
+                'BajaDeUsuarioToolStripMenuItem.Text = "User Delete"
+                'ReseteoDeContraseñasToolStripMenuItem.Text = "Password Reset"
+
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("IMPOSIBLE CAMBIAR EL IDIOMA")
+        End Try
+
     End Sub
 End Class
