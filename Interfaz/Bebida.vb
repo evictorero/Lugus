@@ -21,6 +21,8 @@ Public Class Bebida
 
     Private Sub Bebida_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.txtId_bebida.Enabled = False
+
+
         Select Case mOperacion
             Case TipoOperacion.Alta
 
@@ -64,6 +66,8 @@ Public Class Bebida
                 Me.Label1.Text = "Rehabilitar Bebida"
                 Me.btnGuardar.Visible = False
         End Select
+
+        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -86,5 +90,13 @@ Public Class Bebida
                 Me.Close()
         End Select
     End Sub
+    'Public Sub Traducir()
+    '    Try
+    '        Dim traductor As New Negocio.Negocio.Traductor
+    '        traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+    '    Catch ex As Exception
+    '        MessageBox.Show("IMPOSIBLE CAMBIAR EL IDIOMA")
+    '    End Try
 
+    'End Sub
 End Class
