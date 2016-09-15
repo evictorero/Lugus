@@ -54,6 +54,5 @@ Public Class LogIn
     Private Sub LogIn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Visible = True
         Me.txtUsuario.Focus()
-
     End Sub
 End Class

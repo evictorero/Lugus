@@ -1,7 +1,4 @@
 ﻿Public Class Pedido
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
 
     Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
 
@@ -14,5 +11,6 @@
     Private Sub Pedido_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Visible = True
         Me.TextBox2.Focus()
+        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 End Class

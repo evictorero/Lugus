@@ -30,7 +30,7 @@ Public Class Bebida
                 Me.txtDescripcion_larga.Text = ""
                 Me.txtFecha_Baja.Text = ""
 
-                Me.Label1.Text = "Alta de Bebida"
+                Me.Label1.Text = "Alta de bebida"
 
             Case TipoOperacion.Baja
 
@@ -51,7 +51,7 @@ Public Class Bebida
                     Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
                     Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
                     Me.txtFecha_Baja.Text = mBebida.fechaBaja
-                    Me.Label1.Text = "Modificacion de Bebida"
+                    Me.Label1.Text = "Modificación de bebida"
                 End If
 
             Case TipoOperacion.Rehabilitar
@@ -63,7 +63,7 @@ Public Class Bebida
                 Me.txtDescripcion_corta.Enabled = False
                 Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
                 Me.txtDescripcion_larga.Enabled = False
-                Me.Label1.Text = "Rehabilitar Bebida"
+                Me.Label1.Text = "Rehabilitar bebida"
                 Me.btnGuardar.Visible = False
         End Select
 
@@ -90,13 +90,4 @@ Public Class Bebida
                 Me.Close()
         End Select
     End Sub
-    'Public Sub Traducir()
-    '    Try
-    '        Dim traductor As New Negocio.Negocio.Traductor
-    '        traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
-    '    Catch ex As Exception
-    '        MessageBox.Show("IMPOSIBLE CAMBIAR EL IDIOMA")
-    '    End Try
-
-    'End Sub
 End Class

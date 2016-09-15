@@ -163,7 +163,7 @@ Namespace Negocio
 
                 End If
             Catch ex As Exception
-                MessageBox.Show("IMPOSIBLE CAMBIAR EL IDIOMA")
+                MessageBox.Show(ex.Message)
             End Try
         End Sub
 

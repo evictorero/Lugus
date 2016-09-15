@@ -30,20 +30,20 @@ Partial Class AsocUsuarioFamilia
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(303, 74)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button2.Location = New System.Drawing.Point(227, 60)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(110, 31)
+        Me.Button2.Size = New System.Drawing.Size(82, 25)
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(171, 74)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button1.Location = New System.Drawing.Point(128, 60)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(110, 31)
+        Me.Button1.Size = New System.Drawing.Size(82, 25)
         Me.Button1.TabIndex = 7
         Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
@@ -51,9 +51,10 @@ Partial Class AsocUsuarioFamilia
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(72, 24)
+        Me.Label1.Location = New System.Drawing.Point(54, 20)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(82, 17)
+        Me.Label1.Size = New System.Drawing.Size(63, 13)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Descripcion"
         '
@@ -61,22 +62,22 @@ Partial Class AsocUsuarioFamilia
         '
         Me.cbDescripcionFamilia.FormattingEnabled = True
         Me.cbDescripcionFamilia.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
-        Me.cbDescripcionFamilia.Location = New System.Drawing.Point(164, 22)
-        Me.cbDescripcionFamilia.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cbDescripcionFamilia.Location = New System.Drawing.Point(123, 18)
+        Me.cbDescripcionFamilia.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.cbDescripcionFamilia.Name = "cbDescripcionFamilia"
-        Me.cbDescripcionFamilia.Size = New System.Drawing.Size(365, 24)
+        Me.cbDescripcionFamilia.Size = New System.Drawing.Size(275, 21)
         Me.cbDescripcionFamilia.TabIndex = 5
         '
         'AsocUsuarioFamilia
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(619, 139)
+        Me.ClientSize = New System.Drawing.Size(464, 113)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cbDescripcionFamilia)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "AsocUsuarioFamilia"
         Me.Text = "Familia"
         Me.ResumeLayout(False)

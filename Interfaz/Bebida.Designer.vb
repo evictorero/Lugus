@@ -66,7 +66,7 @@ Partial Class Bebida
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(40, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Codigo"
+        Me.Label1.Text = "Código"
         '
         'Label2
         '
@@ -104,9 +104,9 @@ Partial Class Bebida
         Me.Label5.Location = New System.Drawing.Point(28, 146)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(61, 13)
+        Me.Label5.Size = New System.Drawing.Size(75, 13)
         Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Fecha Baja"
+        Me.Label5.Text = "Fecha de baja"
         '
         'txtId_bebida
         '

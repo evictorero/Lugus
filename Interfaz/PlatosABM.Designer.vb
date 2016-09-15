@@ -37,40 +37,40 @@ Partial Class PlatosABM
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(567, 166)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button1.Location = New System.Drawing.Point(425, 135)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 38)
+        Me.Button1.Size = New System.Drawing.Size(106, 31)
         Me.Button1.TabIndex = 10
         Me.Button1.Text = "Rehabilitar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(420, 166)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button3.Location = New System.Drawing.Point(315, 135)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(142, 38)
+        Me.Button3.Size = New System.Drawing.Size(106, 31)
         Me.Button3.TabIndex = 8
         Me.Button3.Text = "Eliminar"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(272, 166)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button2.Location = New System.Drawing.Point(204, 135)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(142, 38)
+        Me.Button2.Size = New System.Drawing.Size(106, 31)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Modificar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(124, 166)
-        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnNuevo.Location = New System.Drawing.Point(93, 135)
+        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(142, 38)
+        Me.btnNuevo.Size = New System.Drawing.Size(106, 31)
         Me.btnNuevo.TabIndex = 6
         Me.btnNuevo.Text = "Nuevo"
         Me.btnNuevo.UseVisualStyleBackColor = True
@@ -79,17 +79,17 @@ Partial Class PlatosABM
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id_plato, Me.Descripcion_corta, Me.Descripcion_Larga, Me.habilitado, Me.fecha_baja})
-        Me.DataGridView1.Location = New System.Drawing.Point(68, 30)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DataGridView1.Location = New System.Drawing.Point(51, 24)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(732, 120)
+        Me.DataGridView1.Size = New System.Drawing.Size(549, 98)
         Me.DataGridView1.TabIndex = 11
         '
         'Id_plato
         '
-        Me.Id_plato.HeaderText = "Codigo"
+        Me.Id_plato.HeaderText = "Código"
         Me.Id_plato.Name = "Id_plato"
         Me.Id_plato.ReadOnly = True
         '
@@ -113,21 +113,21 @@ Partial Class PlatosABM
         '
         'fecha_baja
         '
-        Me.fecha_baja.HeaderText = "Fecha Baja"
+        Me.fecha_baja.HeaderText = "Fecha de baja"
         Me.fecha_baja.Name = "fecha_baja"
         Me.fecha_baja.ReadOnly = True
         '
         'PlatosABM
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(827, 226)
+        Me.ClientSize = New System.Drawing.Size(620, 184)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnNuevo)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "PlatosABM"
         Me.Text = "Platos"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -140,9 +140,9 @@ Partial Class PlatosABM
     Friend WithEvents Button2 As Button
     Friend WithEvents btnNuevo As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Id_plato As DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion_corta As DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion_Larga As DataGridViewTextBoxColumn
-    Friend WithEvents habilitado As DataGridViewCheckBoxColumn
-    Friend WithEvents fecha_baja As DataGridViewTextBoxColumn
+    Friend WithEvents Id_plato As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion_corta As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion_Larga As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents habilitado As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents fecha_baja As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
