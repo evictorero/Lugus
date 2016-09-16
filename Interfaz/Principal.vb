@@ -1,4 +1,6 @@
-﻿Public Class Principal
+﻿Imports Negocio
+
+Public Class Principal
 
     Public estaAutenticado As Boolean = False
     Public UsuarioEnSesion As New Negocio.Negocio.Usuario
@@ -80,5 +82,15 @@
         Else
             Me.Close()
         End If
+    End Sub
+
+    Public Sub Traducir()
+        Try
+            Dim traductor As New Negocio.Negocio.Traductor
+            traductor.TraducirForm(Me, UsuarioEnSesion.id_idioma)
+        Catch ex As Exception
+            MessageBox.Show("IMPOSIBLE CAMBIAR EL IDIOMA")
+        End Try
+
     End Sub
 End Class

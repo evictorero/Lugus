@@ -21,6 +21,8 @@ Public Class Bebida
 
     Private Sub Bebida_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.txtId_bebida.Enabled = False
+
+
         Select Case mOperacion
             Case TipoOperacion.Alta
 
@@ -28,7 +30,7 @@ Public Class Bebida
                 Me.txtDescripcion_larga.Text = ""
                 Me.txtFecha_Baja.Text = ""
 
-                Me.Label1.Text = "Alta de Bebida"
+                Me.Label1.Text = "Alta de bebida"
 
             Case TipoOperacion.Baja
 
@@ -49,7 +51,7 @@ Public Class Bebida
                     Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
                     Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
                     Me.txtFecha_Baja.Text = mBebida.fechaBaja
-                    Me.Label1.Text = "Modificacion de Bebida"
+                    Me.Label1.Text = "Modificación de bebida"
                 End If
 
             Case TipoOperacion.Rehabilitar
@@ -61,9 +63,11 @@ Public Class Bebida
                 Me.txtDescripcion_corta.Enabled = False
                 Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
                 Me.txtDescripcion_larga.Enabled = False
-                Me.Label1.Text = "Rehabilitar Bebida"
+                Me.Label1.Text = "Rehabilitar bebida"
                 Me.btnGuardar.Visible = False
         End Select
+
+        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -86,5 +90,4 @@ Public Class Bebida
                 Me.Close()
         End Select
     End Sub
-
 End Class

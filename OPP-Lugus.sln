@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.CapaInterfaz", "1.CapaInterfaz", "{97679AA2-7084-4FD7-91AA-45B950627528}"
 EndProject
@@ -25,6 +25,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Negocio", "Negocio\Negocio.
 	ProjectSection(ProjectDependencies) = postProject
 		{F293EB21-9AB7-42D7-BB6D-01E99787CC77} = {F293EB21-9AB7-42D7-BB6D-01E99787CC77}
 		{E746C3AB-F03C-4C5F-8171-1B97A5CCA497} = {E746C3AB-F03C-4C5F-8171-1B97A5CCA497}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{62981F38-05D0-4616-9EAD-6804FEA19BE4}"
+	ProjectSection(SolutionItems) = preProject
+		btraductor.sql = btraductor.sql
 	EndProjectSection
 EndProject
 Global
@@ -55,8 +60,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{65DD64FE-0ECF-4119-84C0-6C79C1546A7A} = {97679AA2-7084-4FD7-91AA-45B950627528}
+		{C777D717-4429-4D6E-837A-B36E842FC3D8} = {2B5327F5-FD6E-4BF3-9D31-BFC0318A0F45}
 		{F293EB21-9AB7-42D7-BB6D-01E99787CC77} = {00FA6EDF-301E-4274-ADC7-EE5A48701787}
 		{E746C3AB-F03C-4C5F-8171-1B97A5CCA497} = {9FA531BA-A3FC-4904-9C01-3C6FF7D5BE02}
-		{C777D717-4429-4D6E-837A-B36E842FC3D8} = {2B5327F5-FD6E-4BF3-9D31-BFC0318A0F45}
 	EndGlobalSection
 EndGlobal

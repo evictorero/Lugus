@@ -23,13 +23,13 @@ Partial Class Bitacora
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.id_bitacora = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.id_usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,86 +48,96 @@ Partial Class Bitacora
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(26, 35)
+        Me.GroupBox1.Location = New System.Drawing.Point(17, 23)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(655, 146)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Size = New System.Drawing.Size(437, 95)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtros"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(366, 43)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(50, 21)
+        Me.Button1.TabIndex = 12
+        Me.Button1.Text = "Buscar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(408, 101)
+        Me.Label3.Location = New System.Drawing.Point(272, 66)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 20)
+        Me.Label3.Size = New System.Drawing.Size(29, 13)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "Error"
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(498, 100)
+        Me.CheckBox1.Location = New System.Drawing.Point(332, 65)
+        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(22, 21)
+        Me.CheckBox1.Size = New System.Drawing.Size(15, 14)
         Me.CheckBox1.TabIndex = 10
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(137, 95)
+        Me.TextBox1.Location = New System.Drawing.Point(91, 62)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(245, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(165, 20)
         Me.TextBox1.TabIndex = 9
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(54, 101)
+        Me.Label2.Location = New System.Drawing.Point(36, 66)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 20)
+        Me.Label2.Size = New System.Drawing.Size(37, 13)
         Me.Label2.TabIndex = 8
         Me.Label2.Text = "Fecha"
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(137, 40)
+        Me.ComboBox1.Location = New System.Drawing.Point(91, 26)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(383, 28)
+        Me.ComboBox1.Size = New System.Drawing.Size(257, 21)
         Me.ComboBox1.TabIndex = 7
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(50, 48)
+        Me.Label1.Location = New System.Drawing.Point(33, 31)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(64, 20)
+        Me.Label1.Size = New System.Drawing.Size(43, 13)
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Usuario"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(549, 66)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 32)
-        Me.Button1.TabIndex = 12
-        Me.Button1.Text = "Buscar"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id_bitacora, Me.id_usuario, Me.descripcion_larga, Me.m_error})
-        Me.DataGridView1.Location = New System.Drawing.Point(35, 258)
+        Me.DataGridView1.Location = New System.Drawing.Point(23, 168)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(646, 119)
+        Me.DataGridView1.Size = New System.Drawing.Size(431, 77)
         Me.DataGridView1.TabIndex = 7
         '
         'id_bitacora
         '
-        Me.id_bitacora.HeaderText = "Codigo"
+        Me.id_bitacora.HeaderText = "Código"
         Me.id_bitacora.Name = "id_bitacora"
         '
         'id_usuario
@@ -137,7 +147,7 @@ Partial Class Bitacora
         '
         'descripcion_larga
         '
-        Me.descripcion_larga.HeaderText = "Descripcion"
+        Me.descripcion_larga.HeaderText = "Descripción"
         Me.descripcion_larga.Name = "descripcion_larga"
         '
         'm_error
@@ -147,13 +157,14 @@ Partial Class Bitacora
         '
         'Bitacora
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(725, 428)
+        Me.ClientSize = New System.Drawing.Size(483, 278)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "Bitacora"
-        Me.Text = "Bitacora"
+        Me.Text = "Bitácora"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -170,8 +181,8 @@ Partial Class Bitacora
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents id_bitacora As DataGridViewTextBoxColumn
-    Friend WithEvents id_usuario As DataGridViewTextBoxColumn
-    Friend WithEvents descripcion_larga As DataGridViewTextBoxColumn
-    Friend WithEvents m_error As DataGridViewCheckBoxColumn
+    Friend WithEvents id_bitacora As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents id_usuario As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents descripcion_larga As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents m_error As System.Windows.Forms.DataGridViewCheckBoxColumn
 End Class

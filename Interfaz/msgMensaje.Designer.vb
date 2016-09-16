@@ -34,14 +34,14 @@ Partial Class msgMensaje
         Me.Label1.Location = New System.Drawing.Point(36, 25)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(436, 13)
+        Me.Label1.Size = New System.Drawing.Size(263, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Usted se encuentra seguro que desea dar de baja el usuario seleccionado?"
+        Me.Label1.Text = "¿Desea dar de baja el usuario seleccionado?"
         '
         'Button2
         '
         Me.Button2.Location = New System.Drawing.Point(238, 55)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(83, 25)
         Me.Button2.TabIndex = 10
@@ -51,7 +51,7 @@ Partial Class msgMensaje
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(139, 55)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 25)
         Me.Button1.TabIndex = 9
@@ -66,7 +66,7 @@ Partial Class msgMensaje
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "msgMensaje"
         Me.Text = "Eliminar"
         Me.ResumeLayout(False)

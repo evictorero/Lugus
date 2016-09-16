@@ -79,6 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TraductorDatos.vb" />
     <Compile Include="UsuarioDatos.vb" />
   </ItemGroup>
   <ItemGroup>

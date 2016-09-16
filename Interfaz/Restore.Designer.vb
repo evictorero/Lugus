@@ -31,47 +31,52 @@ Partial Class Restore
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(179, 46)
+        Me.ComboBox1.Location = New System.Drawing.Point(119, 30)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(380, 28)
+        Me.ComboBox1.Size = New System.Drawing.Size(255, 21)
         Me.ComboBox1.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(28, 49)
+        Me.Label1.Location = New System.Drawing.Point(19, 32)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 20)
+        Me.Label1.Size = New System.Drawing.Size(99, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Seleccione Backup"
+        Me.Label1.Text = "Seleccione backup"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(142, 115)
+        Me.Button1.Location = New System.Drawing.Point(95, 75)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(140, 37)
+        Me.Button1.Size = New System.Drawing.Size(93, 24)
         Me.Button1.TabIndex = 2
         Me.Button1.Text = "Generar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(313, 115)
+        Me.Button2.Location = New System.Drawing.Point(209, 75)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(140, 37)
+        Me.Button2.Size = New System.Drawing.Size(93, 24)
         Me.Button2.TabIndex = 3
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Restore
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(594, 190)
+        Me.ClientSize = New System.Drawing.Size(396, 123)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ComboBox1)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "Restore"
         Me.Text = "Restore"
         Me.ResumeLayout(False)

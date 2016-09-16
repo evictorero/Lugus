@@ -4,7 +4,10 @@ Imports Datos.ProveedorDeDatos
 
 
 Namespace Negocio
+
+
     Public Class Usuario
+
 #Region "Declaraciones"
 
         Dim mUSuario As String
@@ -12,6 +15,7 @@ Namespace Negocio
         Dim mApellido As String
         Dim mPassword As String
         Dim mDNI As Integer
+        Dim mId_idioma As Integer
         Dim mFechaNacimiento As Date
         Dim mEmail As String
         Private Shared ProximoId As Integer
@@ -51,6 +55,15 @@ Namespace Negocio
             End Get
             Set(ByVal value As String)
                 mPassword = value
+            End Set
+        End Property
+
+        Public Property id_idioma() As String
+            Get
+                Return mId_idioma
+            End Get
+            Set(ByVal value As String)
+                mId_idioma = value
             End Set
         End Property
 #End Region
@@ -96,6 +109,8 @@ Namespace Negocio
             mApellido = pDTO.apellido
             mDNI = pDTO.dni
             mPassword = pDTO.contrasenia
+            mId_idioma = pDTO.id_idioma
+
         End Sub
 
         Private Shared Function ObtenerProximoId() As Integer
@@ -137,6 +152,17 @@ Namespace Negocio
             End If
             Return rta
 
+        End Function
+
+        Public Function ObtenerPorUsuario() As Negocio.Usuario
+            Dim mDTO As New DTO.UsuarioDTO
+            Dim mNegocio As New Negocio.Usuario
+
+            mDTO = Datos.UsuarioDatos.ObtenerPorUsuario(Me.usuario)
+
+            mNegocio.Cargar(mDTO)
+
+            Return mNegocio
         End Function
 
 

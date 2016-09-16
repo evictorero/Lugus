@@ -18,4 +18,8 @@
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
         Familia.Show()
     End Sub
+
+    Private Sub FamiliaABM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+    End Sub
 End Class

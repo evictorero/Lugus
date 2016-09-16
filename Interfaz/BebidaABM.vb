@@ -18,7 +18,7 @@ Public Class BebidaABM
             .MultiSelect = False
 
             With .Columns
-                .Add("cid", "Codigo")
+                .Add("cid", "Código")
                 .Item(0).DataPropertyName = "id" 'nombre del dto
                 '.Item(0).Width = 100
                 .Item(0).Visible = False
@@ -27,19 +27,19 @@ Public Class BebidaABM
                 .Item(1).DataPropertyName = "DescripcionCorta"
                 .Item(1).Width = 100
 
-                .Add("cdescripcionlarga", "Descripcion")
+                .Add("cdescripcionlarga", "Descripción")
                 .Item(2).DataPropertyName = "DescripcionLarga"
                 .Item(2).Width = 100
 
-                .Add("chabilitado", "En Carta")
+                .Add("chabilitado", "En carta")
                 .Item(3).DataPropertyName = "habilitado"
                 .Item(3).Width = 100
 
-                .Add("cfechaBaja", "Fecha Baja")
+                .Add("cfechaBaja", "Fecha de baja")
                 .Item(4).DataPropertyName = "fechaBaja"
                 .Item(4).Width = 100
 
-                .Add("cfechaModif", "Fecha Modif")
+                .Add("cfechaModif", "Fecha de modificación")
                 .Item(5).DataPropertyName = "fechaModif"
                 .Item(5).Width = 100
 
@@ -61,6 +61,8 @@ Public Class BebidaABM
         ActualizarGrilla()
 
         Me.dgvBebidas.ClearSelection()
+
+        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
 
     End Sub
 #End Region
@@ -103,7 +105,7 @@ Public Class BebidaABM
 
                 Dim mForm As New Bebida
                 mForm.mOperacion = Bebida.TipoOperacion.Modificacion
-                mForm.BebidaAEditar = New Negocio.Negocio.Bebida()
+                mForm.BebidaAEditar = New Negocio.Negocio.Bebida(mId)
                 mForm.StartPosition = FormStartPosition.CenterParent
                 mForm.ShowDialog(Me)
                 ActualizarGrilla()
