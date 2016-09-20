@@ -144,8 +144,9 @@ Namespace Negocio
         Public Function ValidarLogin() As Integer
             Dim mDTO As New DTO.UsuarioDTO
             Dim rta As Integer
+
             mDTO.usuario = mUSuario
-            mDTO.contrasenia = mPassword
+            mDTO.contrasenia = Encriptador.encriptarDatos(1, mPassword)
 
             If ValidarFormato(mDTO.usuario, mDTO.contrasenia) Then
                 rta = Datos.UsuarioDatos.VerificarLogin(mDTO)

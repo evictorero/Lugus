@@ -66,6 +66,7 @@
     <Compile Include="Bebida.vb" />
     <Compile Include="IColeccionable.vb" />
     <Compile Include="Traductor.vb" />
+    <Compile Include="Encriptador.vb" />
     <Compile Include="Usuario.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
