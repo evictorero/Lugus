@@ -73,20 +73,27 @@ Public Class BebidaABM
         Me.dgvBebidas.DataSource = (New Negocio.Negocio.Bebida).Listar
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim mForm As New Bebida
-        mForm.mOperacion = Bebida.TipoOperacion.Baja
-        mForm.StartPosition = FormStartPosition.CenterParent
-        mForm.ShowDialog(Me)
+        Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
+        Dim bebida As New Negocio.Negocio.Bebida(mId)
+        Dim result As Integer = MessageBox.Show("¿Desea dar de baja la Bebida seleccionada?", "Alerta", MessageBoxButtons.YesNo)
+
+        If result = DialogResult.Yes Then
+            bebida.Eliminar()
+        End If
+
         ActualizarGrilla()
-        '  msgMensaje.Show()
-        ' msgMensaje.Text = "Eliminar"
-        'msgMensaje.Label1.Text = "Usted se encuentra seguro que desea dar de baja la  Bebida seleccionada?"
     End Sub
 
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
-        msgMensaje.Show()
-        msgMensaje.Text = "Rehabilitar"
-        msgMensaje.Label1.Text = "Usted se encuentra seguro que desea rehabilitar la bebida seleccionado?"
+        Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
+        Dim bebida As New Negocio.Negocio.Bebida(mId)
+        Dim result As Integer = MessageBox.Show("¿Desea activar la Bebida seleccionada?", "Alerta", MessageBoxButtons.YesNo)
+
+        If result = DialogResult.Yes Then
+            bebida.Activar()
+        End If
+
+        ActualizarGrilla()
     End Sub
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
@@ -108,12 +115,12 @@ Public Class BebidaABM
                 mForm.BebidaAEditar = New Negocio.Negocio.Bebida(mId)
                 mForm.StartPosition = FormStartPosition.CenterParent
                 mForm.ShowDialog(Me)
-                ActualizarGrilla()
 
+                ActualizarGrilla()
             Catch ex As InvalidCastException
-                MsgBox("Error al establecer el identificador el propietario seleccionado.")
+                MsgBox("Error al establecer el identificador la bebida seleccionada.")
             Catch ex As Exception
-                MsgBox("Error al intentar modificar el propietario seleccionado.")
+                MsgBox("Error al intentar modificar la bebida seleccionada.")
             End Try
 
         End If
@@ -140,8 +147,5 @@ Public Class BebidaABM
     End Sub
 
 #End Region
-
-
-
 
 End Class

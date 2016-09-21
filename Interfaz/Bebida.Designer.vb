@@ -33,8 +33,8 @@ Partial Class Bebida
         Me.txtDescripcion_corta = New System.Windows.Forms.TextBox()
         Me.txtDescripcion_larga = New System.Windows.Forms.TextBox()
         Me.cboxHabilitado = New System.Windows.Forms.ComboBox()
-        Me.txtFecha_Baja = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtFecha_baja = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -101,7 +101,7 @@ Partial Class Bebida
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(28, 146)
+        Me.Label5.Location = New System.Drawing.Point(24, 146)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(75, 13)
@@ -144,17 +144,9 @@ Partial Class Bebida
         Me.cboxHabilitado.Size = New System.Drawing.Size(82, 21)
         Me.cboxHabilitado.TabIndex = 9
         '
-        'txtFecha_Baja
-        '
-        Me.txtFecha_Baja.Location = New System.Drawing.Point(98, 141)
-        Me.txtFecha_Baja.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtFecha_Baja.Name = "txtFecha_Baja"
-        Me.txtFecha_Baja.Size = New System.Drawing.Size(82, 20)
-        Me.txtFecha_Baja.TabIndex = 10
-        '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.txtFecha_Baja)
+        Me.GroupBox1.Controls.Add(Me.txtFecha_baja)
         Me.GroupBox1.Controls.Add(Me.cboxHabilitado)
         Me.GroupBox1.Controls.Add(Me.txtDescripcion_larga)
         Me.GroupBox1.Controls.Add(Me.txtId_bebida)
@@ -171,6 +163,13 @@ Partial Class Bebida
         Me.GroupBox1.Size = New System.Drawing.Size(361, 195)
         Me.GroupBox1.TabIndex = 18
         Me.GroupBox1.TabStop = False
+        '
+        'txtFecha_baja
+        '
+        Me.txtFecha_baja.Location = New System.Drawing.Point(98, 143)
+        Me.txtFecha_baja.Name = "txtFecha_baja"
+        Me.txtFecha_baja.Size = New System.Drawing.Size(100, 20)
+        Me.txtFecha_baja.TabIndex = 10
         '
         'Bebida
         '
@@ -200,6 +199,6 @@ Partial Class Bebida
     Friend WithEvents txtDescripcion_corta As System.Windows.Forms.TextBox
     Friend WithEvents txtDescripcion_larga As System.Windows.Forms.TextBox
     Friend WithEvents cboxHabilitado As System.Windows.Forms.ComboBox
-    Friend WithEvents txtFecha_Baja As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtFecha_baja As System.Windows.Forms.TextBox
 End Class

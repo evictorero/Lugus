@@ -172,9 +172,9 @@ Namespace Negocio
             mDescripcionCorta = pDTO.descripcionCorta
             mDescripcionLarga = pDTO.descripcionLarga
             mHabilitado = pDTO.habilitado
-            If pDTO.fechaBaja <> "1900-01-01" Then
-                mFechaBaja = pDTO.fechaBaja
-            End If
+            'If pDTO.fechaBaja <> "1900-01-01" Then
+            mFechaBaja = pDTO.fechaBaja
+            'End If
             mIdUsuario = pDTO.idUsuario
             mFechaModif = pDTO.fechaModif
             mDvh = pDTO.dvh
@@ -190,6 +190,19 @@ Namespace Negocio
 
             Else
                 Throw New ApplicationException("Se intentó eliminar una bebida sin Id especifico.")
+            End If
+        End Sub
+
+        Public Overridable Sub Activar()
+            If mId > 0 Then
+                Try
+                    Datos.BebidaDatos.Activar(mId)
+                Catch ex As Exception
+                    Throw New ApplicationException("Error al activar la bebida especificada.", ex)
+                End Try
+
+            Else
+                Throw New ApplicationException("Se intentó activar una bebida sin Id especifico.")
             End If
         End Sub
 

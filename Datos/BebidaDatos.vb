@@ -23,13 +23,12 @@ Public Class BebidaDatos
 
         mStrCom = "UPDATE bBebida " & _
                   " SET descripcion_corta = '" & pDTO.descripcionCorta & "'," & _
-                  " descripcion_larga =  " & pDTO.descripcionLarga & "," & _
-                  " habilitado =  " & pDTO.habilitado & _
-                  " fecha_baja =  " & pDTO.fechaBaja & _
-                  " id_usuario =  " & pDTO.idUsuario & _
-                  " dvh =  " & pDTO.dvh & _
-                  " fecha_modif =  " & DateTime.Now & _
-                  " WHERE id = " & pDTO.id
+                  " descripcion_larga =  '" & pDTO.descripcionLarga & "'," & _
+                  " habilitado =  '" & pDTO.habilitado & "'," & _
+                  " id_usuario =  " & pDTO.idUsuario & "," & _
+                  " dvh =  " & pDTO.dvh & "," & _
+                  " fecha_modif =  '" & Format(DateTime.Now, "yyyy/MM/dd") & "'" & _
+                  " WHERE id_bebida = " & pDTO.id
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
@@ -39,16 +38,34 @@ Public Class BebidaDatos
     End Sub
 
     Public Shared Sub Eliminar(ByVal pId As Integer)
+            Dim mStrCom As String
+
+            mStrCom = "UPDATE bBebida " & _
+                      " SET fecha_baja =  '" & Format(DateTime.Now, "yyyy/MM/dd") & "'" & _
+                      " WHERE id_bebida = " & pId
+            Try
+                Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+            Catch ex As Exception
+                Throw New ApplicationException("Fallo al eliminar la bebida", ex)
+            End Try
+    End Sub
+
+    Public Shared Sub Activar(ByVal pId As Integer)
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE bBebida " & _
+                  " SET fecha_baja =  null " & _
+                  " WHERE id_bebida = " & pId
         Try
-            Datos.ProveedorDeDatos.DB.ExecuteNonQuery("DELETE FROM bBebida WHERE id = " & pId)
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
-            Throw New ApplicationException("Fallo al borrar la bebida", ex)
+            Throw New ApplicationException("Fallo al activar la bebida", ex)
         End Try
     End Sub
 
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.BebidaDTO
         If pId > 0 Then
-            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_bebida, descripcion_corta, descripcion_larga, habilitado, fecha_baja, id_usuario, dvh, fecha_modif FROM bBebida WHERE id = " & pId)
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_bebida, descripcion_corta, descripcion_larga, habilitado, fecha_baja, id_usuario, dvh, fecha_modif FROM bBebida WHERE id_bebida = " & pId)
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.BebidaDTO
 
@@ -96,7 +113,13 @@ Public Class BebidaDatos
         pDTO.descripcionCorta = pDr("descripcion_corta")
         pDTO.descripcionLarga = pDr("descripcion_larga")
         pDTO.habilitado = pDr("habilitado")
-        pDTO.fechaBaja = pDr("fecha_baja")
+        'pDTO.fechaBaja = pDr("fecha_baja")
+        'If Not IsNothing(pDr("fecha_baja")) And pDr("fecha_baja") <> "1900-01-01" Then
+        If Not IsDBNull(pDr("fecha_baja")) Then
+            pDTO.fechaBaja = pDr("fecha_baja")
+        End If
+
+        'End If
         pDTO.idUsuario = pDr("id_usuario")
         pDTO.dvh = pDr("dvh")
         pDTO.fechaModif = pDr("fecha_modif")

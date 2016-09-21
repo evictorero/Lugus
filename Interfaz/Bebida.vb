@@ -1,4 +1,6 @@
 ﻿Imports Negocio.Negocio
+Imports System.DateTime
+
 
 Public Class Bebida
     Dim mBebida As Negocio.Negocio.Bebida
@@ -47,10 +49,18 @@ Public Class Bebida
 
             Case TipoOperacion.Modificacion
 
+                Me.txtFecha_baja.Enabled = False
+
                 If Not IsNothing(mBebida) Then
+                    Me.txtId_bebida.Text = mBebida.id
+                    Me.cboxHabilitado.Text = mBebida.habilitado
+
                     Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
                     Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
-                    Me.txtFecha_Baja.Text = mBebida.fechaBaja
+
+                    'If mBebida.fechaBaja.HasValue Then
+                    ' Me.txtFecha_baja.Text = mBebida.fechaBaja
+                    'End If
                     Me.Label1.Text = "Modificación de bebida"
                 End If
 
@@ -80,7 +90,6 @@ Public Class Bebida
                 mBebida.descripcionCorta = Me.txtDescripcion_corta.Text
                 mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
                 mBebida.habilitado = Me.cboxHabilitado.Text
-                'mBebida.fechaBaja = Me.txtFecha_Baja
                 mBebida.idUsuario = 1
                 mBebida.dvh = 1
                 mBebida.Guardar()
