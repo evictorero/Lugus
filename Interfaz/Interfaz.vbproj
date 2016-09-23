@@ -346,6 +346,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.vbproj">
+      <Project>{f293eb21-9ab7-42d7-bb6d-01e99787cc77}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Negocio\Negocio.vbproj">
       <Project>{c777d717-4429-4d6e-837a-b36e842fc3d8}</Project>
       <Name>Negocio</Name>

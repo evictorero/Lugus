@@ -172,9 +172,7 @@ Namespace Negocio
             mDescripcionCorta = pDTO.descripcionCorta
             mDescripcionLarga = pDTO.descripcionLarga
             mHabilitado = pDTO.habilitado
-            'If pDTO.fechaBaja <> "1900-01-01" Then
             mFechaBaja = pDTO.fechaBaja
-            'End If
             mIdUsuario = pDTO.idUsuario
             mFechaModif = pDTO.fechaModif
             mDvh = pDTO.dvh

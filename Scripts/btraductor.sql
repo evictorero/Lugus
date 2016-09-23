@@ -1,7 +1,3 @@
-insert into bidioma values (1,'Español','');
-insert into bidioma values (2,'Inglés','');
-
-
 insert into btraductor values (2,'Datos Maestros','Data Management');
 insert into btraductor values (2,'Administrar Patentes','Manage Security');
 insert into btraductor values (2,'Administrar Familias','Manage Roles');

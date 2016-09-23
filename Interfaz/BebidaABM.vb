@@ -38,10 +38,12 @@ Public Class BebidaABM
                 .Add("cfechaBaja", "Fecha de baja")
                 .Item(4).DataPropertyName = "fechaBaja"
                 .Item(4).Width = 100
+                .Item(4).DefaultCellStyle.Format = "dd/MM/yyyy"
 
                 .Add("cfechaModif", "Fecha de modificación")
                 .Item(5).DataPropertyName = "fechaModif"
                 .Item(5).Width = 100
+                .Item(5).DefaultCellStyle.Format = "dd/MM/yyyy"
 
                 .Add("cidUsuario", "Usuario Alta/Modif")
                 .Item(6).DataPropertyName = "idUsuario"

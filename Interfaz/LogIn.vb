@@ -15,9 +15,6 @@ Public Class LogIn
         Else
             mUsuario.usuario = Me.txtUsuario.Text
             mUsuario.password = Me.txtPassword.Text
-            'BORRAR
-            mUsuario.usuario = "Cgomez"
-            mUsuario.password = "123"
 
             rta = mUsuario.ValidarLogin()
             If rta = 1 Then
@@ -34,7 +31,6 @@ Public Class LogIn
                 'Me.Close() Celeste
             ElseIf rta = 2 Then
                 MsgBox("Contraseña Incorrecta.")
-                'Update al usuario Celeste
             ElseIf rta = 3 Then
                 MsgBox("El usuario ingresado es Incorrecto.")
             End If
@@ -54,5 +50,7 @@ Public Class LogIn
     Private Sub LogIn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Visible = True
         Me.txtUsuario.Focus()
+        Me.txtUsuario.Text = "Cgomez"
+        Me.txtPassword.Text = "123"
     End Sub
 End Class

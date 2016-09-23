@@ -32,16 +32,16 @@ Public Class Bebida
                 Me.txtDescripcion_larga.Text = ""
                 Me.txtFecha_Baja.Text = ""
 
-                Me.Label1.Text = "Alta de bebida"
+                Me.lblTitulo.Text = "Alta de bebida"
 
             Case TipoOperacion.Baja
 
                 If Not IsNothing(mBebida) Then
                     Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
                     Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
-                    Me.txtFecha_Baja.Text = mBebida.fechaBaja
+                    Me.txtFecha_baja.Text = mBebida.fechaBaja
 
-                    Me.Label1.Text = "¿Esta seguro que desea dar de baja esta Bebida?"
+                    Me.lblTitulo.Text = "¿Esta seguro que desea dar de baja esta Bebida?"
                     Me.btnGuardar.Text = "Eliminar"
                     Me.btnGuardar.BackColor = Color.Firebrick
                     Me.btnGuardar.ForeColor = Color.AntiqueWhite
@@ -61,7 +61,7 @@ Public Class Bebida
                     'If mBebida.fechaBaja.HasValue Then
                     ' Me.txtFecha_baja.Text = mBebida.fechaBaja
                     'End If
-                    Me.Label1.Text = "Modificación de bebida"
+                    Me.lblTitulo.Text = "Modificación de bebida"
                 End If
 
             Case TipoOperacion.Rehabilitar
@@ -73,7 +73,7 @@ Public Class Bebida
                 Me.txtDescripcion_corta.Enabled = False
                 Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
                 Me.txtDescripcion_larga.Enabled = False
-                Me.Label1.Text = "Rehabilitar bebida"
+                Me.lblTitulo.Text = "Rehabilitar bebida"
                 Me.btnGuardar.Visible = False
         End Select
 
