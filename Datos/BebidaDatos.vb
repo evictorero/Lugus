@@ -7,13 +7,13 @@ Public Class BebidaDatos
     Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.BebidaDTO)
         Dim mStrCom As String
 
-        mStrCom = "INSERT INTO dbo.bBebida (id_bebida, descripcion_corta, descripcion_larga, habilitado, fecha_baja, id_usuario, dvh, fecha_modif)" & _
-        " VALUES " & _
-        "(" & pDTO.id & ", '" & pDTO.descripcionCorta & "' , '" & pDTO.descripcionLarga & "' , '" & pDTO.habilitado & "', '" & pDTO.fechaBaja & "', " & pDTO.idUsuario & ", " & pDTO.dvh & ", '" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "')"
+        mStrCom = "INSERT INTO dbo.bBebida (id_bebida, descripcion_corta, descripcion_larga, habilitado,  id_usuario, dvh, fecha_modif)" &
+        " VALUES " &
+        "(" & pDTO.id & ", '" & pDTO.descripcionCorta & "' , '" & pDTO.descripcionLarga & "' , '" & pDTO.habilitado & "', " & pDTO.idUsuario & ", " & pDTO.dvh & ", '" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "')"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
-            Throw New ApplicationException("Fallo al insertar o modificar la bebida", ex)
+            Throw New ApplicationException("Fallo al insertar la bebida", ex)
         End Try
     End Sub
 
@@ -32,7 +32,7 @@ Public Class BebidaDatos
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
-            Throw New ApplicationException("Fallo al insertar o modificar la bebida", ex)
+            Throw New ApplicationException("Fallo al modificar la bebida", ex)
         End Try
 
     End Sub
@@ -50,11 +50,11 @@ Public Class BebidaDatos
             End Try
     End Sub
 
-    Public Shared Sub Activar(ByVal pId As Integer)
+    Public Shared Sub Rehabilitar(ByVal pId As Integer)
         Dim mStrCom As String
 
-        mStrCom = "UPDATE bBebida " & _
-                  " SET fecha_baja =  null " & _
+        mStrCom = "UPDATE bBebida " &
+                  " SET fecha_baja =  null " &
                   " WHERE id_bebida = " & pId
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)

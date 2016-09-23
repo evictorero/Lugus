@@ -73,26 +73,34 @@ Public Class BebidaABM
 
     Friend Sub ActualizarGrilla()
         Me.dgvBebidas.DataSource = (New Negocio.Negocio.Bebida).Listar
+        If Me.dgvBebidas.RowCount = 0 Then
+            Me.txtMensaje.Text = "No existen Bebidas ingresadas en el sistema"
+        Else
+            Me.txtMensaje.Text = ""
+        End If
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
         Dim bebida As New Negocio.Negocio.Bebida(mId)
-        Dim result As Integer = MessageBox.Show("¿Desea dar de baja la Bebida seleccionada?", "Alerta", MessageBoxButtons.YesNo)
-
+        'Traducir Celeste
+        Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea dar de baja la Bebida seleccionada?", "Eliminar", MessageBoxButtons.YesNo)
         If result = DialogResult.Yes Then
             bebida.Eliminar()
+            'Traducir Celeste
+            MessageBox.Show("Bebida eliminada correctamente.")
         End If
-
         ActualizarGrilla()
     End Sub
 
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
         Dim bebida As New Negocio.Negocio.Bebida(mId)
-        Dim result As Integer = MessageBox.Show("¿Desea activar la Bebida seleccionada?", "Alerta", MessageBoxButtons.YesNo)
-
+        Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea rehabilitar la Bebida seleccionada?", "Rehabilitar", MessageBoxButtons.YesNo)
+        'Traducir Celeste
         If result = DialogResult.Yes Then
-            bebida.Activar()
+            bebida.Rehabilitar()
+            'Traducir Celeste
+            MessageBox.Show("Bebida rehabilitada correctamente.")
         End If
 
         ActualizarGrilla()

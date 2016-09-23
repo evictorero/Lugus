@@ -191,10 +191,10 @@ Namespace Negocio
             End If
         End Sub
 
-        Public Overridable Sub Activar()
+        Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try
-                    Datos.BebidaDatos.Activar(mId)
+                    Datos.BebidaDatos.Rehabilitar(mId)
                 Catch ex As Exception
                     Throw New ApplicationException("Error al activar la bebida especificada.", ex)
                 End Try

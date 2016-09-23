@@ -66,6 +66,14 @@ Namespace Negocio
                 mId_idioma = value
             End Set
         End Property
+        Public Property id() As Integer
+            Get
+                Return mId
+            End Get
+            Set(ByVal value As Integer)
+                mId = value
+            End Set
+        End Property
 #End Region
 
 

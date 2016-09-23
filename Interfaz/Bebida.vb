@@ -23,15 +23,15 @@ Public Class Bebida
 
     Private Sub Bebida_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.txtId_bebida.Enabled = False
-
+        Me.txtFecha_baja.Enabled = False
 
         Select Case mOperacion
             Case TipoOperacion.Alta
 
                 Me.txtDescripcion_corta.Text = ""
                 Me.txtDescripcion_larga.Text = ""
-                Me.txtFecha_Baja.Text = ""
-
+                Me.cboxHabilitado.Text = ""
+                Me.txtFecha_baja.Text = ""
                 Me.lblTitulo.Text = "Alta de bebida"
 
             Case TipoOperacion.Baja
@@ -49,18 +49,12 @@ Public Class Bebida
 
             Case TipoOperacion.Modificacion
 
-                Me.txtFecha_baja.Enabled = False
-
                 If Not IsNothing(mBebida) Then
                     Me.txtId_bebida.Text = mBebida.id
                     Me.cboxHabilitado.Text = mBebida.habilitado
-
                     Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
                     Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
-
-                    'If mBebida.fechaBaja.HasValue Then
-                    ' Me.txtFecha_baja.Text = mBebida.fechaBaja
-                    'End If
+                    Me.txtFecha_baja.Text = mBebida.fechaBaja
                     Me.lblTitulo.Text = "Modificación de bebida"
                 End If
 
@@ -90,13 +84,18 @@ Public Class Bebida
                 mBebida.descripcionCorta = Me.txtDescripcion_corta.Text
                 mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
                 mBebida.habilitado = Me.cboxHabilitado.Text
-                mBebida.idUsuario = 1
-                mBebida.dvh = 1
+                mBebida.idUsuario = Principal.UsuarioEnSesion.id
+                mBebida.dvh = 1 'Digito Verificador Celes
                 mBebida.Guardar()
                 Me.Close()
             Case TipoOperacion.Baja
                 mBebida.Eliminar()
                 Me.Close()
         End Select
+    End Sub
+
+    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+        Me.Close()
+
     End Sub
 End Class

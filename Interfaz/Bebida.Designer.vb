@@ -64,9 +64,9 @@ Partial Class Bebida
         Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.Location = New System.Drawing.Point(36, 38)
         Me.lblTitulo.Name = "lblTitulo"
-        Me.lblTitulo.Size = New System.Drawing.Size(58, 17)
+        Me.lblTitulo.Size = New System.Drawing.Size(68, 17)
         Me.lblTitulo.TabIndex = 0
-        Me.lblTitulo.Text = "Código"
+        Me.lblTitulo.Text = "Mensaje"
         '
         'Label2
         '
@@ -135,6 +135,7 @@ Partial Class Bebida
         'cboxHabilitado
         '
         Me.cboxHabilitado.FormattingEnabled = True
+        Me.cboxHabilitado.Items.AddRange(New Object() {"S", "N"})
         Me.cboxHabilitado.Location = New System.Drawing.Point(131, 138)
         Me.cboxHabilitado.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cboxHabilitado.Name = "cboxHabilitado"

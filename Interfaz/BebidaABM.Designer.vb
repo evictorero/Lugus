@@ -27,45 +27,46 @@ Partial Class BebidaABM
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
         Me.dgvBebidas = New System.Windows.Forms.DataGridView()
+        Me.txtMensaje = New System.Windows.Forms.Label()
         CType(Me.dgvBebidas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnRehabilitar
         '
-        Me.btnRehabilitar.Location = New System.Drawing.Point(419, 312)
-        Me.btnRehabilitar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnRehabilitar.Location = New System.Drawing.Point(559, 384)
+        Me.btnRehabilitar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRehabilitar.Name = "btnRehabilitar"
-        Me.btnRehabilitar.Size = New System.Drawing.Size(106, 31)
+        Me.btnRehabilitar.Size = New System.Drawing.Size(141, 38)
         Me.btnRehabilitar.TabIndex = 21
         Me.btnRehabilitar.Text = "Rehabilitar"
         Me.btnRehabilitar.UseVisualStyleBackColor = True
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(309, 312)
-        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEliminar.Location = New System.Drawing.Point(412, 384)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(106, 31)
+        Me.btnEliminar.Size = New System.Drawing.Size(141, 38)
         Me.btnEliminar.TabIndex = 20
         Me.btnEliminar.Text = "Eliminar"
         Me.btnEliminar.UseVisualStyleBackColor = True
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(197, 312)
-        Me.btnModificar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnModificar.Location = New System.Drawing.Point(263, 384)
+        Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Size = New System.Drawing.Size(106, 31)
+        Me.btnModificar.Size = New System.Drawing.Size(141, 38)
         Me.btnModificar.TabIndex = 19
         Me.btnModificar.Text = "Modificar"
         Me.btnModificar.UseVisualStyleBackColor = True
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(87, 312)
-        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnNuevo.Location = New System.Drawing.Point(116, 384)
+        Me.btnNuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(106, 31)
+        Me.btnNuevo.Size = New System.Drawing.Size(141, 38)
         Me.btnNuevo.TabIndex = 18
         Me.btnNuevo.Text = "Nuevo"
         Me.btnNuevo.UseVisualStyleBackColor = True
@@ -73,28 +74,40 @@ Partial Class BebidaABM
         'dgvBebidas
         '
         Me.dgvBebidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvBebidas.Location = New System.Drawing.Point(34, 21)
-        Me.dgvBebidas.Margin = New System.Windows.Forms.Padding(2)
+        Me.dgvBebidas.Location = New System.Drawing.Point(45, 43)
+        Me.dgvBebidas.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvBebidas.Name = "dgvBebidas"
         Me.dgvBebidas.RowTemplate.Height = 28
-        Me.dgvBebidas.Size = New System.Drawing.Size(549, 275)
+        Me.dgvBebidas.Size = New System.Drawing.Size(732, 321)
         Me.dgvBebidas.TabIndex = 22
+        '
+        'txtMensaje
+        '
+        Me.txtMensaje.AutoSize = True
+        Me.txtMensaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMensaje.Location = New System.Drawing.Point(45, 13)
+        Me.txtMensaje.Name = "txtMensaje"
+        Me.txtMensaje.Size = New System.Drawing.Size(68, 17)
+        Me.txtMensaje.TabIndex = 23
+        Me.txtMensaje.Text = "Mensaje"
         '
         'BebidaABM
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(615, 364)
+        Me.ClientSize = New System.Drawing.Size(820, 448)
+        Me.Controls.Add(Me.txtMensaje)
         Me.Controls.Add(Me.dgvBebidas)
         Me.Controls.Add(Me.btnRehabilitar)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.btnNuevo)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "BebidaABM"
         Me.Text = "Bebida"
         CType(Me.dgvBebidas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -103,4 +116,5 @@ Partial Class BebidaABM
     Friend WithEvents btnModificar As Button
     Friend WithEvents btnNuevo As Button
     Friend WithEvents dgvBebidas As DataGridView
+    Friend WithEvents txtMensaje As Label
 End Class
