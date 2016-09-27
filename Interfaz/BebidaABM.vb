@@ -75,6 +75,8 @@ Public Class BebidaABM
         Me.dgvBebidas.DataSource = (New Negocio.Negocio.Bebida).Listar
         If Me.dgvBebidas.RowCount = 0 Then
             Me.txtMensaje.Text = "No existen Bebidas ingresadas en el sistema"
+            Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
+
         Else
             Me.txtMensaje.Text = ""
         End If
@@ -143,7 +145,7 @@ Public Class BebidaABM
             Me.btnModificar.Enabled = True
             Me.btnNuevo.Enabled = True
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
-            If Me.dgvBebidas.SelectedRows(0).Cells(4).Value Is Nothing Then
+            If IsNothing(Me.dgvBebidas.SelectedRows(0).Cells(4).Value) Then
                 Me.btnEliminar.Enabled = True
             Else
                 Me.btnRehabilitar.Enabled = True

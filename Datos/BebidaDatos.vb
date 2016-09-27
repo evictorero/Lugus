@@ -46,8 +46,8 @@ Public Class BebidaDatos
             Try
                 Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
             Catch ex As Exception
-                Throw New ApplicationException("Fallo al eliminar la bebida", ex)
-            End Try
+            Throw New ApplicationException("Fallo al dar de baja la bebida", ex)
+        End Try
     End Sub
 
     Public Shared Sub Rehabilitar(ByVal pId As Integer)
@@ -59,7 +59,7 @@ Public Class BebidaDatos
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
-            Throw New ApplicationException("Fallo al activar la bebida", ex)
+            Throw New ApplicationException("Fallo al rehabilitar la bebida", ex)
         End Try
     End Sub
 

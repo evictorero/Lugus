@@ -24,7 +24,6 @@ Public Class UsuarioDatos
         End If
 
     End Function
-
     Public Shared Function ObtenerPorUsuario(ByVal pUsuario As String) As DTO.UsuarioDTO
         If Not IsNothing(pUsuario) Then
             Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario, nombre, apellido, dni, email, id_idioma,fecha_nacimiento FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
@@ -82,6 +81,7 @@ Public Class UsuarioDatos
         If rta > 0 Then
             mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña <> '" & pDTO.contrasenia & "' "
             rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+            'Intentos login 
             If rta > 0 Then
                 Return 2  ' USuario OK  y contrase;a NOK
             End If
@@ -90,4 +90,71 @@ Public Class UsuarioDatos
         End If
         Return rta
     End Function
+
+    Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.UsuarioDTO)
+        Dim mStrCom As String
+
+        mStrCom = "INSERT INTO [dbo].[bUsuario] ([id_usuario],[usuario],[contraseña],[nombre],[apellido],[dni],[email],[id_idioma],[fecha_nacimiento],[dvh],[intentos_login],[fecha_modif],[id_usuario_alta])" &
+        " VALUES " &
+        "(" & pDTO.id & ", '" & pDTO.usuario & "' , '" & pDTO.contrasenia & "' , '" & pDTO.nombre & "', '" & pDTO.apellido & "', " & pDTO.dni & ", '" & pDTO.email & "', " & pDTO.id_idioma & ",  '" & pDTO.fechaNacimiento & "', " & pDTO.dvh & ", " & pDTO.intentosLogin & ",'" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "'," & pDTO.idUsuarioAlta & ")"
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al insertar el Usuario", ex)
+        End Try
+    End Sub
+
+    Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.UsuarioDTO)
+
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE bUsuario " &
+                   "SET usuario = '" & pDTO.usuario & "'," &
+                      " contraseña = '" & pDTO.contrasenia & "'," &
+                      "nombre = '" & pDTO.nombre & "'," &
+                      "apellido = '" & pDTO.apellido & "'," &
+                      "dni = " & pDTO.dni & "," &
+                      "email ='" & pDTO.email & "'," &
+                      "id_idioma = " & pDTO.id_idioma & "," &
+                      "fecha_nacimiento = '" & Format(pDTO.fechaNacimiento, "yyyy/MM/dd") & "'," &
+                      "dvh = " & pDTO.dvh & "," &
+                      "intentos_login = " & pDTO.intentosLogin & "," &
+                      "fecha_modif =  '" & Format(DateTime.Now, "yyyy/MM/dd") & "'," &
+                      "id_usuario_alta = " & pDTO.idUsuarioAlta &
+                     " where id_usuario = " & pDTO.id
+
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al modificar el usuario", ex)
+        End Try
+
+    End Sub
+
+    Public Shared Sub Eliminar(ByVal pId As Integer)
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE bUsuario " &
+                  " SET fecha_baja =  '" & Format(DateTime.Now, "yyyy/MM/dd") & "'" &
+                  " WHERE id_usuario = " & pId
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al dar de baja el Usuario.", ex)
+        End Try
+    End Sub
+
+    Public Shared Sub Rehabilitar(ByVal pId As Integer)
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE bUsuario " &
+                  " SET fecha_baja =  null " &
+                  " WHERE id_usuario = " & pId
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al Rehabilitar el usuario.", ex)
+        End Try
+    End Sub
+
 End Class

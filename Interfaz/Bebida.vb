@@ -54,11 +54,14 @@ Public Class Bebida
                     Me.cboxHabilitado.Text = mBebida.habilitado
                     Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
                     Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
-                    Me.txtFecha_baja.Text = mBebida.fechaBaja
-                    Me.lblTitulo.Text = "Modificación de bebida"
-                End If
+                    If Not IsNothing(mBebida.fechaBaja) Then
+                        Me.txtFecha_baja.Text = mBebida.fechaBaja
+                    End If
 
-            Case TipoOperacion.Rehabilitar
+                    Me.lblTitulo.Text = "Modificación de bebida"
+                    End If
+
+                    Case TipoOperacion.Rehabilitar
 
                 Me.txtId_bebida.Text = mBebida.id
                 Me.txtId_bebida.Enabled = False

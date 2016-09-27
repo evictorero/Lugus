@@ -56,7 +56,7 @@ Namespace Negocio
 
 #Region "Métodos"
 
-        Public Function ObtenerTraduccion(pIdIdioma As Integer, pMensaje As String) As String
+        Public Shared Function ObtenerTraduccion(pIdIdioma As Integer, pMensaje As String) As String
             Dim mMensajeTraducido As String
 
             mMensajeTraducido = Datos.TraductorDatos.ObtenerTraduccion(pIdIdioma, pMensaje)
