@@ -4,23 +4,24 @@ Imports Datos.ProveedorDeDatos
 
 
 Namespace Negocio
-
-
     Public Class Usuario
 
 #Region "Declaraciones"
-
-        Dim mUSuario As String
+        Dim mUsuario As String
+        Dim mPassword As String
         Dim mNombre As String
         Dim mApellido As String
-        Dim mPassword As String
         Dim mDNI As Integer
+        Dim mEmail As String
         Dim mId_idioma As Integer
         Dim mFechaNacimiento As Date
-        Dim mEmail As String
+        Dim mFechaBaja As Nullable(Of DateTime)
+        Dim mDvh As Integer
+        Dim mIntentosLogin As Integer
+        Dim mIdUsuarioAlta As Integer
+        Dim mFechaModif As Date
         Private Shared ProximoId As Integer
         Dim mId As Integer = 0
-
 #End Region
 
 #Region "Constructores"
@@ -48,7 +49,22 @@ Namespace Negocio
                 mUSuario = value
             End Set
         End Property
-
+        Public Property nombre() As String
+            Get
+                Return mNombre
+            End Get
+            Set(ByVal value As String)
+                mNombre = value
+            End Set
+        End Property
+        Public Property apellido() As String
+            Get
+                Return mApellido
+            End Get
+            Set(ByVal value As String)
+                mApellido = value
+            End Set
+        End Property
         Public Property password() As String
             Get
                 Return mPassword
@@ -57,13 +73,76 @@ Namespace Negocio
                 mPassword = value
             End Set
         End Property
-
+        Public Property dni() As Integer
+            Get
+                Return mDNI
+            End Get
+            Set(ByVal value As Integer)
+                mDNI = value
+            End Set
+        End Property
         Public Property id_idioma() As String
             Get
                 Return mId_idioma
             End Get
             Set(ByVal value As String)
                 mId_idioma = value
+            End Set
+        End Property
+        Public Property fechaNacimiento() As Date
+            Get
+                Return mFechaNacimiento
+            End Get
+            Set(ByVal value As Date)
+                mFechaNacimiento = value
+            End Set
+        End Property
+        Public Property email() As String
+            Get
+                Return mEmail
+            End Get
+            Set(ByVal value As String)
+                mEmail = value
+            End Set
+        End Property
+        Public Property idUsuarioAlta() As Integer
+            Get
+                Return mIdUsuarioAlta
+            End Get
+            Set(ByVal value As Integer)
+                mIdUsuarioAlta = value
+            End Set
+        End Property
+        Public Property fechaBaja() As Nullable(Of DateTime)
+            Get
+                Return mFechaBaja
+            End Get
+            Set(ByVal value As Nullable(Of DateTime))
+                mFechaBaja = value
+            End Set
+        End Property
+        Public Property dvh() As Integer
+            Get
+                Return mDvh
+            End Get
+            Set(ByVal value As Integer)
+                mDvh = value
+            End Set
+        End Property
+        Public Property intentoLogin() As Integer
+            Get
+                Return mIntentosLogin
+            End Get
+            Set(ByVal value As Integer)
+                mIntentosLogin = value
+            End Set
+        End Property
+        Public Property fechaModif() As Date
+            Get
+                Return mFechaModif
+            End Get
+            Set(ByVal value As Date)
+                mFechaModif = value
             End Set
         End Property
         Public Property id() As Integer
@@ -92,10 +171,12 @@ Namespace Negocio
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mId = pDr("id")
+                mUsuario = pDr("usuario")
                 mNombre = pDr("nombre")
                 mApellido = pDr("apellido")
-                mDNI = pDr("apellido")
+                mDNI = pDr("dni")
                 mFechaNacimiento = pDr("fecha_nacimiento")
+                mFechaNacimiento = pDr("fecha_modif")
                 mEmail = pDr("email")
             Catch ex As Exception
                 MsgBox(ex.Message)
@@ -113,11 +194,18 @@ Namespace Negocio
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.UsuarioDTO)
             mId = pDTO.id
+            mUsuario = pDTO.usuario
+            mPassword = pDTO.contrasenia
             mNombre = pDTO.nombre
             mApellido = pDTO.apellido
             mDNI = pDTO.dni
-            mPassword = pDTO.contrasenia
             mId_idioma = pDTO.id_idioma
+            mEmail = pDTO.email
+            mFechaNacimiento = pDTO.fechaNacimiento
+            mFechaBaja = pDTO.fechaBaja
+            mDvh = pDTO.dvh
+            mIntentosLogin = pDTO.intentosLogin
+            mFechaModif = pDTO.fechaModif
 
         End Sub
 
@@ -137,9 +225,12 @@ Namespace Negocio
         Public Overridable Function Listar() As Collections.Generic.List(Of Usuario)
             Dim mCol As New Collections.Generic.List(Of Usuario)
             Dim mColDTO As List(Of DTO.UsuarioDTO) = Datos.UsuarioDatos.Listar()
+            Dim miUsuario As Negocio.Usuario
 
             For Each mDTO As DTO.UsuarioDTO In mColDTO
-                mCol.Add(New Negocio.Usuario(mDTO))
+                miUsuario = New Negocio.Usuario(mDTO)
+                miUsuario.usuario = Encriptador.DesencriptarDatos(2, mDTO.usuario)
+                mCol.Add(miUsuario)
             Next
 
             Return mCol
@@ -153,7 +244,7 @@ Namespace Negocio
             Dim mDTO As New DTO.UsuarioDTO
             Dim rta As Integer
 
-            mDTO.usuario = mUSuario
+            mDTO.usuario = Encriptador.EncriptarDatos(2, mUsuario)
             mDTO.contrasenia = Encriptador.encriptarDatos(1, mPassword)
 
             If ValidarFormato(mDTO.usuario, mDTO.contrasenia) Then
@@ -167,14 +258,76 @@ Namespace Negocio
             Dim mDTO As New DTO.UsuarioDTO
             Dim mNegocio As New Negocio.Usuario
 
-            mDTO = Datos.UsuarioDatos.ObtenerPorUsuario(Me.usuario)
+            mDTO = Datos.UsuarioDatos.ObtenerPorUsuario(Encriptador.EncriptarDatos(2, Me.usuario))
 
             mNegocio.Cargar(mDTO)
 
             Return mNegocio
         End Function
 
+        Public Overridable Sub Guardar()
+            Dim mDTO As New DTO.UsuarioDTO
 
+            mDTO.usuario = Encriptador.EncriptarDatos(2, Me.usuario)
+            mDTO.nombre = Me.nombre
+            mDTO.apellido = Me.apellido
+            mDTO.dni = Me.dni
+            mDTO.email = Me.email
+            mDTO.id_idioma = Me.id_idioma
+            mDTO.fechaNacimiento = Me.fechaNacimiento
+            mDTO.dvh = Me.dvh ' Celes
+            mDTO.idUsuarioAlta = Me.idUsuarioAlta
+            mDTO.fechaModif = Me.mFechaModif
+
+
+            ValidarCampos()
+
+            If mId = 0 Then
+                mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
+                Datos.UsuarioDatos.GuardarNuevo(mDTO)
+            Else
+                mDTO.id = Me.id
+                Datos.UsuarioDatos.GuardarModificacion(mDTO)
+            End If
+
+        End Sub
+        Private Sub ValidarCampos()
+            If (Me.nombre = "") Then
+                Throw New ApplicationException("Debe completar la descripción corta.")
+            End If
+            If (Me.apellido = "") Then
+                Throw New ApplicationException("Debe completar la descripción larga.")
+            End If
+            If (Me.usuario = "") Then
+                Throw New ApplicationException("Debe completar el campo habilitado.")
+            End If
+        End Sub
+
+        Public Overridable Sub Eliminar()
+            If mId > 0 Then
+                Try
+                    Datos.UsuarioDatos.Eliminar(mId)
+                Catch ex As Exception
+                    Throw New ApplicationException("Error al borrar la bebida especificada.", ex)
+                End Try
+
+            Else
+                Throw New ApplicationException("Se intentó eliminar una bebida sin Id especifico.")
+            End If
+        End Sub
+
+        Public Overridable Sub Rehabilitar()
+            If mId > 0 Then
+                Try
+                    Datos.UsuarioDatos.Rehabilitar(mId)
+                Catch ex As Exception
+                    Throw New ApplicationException("Error al activar la bebida especificada.", ex)
+                End Try
+
+            Else
+                Throw New ApplicationException("Se intentó activar una bebida sin Id especifico.")
+            End If
+        End Sub
 #End Region
 
     End Class

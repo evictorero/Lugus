@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Configuration
 
 Namespace ProveedorDeDatos
 
@@ -6,6 +7,7 @@ Namespace ProveedorDeDatos
         Shared mCon As SqlConnection
 
         Public Shared StrConnection As String = "Data Source=.\SQLEXPRESS;Initial Catalog=lugus;Integrated Security=True"
+        'Public Shared StrConnection As String = ConfigurationManager.ConnectionStrings("Datos.My.MySettings.lugusConnStringDB").ConnectionString
 
         Public Shared Function ExecuteDataset(ByVal pCommandText As String) As DataSet
             Dim mDs As New DataSet
@@ -137,6 +139,8 @@ Namespace ProveedorDeDatos
                         mId = "id_pedidobebida"
                     Case "rPedidoPlato"
                         mId = "id_pedidoplato"
+                    Case "bUsuario"
+                        mId = "id_usuario"
                     Case Else
                         mId = "id"
                 End Select

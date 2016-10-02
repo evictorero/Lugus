@@ -215,10 +215,10 @@
     <Compile Include="Restore.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Usuario.Designer.vb">
-      <DependentUpon>Usuario.vb</DependentUpon>
+    <Compile Include="Usuarios.Designer.vb">
+      <DependentUpon>Usuarios.vb</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.vb">
+    <Compile Include="Usuarios.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UsuarioABM.vb">
@@ -314,8 +314,8 @@
     <EmbeddedResource Include="Restore.resx">
       <DependentUpon>Restore.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Usuario.resx">
-      <DependentUpon>Usuario.vb</DependentUpon>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsuarioABM.resx">
       <DependentUpon>UsuarioABM.vb</DependentUpon>

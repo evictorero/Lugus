@@ -4,7 +4,6 @@ Public Class LogIn
 
     Dim mUsuario As Negocio.Negocio.Usuario
 
-
     Private Sub btnIniciarSesion_Click(sender As Object, e As EventArgs) Handles btnIniciarSesion.Click
 
         Dim rta As Integer = -1

@@ -6,7 +6,7 @@ Public Class UsuarioDatos
     Private Shared ProximoId As Integer
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.UsuarioDTO
         If pId > 0 Then
-            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id, nombre, apellido FROM dbo.busuario WHERE id_usuario = " & pId)
+            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta  FROM dbo.busuario WHERE id_usuario = " & pId)
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.UsuarioDTO
 
@@ -26,7 +26,7 @@ Public Class UsuarioDatos
     End Function
     Public Shared Function ObtenerPorUsuario(ByVal pUsuario As String) As DTO.UsuarioDTO
         If Not IsNothing(pUsuario) Then
-            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario, nombre, apellido, dni, email, id_idioma,fecha_nacimiento FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
+            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.UsuarioDTO
 
@@ -46,6 +46,7 @@ Public Class UsuarioDatos
     Private Shared Sub CargarDTO(ByVal pDTO As DTO.UsuarioDTO, ByVal pDr As DataRow)
         pDTO.id = pDr("id_usuario")
         pDTO.usuario = pDr("usuario")
+        pDTO.contrasenia = pDr("contraseña")
         pDTO.nombre = pDr("nombre")
         pDTO.apellido = pDr("apellido")
         pDTO.email = pDr("email")
@@ -53,11 +54,18 @@ Public Class UsuarioDatos
         pDTO.id_idioma = pDr("id_idioma")
         ' probando 
         pDTO.fechaNacimiento = pDr("fecha_nacimiento")
+        If Not IsDBNull(pDr("fecha_baja")) Then
+            pDTO.fechaBaja = pDr("fecha_baja")
+        End If
+        pDTO.dvh = pDr("dvh")
+        pDTO.intentosLogin = pDr("intentos_login")
+        pDTO.fechaModif = pDr("fecha_modif")
+        pDTO.idUsuarioAlta = pDr("id_usuario_alta")
     End Sub
     Public Shared Function Listar() As List(Of DTO.UsuarioDTO)
 
         Dim mCol As New List(Of DTO.UsuarioDTO)
-        Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_usuario, nombre, apellido, email, dni, fecha_nacimiento FROM dbo.busuario "))
+        Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario "))
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.UsuarioDTO
@@ -157,4 +165,11 @@ Public Class UsuarioDatos
         End Try
     End Sub
 
+    Public Shared Function ObtenerProximoId() As Integer
+        If ProximoId = 0 Then
+            ProximoId = Datos.ProveedorDeDatos.DB.ObtenerId("bUsuario")
+        End If
+        ProximoId += 1
+        Return ProximoId
+    End Function
 End Class
