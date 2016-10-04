@@ -42,25 +42,10 @@ Public Class Usuarios
                 Me.txtDNI.Text = ""
                 Me.lblTitulo.Text = "Alta de Usuario"
 
-            'Case TipoOperacion.Baja
-            '    'Celeste
-            '    If Not IsNothing(mUsuario) Then
-            '        Me.txtUsuario.Text = mUsuario.usuario
-            '        Me.txtNombre.Text = mUsuario.nombre
-            '        Me.txtApellido.Text = mUsuario.apellido
-            '        Me.txtFecha_Nacimiento.Text = mUsuario.fecha_nacimiento
-            '        Me.txtEmail.Text = mUsuario.email
-            '        Me.txtDNI.Text = mUsuario.dni
-
-            '        Me.lblTitulo.Text = "¿Esta seguro que desea dar de baja esta Bebida?"
-            '        Me.btnGuardar.Text = "Eliminar"
-            '        Me.btnGuardar.BackColor = Color.Firebrick
-            '        Me.btnGuardar.ForeColor = Color.AntiqueWhite
-            '    End If
-
             Case TipoOperacion.Modificacion
 
                 If Not IsNothing(mUsuario) Then
+                    Me.txtId_usuario.Text = mUsuario.id
                     Me.txtUsuario.Text = mUsuario.usuario
                     Me.txtNombre.Text = mUsuario.nombre
                     Me.txtApellido.Text = mUsuario.apellido
@@ -70,18 +55,6 @@ Public Class Usuarios
 
                     Me.lblTitulo.Text = "Modificación de Usuario"
                 End If
-
-                'Case TipoOperacion.Rehabilitar
-
-                '    Me.txtId_bebida.Text = mBebida.id
-                '    Me.txtId_bebida.Enabled = False
-
-                '    Me.txtDescripcion_corta.Text = mBebida.descripcionCorta
-                '    Me.txtDescripcion_corta.Enabled = False
-                '    Me.txtDescripcion_larga.Text = mBebida.descripcionLarga
-                '    Me.txtDescripcion_larga.Enabled = False
-                '    Me.lblTitulo.Text = "Rehabilitar bebida"
-                '    Me.btnGuardar.Visible = False
         End Select
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
@@ -93,7 +66,6 @@ Public Class Usuarios
                 If IsNothing(mUsuario) Then
                     mUsuario = New Negocio.Negocio.Usuario
                 End If
-
                 mUsuario.usuario = Me.txtUsuario.Text
                 mUsuario.nombre = Me.txtNombre.Text
                 mUsuario.apellido = Me.txtApellido.Text
@@ -102,6 +74,8 @@ Public Class Usuarios
                 mUsuario.fechaNacimiento = Me.txtFecha_Nacimiento.Text
                 mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
                 mUsuario.dvh = 1 'Digito Verificador Celes
+                mUsuario.id_idioma = 1 'Idioma Celes
+
                 mUsuario.Guardar()
                 Me.Close()
             Case TipoOperacion.Baja
@@ -111,7 +85,19 @@ Public Class Usuarios
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
-        Me.Close()
+        'Traducir Celeste
+        Select Case mOperacion
+            Case TipoOperacion.Alta, TipoOperacion.Modificacion
+                Dim result As Integer = MessageBox.Show("¿Desea Cancelar la operación de Alta de usuario? ", "Cancelar", MessageBoxButtons.YesNo)
+                If result = DialogResult.Yes Then
+                    Me.Close()
+                End If
+            Case TipoOperacion.Baja
+                Dim result As Integer = MessageBox.Show("¿Desea Cancelar la operación de Modificacion de Usuario? ", "Cancelar", MessageBoxButtons.YesNo)
+                If result = DialogResult.Yes Then
+                    Me.Close()
+                End If
+        End Select
 
     End Sub
 

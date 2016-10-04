@@ -194,7 +194,7 @@ Namespace Negocio
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.UsuarioDTO)
             mId = pDTO.id
-            mUsuario = pDTO.usuario
+            mUsuario = Encriptador.DesencriptarDatos(2, pDTO.usuario)
             mPassword = pDTO.contrasenia
             mNombre = pDTO.nombre
             mApellido = pDTO.apellido
@@ -267,6 +267,7 @@ Namespace Negocio
 
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.UsuarioDTO
+            Dim pass As String
 
             mDTO.usuario = Encriptador.EncriptarDatos(2, Me.usuario)
             mDTO.nombre = Me.nombre
@@ -284,7 +285,11 @@ Namespace Negocio
 
             If mId = 0 Then
                 mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
+                pass = GenerarPasswordAleatorio()
+                MsgBox("Password Aleatorio" & pass)
+                mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarNuevo(mDTO)
+                EnviarMail(mDTO.usuario, mDTO.contrasenia)
             Else
                 mDTO.id = Me.id
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
@@ -328,6 +333,26 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó activar una bebida sin Id especifico.")
             End If
         End Sub
+
+        Public Function GenerarPasswordAleatorio() As String
+            Dim numAleatorio As New Random()
+            Dim password As String
+            password = System.Convert.ToString(numAleatorio.Next)
+            Return password
+        End Function
+
+        Public Sub EnviarMail(ByVal pNombreUsuario As String, ByVal pPass As String)
+            Dim ruta As String = "C:\" & pNombreUsuario & ".txt"
+            If Not System.IO.File.Exists(ruta) Then
+                System.IO.File.Create(ruta).Dispose()
+            End If
+            Dim Escribir As New System.IO.StreamWriter(ruta, True)
+            Escribir.WriteLine("Usuario" & pNombreUsuario)
+            Escribir.WriteLine("Contraseña" & pPass)
+            Escribir.Close()
+
+        End Sub
+
 #End Region
 
     End Class

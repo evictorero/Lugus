@@ -84,9 +84,10 @@ Public Class UsuarioABM
 
         Else
             Me.txtMensaje.Text = ""
-            End If
-        End Sub
-        Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        End If
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
         'Traducir Celeste
@@ -96,10 +97,11 @@ Public Class UsuarioABM
             'Traducir Celeste
             MessageBox.Show("Usuario dado de baja correctamente.")
         End If
-            ActualizarGrilla()
-        End Sub
+        ActualizarGrilla()
+    End Sub
 
-        Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
+
+    Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
         Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea rehabilitar el usuario seleccionado?", "Rehabilitar", MessageBoxButtons.YesNo)
@@ -110,10 +112,11 @@ Public Class UsuarioABM
             MessageBox.Show("Usuario rehabilitado correctamente.")
         End If
 
-            ActualizarGrilla()
-        End Sub
+        ActualizarGrilla()
+    End Sub
 
-        Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         Dim mForm As New Usuarios
         mForm.mOperacion = Interfaz.Usuarios.TipoOperacion.Alta
         mForm.StartPosition = FormStartPosition.CenterParent
@@ -150,7 +153,7 @@ Public Class UsuarioABM
             Me.btnModificar.Enabled = True
             Me.btnNuevo.Enabled = True
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
-            If IsNothing(Me.dgv_Usuarios.SelectedRows(0).Cells(4).Value) Then
+            If IsNothing(Me.dgv_Usuarios.SelectedRows(0).Cells(5).Value) Then
                 Me.btnEliminar.Enabled = True
             Else
                 Me.btnRehabilitar.Enabled = True
