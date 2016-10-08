@@ -141,6 +141,8 @@ Namespace ProveedorDeDatos
                         mId = "id_pedidoplato"
                     Case "bUsuario"
                         mId = "id_usuario"
+                    Case "bFamilia"
+                        mId = "id_familia"
                     Case Else
                         mId = "id"
                 End Select

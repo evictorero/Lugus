@@ -2,9 +2,9 @@
 
 Namespace Negocio
 
-    'bebida ES UNA ENTIDAD QUE PUEDE PERTENECER A UNA COLECCION
+    'Familia ES UNA ENTIDAD QUE PUEDE PERTENECER A UNA COLECCION
     'EN UNA RELACION DE AGREGACION, POR ESO IMPLEMENTA LA INTERFAZ ICOLECCIONABLE
-    Public Class Bebida
+    Public Class Familia
         Implements IColeccionable
 
 #Region "Declaraciones"
@@ -31,7 +31,7 @@ Namespace Negocio
         Public Sub New(ByVal pDr As DataRow)
             Me.Cargar(pDr)
         End Sub
-        Public Sub New(ByVal pDTO As DTO.BebidaDTO)
+        Public Sub New(ByVal pDTO As DTO.FamiliaDTO)
             Me.Cargar(pDTO)
         End Sub
 #End Region
@@ -111,11 +111,10 @@ Namespace Negocio
 #Region "Métodos"
 
         Public Overridable Sub Guardar()
-            Dim mDTO As New DTO.BebidaDTO
+            Dim mDTO As New DTO.FamiliaDTO
 
             mDTO.descripcionCorta = Me.descripcionCorta
             mDTO.descripcionLarga = Me.descripcionLarga
-            mDTO.habilitado = Me.habilitado
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
@@ -123,22 +122,22 @@ Namespace Negocio
             ValidarCampos()
 
             If mId = 0 Then
-                mDTO.id = Datos.BebidaDatos.ObtenerProximoId()
+                mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
                 mDTO.dvh = "23423354"
-                Datos.BebidaDatos.GuardarNuevo(mDTO)
+                Datos.FamiliaDatos.GuardarNuevo(mDTO)
             Else
                 mDTO.id = Me.id
                 mDTO.dvh = "23423433"
-                Datos.BebidaDatos.GuardarModificacion(mDTO)
+                Datos.FamiliaDatos.GuardarModificacion(mDTO)
             End If
 
         End Sub
         Public Overridable Sub Cargar()
             If mId > 0 Then
-                Dim mDTO As DTO.BebidaDTO = Datos.BebidaDatos.Obtener(mId)
+                Dim mDTO As DTO.FamiliaDTO = Datos.FamiliaDatos.Obtener(mId)
                 MyClass.Cargar(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Bebida sin Id especificado")
+                Throw New ApplicationException("Se intentó cargar un Familia sin Id especificado")
 
             End If
         End Sub
@@ -161,17 +160,16 @@ Namespace Negocio
 
         Public Overridable Sub Cargar(ByVal pId As Integer)
             If mId > 0 Then
-                Dim mDTO As DTO.BebidaDTO = Datos.BebidaDatos.Obtener(pId)
+                Dim mDTO As DTO.FamiliaDTO = Datos.FamiliaDatos.Obtener(pId)
                 MyClass.Cargar(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Bebida sin Id especificado")
+                Throw New ApplicationException("Se intentó cargar un Familia sin Id especificado")
             End If
         End Sub
-        Public Sub Cargar(ByVal pDTO As DTO.BebidaDTO)
+        Public Sub Cargar(ByVal pDTO As DTO.FamiliaDTO)
             mId = pDTO.id
             mDescripcionCorta = pDTO.descripcionCorta
             mDescripcionLarga = pDTO.descripcionLarga
-            mHabilitado = pDTO.habilitado
             mFechaBaja = pDTO.fechaBaja
             mIdUsuario = pDTO.idUsuario
             mFechaModif = pDTO.fechaModif
@@ -181,32 +179,32 @@ Namespace Negocio
         Public Overridable Sub Eliminar()
             If mId > 0 Then
                 Try
-                    Datos.BebidaDatos.Eliminar(mId)
+                    Datos.FamiliaDatos.Eliminar(mId)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al borrar la bebida especificada.", ex)
+                    Throw New ApplicationException("Error al borrar la Familia especificada.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó eliminar una bebida sin Id especifico.")
+                Throw New ApplicationException("Se intentó eliminar una Familia sin Id especifico.")
             End If
         End Sub
 
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try
-                    Datos.BebidaDatos.Rehabilitar(mId)
+                    Datos.FamiliaDatos.Rehabilitar(mId)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al activar la bebida especificada.", ex)
+                    Throw New ApplicationException("Error al activar la Familia especificada.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó activar una bebida sin Id especifico.")
+                Throw New ApplicationException("Se intentó activar una Familia sin Id especifico.")
             End If
         End Sub
 
         Private Shared Function ObtenerProximoId() As Integer
             If ProximoId = 0 Then
-                Dim mTempId As Object = Datos.BebidaDatos.ObtenerProximoId()
+                Dim mTempId As Object = Datos.FamiliaDatos.ObtenerProximoId()
             End If
             ProximoId += 1
             Return ProximoId
@@ -218,16 +216,14 @@ Namespace Negocio
             If (Me.descripcionLarga = "") Then
                 Throw New ApplicationException("Debe completar la descripción larga.")
             End If
-            If (Me.habilitado = "") Then
-                Throw New ApplicationException("Debe completar el campo habilitado.")
-            End If
-        End Sub
-        Public Overridable Function Listar() As Collections.Generic.List(Of Bebida)
-            Dim mCol As New Collections.Generic.List(Of Bebida)
-            Dim mColDTO As List(Of DTO.BebidaDTO) = Datos.BebidaDatos.Listar()
 
-            For Each mDTO As DTO.BebidaDTO In mColDTO
-                mCol.Add(New Negocio.Bebida(mDTO))
+        End Sub
+        Public Overridable Function Listar() As Collections.Generic.List(Of Familia)
+            Dim mCol As New Collections.Generic.List(Of Familia)
+            Dim mColDTO As List(Of DTO.FamiliaDTO) = Datos.FamiliaDatos.Listar()
+
+            For Each mDTO As DTO.FamiliaDTO In mColDTO
+                mCol.Add(New Negocio.Familia(mDTO))
             Next
 
             Return mCol
