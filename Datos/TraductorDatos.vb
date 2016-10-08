@@ -28,7 +28,7 @@ Public Class TraductorDatos
             Throw New ApplicationException("Se intentó obtener traduccion sin id de idioma")
             Return Nothing
         End If
-
+        Return "{{" + pMensaje + "}}"
     End Function
 
 End Class

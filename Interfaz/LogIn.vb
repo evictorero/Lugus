@@ -35,6 +35,8 @@ Public Class LogIn
             End If
         End If
 
+        'TODO Celeste
+        'Me.Visible = False
 
     End Sub
 
