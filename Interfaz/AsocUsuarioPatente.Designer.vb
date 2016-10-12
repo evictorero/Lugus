@@ -24,59 +24,58 @@ Partial Class AsocUsuarioPatente
     Private Sub InitializeComponent()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.chbM_Negada = New System.Windows.Forms.CheckBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbDescripcionPatente = New System.Windows.Forms.ComboBox()
+        Me.txtId_patente = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(63, 54)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(84, 66)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
+        Me.Label2.Size = New System.Drawing.Size(58, 17)
         Me.Label2.TabIndex = 16
         Me.Label2.Text = "Negada"
         '
         'chbM_Negada
         '
         Me.chbM_Negada.AutoSize = True
-        Me.chbM_Negada.Location = New System.Drawing.Point(129, 54)
-        Me.chbM_Negada.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.chbM_Negada.Location = New System.Drawing.Point(172, 66)
+        Me.chbM_Negada.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.chbM_Negada.Name = "chbM_Negada"
-        Me.chbM_Negada.Size = New System.Drawing.Size(15, 14)
+        Me.chbM_Negada.Size = New System.Drawing.Size(18, 17)
         Me.chbM_Negada.TabIndex = 15
         Me.chbM_Negada.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnCancelar
         '
-        Me.Button2.Location = New System.Drawing.Point(263, 76)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(82, 25)
-        Me.Button2.TabIndex = 14
-        Me.Button2.Text = "Cancelar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCancelar.Location = New System.Drawing.Point(351, 94)
+        Me.btnCancelar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnCancelar.Name = "btnCancelar"
+        Me.btnCancelar.Size = New System.Drawing.Size(109, 31)
+        Me.btnCancelar.TabIndex = 14
+        Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnGuardar
         '
-        Me.Button1.Location = New System.Drawing.Point(164, 76)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(82, 25)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Guardar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnGuardar.Location = New System.Drawing.Point(219, 94)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(109, 31)
+        Me.btnGuardar.TabIndex = 13
+        Me.btnGuardar.Text = "Guardar"
+        Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(60, 24)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(80, 30)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(63, 13)
+        Me.Label1.Size = New System.Drawing.Size(82, 17)
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "Descripcion"
         '
@@ -84,24 +83,32 @@ Partial Class AsocUsuarioPatente
         '
         Me.cbDescripcionPatente.FormattingEnabled = True
         Me.cbDescripcionPatente.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
-        Me.cbDescripcionPatente.Location = New System.Drawing.Point(129, 22)
-        Me.cbDescripcionPatente.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbDescripcionPatente.Location = New System.Drawing.Point(172, 27)
+        Me.cbDescripcionPatente.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cbDescripcionPatente.Name = "cbDescripcionPatente"
-        Me.cbDescripcionPatente.Size = New System.Drawing.Size(275, 21)
+        Me.cbDescripcionPatente.Size = New System.Drawing.Size(365, 24)
         Me.cbDescripcionPatente.TabIndex = 11
+        '
+        'txtId_patente
+        '
+        Me.txtId_patente.Location = New System.Drawing.Point(83, 103)
+        Me.txtId_patente.Name = "txtId_patente"
+        Me.txtId_patente.Size = New System.Drawing.Size(100, 22)
+        Me.txtId_patente.TabIndex = 17
         '
         'AsocUsuarioPatente
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(462, 124)
+        Me.ClientSize = New System.Drawing.Size(616, 153)
+        Me.Controls.Add(Me.txtId_patente)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.chbM_Negada)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnCancelar)
+        Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cbDescripcionPatente)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "AsocUsuarioPatente"
         Me.Text = "Patente"
         Me.ResumeLayout(False)
@@ -111,8 +118,9 @@ Partial Class AsocUsuarioPatente
 
     Friend WithEvents Label2 As Label
     Friend WithEvents chbM_Negada As CheckBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnCancelar As Button
+    Friend WithEvents btnGuardar As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents cbDescripcionPatente As ComboBox
+    Friend WithEvents txtId_patente As TextBox
 End Class

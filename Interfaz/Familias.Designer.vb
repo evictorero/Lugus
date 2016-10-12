@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Familia
+Partial Class Familias
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,6 +25,7 @@ Partial Class Familia
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblTitulo = New System.Windows.Forms.Label()
         Me.txtFecha_baja = New System.Windows.Forms.TextBox()
         Me.txtDescripcion_larga = New System.Windows.Forms.TextBox()
         Me.txtDescripcion_corta = New System.Windows.Forms.TextBox()
@@ -33,15 +34,12 @@ Partial Class Familia
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Nuevo = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Cod_Patente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblTitulo = New System.Windows.Forms.Label()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.dgvPatentes = New System.Windows.Forms.DataGridView()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvPatentes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancelar
@@ -81,6 +79,16 @@ Partial Class Familia
         Me.GroupBox1.Size = New System.Drawing.Size(468, 233)
         Me.GroupBox1.TabIndex = 21
         Me.GroupBox1.TabStop = False
+        '
+        'lblTitulo
+        '
+        Me.lblTitulo.AutoSize = True
+        Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitulo.Location = New System.Drawing.Point(13, 39)
+        Me.lblTitulo.Name = "lblTitulo"
+        Me.lblTitulo.Size = New System.Drawing.Size(68, 17)
+        Me.lblTitulo.TabIndex = 11
+        Me.lblTitulo.Text = "Mensaje"
         '
         'txtFecha_baja
         '
@@ -147,9 +155,9 @@ Partial Class Familia
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Nuevo)
-        Me.GroupBox2.Controls.Add(Me.DataGridView1)
+        Me.GroupBox2.Controls.Add(Me.btnEliminar)
+        Me.GroupBox2.Controls.Add(Me.btnAgregar)
+        Me.GroupBox2.Controls.Add(Me.dgvPatentes)
         Me.GroupBox2.Location = New System.Drawing.Point(29, 254)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
@@ -159,59 +167,37 @@ Partial Class Familia
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Patentes"
         '
-        'Button5
+        'btnEliminar
         '
-        Me.Button5.Location = New System.Drawing.Point(412, 121)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(84, 31)
-        Me.Button5.TabIndex = 6
-        Me.Button5.Text = "Eliminar"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnEliminar.Location = New System.Drawing.Point(412, 121)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(84, 31)
+        Me.btnEliminar.TabIndex = 6
+        Me.btnEliminar.Text = "Eliminar"
+        Me.btnEliminar.UseVisualStyleBackColor = True
         '
-        'Nuevo
+        'btnAgregar
         '
-        Me.Nuevo.Location = New System.Drawing.Point(412, 75)
-        Me.Nuevo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Nuevo.Name = "Nuevo"
-        Me.Nuevo.Size = New System.Drawing.Size(84, 31)
-        Me.Nuevo.TabIndex = 4
-        Me.Nuevo.Text = "Agregar"
-        Me.Nuevo.UseVisualStyleBackColor = True
+        Me.btnAgregar.Location = New System.Drawing.Point(412, 75)
+        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(84, 31)
+        Me.btnAgregar.TabIndex = 4
+        Me.btnAgregar.Text = "Agregar"
+        Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dgvPatentes
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cod_Patente, Me.Descripcion})
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 30)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(391, 158)
-        Me.DataGridView1.TabIndex = 0
+        Me.dgvPatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPatentes.Location = New System.Drawing.Point(12, 30)
+        Me.dgvPatentes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dgvPatentes.Name = "dgvPatentes"
+        Me.dgvPatentes.RowTemplate.Height = 28
+        Me.dgvPatentes.Size = New System.Drawing.Size(391, 158)
+        Me.dgvPatentes.TabIndex = 0
         '
-        'Cod_Patente
-        '
-        Me.Cod_Patente.HeaderText = "Patente"
-        Me.Cod_Patente.Name = "Cod_Patente"
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.Width = 150
-        '
-        'lblTitulo
-        '
-        Me.lblTitulo.AutoSize = True
-        Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitulo.Location = New System.Drawing.Point(13, 39)
-        Me.lblTitulo.Name = "lblTitulo"
-        Me.lblTitulo.Size = New System.Drawing.Size(68, 17)
-        Me.lblTitulo.TabIndex = 11
-        Me.lblTitulo.Text = "Mensaje"
-        '
-        'Familia
+        'Familias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -221,12 +207,12 @@ Partial Class Familia
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.GroupBox1)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Name = "Familia"
+        Me.Name = "Familias"
         Me.Text = "Familia"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvPatentes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -242,10 +228,8 @@ Partial Class Familia
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Nuevo As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Cod_Patente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnEliminar As Button
+    Friend WithEvents btnAgregar As Button
+    Friend WithEvents dgvPatentes As DataGridView
     Friend WithEvents lblTitulo As Label
 End Class

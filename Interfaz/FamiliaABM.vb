@@ -43,8 +43,8 @@ Public Class FamiliaABM
                 .Item(4).DefaultCellStyle.Format = "dd/MM/yyyy"
 
                 .Add("cidUsuario", "Usuario Alta/Modif")
-                .Item(6).DataPropertyName = "idUsuario"
-                .Item(6).Width = 100
+                .Item(5).DataPropertyName = "idUsuario"
+                .Item(5).Width = 100
 
             End With
 
@@ -108,8 +108,8 @@ Public Class FamiliaABM
     End Sub
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        Dim mForm As New Familia
-        mForm.mOperacion = Familia.TipoOperacion.Alta
+        Dim mForm As New Familias
+        mForm.mOperacion = Familias.TipoOperacion.Alta
         mForm.StartPosition = FormStartPosition.CenterParent
         mForm.ShowDialog(Me)
         ActualizarGrilla()
@@ -121,8 +121,8 @@ Public Class FamiliaABM
             Try
                 Dim mId As Integer = CInt(Me.dgvFamilias.SelectedRows(0).Cells(0).Value)
 
-                Dim mForm As New Familia
-                mForm.mOperacion = Familia.TipoOperacion.Modificacion
+                Dim mForm As New Familias
+                mForm.mOperacion = Familias.TipoOperacion.Modificacion
                 mForm.FamiliaAEditar = New Negocio.Negocio.Familia(mId)
                 mForm.StartPosition = FormStartPosition.CenterParent
                 mForm.ShowDialog(Me)
@@ -142,7 +142,7 @@ Public Class FamiliaABM
             Me.btnModificar.Enabled = True
             Me.btnNuevo.Enabled = True
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
-            If IsNothing(Me.dgvFamilias.SelectedRows(0).Cells(4).Value) Then
+            If IsNothing(Me.dgvFamilias.SelectedRows(0).Cells(3).Value) Then
                 Me.btnEliminar.Enabled = True
             Else
                 Me.btnRehabilitar.Enabled = True

@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FamiliaDatos.vb" />
+    <Compile Include="FamiliaPatenteDatos.vb" />
+    <Compile Include="PatenteDatos.vb" />
     <Compile Include="PlatoDatos.vb" />
     <Compile Include="BebidaDatos.vb" />
     <Compile Include="DB.vb" />

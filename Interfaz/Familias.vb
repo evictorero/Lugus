@@ -2,8 +2,11 @@
 Imports System.DateTime
 
 
-Public Class Familia
+Public Class Familias
+
     Dim mFamilia As Negocio.Negocio.Familia
+
+    Dim mPatente As Negocio.Negocio.Patente
 
     Friend mOperacion As TipoOperacion
     Friend Enum TipoOperacion
@@ -72,6 +75,8 @@ Public Class Familia
                 Me.btnGuardar.Visible = False
         End Select
 
+        dgvPatentes.DataSource = (New Negocio.Negocio.FamiliaPatente).Listar(mFamilia.id)
+
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 
@@ -98,4 +103,31 @@ Public Class Familia
         Me.Close()
 
     End Sub
+
+
+#Region "Patentes"
+    Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+        Dim mForm As New AsocUsuarioPatente
+        mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Alta
+        mForm.StartPosition = FormStartPosition.CenterParent
+        mForm.ShowDialog(Me)
+        'Me.dgvPatentes.DataSource = mFamilia.Patentes
+    End Sub
+
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+        If Me.dgvPatentes.Rows.Count > 0 AndAlso Me.dgvPatentes.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(dgvPatentes.SelectedRows(0).Cells(4).Value)
+            Dim mForm As New AsocUsuarioPatente
+            mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Baja
+
+            'mForm.PatenteAEditar = mFamilia.ObtenerPatentePorIndice(mIndice)
+            'mForm.StartPosition = FormStartPosition.CenterParent
+            'mForm.ShowDialog(Me)
+            'Me.dgvPatentes.DataSource = mFamilia.Patente
+
+        End If
+    End Sub
+
+#End Region
+
 End Class

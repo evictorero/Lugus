@@ -2,10 +2,7 @@
 
 Namespace Negocio
 
-    'Familia ES UNA ENTIDAD QUE PUEDE PERTENECER A UNA COLECCION
-    'EN UNA RELACION DE AGREGACION, POR ESO IMPLEMENTA LA INTERFAZ ICOLECCIONABLE
     Public Class Familia
-        Implements IColeccionable
 
 #Region "Declaraciones"
         Dim mDescripcionCorta As String
@@ -18,6 +15,7 @@ Namespace Negocio
 
         Private Shared ProximoId As Integer
         Dim mId As Integer = 0
+
 #End Region
 
 #Region "Constructores"
@@ -209,7 +207,9 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
+
         Private Sub ValidarCampos()
+
             If (Me.descripcionCorta = "") Then
                 Throw New ApplicationException("Debe completar la descripción corta.")
             End If
@@ -229,29 +229,5 @@ Namespace Negocio
             Return mCol
         End Function
 #End Region
-
-        'IMPLEMENTACION DE LOS MIEMBROS DE LA INTERFAZ ICOLECCIONABLE
-#Region "IColeccionable"
-        Dim mEstado As IColeccionable.EstadosColeccion
-        Public Property EstadoColeccion() As IColeccionable.EstadosColeccion Implements IColeccionable.EstadoColeccion
-            Get
-                Return mEstado
-            End Get
-            Set(ByVal value As IColeccionable.EstadosColeccion)
-                mEstado = value
-            End Set
-        End Property
-        Dim mIndice As Integer
-        Public Property IndiceColeccion() As Integer Implements IColeccionable.IndiceColeccion
-            Get
-                Return mIndice
-            End Get
-            Set(ByVal value As Integer)
-                mIndice = value
-            End Set
-        End Property
-
-#End Region
-
     End Class
 End Namespace

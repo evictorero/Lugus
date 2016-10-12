@@ -23,10 +23,6 @@ Partial Class FamiliaABM
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dgvFamilias = New System.Windows.Forms.DataGridView()
-        Me.Id_plato = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion_corta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion_Larga = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha_baja = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnRehabilitar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnModificar = New System.Windows.Forms.Button()
@@ -38,7 +34,6 @@ Partial Class FamiliaABM
         'dgvFamilias
         '
         Me.dgvFamilias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvFamilias.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id_plato, Me.Descripcion_corta, Me.Descripcion_Larga, Me.fecha_baja})
         Me.dgvFamilias.Location = New System.Drawing.Point(69, 42)
         Me.dgvFamilias.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvFamilias.Name = "dgvFamilias"
@@ -46,33 +41,6 @@ Partial Class FamiliaABM
         Me.dgvFamilias.RowTemplate.Height = 28
         Me.dgvFamilias.Size = New System.Drawing.Size(732, 391)
         Me.dgvFamilias.TabIndex = 27
-        '
-        'Id_plato
-        '
-        Me.Id_plato.HeaderText = "Código"
-        Me.Id_plato.Name = "Id_plato"
-        Me.Id_plato.ReadOnly = True
-        Me.Id_plato.Width = 50
-        '
-        'Descripcion_corta
-        '
-        Me.Descripcion_corta.HeaderText = "Descripción corta"
-        Me.Descripcion_corta.Name = "Descripcion_corta"
-        Me.Descripcion_corta.ReadOnly = True
-        '
-        'Descripcion_Larga
-        '
-        Me.Descripcion_Larga.HeaderText = "Descripción larga"
-        Me.Descripcion_Larga.Name = "Descripcion_Larga"
-        Me.Descripcion_Larga.ReadOnly = True
-        Me.Descripcion_Larga.Width = 300
-        '
-        'fecha_baja
-        '
-        Me.fecha_baja.HeaderText = "Fecha de baja"
-        Me.fecha_baja.Name = "fecha_baja"
-        Me.fecha_baja.ReadOnly = True
-        Me.fecha_baja.Width = 50
         '
         'btnRehabilitar
         '
@@ -149,9 +117,5 @@ Partial Class FamiliaABM
     Friend WithEvents btnEliminar As Button
     Friend WithEvents btnModificar As Button
     Friend WithEvents btnNuevo As Button
-    Friend WithEvents Id_plato As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion_corta As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion_Larga As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents fecha_baja As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtMensaje As Label
 End Class
