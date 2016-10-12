@@ -8,8 +8,7 @@ Public Class FamiliaPatenteDatos
     Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.FamiliaPatenteDTO)
         Dim mStrCom As String
 
-        mStrCom = "INSERT INTO dbo.rFamiliaPatente  (id_familia,id_patente,id_usuario_alta,dvh)VALUES (" &
-        " VALUES " &
+        mStrCom = "INSERT INTO dbo.rFamiliaPatente  (id_familia,id_patente,id_usuario_alta,dvh) VALUES " &
         "(" & pDTO.Id_familia & ", " & pDTO.Id_Patente & " , " & pDTO.Id_Usuario_alta & " , " & pDTO.Dvh & ")"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)

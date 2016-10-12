@@ -2,7 +2,8 @@
 Public Class AsocUsuarioPatente
 
 #Region "Declaraciones"
-    Dim mPatente As Negocio.Negocio.Patente
+
+    Dim mFamiliaPatente As Negocio.Negocio.FamiliaPatente
 
     Friend mOperacion As TipoOperacion
         Friend Enum TipoOperacion
@@ -13,20 +14,21 @@ Public Class AsocUsuarioPatente
 #End Region
 
 #Region "Propiedades"
-        Friend Property Operacion() As TipoOperacion
-            Get
-                Return mOperacion
-            End Get
-            Set(ByVal value As TipoOperacion)
-                mOperacion = value
-            End Set
-        End Property
-    Friend Property PatenteAEditar() As Negocio.Negocio.Patente
+    Friend Property Operacion() As TipoOperacion
         Get
-            Return mPatente
+            Return mOperacion
         End Get
-        Set(ByVal value As Negocio.Negocio.Patente)
-            mPatente = value
+        Set(ByVal value As TipoOperacion)
+            mOperacion = value
+        End Set
+    End Property
+
+    Friend Property FamiliaPatenteAEditar() As Negocio.Negocio.FamiliaPatente
+        Get
+            Return mFamiliaPatente
+        End Get
+        Set(ByVal value As Negocio.Negocio.FamiliaPatente)
+            mFamiliaPatente = value
         End Set
     End Property
 #End Region
@@ -43,13 +45,13 @@ Public Class AsocUsuarioPatente
                 Me.txtId_patente.Text = ""
                 Me.Label1.Text = "Nueva Patente"
 
-                Me.cbDescripcionPatente.DataSource = (New Negocio.Negocio.Patente).Listar
+                cbDescripcionPatente.DataSource = (New Negocio.Negocio.Patente).Listar
                 cbDescripcionPatente.DisplayMember = "descripcionLarga"
                 cbDescripcionPatente.ValueMember = "id"
 
             Case TipoOperacion.Baja
 
-                If Not IsNothing(mPatente) Then
+                If Not IsNothing(mFamiliaPatente) Then
                     Me.txtId_patente.Text =
                     Me.txtId_patente.Enabled = False
                     'Me.txtTipo.Text = mPatente.Tipo
@@ -64,8 +66,8 @@ Public Class AsocUsuarioPatente
 
             Case TipoOperacion.Modificacion
 
-                If Not IsNothing(mPatente) Then
-                    Me.txtId_patente.Text = mPatente.id
+                If Not IsNothing(mFamiliaPatente) Then
+                    Me.txtId_patente.Text = mFamiliaPatente.id_patente
                     'Me.txtTipo.Text = mPatente.Tipo
                     'Me.txtSuperficie.Text = mPatente.Superficie
                     Me.Label1.Text = "MODIFICACION DEL Patente"
@@ -83,26 +85,15 @@ Public Class AsocUsuarioPatente
         Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
             Select Case mOperacion
                 Case TipoOperacion.Alta
-                mPatente = New Negocio.Negocio.Patente
-            'mPatente.Tipo = Me.txtTipo.Text
+                mFamiliaPatente = New Negocio.Negocio.FamiliaPatente
+                mFamiliaPatente.id_patente = cbDescripcionPatente.SelectedValue
+                mFamiliaPatente.id_usuario_alta = Principal.UsuarioEnSesion.id
 
-            'If Single.TryParse(Me.txtSuperficie.Text, mPatente.Superficie) Then
-            '    mPatente.Superficie = Single.Parse(Me.txtSuperficie.Text)
-            'Else
-            '    mPatente.Superficie = 0
-            'End If
+                CType(Me.Owner, Familias).FamiliaAEditar.AgregarFamiliaPatente(mFamiliaPatente)
 
-            'CType(Me.Owner, Familias).FamiliaAEditar.AgregarPatente(mPatente)
-
-            Case TipoOperacion.Modificacion
-                If Not IsNothing(mPatente) Then
-                    'mPatente.Tipo = Me.txtTipo.Text
-                    'mPatente.Superficie = Me.txtSuperficie.Text
-                    'CType(Me.Owner, Familias).PatenteAEditar.ModificarPatente(mPatente)
-                End If
             Case TipoOperacion.Baja
-                If Not IsNothing(mPatente) Then
-                    'CType(Me.Owner, Familias).CasaAEditar.EliminarPatente(mPatente.IndiceColeccion)
+                If Not IsNothing(mFamiliaPatente) Then
+                    CType(Me.Owner, Familias).FamiliaAEditar.EliminarFamiliaPatente(mFamiliaPatente.IndiceColeccion)
                 End If
         End Select
             Me.Close()

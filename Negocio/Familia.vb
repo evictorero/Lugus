@@ -2,7 +2,7 @@
 
 Namespace Negocio
 
-    Public Class Familia
+    Public Class Familia : Implements IColeccionable
 
 #Region "Declaraciones"
         Dim mDescripcionCorta As String
@@ -16,6 +16,8 @@ Namespace Negocio
         Private Shared ProximoId As Integer
         Dim mId As Integer = 0
 
+        'Esta coleccion alojara las Ambiente del inmueble
+        Protected mFamiliaPatente As New Collections.Generic.List(Of FamiliaPatente)
 #End Region
 
 #Region "Constructores"
@@ -129,6 +131,8 @@ Namespace Negocio
                 Datos.FamiliaDatos.GuardarModificacion(mDTO)
             End If
 
+            Me.GuardarFamiliaPatentes()
+
         End Sub
         Public Overridable Sub Cargar()
             If mId > 0 Then
@@ -229,5 +233,136 @@ Namespace Negocio
             Return mCol
         End Function
 #End Region
+
+#Region "IColeccionable"
+        Dim mEstadoColeccion As IColeccionable.EstadosColeccion
+        Public Property EstadoColeccion() As IColeccionable.EstadosColeccion Implements IColeccionable.EstadoColeccion
+            Get
+                Return mEstadoColeccion
+            End Get
+            Set(ByVal value As IColeccionable.EstadosColeccion)
+                mEstadoColeccion = value
+            End Set
+        End Property
+
+        Dim mIndiceColeccion As Integer
+        Public Property IndiceColeccion() As Integer Implements IColeccionable.IndiceColeccion
+            Get
+                Return mIndiceColeccion
+            End Get
+            Set(ByVal value As Integer)
+                mIndiceColeccion = value
+            End Set
+        End Property
+
+
+#End Region
+
+#Region "FamiliaPAtente"
+
+        'ESTA PROPIEDAD DEVUELVE LOS Ambientes DE LA Inmueble
+        'PERO SOLO DEVUELVE LOS Ambientes QUE PUEDEN MOSTRARSE (NO LOS QUE ESTAN
+        'CON ESTADO BORRADO O QUITADO). POR ESO INVOCA ANTES EL METODO DE FILTRO
+        'EL RESULTADO DE ESTA PROPIEDAD PUEDE ENLAZARSE A UNA GRILLA
+        Public ReadOnly Property FamiliaPatente() As Collections.Generic.List(Of FamiliaPatente)
+            Get
+                Return Me.FiltrarFamiliaPatenteNoVisibles
+            End Get
+        End Property
+        Public Sub EliminarFamiliaPatente(ByVal pFamiliaPatente As FamiliaPatente)
+            EliminarFamiliaPatente(pFamiliaPatente.IndiceColeccion)
+        End Sub
+        Public Sub EliminarFamiliaPatente(ByVal pIndice As Integer)
+            If Me.mFamiliaPatente(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                Me.mFamiliaPatente(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Quitado
+            Else
+                Me.mFamiliaPatente(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Borrado
+            End If
+
+        End Sub
+        Public Sub ModificarFamiliaPatente(ByVal pFamiliaPatente As FamiliaPatente)
+            Me.mFamiliaPatente(pFamiliaPatente.IndiceColeccion) = pFamiliaPatente
+            If Not pFamiliaPatente.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                pFamiliaPatente.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado
+            End If
+
+        End Sub
+        Public Sub AgregarFamiliaPatente(ByVal pFamiliaPatente As FamiliaPatente)
+            Me.mFamiliaPatente.Add(pFamiliaPatente)
+            Dim mInd As Integer = Me.mFamiliaPatente.IndexOf(pFamiliaPatente)
+            Me.mFamiliaPatente(mInd).IndiceColeccion = mInd
+            Me.mFamiliaPatente(mInd).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado
+
+            'POR ULTIMO EL NUEVO FamiliaPatente DEBE SABER A QUE Casa PERTENECE
+            Me.mFamiliaPatente(mInd).id_familia = mId
+        End Sub
+        Private Sub GuardarFamiliaPatentes()
+            Dim mLock As New Object
+            Dim mReacomodar As Boolean = False
+            SyncLock mLock
+                Dim mEliminados As Integer = 0
+                For x As Integer = 0 To Me.mFamiliaPatente.Count - 1
+                    Select Case Me.mFamiliaPatente(x - mEliminados).EstadoColeccion
+                        Case IColeccionable.EstadosColeccion.Agregado, IColeccionable.EstadosColeccion.Modificado
+                            If Me.mFamiliaPatente(x - mEliminados).id_patente = 0 Then
+                                Me.mFamiliaPatente(x - mEliminados).id_patente = mId
+                            End If
+                            Me.mFamiliaPatente(x - mEliminados).Guardar()
+                            Me.mFamiliaPatente(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
+
+                        Case IColeccionable.EstadosColeccion.Borrado
+                            Me.mFamiliaPatente(x - mEliminados).Eliminar()
+                            Me.mFamiliaPatente.RemoveAt(Me.mFamiliaPatente(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+
+                        Case IColeccionable.EstadosColeccion.Quitado
+                            Me.mFamiliaPatente.RemoveAt(Me.mFamiliaPatente(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+                    End Select
+
+                Next
+            End SyncLock
+
+            'SI SE HA QUITADO ALGUN ELEMENTO DE LA COLECCION< DEBEREMOS REACOMODAR LOS INDICES
+            'QUE CADA OBJETO CONOCE DE SI MISMO
+            If mReacomodar Then
+                Me.ReacomodarIndices()
+            End If
+        End Sub
+        Private Sub ReacomodarIndices()
+            'A CADA ELEMENTO DE LA COLECCION LE AVISAMOS CUAL ES SU NUEVO INDICE
+            For Each mT As FamiliaPatente In Me.mFamiliaPatente
+                mT.IndiceColeccion = Me.mFamiliaPatente.IndexOf(mT)
+            Next
+        End Sub
+        Private Sub CargarFamiliaPatente()
+            'AL CARGAR LOS FamiliaPatentes SIMPLEMENTE ASIGAMOS LA COLECCION QUE DEVUELVE EL METODO
+            'LISTAR
+            'INMEDIATAMENTE DESPUES LE AVISAMOS A CADA OBJETO FamiliaPatente QUE INDICE LE TOCO EN LA LISTA
+            Me.mFamiliaPatente = (New Negocio.FamiliaPatente).Listar(mId)
+            For Each mT As FamiliaPatente In mFamiliaPatente
+                mT.IndiceColeccion = Me.mFamiliaPatente.IndexOf(mT)
+            Next
+        End Sub
+        Private Function FiltrarFamiliaPatenteNoVisibles() As Collections.Generic.List(Of FamiliaPatente)
+            'ESTE METODO PERMITIRA FILTRAR LOS FamiliaPatentes ANTES DE MOSTRARLOS EN UN GRILLA
+            'SE SUPONE QUE EN LA GRILLA NO SE VERAN LOS FamiliaPatentes BORRADOS Y QUITADOS
+            Dim mCol As New Collections.Generic.List(Of FamiliaPatente)
+            'mCol = (New FamiliaPatente).Listar(mId)
+            For Each mT As FamiliaPatente In Me.mFamiliaPatente
+                If mT.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio Then
+                    mCol.Add(mT)
+                End If
+            Next
+            Return mCol
+        End Function
+        Public Function ObtenerFamiliaPatentePorIndice(ByVal pIndice As Integer) As FamiliaPatente
+            Return Me.mFamiliaPatente(pIndice)
+        End Function
+
+#End Region
+
     End Class
 End Namespace

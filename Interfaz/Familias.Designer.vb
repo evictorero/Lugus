@@ -36,10 +36,10 @@ Partial Class Familias
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.dgvPatentes = New System.Windows.Forms.DataGridView()
+        Me.dgvFamiliaPatentes = New System.Windows.Forms.DataGridView()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.dgvPatentes, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvFamiliaPatentes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancelar
@@ -157,7 +157,7 @@ Partial Class Familias
         '
         Me.GroupBox2.Controls.Add(Me.btnEliminar)
         Me.GroupBox2.Controls.Add(Me.btnAgregar)
-        Me.GroupBox2.Controls.Add(Me.dgvPatentes)
+        Me.GroupBox2.Controls.Add(Me.dgvFamiliaPatentes)
         Me.GroupBox2.Location = New System.Drawing.Point(29, 254)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
@@ -187,15 +187,15 @@ Partial Class Familias
         Me.btnAgregar.Text = "Agregar"
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'dgvPatentes
+        'dgvFamiliaPatentes
         '
-        Me.dgvPatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPatentes.Location = New System.Drawing.Point(12, 30)
-        Me.dgvPatentes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.dgvPatentes.Name = "dgvPatentes"
-        Me.dgvPatentes.RowTemplate.Height = 28
-        Me.dgvPatentes.Size = New System.Drawing.Size(391, 158)
-        Me.dgvPatentes.TabIndex = 0
+        Me.dgvFamiliaPatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvFamiliaPatentes.Location = New System.Drawing.Point(12, 30)
+        Me.dgvFamiliaPatentes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dgvFamiliaPatentes.Name = "dgvFamiliaPatentes"
+        Me.dgvFamiliaPatentes.RowTemplate.Height = 28
+        Me.dgvFamiliaPatentes.Size = New System.Drawing.Size(391, 158)
+        Me.dgvFamiliaPatentes.TabIndex = 0
         '
         'Familias
         '
@@ -212,7 +212,7 @@ Partial Class Familias
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        CType(Me.dgvPatentes, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvFamiliaPatentes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -230,6 +230,6 @@ Partial Class Familias
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnEliminar As Button
     Friend WithEvents btnAgregar As Button
-    Friend WithEvents dgvPatentes As DataGridView
+    Friend WithEvents dgvFamiliaPatentes As DataGridView
     Friend WithEvents lblTitulo As Label
 End Class

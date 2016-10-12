@@ -3,7 +3,7 @@ Imports Datos.ProveedorDeDatos.DB
 
 Namespace Negocio
 
-    Public Class FamiliaPatente
+    Public Class FamiliaPatente : Implements IColeccionable
 
 #Region "Declaraciones"
         Dim mId_familia As Integer
@@ -175,6 +175,29 @@ Namespace Negocio
         End Function
 #End Region
 
+#Region "IColeccionable"
+        Dim mEstadoColeccion As IColeccionable.EstadosColeccion
+        Public Property EstadoColeccion() As IColeccionable.EstadosColeccion Implements IColeccionable.EstadoColeccion
+            Get
+                Return mEstadoColeccion
+            End Get
+            Set(ByVal value As IColeccionable.EstadosColeccion)
+                mEstadoColeccion = value
+            End Set
+        End Property
+
+        Dim mIndiceColeccion As Integer
+        Public Property IndiceColeccion() As Integer Implements IColeccionable.IndiceColeccion
+            Get
+                Return mIndiceColeccion
+            End Get
+            Set(ByVal value As Integer)
+                mIndiceColeccion = value
+            End Set
+        End Property
+
+
+#End Region
 
     End Class
 End Namespace

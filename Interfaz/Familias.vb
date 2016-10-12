@@ -6,8 +6,6 @@ Public Class Familias
 
     Dim mFamilia As Negocio.Negocio.Familia
 
-    Dim mPatente As Negocio.Negocio.Patente
-
     Friend mOperacion As TipoOperacion
     Friend Enum TipoOperacion
         Alta = 1
@@ -15,6 +13,7 @@ Public Class Familias
         Modificacion = 3
         Rehabilitar = 4
     End Enum
+
     Friend Property FamiliaAEditar() As Negocio.Negocio.Familia
         Get
             Return mFamilia
@@ -28,6 +27,40 @@ Public Class Familias
         Me.txtId_familia.Enabled = False
         Me.txtFecha_baja.Enabled = False
 
+        'Seteo de aspecto de la grilla AMBIENTES
+        With Me.dgvFamiliaPatentes
+            .AllowDrop = False
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .AllowUserToResizeColumns = False
+            .AllowUserToResizeRows = False
+            .AutoGenerateColumns = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+
+            With .Columns
+                .Add("cId", "id_familia")
+                .Item(0).DataPropertyName = "Id_familia"
+                .Item(0).Visible = False
+
+                .Add("cid_familia", "id_patente")
+                .Item(1).DataPropertyName = "id_patente"
+                .Item(1).Width = 125
+
+                .Add("cdvh", "dvh")
+                .Item(2).DataPropertyName = "dvh"
+                .Item(2).Width = 125
+
+                .Add("cEstadoColeccion", "EstadoColeccion")
+                .Item(3).DataPropertyName = "EstadoColeccion"
+                .Item(3).Visible = True
+
+                .Add("cIndiceColeccion", "IndiceColeccion")
+                .Item(4).DataPropertyName = "IndiceColeccion"
+                .Item(4).Visible = True
+
+            End With
+        End With
         Select Case mOperacion
             Case TipoOperacion.Alta
 
@@ -61,6 +94,7 @@ Public Class Familias
 
                     Me.lblTitulo.Text = "Modificación de Familia"
                 End If
+                dgvFamiliaPatentes.DataSource = (New Negocio.Negocio.FamiliaPatente).Listar(mFamilia.id)
 
             Case TipoOperacion.Rehabilitar
 
@@ -74,8 +108,6 @@ Public Class Familias
                 Me.lblTitulo.Text = "Rehabilitar Familia"
                 Me.btnGuardar.Visible = False
         End Select
-
-        dgvPatentes.DataSource = (New Negocio.Negocio.FamiliaPatente).Listar(mFamilia.id)
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
@@ -111,12 +143,12 @@ Public Class Familias
         mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Alta
         mForm.StartPosition = FormStartPosition.CenterParent
         mForm.ShowDialog(Me)
-        'Me.dgvPatentes.DataSource = mFamilia.Patentes
+        dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
     End Sub
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
-        If Me.dgvPatentes.Rows.Count > 0 AndAlso Me.dgvPatentes.SelectedRows.Count = 1 Then
-            Dim mIndice As Integer = CInt(dgvPatentes.SelectedRows(0).Cells(4).Value)
+        If Me.dgvFamiliaPatentes.Rows.Count > 0 AndAlso Me.dgvFamiliaPatentes.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(dgvFamiliaPatentes.SelectedRows(0).Cells(4).Value)
             Dim mForm As New AsocUsuarioPatente
             mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Baja
 
