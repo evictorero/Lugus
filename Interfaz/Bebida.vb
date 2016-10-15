@@ -75,30 +75,37 @@ Public Class Bebida
         End Select
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Select Case mOperacion
-            Case TipoOperacion.Alta, TipoOperacion.Modificacion
-                If IsNothing(mBebida) Then
-                    mBebida = New Negocio.Negocio.Bebida
-                End If
 
-                mBebida.descripcionCorta = Me.txtDescripcion_corta.Text
-                mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
-                mBebida.habilitado = Me.cboxHabilitado.Text
-                mBebida.idUsuario = Principal.UsuarioEnSesion.id
-                mBebida.dvh = 1 'Digito Verificador Celes
-                mBebida.Guardar()
-                Me.Close()
-            Case TipoOperacion.Baja
-                mBebida.Eliminar()
-                Me.Close()
-        End Select
+        Try
+            Select Case mOperacion
+                Case TipoOperacion.Alta, TipoOperacion.Modificacion
+                    If IsNothing(mBebida) Then
+                        mBebida = New Negocio.Negocio.Bebida
+                    End If
+                    mBebida.descripcionCorta = Me.txtDescripcion_corta.Text
+                    mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
+                    mBebida.habilitado = Me.cboxHabilitado.Text
+                    mBebida.idUsuario = Principal.UsuarioEnSesion.id
+                    mBebida.dvh = 1 'Digito Verificador Celes
+                    mBebida.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
+                    mBebida.Guardar()
+                    Me.Close()
+                Case TipoOperacion.Baja
+                    mBebida.Eliminar()
+                    Me.Close()
+            End Select
+        Catch ex As Exception
+        End Try
+
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         Me.Close()
 
     End Sub
+
 End Class

@@ -165,7 +165,7 @@ Partial Class Bebida
         'txtFecha_baja
         '
         Me.txtFecha_baja.Location = New System.Drawing.Point(131, 176)
-        Me.txtFecha_baja.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFecha_baja.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFecha_baja.Name = "txtFecha_baja"
         Me.txtFecha_baja.Size = New System.Drawing.Size(132, 22)
         Me.txtFecha_baja.TabIndex = 10

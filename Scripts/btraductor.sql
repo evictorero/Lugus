@@ -57,4 +57,7 @@ insert into btraductor values (2,'Rehabilitar','activate');
 insert into btraductor values (2,'Bebida rehabilitada correctamente','Drink activated');
 insert into btraductor values (2,'Error al intentar modificar la bebida seleccionada','Error updating selected drink');
 
+insert into btraductor values (2,'Debe completar la descripción corta.','You must complete the short description.');
+insert into btraductor values (2,'Debe completar la descripción larga.','You must complete the long description.');
+insert into btraductor values (2,'Debe completar si el campo esta habilitado en la carta.','You must complete if the field is enabled on the card.');
 select * from btraductor;

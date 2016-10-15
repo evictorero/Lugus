@@ -94,7 +94,7 @@ Public Class Familias
 
                     Me.lblTitulo.Text = "Modificación de Familia"
                 End If
-                dgvFamiliaPatentes.DataSource = (New Negocio.Negocio.FamiliaPatente).Listar(mFamilia.id)
+                dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
 
             Case TipoOperacion.Rehabilitar
 
@@ -123,6 +123,7 @@ Public Class Familias
                 mFamilia.descripcionLarga = Me.txtDescripcion_larga.Text
                 mFamilia.idUsuario = Principal.UsuarioEnSesion.id
                 mFamilia.dvh = 1 'Digito Verificador Celes
+                mFamilia.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mFamilia.Guardar()
                 Me.Close()
             Case TipoOperacion.Baja
@@ -152,11 +153,10 @@ Public Class Familias
             Dim mForm As New AsocUsuarioPatente
             mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Baja
 
-            'mForm.PatenteAEditar = mFamilia.ObtenerPatentePorIndice(mIndice)
-            'mForm.StartPosition = FormStartPosition.CenterParent
-            'mForm.ShowDialog(Me)
-            'Me.dgvPatentes.DataSource = mFamilia.Patente
-
+            mForm.FamiliaPatenteAEditar = mFamilia.ObtenerFamiliaPatentePorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            Me.dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
         End If
     End Sub
 

@@ -52,28 +52,19 @@ Public Class AsocUsuarioPatente
             Case TipoOperacion.Baja
 
                 If Not IsNothing(mFamiliaPatente) Then
-                    Me.txtId_patente.Text =
-                    Me.txtId_patente.Enabled = False
-                    'Me.txtTipo.Text = mPatente.Tipo
-                    'Me.txtTipo.Enabled = False
-                    'Me.txtSuperficie.Text = mPatente.Superficie
-                    'Me.txtSuperficie.Enabled = False
-                    'Me.Label1.Text = "¿esta Seguro que desea Eliminar este Patente?"
+                    Me.txtId_patente.Text = mFamiliaPatente.id_patente
+                    Me.txtId_patente.Visible = False
+                    Me.txtid_familia.Text = mFamiliaPatente.id_familia
+                    Me.txtid_familia.Visible = False
+                    Me.cbDescripcionPatente.SelectedValue = mFamiliaPatente.id_patente
+                    Me.cbDescripcionPatente.Enabled = False
+                    Me.Label1.Text = "¿Esta Seguro que desea Eliminar este Caracteristica?" 'Celes
                     Me.btnGuardar.Text = "Eliminar"
                     Me.btnGuardar.BackColor = Color.Firebrick
                     Me.btnGuardar.ForeColor = Color.AntiqueWhite
                 End If
-
-            Case TipoOperacion.Modificacion
-
-                If Not IsNothing(mFamiliaPatente) Then
-                    Me.txtId_patente.Text = mFamiliaPatente.id_patente
-                    'Me.txtTipo.Text = mPatente.Tipo
-                    'Me.txtSuperficie.Text = mPatente.Superficie
-                    Me.Label1.Text = "MODIFICACION DEL Patente"
-                End If
         End Select
-        End Sub
+    End Sub
 #End Region
 
 #Region "Metodos"

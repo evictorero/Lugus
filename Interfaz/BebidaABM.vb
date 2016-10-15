@@ -133,7 +133,7 @@ Public Class BebidaABM
 
                 ActualizarGrilla()
             Catch ex As Exception
-                MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la bebida seleccionada"))
+                'MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la bebida seleccionada"))
             End Try
 
         End If

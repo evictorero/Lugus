@@ -33,6 +33,7 @@ Namespace Negocio
         End Sub
         Public Sub New(ByVal pDTO As DTO.FamiliaDTO)
             Me.Cargar(pDTO)
+            Me.CargarFamiliaPatente()
         End Sub
 #End Region
 
@@ -42,7 +43,6 @@ Namespace Negocio
                 Return mId
             End Get
         End Property
-
         Public Property descripcionCorta() As String
             Get
                 Return mDescripcionCorta
@@ -51,7 +51,6 @@ Namespace Negocio
                 mDescripcionCorta = value
             End Set
         End Property
-
         Public Property descripcionLarga() As String
             Get
                 Return mDescripcionLarga
@@ -60,7 +59,6 @@ Namespace Negocio
                 mDescripcionLarga = value
             End Set
         End Property
-
         Public Property habilitado() As String
             Get
                 Return mHabilitado
@@ -69,7 +67,6 @@ Namespace Negocio
                 mHabilitado = value
             End Set
         End Property
-
         Public Property fechaBaja() As Nullable(Of DateTime)
             Get
                 Return mFechaBaja
@@ -78,7 +75,6 @@ Namespace Negocio
                 mFechaBaja = value
             End Set
         End Property
-
         Public Property idUsuario() As Integer
             Get
                 Return mIdUsuario
@@ -87,7 +83,6 @@ Namespace Negocio
                 mIdUsuario = value
             End Set
         End Property
-
         Public Property dvh() As Integer
             Get
                 Return mDvh
@@ -96,8 +91,6 @@ Namespace Negocio
                 mDvh = value
             End Set
         End Property
-
-
         Public Property fechaModif() As Date
             Get
                 Return mFechaModif
@@ -105,6 +98,11 @@ Namespace Negocio
             Set(ByVal value As Date)
                 mFechaModif = value
             End Set
+        End Property
+        Public ReadOnly Property FamiliaPatente() As Collections.Generic.List(Of FamiliaPatente)
+            Get
+                Return Me.FiltrarFamiliaPatenteNoVisibles
+            End Get
         End Property
 #End Region
 
@@ -118,8 +116,6 @@ Namespace Negocio
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
-
-            ValidarCampos()
 
             If mId = 0 Then
                 mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
@@ -143,7 +139,6 @@ Namespace Negocio
 
             End If
         End Sub
-
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mDescripcionCorta = pDr("descripcion_corta")
@@ -159,7 +154,6 @@ Namespace Negocio
             End Try
 
         End Sub
-
         Public Overridable Sub Cargar(ByVal pId As Integer)
             If mId > 0 Then
                 Dim mDTO As DTO.FamiliaDTO = Datos.FamiliaDatos.Obtener(pId)
@@ -177,7 +171,6 @@ Namespace Negocio
             mFechaModif = pDTO.fechaModif
             mDvh = pDTO.dvh
         End Sub
-
         Public Overridable Sub Eliminar()
             If mId > 0 Then
                 Try
@@ -190,7 +183,6 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó eliminar una Familia sin Id especifico.")
             End If
         End Sub
-
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try
@@ -203,7 +195,6 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó activar una Familia sin Id especifico.")
             End If
         End Sub
-
         Private Shared Function ObtenerProximoId() As Integer
             If ProximoId = 0 Then
                 Dim mTempId As Object = Datos.FamiliaDatos.ObtenerProximoId()
@@ -211,16 +202,19 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
+        Public Sub ValidarFormato(pid_idioma As Integer)
+            Try
+                If (Me.descripcionCorta = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar la descripción corta."))
+                End If
+                If (Me.descripcionLarga = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar la descripción larga."))
+                End If
 
-        Private Sub ValidarCampos()
-
-            If (Me.descripcionCorta = "") Then
-                Throw New ApplicationException("Debe completar la descripción corta.")
-            End If
-            If (Me.descripcionLarga = "") Then
-                Throw New ApplicationException("Debe completar la descripción larga.")
-            End If
-
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Throw
+            End Try
         End Sub
         Public Overridable Function Listar() As Collections.Generic.List(Of Familia)
             Dim mCol As New Collections.Generic.List(Of Familia)
@@ -259,16 +253,6 @@ Namespace Negocio
 #End Region
 
 #Region "FamiliaPAtente"
-
-        'ESTA PROPIEDAD DEVUELVE LOS Ambientes DE LA Inmueble
-        'PERO SOLO DEVUELVE LOS Ambientes QUE PUEDEN MOSTRARSE (NO LOS QUE ESTAN
-        'CON ESTADO BORRADO O QUITADO). POR ESO INVOCA ANTES EL METODO DE FILTRO
-        'EL RESULTADO DE ESTA PROPIEDAD PUEDE ENLAZARSE A UNA GRILLA
-        Public ReadOnly Property FamiliaPatente() As Collections.Generic.List(Of FamiliaPatente)
-            Get
-                Return Me.FiltrarFamiliaPatenteNoVisibles
-            End Get
-        End Property
         Public Sub EliminarFamiliaPatente(ByVal pFamiliaPatente As FamiliaPatente)
             EliminarFamiliaPatente(pFamiliaPatente.IndiceColeccion)
         End Sub
@@ -341,7 +325,11 @@ Namespace Negocio
             'AL CARGAR LOS FamiliaPatentes SIMPLEMENTE ASIGAMOS LA COLECCION QUE DEVUELVE EL METODO
             'LISTAR
             'INMEDIATAMENTE DESPUES LE AVISAMOS A CADA OBJETO FamiliaPatente QUE INDICE LE TOCO EN LA LISTA
-            Me.mFamiliaPatente = (New Negocio.FamiliaPatente).Listar(mId)
+            If mFamiliaPatente.Count = 0 Then
+                Me.mFamiliaPatente = (New Negocio.FamiliaPatente).Listar(mId)
+            End If
+
+
             For Each mT As FamiliaPatente In mFamiliaPatente
                 mT.IndiceColeccion = Me.mFamiliaPatente.IndexOf(mT)
             Next
@@ -350,18 +338,19 @@ Namespace Negocio
             'ESTE METODO PERMITIRA FILTRAR LOS FamiliaPatentes ANTES DE MOSTRARLOS EN UN GRILLA
             'SE SUPONE QUE EN LA GRILLA NO SE VERAN LOS FamiliaPatentes BORRADOS Y QUITADOS
             Dim mCol As New Collections.Generic.List(Of FamiliaPatente)
-            'mCol = (New FamiliaPatente).Listar(mId)
+            CargarFamiliaPatente()
+
             For Each mT As FamiliaPatente In Me.mFamiliaPatente
                 If mT.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio Then
                     mCol.Add(mT)
                 End If
             Next
+            ReacomodarIndices()
             Return mCol
         End Function
         Public Function ObtenerFamiliaPatentePorIndice(ByVal pIndice As Integer) As FamiliaPatente
             Return Me.mFamiliaPatente(pIndice)
         End Function
-
 #End Region
 
     End Class

@@ -29,6 +29,7 @@ Partial Class AsocUsuarioPatente
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbDescripcionPatente = New System.Windows.Forms.ComboBox()
         Me.txtId_patente = New System.Windows.Forms.TextBox()
+        Me.txtid_familia = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label2
@@ -91,16 +92,24 @@ Partial Class AsocUsuarioPatente
         '
         'txtId_patente
         '
-        Me.txtId_patente.Location = New System.Drawing.Point(83, 103)
+        Me.txtId_patente.Location = New System.Drawing.Point(12, 94)
         Me.txtId_patente.Name = "txtId_patente"
         Me.txtId_patente.Size = New System.Drawing.Size(100, 22)
         Me.txtId_patente.TabIndex = 17
+        '
+        'txtid_familia
+        '
+        Me.txtid_familia.Location = New System.Drawing.Point(12, 119)
+        Me.txtid_familia.Name = "txtid_familia"
+        Me.txtid_familia.Size = New System.Drawing.Size(100, 22)
+        Me.txtid_familia.TabIndex = 18
         '
         'AsocUsuarioPatente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(616, 153)
+        Me.Controls.Add(Me.txtid_familia)
         Me.Controls.Add(Me.txtId_patente)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.chbM_Negada)
@@ -123,4 +132,5 @@ Partial Class AsocUsuarioPatente
     Friend WithEvents Label1 As Label
     Friend WithEvents cbDescripcionPatente As ComboBox
     Friend WithEvents txtId_patente As TextBox
+    Friend WithEvents txtid_familia As TextBox
 End Class

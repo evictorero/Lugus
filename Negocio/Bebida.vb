@@ -117,8 +117,6 @@ Namespace Negocio
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
 
-            ValidarCampos()
-
             If mId = 0 Then
                 mDTO.id = Datos.BebidaDatos.ObtenerProximoId()
                 mDTO.dvh = "23423354"
@@ -139,7 +137,6 @@ Namespace Negocio
 
             End If
         End Sub
-
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mDescripcionCorta = pDr("descripcion_corta")
@@ -155,7 +152,6 @@ Namespace Negocio
             End Try
 
         End Sub
-
         Public Overridable Sub Cargar(ByVal pId As Integer)
             If mId > 0 Then
                 Dim mDTO As DTO.BebidaDTO = Datos.BebidaDatos.Obtener(pId)
@@ -174,7 +170,6 @@ Namespace Negocio
             mFechaModif = pDTO.fechaModif
             mDvh = pDTO.dvh
         End Sub
-
         Public Overridable Sub Eliminar()
             If mId > 0 Then
                 Try
@@ -187,7 +182,6 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó eliminar una bebida sin Id especifico.")
             End If
         End Sub
-
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try
@@ -200,7 +194,6 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó activar una bebida sin Id especifico.")
             End If
         End Sub
-
         Private Shared Function ObtenerProximoId() As Integer
             If ProximoId = 0 Then
                 Dim mTempId As Object = Datos.BebidaDatos.ObtenerProximoId()
@@ -208,18 +201,22 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
-        Private Sub ValidarCampos()
-            If (Me.descripcionCorta = "") Then
-                Throw New ApplicationException("Debe completar la descripción corta.")
-            End If
-            If (Me.descripcionLarga = "") Then
-                Throw New ApplicationException("Debe completar la descripción larga.")
-            End If
-            If (Me.habilitado = "") Then
-                Throw New ApplicationException("Debe completar el campo habilitado.")
-            End If
+        Public Sub ValidarFormato(pid_idioma As Integer)
+            Try
+                If (Me.descripcionCorta = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar la descripción corta."))
+                End If
+                If (Me.descripcionLarga = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar la descripción larga."))
+                End If
+                If (Me.habilitado = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar si el campo esta habilitado en la carta."))
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Throw
+            End Try
         End Sub
-
         Public Overridable Function Listar() As Collections.Generic.List(Of Bebida)
             Dim mCol As New Collections.Generic.List(Of Bebida)
             Dim mColDTO As List(Of DTO.BebidaDTO) = Datos.BebidaDatos.Listar()
