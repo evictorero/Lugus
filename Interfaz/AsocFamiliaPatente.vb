@@ -1,16 +1,16 @@
 ﻿Imports Negocio.Negocio
-Public Class AsocUsuarioPatente
+Public Class AsocFamiliaPatente
 
 #Region "Declaraciones"
 
     Dim mFamiliaPatente As Negocio.Negocio.FamiliaPatente
 
     Friend mOperacion As TipoOperacion
-        Friend Enum TipoOperacion
-            Alta = 1
-            Baja = 2
-            Modificacion = 3
-        End Enum
+    Friend Enum TipoOperacion
+        Alta = 1
+        Baja = 2
+        Modificacion = 3
+    End Enum
 #End Region
 
 #Region "Propiedades"
@@ -69,13 +69,13 @@ Public Class AsocUsuarioPatente
 
 #Region "Metodos"
 
-        Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
-            Me.Close()
-        End Sub
+    Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
+        Me.Close()
+    End Sub
 
-        Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
-            Select Case mOperacion
-                Case TipoOperacion.Alta
+    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
+        Select Case mOperacion
+            Case TipoOperacion.Alta
                 mFamiliaPatente = New Negocio.Negocio.FamiliaPatente
                 mFamiliaPatente.id_patente = cbDescripcionPatente.SelectedValue
                 mFamiliaPatente.id_usuario_alta = Principal.UsuarioEnSesion.id
@@ -87,8 +87,8 @@ Public Class AsocUsuarioPatente
                     CType(Me.Owner, Familias).FamiliaAEditar.EliminarFamiliaPatente(mFamiliaPatente.IndiceColeccion)
                 End If
         End Select
-            Me.Close()
-        End Sub
+        Me.Close()
+    End Sub
 
 
 

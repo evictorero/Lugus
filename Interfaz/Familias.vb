@@ -140,8 +140,8 @@ Public Class Familias
 
 #Region "Patentes"
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
-        Dim mForm As New AsocUsuarioPatente
-        mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Alta
+        Dim mForm As New AsocFamiliaPatente
+        mForm.Operacion = AsocFamiliaPatente.TipoOperacion.Alta
         mForm.StartPosition = FormStartPosition.CenterParent
         mForm.ShowDialog(Me)
         dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
@@ -150,8 +150,8 @@ Public Class Familias
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         If Me.dgvFamiliaPatentes.Rows.Count > 0 AndAlso Me.dgvFamiliaPatentes.SelectedRows.Count = 1 Then
             Dim mIndice As Integer = CInt(dgvFamiliaPatentes.SelectedRows(0).Cells(4).Value)
-            Dim mForm As New AsocUsuarioPatente
-            mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Baja
+            Dim mForm As New AsocFamiliaPatente
+            mForm.Operacion = AsocFamiliaPatente.TipoOperacion.Baja
 
             mForm.FamiliaPatenteAEditar = mFamilia.ObtenerFamiliaPatentePorIndice(mIndice)
             mForm.StartPosition = FormStartPosition.CenterParent

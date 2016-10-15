@@ -21,11 +21,11 @@ Public Class FamiliaPatenteDatos
         Dim mStrCom As String
 
         mStrCom = "DELETE FROM dbo.rFamiliaPatente" &
-                   "WHERE id_familia =  " & pId_Familia & " and id_Patente" & pId_Patente
+                   " WHERE id_familia =  " & pId_Familia & " and id_Patente = " & pId_Patente
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
-            Throw New ApplicationException("Fallo al dar de baja la bebida", ex)
+            Throw New ApplicationException("Fallo al dar de baja la Familia Patente", ex)
         End Try
     End Sub
 
@@ -41,11 +41,11 @@ Public Class FamiliaPatenteDatos
                 Return mDTO
             Else
 
-                Throw New ApplicationException("Fallo al cargar la bebida")
+                Throw New ApplicationException("Fallo al cargar la Familia Patente")
                 Return Nothing
             End If
         Else
-            Throw New ApplicationException("Se intentó cargar una bebida sin Id especificado")
+            Throw New ApplicationException("Se intentó cargar una Familia Patente sin Id especificado")
             Return Nothing
         End If
 

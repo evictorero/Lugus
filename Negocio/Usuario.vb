@@ -244,6 +244,7 @@ Namespace Negocio
             Dim mDTO As New DTO.UsuarioDTO
             Dim rta As Integer
 
+            'El 2 implica DES(Reversible) y el 1 MD5(Irreversible)
             mDTO.usuario = Encriptador.EncriptarDatos(2, mUsuario)
             mDTO.contrasenia = Encriptador.encriptarDatos(1, mPassword)
 

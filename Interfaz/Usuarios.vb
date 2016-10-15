@@ -102,7 +102,7 @@ Public Class Usuarios
     End Sub
 
     Private Sub Nuevo_Click(sender As Object, e As EventArgs) Handles btnAgregarPatente.Click
-        AsocUsuarioPatente.Show()
+        AsocFamiliaPatente.Show()
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPatentes.CellContentClick
