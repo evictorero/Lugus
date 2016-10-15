@@ -125,10 +125,10 @@
     <Compile Include="AsocUsuarioFamilia.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Familia.Designer.vb">
-      <DependentUpon>Familia.vb</DependentUpon>
+    <Compile Include="Familias.Designer.vb">
+      <DependentUpon>Familias.vb</DependentUpon>
     </Compile>
-    <Compile Include="Familia.vb">
+    <Compile Include="Familias.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FamiliaABM.Designer.vb">
@@ -161,10 +161,10 @@
     <Compile Include="msgRehabilitar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AsocUsuarioPatente.Designer.vb">
-      <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
+    <Compile Include="AsocFamiliaPatente.Designer.vb">
+      <DependentUpon>AsocFamiliaPatente.vb</DependentUpon>
     </Compile>
-    <Compile Include="AsocUsuarioPatente.vb">
+    <Compile Include="AsocFamiliaPatente.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Patente.Designer.vb">
@@ -215,10 +215,10 @@
     <Compile Include="Restore.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Usuario.Designer.vb">
-      <DependentUpon>Usuario.vb</DependentUpon>
+    <Compile Include="Usuarios.Designer.vb">
+      <DependentUpon>Usuarios.vb</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.vb">
+    <Compile Include="Usuarios.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UsuarioABM.vb">
@@ -263,8 +263,8 @@
     <EmbeddedResource Include="AsocUsuarioFamilia.resx">
       <DependentUpon>AsocUsuarioFamilia.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Familia.resx">
-      <DependentUpon>Familia.vb</DependentUpon>
+    <EmbeddedResource Include="Familias.resx">
+      <DependentUpon>Familias.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FamiliaABM.resx">
       <DependentUpon>FamiliaABM.vb</DependentUpon>
@@ -287,8 +287,8 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AsocUsuarioPatente.resx">
-      <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
+    <EmbeddedResource Include="AsocFamiliaPatente.resx">
+      <DependentUpon>AsocFamiliaPatente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Patente.resx">
       <DependentUpon>Patente.vb</DependentUpon>
@@ -314,8 +314,8 @@
     <EmbeddedResource Include="Restore.resx">
       <DependentUpon>Restore.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Usuario.resx">
-      <DependentUpon>Usuario.vb</DependentUpon>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsuarioABM.resx">
       <DependentUpon>UsuarioABM.vb</DependentUpon>

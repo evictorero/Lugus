@@ -8,7 +8,7 @@ Namespace Negocio
     Public Class Encriptador
 
         'Funcion de encriptado
-        Public Shared Function encriptarDatos(ByVal tipo As Integer, ByVal textoAEncriptar As String) As String
+        Public Shared Function EncriptarDatos(ByVal tipo As Integer, ByVal textoAEncriptar As String) As String
             Try
                 'MD5
                 If tipo = 1 Then
@@ -48,7 +48,7 @@ Namespace Negocio
 
         End Function
 
-        Public Shared Function desencriptarDatos(ByVal tipo As Integer, ByVal textoEncriptado As String) As String
+        Public Shared Function DesencriptarDatos(ByVal tipo As Integer, ByVal textoEncriptado As String) As String
             Try
                 'DES
                 If tipo = 2 Then

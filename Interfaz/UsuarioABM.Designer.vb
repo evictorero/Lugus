@@ -23,12 +23,6 @@ Partial Class UsuarioABM
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dgv_Usuarios = New System.Windows.Forms.DataGridView()
-        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Apellido = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DNI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaBaja = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnRehabilitar = New System.Windows.Forms.Button()
@@ -36,13 +30,13 @@ Partial Class UsuarioABM
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
         Me.btnBlanquear = New System.Windows.Forms.Button()
+        Me.txtMensaje = New System.Windows.Forms.Label()
         CType(Me.dgv_Usuarios, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgv_Usuarios
         '
         Me.dgv_Usuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_Usuarios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Id, Me.Usuario, Me.Nombre, Me.Apellido, Me.DNI, Me.FechaBaja})
         Me.dgv_Usuarios.Location = New System.Drawing.Point(29, 28)
         Me.dgv_Usuarios.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgv_Usuarios.Name = "dgv_Usuarios"
@@ -50,42 +44,6 @@ Partial Class UsuarioABM
         Me.dgv_Usuarios.RowTemplate.Height = 28
         Me.dgv_Usuarios.Size = New System.Drawing.Size(859, 502)
         Me.dgv_Usuarios.TabIndex = 0
-        '
-        'Id
-        '
-        Me.Id.HeaderText = "Código"
-        Me.Id.Name = "Id"
-        Me.Id.ReadOnly = True
-        '
-        'Usuario
-        '
-        Me.Usuario.HeaderText = "Usuario"
-        Me.Usuario.Name = "Usuario"
-        Me.Usuario.ReadOnly = True
-        '
-        'Nombre
-        '
-        Me.Nombre.HeaderText = "Nombre"
-        Me.Nombre.Name = "Nombre"
-        Me.Nombre.ReadOnly = True
-        '
-        'Apellido
-        '
-        Me.Apellido.HeaderText = "Apellido"
-        Me.Apellido.Name = "Apellido"
-        Me.Apellido.ReadOnly = True
-        '
-        'DNI
-        '
-        Me.DNI.HeaderText = "DNI"
-        Me.DNI.Name = "DNI"
-        Me.DNI.ReadOnly = True
-        '
-        'FechaBaja
-        '
-        Me.FechaBaja.HeaderText = "Fecha de baja"
-        Me.FechaBaja.Name = "FechaBaja"
-        Me.FechaBaja.ReadOnly = True
         '
         'btnModificar
         '
@@ -137,11 +95,22 @@ Partial Class UsuarioABM
         Me.btnBlanquear.Text = "Blanquear Clave"
         Me.btnBlanquear.UseVisualStyleBackColor = True
         '
+        'txtMensaje
+        '
+        Me.txtMensaje.AutoSize = True
+        Me.txtMensaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMensaje.Location = New System.Drawing.Point(26, 9)
+        Me.txtMensaje.Name = "txtMensaje"
+        Me.txtMensaje.Size = New System.Drawing.Size(68, 17)
+        Me.txtMensaje.TabIndex = 24
+        Me.txtMensaje.Text = "Mensaje"
+        '
         'UsuarioABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(923, 626)
+        Me.Controls.Add(Me.txtMensaje)
         Me.Controls.Add(Me.btnBlanquear)
         Me.Controls.Add(Me.btnRehabilitar)
         Me.Controls.Add(Me.btnEliminar)
@@ -153,6 +122,7 @@ Partial Class UsuarioABM
         Me.Text = "Usuarios"
         CType(Me.dgv_Usuarios, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -164,10 +134,5 @@ Partial Class UsuarioABM
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnBlanquear As Button
-    Friend WithEvents Id As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Usuario As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Nombre As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Apellido As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DNI As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FechaBaja As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtMensaje As Label
 End Class

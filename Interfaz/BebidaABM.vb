@@ -1,4 +1,5 @@
 ﻿Imports Negocio.Negocio.Bebida
+Imports Negocio.Negocio.Traductor
 
 Public Class BebidaABM
 
@@ -64,7 +65,7 @@ Public Class BebidaABM
 
         Me.dgvBebidas.ClearSelection()
 
-        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+        TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
 
     End Sub
 #End Region
@@ -74,9 +75,7 @@ Public Class BebidaABM
     Friend Sub ActualizarGrilla()
         Me.dgvBebidas.DataSource = (New Negocio.Negocio.Bebida).Listar
         If Me.dgvBebidas.RowCount = 0 Then
-            Me.txtMensaje.Text = "No existen Bebidas ingresadas en el sistema"
-            Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
-
+            Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
         Else
             Me.txtMensaje.Text = ""
         End If
@@ -85,11 +84,13 @@ Public Class BebidaABM
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
         Dim bebida As New Negocio.Negocio.Bebida(mId)
         'Traducir Celeste
-        Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea dar de baja la Bebida seleccionada?", "Eliminar", MessageBoxButtons.YesNo)
+        Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja la Bebida seleccionada?"),
+                                                ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Eliminar"),
+                                                MessageBoxButtons.YesNo)
         If result = DialogResult.Yes Then
             bebida.Eliminar()
             'Traducir Celeste
-            MessageBox.Show("Bebida eliminada correctamente.")
+            MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Bebida eliminada correctamente"))
         End If
         ActualizarGrilla()
     End Sub
@@ -97,12 +98,14 @@ Public Class BebidaABM
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
         Dim bebida As New Negocio.Negocio.Bebida(mId)
-        Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea rehabilitar la Bebida seleccionada?", "Rehabilitar", MessageBoxButtons.YesNo)
+        Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea rehabilitar la Bebida seleccionada?"),
+                                                ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Rehabilitar"),
+                                                MessageBoxButtons.YesNo)
         'Traducir Celeste
         If result = DialogResult.Yes Then
             bebida.Rehabilitar()
             'Traducir Celeste
-            MessageBox.Show("Bebida rehabilitada correctamente.")
+            MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Bebida rehabilitada correctamente"))
         End If
 
         ActualizarGrilla()
@@ -129,10 +132,8 @@ Public Class BebidaABM
                 mForm.ShowDialog(Me)
 
                 ActualizarGrilla()
-            Catch ex As InvalidCastException
-                MsgBox("Error al establecer el identificador la bebida seleccionada.")
             Catch ex As Exception
-                MsgBox("Error al intentar modificar la bebida seleccionada.")
+                'MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la bebida seleccionada"))
             End Try
 
         End If
@@ -156,6 +157,10 @@ Public Class BebidaABM
             Me.btnNuevo.Enabled = True
             Me.btnRehabilitar.Enabled = False
         End If
+    End Sub
+
+    Private Sub dgvBebidas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvBebidas.CellContentClick
+
     End Sub
 
 #End Region

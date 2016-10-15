@@ -63,6 +63,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Familia.vb" />
+    <Compile Include="FamiliaPatente.vb" />
+    <Compile Include="Patente.vb" />
+    <Compile Include="Plato.vb" />
     <Compile Include="Bebida.vb" />
     <Compile Include="IColeccionable.vb" />
     <Compile Include="Traductor.vb" />
@@ -93,6 +97,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

@@ -10,7 +10,7 @@ Public Class UsuarioDTO
     Public email As String
     Public id_idioma As Integer
     Public fechaNacimiento As Date
-    Public fechaBaja As Date
+    Public fechaBaja As Nullable(Of DateTime)
     Public dvh As Integer
     Public intentosLogin As Integer
     Public fechaModif As Date

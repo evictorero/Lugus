@@ -8,6 +8,7 @@ Public Class TraductorDatos
         pDTO.mensaje = pDr("mensaje")
         pDTO.traduccion = pDr("traduccion")
     End Sub
+
     Public Shared Function ObtenerTraduccion(ByVal pIdIdioma As String,
                                              ByVal pMensaje As String) As String
         Dim l_return As String
