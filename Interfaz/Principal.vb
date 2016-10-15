@@ -79,6 +79,15 @@ Public Class Principal
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If estaAutenticado Then
             Me.WindowState = FormWindowState.Maximized
+
+            Dim idiomaDataSource As Collections.Generic.List(Of Negocio.Negocio.Idioma)
+            idiomaDataSource = (New Negocio.Negocio.Idioma).Listar
+
+            For Each t As Negocio.Negocio.Idioma In idiomaDataSource
+                Dim subitem As New ToolStripMenuItem(t.descripcion)
+                IdiomaToolStripMenuItem1.DropDownItems.Add(subitem)
+            Next
+
         Else
             Me.Close()
         End If
@@ -93,4 +102,5 @@ Public Class Principal
         End Try
 
     End Sub
+
 End Class

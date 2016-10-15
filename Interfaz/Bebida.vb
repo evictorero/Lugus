@@ -59,9 +59,9 @@ Public Class Bebida
                     End If
 
                     Me.lblTitulo.Text = "Modificación de bebida"
-                    End If
+                End If
 
-                    Case TipoOperacion.Rehabilitar
+            Case TipoOperacion.Rehabilitar
 
                 Me.txtId_bebida.Text = mBebida.id
                 Me.txtId_bebida.Enabled = False

@@ -38,8 +38,6 @@ Partial Class Principal
         Me.PedidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ServiciosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IdiomaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InglesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EspañolToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -155,22 +153,9 @@ Partial Class Principal
         '
         'IdiomaToolStripMenuItem1
         '
-        Me.IdiomaToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InglesToolStripMenuItem1, Me.EspañolToolStripMenuItem1})
         Me.IdiomaToolStripMenuItem1.Name = "IdiomaToolStripMenuItem1"
         Me.IdiomaToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
         Me.IdiomaToolStripMenuItem1.Text = "Idioma"
-        '
-        'InglesToolStripMenuItem1
-        '
-        Me.InglesToolStripMenuItem1.Name = "InglesToolStripMenuItem1"
-        Me.InglesToolStripMenuItem1.Size = New System.Drawing.Size(115, 22)
-        Me.InglesToolStripMenuItem1.Text = "Ingles "
-        '
-        'EspañolToolStripMenuItem1
-        '
-        Me.EspañolToolStripMenuItem1.Name = "EspañolToolStripMenuItem1"
-        Me.EspañolToolStripMenuItem1.Size = New System.Drawing.Size(115, 22)
-        Me.EspañolToolStripMenuItem1.Text = "Español"
         '
         'BackupToolStripMenuItem
         '
@@ -201,7 +186,7 @@ Partial Class Principal
         'ConsultaToolStripMenuItem
         '
         Me.ConsultaToolStripMenuItem.Name = "ConsultaToolStripMenuItem"
-        Me.ConsultaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ConsultaToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
         Me.ConsultaToolStripMenuItem.Text = "Consulta"
         '
         'CambiarContraseñaToolStripMenuItem
@@ -241,7 +226,7 @@ Partial Class Principal
         Me.ClientSize = New System.Drawing.Size(507, 376)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Principal"
         Me.Text = "Principal"
         Me.MenuStrip1.ResumeLayout(False)
@@ -261,8 +246,6 @@ Partial Class Principal
     Friend WithEvents AdministrarUsuarioToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ServiciosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents IdiomaToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents InglesToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents EspañolToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents BackupToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BackupToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents RestoreToolStripMenuItem As ToolStripMenuItem

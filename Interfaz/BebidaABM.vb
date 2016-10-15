@@ -159,10 +159,6 @@ Public Class BebidaABM
         End If
     End Sub
 
-    Private Sub dgvBebidas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvBebidas.CellContentClick
-
-    End Sub
-
 #End Region
 
 End Class
