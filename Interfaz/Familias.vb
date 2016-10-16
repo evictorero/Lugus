@@ -22,12 +22,14 @@ Public Class Familias
             mFamilia = value
         End Set
     End Property
-
+#Region "Eventos Form"
     Private Sub Familia_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.txtId_familia.Enabled = False
         Me.txtFecha_baja.Enabled = False
+        Me.txtId_familia.Visible = False
+        Me.txtFecha_baja.Visible = False
 
-        'Seteo de aspecto de la grilla AMBIENTES
+        'Seteo de aspecto de la grilla 
         With Me.dgvFamiliaPatentes
             .AllowDrop = False
             .AllowUserToAddRows = False
@@ -46,19 +48,29 @@ Public Class Familias
                 .Add("cid_familia", "id_patente")
                 .Item(1).DataPropertyName = "id_patente"
                 .Item(1).Width = 125
+                .Item(1).Visible = False
+
+                .Add("cDescripcion", "Descripcion")
+                .Item(2).DataPropertyName = "Descripcion"
+                .Item(2).Width = 150
+                .Item(2).Visible = True
 
                 .Add("cdvh", "dvh")
-                .Item(2).DataPropertyName = "dvh"
-                .Item(2).Width = 125
+                .Item(3).DataPropertyName = "dvh"
+                .Item(3).Width = 125
+                .Item(3).Visible = False
 
                 .Add("cEstadoColeccion", "EstadoColeccion")
-                .Item(3).DataPropertyName = "EstadoColeccion"
-                .Item(3).Visible = True
+                .Item(4).DataPropertyName = "EstadoColeccion"
+                .Item(4).Visible = False
 
                 .Add("cIndiceColeccion", "IndiceColeccion")
-                .Item(4).DataPropertyName = "IndiceColeccion"
-                .Item(4).Visible = True
+                .Item(5).DataPropertyName = "IndiceColeccion"
+                .Item(5).Visible = False
 
+                .Add("cM_negada", "M_negada")
+                .Item(6).DataPropertyName = "M_negada"
+                .Item(6).Visible = True
             End With
         End With
         Select Case mOperacion
@@ -91,27 +103,13 @@ Public Class Familias
                     If Not IsNothing(mFamilia.fechaBaja) Then
                         Me.txtFecha_baja.Text = mFamilia.fechaBaja
                     End If
-
                     Me.lblTitulo.Text = "Modificación de Familia"
                 End If
-                dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
-
-            Case TipoOperacion.Rehabilitar
-
-                Me.txtId_familia.Text = mFamilia.id
-                Me.txtId_familia.Enabled = False
-
-                Me.txtDescripcion_corta.Text = mFamilia.descripcionCorta
-                Me.txtDescripcion_corta.Enabled = False
-                Me.txtDescripcion_larga.Text = mFamilia.descripcionLarga
-                Me.txtDescripcion_larga.Enabled = False
-                Me.lblTitulo.Text = "Rehabilitar Familia"
-                Me.btnGuardar.Visible = False
+                ActualizarGrilla()
         End Select
-
+        ActualizarBotones()
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
-
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Select Case mOperacion
             Case TipoOperacion.Alta, TipoOperacion.Modificacion
@@ -126,40 +124,50 @@ Public Class Familias
                 mFamilia.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mFamilia.Guardar()
                 Me.Close()
-            Case TipoOperacion.Baja
-                mFamilia.Eliminar()
-                Me.Close()
         End Select
     End Sub
-
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         Me.Close()
-
     End Sub
-
-
+    Private Sub ActualizarGrilla()
+        dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
+        If dgvFamiliaPatentes.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvFamiliaPatentes.Rows.Count - 1
+                Dim mPatente As New Negocio.Negocio.Patente
+                mPatente.Cargar(CInt(dgvFamiliaPatentes.Rows(i).Cells(1).Value))
+                dgvFamiliaPatentes.Rows(i).Cells(2).Value = mPatente.descripcionCorta
+            Next
+        End If
+    End Sub
+    Private Sub ActualizarBotones()
+        btnAgregar.Enabled = False
+        btnEliminar.Enabled = False
+        If mOperacion = TipoOperacion.Modificacion Then
+            btnAgregar.Enabled = True
+            btnEliminar.Enabled = True
+        End If
+    End Sub
+#End Region
 #Region "Patentes"
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
         Dim mForm As New AsocFamiliaPatente
         mForm.Operacion = AsocFamiliaPatente.TipoOperacion.Alta
         mForm.StartPosition = FormStartPosition.CenterParent
         mForm.ShowDialog(Me)
-        dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
+        ActualizarGrilla()
     End Sub
-
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         If Me.dgvFamiliaPatentes.Rows.Count > 0 AndAlso Me.dgvFamiliaPatentes.SelectedRows.Count = 1 Then
-            Dim mIndice As Integer = CInt(dgvFamiliaPatentes.SelectedRows(0).Cells(4).Value)
+            Dim mIndice As Integer = CInt(dgvFamiliaPatentes.SelectedRows(0).Cells(5).Value)
             Dim mForm As New AsocFamiliaPatente
             mForm.Operacion = AsocFamiliaPatente.TipoOperacion.Baja
 
             mForm.FamiliaPatenteAEditar = mFamilia.ObtenerFamiliaPatentePorIndice(mIndice)
             mForm.StartPosition = FormStartPosition.CenterParent
             mForm.ShowDialog(Me)
-            Me.dgvFamiliaPatentes.DataSource = mFamilia.FamiliaPatente
+            ActualizarGrilla()
         End If
     End Sub
-
 #End Region
 
 End Class

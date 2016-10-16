@@ -45,7 +45,12 @@ Public Class FamiliaABM
                 .Add("cidUsuario", "Usuario Alta/Modif")
                 .Item(5).DataPropertyName = "idUsuario"
                 .Item(5).Width = 100
+                .Item(5).Visible = False
 
+                .Add("cNombreUsuario", "Usuario Alta/Modif")
+                .Item(6).DataPropertyName = "Nombre Usuario"
+                .Item(6).Width = 150
+                .Item(6).Visible = True
             End With
 
         End With
@@ -64,49 +69,44 @@ Public Class FamiliaABM
         TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
 
     End Sub
-#End Region
-
-#Region "Métodos"
-
-    Friend Sub ActualizarGrilla()
-        Me.dgvFamilias.DataSource = (New Negocio.Negocio.Familia).Listar
-        If Me.dgvFamilias.RowCount = 0 Then
-            Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen familias ingresadas en el sistema")
-        Else
-            Me.txtMensaje.Text = ""
-        End If
-    End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim mId As Integer = CInt(Me.dgvFamilias.SelectedRows(0).Cells(0).Value)
-        Dim Familia As New Negocio.Negocio.Familia(mId)
-        'Traducir Celeste
-        Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja la Familia seleccionada?"),
-                                                ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Eliminar"),
-                                                MessageBoxButtons.YesNo)
-        If result = DialogResult.Yes Then
-            Familia.Eliminar()
+        Try
+            Dim mId As Integer = CInt(Me.dgvFamilias.SelectedRows(0).Cells(0).Value)
+            Dim Familia As New Negocio.Negocio.Familia(mId)
             'Traducir Celeste
-            MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia eliminada correctamente"))
-        End If
-        ActualizarGrilla()
-    End Sub
+            Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja la Familia seleccionada?"),
+                                            ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Eliminar"),
+                                            MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
 
+                Familia.Eliminar()
+                'Traducir Celeste
+                MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia eliminada correctamente"))
+            End If
+            ActualizarGrilla()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
-        Dim mId As Integer = CInt(Me.dgvFamilias.SelectedRows(0).Cells(0).Value)
-        Dim Familia As New Negocio.Negocio.Familia(mId)
-        Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea rehabilitar la Familia seleccionada?"),
+        Try
+            Dim mId As Integer = CInt(Me.dgvFamilias.SelectedRows(0).Cells(0).Value)
+            Dim Familia As New Negocio.Negocio.Familia(mId)
+            Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea rehabilitar la Familia seleccionada?"),
                                                 ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Rehabilitar"),
                                                 MessageBoxButtons.YesNo)
-        'Traducir Celeste
-        If result = DialogResult.Yes Then
-            Familia.Rehabilitar()
             'Traducir Celeste
-            MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia rehabilitada correctamente"))
-        End If
+            If result = DialogResult.Yes Then
+                Familia.Rehabilitar()
+                'Traducir Celeste
+                MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia rehabilitada correctamente"))
+            End If
 
-        ActualizarGrilla()
+            ActualizarGrilla()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
-
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         Dim mForm As New Familias
         mForm.mOperacion = Familias.TipoOperacion.Alta
@@ -114,11 +114,9 @@ Public Class FamiliaABM
         mForm.ShowDialog(Me)
         ActualizarGrilla()
     End Sub
-
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
-
-        If Me.dgvFamilias.SelectedRows.Count > 0 Then
-            Try
+        Try
+            If Me.dgvFamilias.SelectedRows.Count > 0 Then
                 Dim mId As Integer = CInt(Me.dgvFamilias.SelectedRows(0).Cells(0).Value)
 
                 Dim mForm As New Familias
@@ -126,17 +124,14 @@ Public Class FamiliaABM
                 mForm.FamiliaAEditar = New Negocio.Negocio.Familia(mId)
                 mForm.StartPosition = FormStartPosition.CenterParent
                 mForm.ShowDialog(Me)
-
                 ActualizarGrilla()
-            Catch ex As Exception
-                MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la Familia seleccionada"))
-            End Try
-
-        End If
+            End If
+        Catch ex As Exception
+            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la Familia seleccionada"))
+        End Try
 
 
     End Sub
-
     Private Sub dgvFamilias_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dgvFamilias.SelectionChanged
         If Me.dgvFamilias.SelectedRows.Count > 0 Then
             Me.btnModificar.Enabled = True
@@ -144,8 +139,10 @@ Public Class FamiliaABM
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
             If IsNothing(Me.dgvFamilias.SelectedRows(0).Cells(3).Value) Then
                 Me.btnEliminar.Enabled = True
+                Me.btnRehabilitar.Enabled = False
             Else
                 Me.btnRehabilitar.Enabled = True
+                Me.btnEliminar.Enabled = False
             End If
         Else
             Me.btnEliminar.Enabled = False
@@ -153,9 +150,26 @@ Public Class FamiliaABM
             Me.btnNuevo.Enabled = True
             Me.btnRehabilitar.Enabled = False
         End If
+
     End Sub
+#End Region
 
-
+#Region "Métodos"
+    Friend Sub ActualizarGrilla()
+        Me.dgvFamilias.DataSource = (New Negocio.Negocio.Familia).Listar
+        If Me.dgvFamilias.RowCount = 0 Then
+            Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen familias ingresadas en el sistema")
+        Else
+            Me.txtMensaje.Text = ""
+        End If
+        If dgvFamilias.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvFamilias.Rows.Count - 1
+                Dim mUsuario As New Negocio.Negocio.Usuario
+                mUsuario.Cargar(CInt(dgvFamilias.Rows(i).Cells(5).Value))
+                dgvFamilias.Rows(i).Cells(6).Value = mUsuario.usuario
+            Next
+        End If
+    End Sub
 #End Region
 
 End Class

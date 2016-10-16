@@ -37,14 +37,12 @@ Public Class AsocFamiliaPatente
 
     Private Sub AsocUsuarioPatente_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
-
         Me.txtId_patente.Enabled = False
 
         Select Case mOperacion
             Case TipoOperacion.Alta
                 Me.txtId_patente.Text = ""
-                Me.Label1.Text = "Nueva Patente"
-
+                Me.lblDescripcion.Text = "Descripcion"
                 cbDescripcionPatente.DataSource = (New Negocio.Negocio.Patente).Listar
                 cbDescripcionPatente.DisplayMember = "descripcionLarga"
                 cbDescripcionPatente.ValueMember = "id"
@@ -58,7 +56,10 @@ Public Class AsocFamiliaPatente
                     Me.txtid_familia.Visible = False
                     Me.cbDescripcionPatente.SelectedValue = mFamiliaPatente.id_patente
                     Me.cbDescripcionPatente.Enabled = False
-                    Me.Label1.Text = "¿Esta Seguro que desea Eliminar este Caracteristica?" 'Celes
+                    Me.cbDescripcionPatente.Visible = False
+                    Me.chbM_Negada.Visible = False
+                    Me.lblNegada.Visible = False
+                    Me.lblDescripcion.Text = "¿Esta Seguro que desea eliminar esta asociacion familia patente?"
                     Me.btnGuardar.Text = "Eliminar"
                     Me.btnGuardar.BackColor = Color.Firebrick
                     Me.btnGuardar.ForeColor = Color.AntiqueWhite
@@ -79,6 +80,11 @@ Public Class AsocFamiliaPatente
                 mFamiliaPatente = New Negocio.Negocio.FamiliaPatente
                 mFamiliaPatente.id_patente = cbDescripcionPatente.SelectedValue
                 mFamiliaPatente.id_usuario_alta = Principal.UsuarioEnSesion.id
+                If chbM_Negada.Checked = True Then
+                    mFamiliaPatente.m_negada = "S"
+                Else
+                    mFamiliaPatente.m_negada = "N"
+                End If
 
                 CType(Me.Owner, Familias).FamiliaAEditar.AgregarFamiliaPatente(mFamiliaPatente)
 
@@ -89,8 +95,5 @@ Public Class AsocFamiliaPatente
         End Select
         Me.Close()
     End Sub
-
-
-
 #End Region
 End Class

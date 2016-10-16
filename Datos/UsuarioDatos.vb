@@ -14,13 +14,11 @@ Public Class UsuarioDatos
 
                 Return mDTO
             Else
-
                 Throw New ApplicationException("Fallo al cargar el Usuario.")
-                Return Nothing
+
             End If
         Else
             Throw New ApplicationException("Se intentó cargar el Usuario sin Id especificado")
-            Return Nothing
         End If
 
     End Function
@@ -29,17 +27,13 @@ Public Class UsuarioDatos
             Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.UsuarioDTO
-
                 CargarDTO(mDTO, mDs.Tables(0).Rows(0))
-
                 Return mDTO
             Else
                 Throw New ApplicationException("Fallo al cargar el Usuario.")
-                Return Nothing
             End If
         Else
             Throw New ApplicationException("Se intentó cargar el Usuario sin Id especificado")
-            Return Nothing
         End If
 
     End Function
@@ -117,9 +111,7 @@ Public Class UsuarioDatos
         Dim mStrCom As String
 
         mStrCom = "UPDATE bUsuario " &
-                   "SET usuario = '" & pDTO.usuario & "'," &
-                      " contraseña = '" & pDTO.contrasenia & "'," &
-                      "nombre = '" & pDTO.nombre & "'," &
+                   "SET nombre = '" & pDTO.nombre & "'," &
                       "apellido = '" & pDTO.apellido & "'," &
                       "dni = " & pDTO.dni & "," &
                       "email ='" & pDTO.email & "'," &

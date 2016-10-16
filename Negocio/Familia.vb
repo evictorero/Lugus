@@ -16,7 +16,7 @@ Namespace Negocio
         Private Shared ProximoId As Integer
         Dim mId As Integer = 0
 
-        'Esta coleccion alojara las Ambiente del inmueble
+        'Esta coleccion alojara las patentes de cada familia
         Protected mFamiliaPatente As New Collections.Generic.List(Of FamiliaPatente)
 #End Region
 
@@ -173,12 +173,8 @@ Namespace Negocio
         End Sub
         Public Overridable Sub Eliminar()
             If mId > 0 Then
-                Try
-                    Datos.FamiliaDatos.Eliminar(mId)
-                Catch ex As Exception
-                    Throw New ApplicationException("Error al borrar la Familia especificada.", ex)
-                End Try
-
+                Datos.FamiliaDatos.ValidarDatos(mId)
+                Datos.FamiliaDatos.Eliminar(mId)
             Else
                 Throw New ApplicationException("Se intentó eliminar una Familia sin Id especifico.")
             End If

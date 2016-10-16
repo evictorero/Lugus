@@ -140,7 +140,6 @@ Namespace Negocio
 
             End If
         End Sub
-
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mDescripcionCorta = pDr("descripcion_corta")
@@ -156,9 +155,8 @@ Namespace Negocio
             End Try
 
         End Sub
-
         Public Overridable Sub Cargar(ByVal pId As Integer)
-            If mId > 0 Then
+            If pId > 0 Then
                 Dim mDTO As DTO.PatenteDTO = Datos.PatenteDatos.Obtener(pId)
                 MyClass.Cargar(mDTO)
             Else
@@ -174,7 +172,6 @@ Namespace Negocio
             mFechaModif = pDTO.fechaModif
             mDvh = pDTO.dvh
         End Sub
-
         Public Overridable Sub Eliminar()
             If mId > 0 Then
                 Try
@@ -187,7 +184,6 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó eliminar una Patente sin Id especifico.")
             End If
         End Sub
-
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try
@@ -200,7 +196,6 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó activar una Patente sin Id especifico.")
             End If
         End Sub
-
         Private Shared Function ObtenerProximoId() As Integer
             If ProximoId = 0 Then
                 Dim mTempId As Object = Datos.PatenteDatos.ObtenerProximoId()

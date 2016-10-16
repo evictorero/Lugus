@@ -101,16 +101,27 @@ Public Class Usuarios
 
     End Sub
 
-    Private Sub Nuevo_Click(sender As Object, e As EventArgs) Handles btnAgregarPatente.Click
-        AsocFamiliaPatente.Show()
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPatentes.CellContentClick
-
+    Private Sub btnAgregarPatente_Click(sender As Object, e As EventArgs) Handles btnAgregarPatente.Click
+        Dim mForm As New AsocUsuarioPatente
+        mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Alta
+        mForm.StartPosition = FormStartPosition.CenterParent
+        mForm.ShowDialog(Me)
+        ActualizarGrilla()
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles btnAgregarFamilia.Click
         AsocUsuarioFamilia.Show()
+    End Sub
+
+    Private Sub ActualizarGrilla()
+        dgvPatentes.DataSource = mUsuario.UsuarioPatente
+        If dgvPatentes.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvPatentes.Rows.Count - 1
+                Dim mPatente As New Negocio.Negocio.Patente
+                mPatente.Cargar(CInt(dgvPatentes.Rows(i).Cells(1).Value))
+                dgvPatentes.Rows(i).Cells(2).Value = mPatente.descripcionCorta
+            Next
+        End If
     End Sub
 
 End Class

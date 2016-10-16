@@ -8,8 +8,8 @@ Public Class FamiliaPatenteDatos
     Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.FamiliaPatenteDTO)
         Dim mStrCom As String
 
-        mStrCom = "INSERT INTO dbo.rFamiliaPatente  (id_familia,id_patente,id_usuario_alta,dvh) VALUES " &
-        "(" & pDTO.Id_familia & ", " & pDTO.Id_Patente & " , " & pDTO.Id_Usuario_alta & " , " & pDTO.Dvh & ")"
+        mStrCom = "INSERT INTO dbo.rFamiliaPatente  (id_familia,id_patente,id_usuario_alta,m_negada,dvh) VALUES " &
+        "(" & pDTO.Id_familia & ", " & pDTO.Id_Patente & " , " & pDTO.Id_Usuario_alta & " , '" & pDTO.M_negada & "' , " & pDTO.Dvh & ")"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
@@ -32,7 +32,7 @@ Public Class FamiliaPatenteDatos
 
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.FamiliaPatenteDTO
         If pId > 0 Then
-            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,dvh FROM dbo.rFamiliaPatente WHERE id_patente = " & pId)
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,m_negada, dvh FROM dbo.rFamiliaPatente WHERE id_patente = " & pId)
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.FamiliaPatenteDTO
 
@@ -53,7 +53,7 @@ Public Class FamiliaPatenteDatos
 
     Public Shared Function Listar(ByVal pId_familia As Integer) As List(Of DTO.FamiliaPatenteDTO)
         Dim mCol As New List(Of DTO.FamiliaPatenteDTO)
-        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,dvh FROM dbo.rFamiliaPatente where id_familia = " & pId_familia)
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,m_negada,dvh FROM dbo.rFamiliaPatente where id_familia = " & pId_familia)
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.FamiliaPatenteDTO
@@ -89,10 +89,10 @@ Public Class FamiliaPatenteDatos
     End Function
 
     Private Shared Sub CargarDTO(ByVal pDTO As DTO.FamiliaPatenteDTO, ByVal pDr As DataRow)
-        ' id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif
         pDTO.Id_familia = pDr("id_familia")
         pDTO.Id_Patente = pDr("id_patente")
         pDTO.Id_Usuario_alta = pDr("Id_Usuario_alta")
+        pDTO.M_negada = pDr("m_negada")
         pDTO.Dvh = pDr("dvh")
     End Sub
 

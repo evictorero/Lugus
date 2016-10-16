@@ -89,6 +89,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsocUsuarioPatente.Designer.vb">
+      <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AsocUsuarioPatente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Backup.Designer.vb">
       <DependentUpon>Backup.vb</DependentUpon>
     </Compile>
@@ -245,6 +251,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AsocUsuarioPatente.resx">
+      <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Backup.resx">
       <DependentUpon>Backup.vb</DependentUpon>
     </EmbeddedResource>

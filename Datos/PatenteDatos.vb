@@ -65,7 +65,7 @@ Public Class PatenteDatos
 
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.PatenteDTO
         If pId > 0 Then
-            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_Patente, descripcion_corta, descripcion_larga, habilitado, fecha_baja, id_usuario, dvh, fecha_modif FROM bPatente WHERE id_Patente = " & pId)
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_Patente, descripcion_corta, descripcion_larga,  fecha_baja, id_usuario_alta, dvh, fecha_modif  FROM bPatente WHERE id_Patente = " & pId)
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.PatenteDTO
 

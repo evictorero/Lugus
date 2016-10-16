@@ -148,8 +148,10 @@ Public Class BebidaABM
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
             If IsNothing(Me.dgvBebidas.SelectedRows(0).Cells(4).Value) Then
                 Me.btnEliminar.Enabled = True
+                Me.btnRehabilitar.Enabled = False
             Else
                 Me.btnRehabilitar.Enabled = True
+                Me.btnEliminar.Enabled = False
             End If
         Else
             Me.btnEliminar.Enabled = False

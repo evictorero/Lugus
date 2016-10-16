@@ -121,4 +121,15 @@ Public Class FamiliaDatos
         pDTO.fechaModif = pDr("fecha_modif")
     End Sub
 
+    Public Shared Sub ValidarDatos(ByVal pId As Integer)
+        If pId > 0 Then
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT * FROM rUsuarioFamilia WHERE id_Familia = " & pId)
+            If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+                Throw New ApplicationException("Familia asociada a un usuario.")
+            End If
+        Else
+            Throw New ApplicationException("Se intentó borrar una Familia sin Id especificado")
+        End If
+    End Sub
+
 End Class

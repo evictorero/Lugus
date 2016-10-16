@@ -72,11 +72,11 @@ Partial Class Familias
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Location = New System.Drawing.Point(44, 17)
+        Me.GroupBox1.Location = New System.Drawing.Point(29, 17)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox1.Size = New System.Drawing.Size(468, 233)
+        Me.GroupBox1.Size = New System.Drawing.Size(504, 233)
         Me.GroupBox1.TabIndex = 21
         Me.GroupBox1.TabStop = False
         '

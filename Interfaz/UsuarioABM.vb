@@ -5,8 +5,6 @@ Public Class UsuarioABM
 
 #Region "Eventos Form"
     Private Sub UsuarioABM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Me.WindowState = FormWindowState.Maximized
-
         'Seteo de aspecto de la grilla
         With Me.dgv_Usuarios
             .AllowDrop = False
@@ -53,7 +51,12 @@ Public Class UsuarioABM
                 .Add("cidUsuario", "Usuario Alta/Modif")
                 .Item(7).DataPropertyName = "idUsuarioAlta"
                 .Item(7).Width = 100
+                .Item(7).Visible = False
 
+                .Add("cNombreUsuario", "Usuario Alta/Modif")
+                .Item(8).DataPropertyName = "Nombre Usuario"
+                .Item(8).Width = 150
+                .Item(8).Visible = True
             End With
 
         End With
@@ -77,14 +80,26 @@ Public Class UsuarioABM
 #Region "Métodos"
 
     Friend Sub ActualizarGrilla()
-        Me.dgv_Usuarios.DataSource = (New Negocio.Negocio.Usuario).Listar
-        If Me.dgv_Usuarios.RowCount = 0 Then
-            Me.txtMensaje.Text = "No existen Usuarios ingresados en el sistema"
-            Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
+        Try
+            Me.dgv_Usuarios.DataSource = (New Negocio.Negocio.Usuario).Listar
+            If Me.dgv_Usuarios.RowCount = 0 Then
+                Me.txtMensaje.Text = "No existen Usuarios ingresados en el sistema"
+                Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
 
-        Else
-            Me.txtMensaje.Text = ""
-        End If
+            Else
+                Me.txtMensaje.Text = ""
+            End If
+            If dgv_Usuarios.Rows.Count > 0 Then
+                For i As Integer = 0 To dgv_Usuarios.Rows.Count - 1
+                    Dim mUsuario As New Negocio.Negocio.Usuario
+                    mUsuario.Cargar(CInt(dgv_Usuarios.Rows(i).Cells(7).Value))
+                    dgv_Usuarios.Rows(i).Cells(8).Value = mUsuario.usuario
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox(ex.message)
+            Throw
+        End Try
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click

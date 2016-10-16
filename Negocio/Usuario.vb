@@ -4,7 +4,7 @@ Imports Datos.ProveedorDeDatos
 
 
 Namespace Negocio
-    Public Class Usuario
+    Public Class Usuario : Implements IColeccionable
 
 #Region "Declaraciones"
         Dim mUsuario As String
@@ -22,6 +22,10 @@ Namespace Negocio
         Dim mFechaModif As Date
         Private Shared ProximoId As Integer
         Dim mId As Integer = 0
+
+        'Esta coleccion alojara las patentes de cada usuario
+        Protected mUsuarioPatente As New Collections.Generic.List(Of UsuarioPatente)
+
 #End Region
 
 #Region "Constructores"
@@ -34,6 +38,7 @@ Namespace Negocio
         End Sub
         Public Sub New(ByVal pDTO As DTO.UsuarioDTO)
             Me.Cargar(pDTO)
+            Me.CargarUsuarioPatente()
         End Sub
         Public Sub New()
 
@@ -153,6 +158,11 @@ Namespace Negocio
                 mId = value
             End Set
         End Property
+        Public ReadOnly Property UsuarioPatente() As Collections.Generic.List(Of UsuarioPatente)
+            Get
+                Return Me.FiltrarUsuarioPatenteNoVisibles
+            End Get
+        End Property
 #End Region
 
 
@@ -164,7 +174,6 @@ Namespace Negocio
                 MyClass.Cargar(mDTO)
             Else
                 Throw New ApplicationException("Se intentó cargar un Usuario sin Id especificado")
-
             End If
         End Sub
 
@@ -175,23 +184,26 @@ Namespace Negocio
                 mNombre = pDr("nombre")
                 mApellido = pDr("apellido")
                 mDNI = pDr("dni")
+                mEmail = pDr("email")
+                mId_idioma = pDr("email")
                 mFechaNacimiento = pDr("fecha_nacimiento")
                 mFechaNacimiento = pDr("fecha_modif")
-                mEmail = pDr("email")
+                mIntentosLogin = pDr("intentosLogin")
+                mIdUsuarioAlta = pDr("id_usuario_alta")
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
 
         End Sub
         Public Overridable Sub Cargar(ByVal pId As Integer)
-            Try
-                mId = pId
-                MyClass.Cargar()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-
+            If pId > 0 Then
+                Dim mDTO As DTO.UsuarioDTO = Datos.UsuarioDatos.Obtener(pId)
+                MyClass.Cargar(mDTO)
+            Else
+                Throw New ApplicationException("Se intentó cargar un Usurio sin Id especificado")
+            End If
         End Sub
+
         Public Sub Cargar(ByVal pDTO As DTO.UsuarioDTO)
             mId = pDTO.id
             mUsuario = Encriptador.DesencriptarDatos(2, pDTO.usuario)
@@ -199,14 +211,14 @@ Namespace Negocio
             mNombre = pDTO.nombre
             mApellido = pDTO.apellido
             mDNI = pDTO.dni
-            mId_idioma = pDTO.id_idioma
             mEmail = pDTO.email
+            mId_idioma = pDTO.id_idioma
             mFechaNacimiento = pDTO.fechaNacimiento
             mFechaBaja = pDTO.fechaBaja
             mDvh = pDTO.dvh
             mIntentosLogin = pDTO.intentosLogin
             mFechaModif = pDTO.fechaModif
-
+            mIdUsuarioAlta = pDTO.idUsuarioAlta
         End Sub
 
         Private Shared Function ObtenerProximoId() As Integer
@@ -226,15 +238,14 @@ Namespace Negocio
             Dim mCol As New Collections.Generic.List(Of Usuario)
             Dim mColDTO As List(Of DTO.UsuarioDTO) = Datos.UsuarioDatos.Listar()
             Dim miUsuario As Negocio.Usuario
-
             For Each mDTO As DTO.UsuarioDTO In mColDTO
                 miUsuario = New Negocio.Usuario(mDTO)
                 miUsuario.usuario = Encriptador.DesencriptarDatos(2, mDTO.usuario)
                 mCol.Add(miUsuario)
             Next
-
             Return mCol
         End Function
+
         Public Shared Function ValidarFormato(pUsuario As String, pContrasenia As String) As Boolean
             'Celeste
             Return True
@@ -356,5 +367,129 @@ Namespace Negocio
 
 #End Region
 
+#Region "IColeccionable"
+        Dim mEstadoColeccion As IColeccionable.EstadosColeccion
+        Public Property EstadoColeccion() As IColeccionable.EstadosColeccion Implements IColeccionable.EstadoColeccion
+            Get
+                Return mEstadoColeccion
+            End Get
+            Set(ByVal value As IColeccionable.EstadosColeccion)
+                mEstadoColeccion = value
+            End Set
+        End Property
+
+        Dim mIndiceColeccion As Integer
+        Public Property IndiceColeccion() As Integer Implements IColeccionable.IndiceColeccion
+            Get
+                Return mIndiceColeccion
+            End Get
+            Set(ByVal value As Integer)
+                mIndiceColeccion = value
+            End Set
+        End Property
+
+
+#End Region
+
+#Region "UsuarioPatente"
+        Public Sub EliminarUsuarioPatente(ByVal pUsuarioPatente As UsuarioPatente)
+            EliminarUsuarioPatente(pUsuarioPatente.IndiceColeccion)
+        End Sub
+        Public Sub EliminarUsuarioPatente(ByVal pIndice As Integer)
+            If Me.mUsuarioPatente(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                Me.mUsuarioPatente(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Quitado
+            Else
+                Me.mUsuarioPatente(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Borrado
+            End If
+
+        End Sub
+        Public Sub ModificarUsuarioPatente(ByVal pUsuarioPatente As UsuarioPatente)
+            Me.mUsuarioPatente(pUsuarioPatente.IndiceColeccion) = pUsuarioPatente
+            If Not pUsuarioPatente.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                pUsuarioPatente.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado
+            End If
+
+        End Sub
+        Public Sub AgregarUsuarioPatente(ByVal pUsuarioPatente As UsuarioPatente)
+            Me.mUsuarioPatente.Add(pUsuarioPatente)
+            Dim mInd As Integer = Me.mUsuarioPatente.IndexOf(pUsuarioPatente)
+            Me.mUsuarioPatente(mInd).IndiceColeccion = mInd
+            Me.mUsuarioPatente(mInd).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado
+
+            'POR ULTIMO EL NUEVO UsuarioPatente DEBE SABER A QUE Casa PERTENECE
+            Me.mUsuarioPatente(mInd).id_usuario = mId
+        End Sub
+        Private Sub GuardarUsuarioPatentes()
+            Dim mLock As New Object
+            Dim mReacomodar As Boolean = False
+            SyncLock mLock
+                Dim mEliminados As Integer = 0
+                For x As Integer = 0 To Me.mUsuarioPatente.Count - 1
+                    Select Case Me.mUsuarioPatente(x - mEliminados).EstadoColeccion
+                        Case IColeccionable.EstadosColeccion.Agregado, IColeccionable.EstadosColeccion.Modificado
+                            If Me.mUsuarioPatente(x - mEliminados).id_patente = 0 Then
+                                Me.mUsuarioPatente(x - mEliminados).id_patente = mId
+                            End If
+                            Me.mUsuarioPatente(x - mEliminados).Guardar()
+                            Me.mUsuarioPatente(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
+
+                        Case IColeccionable.EstadosColeccion.Borrado
+                            Me.mUsuarioPatente(x - mEliminados).Eliminar()
+                            Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+
+                        Case IColeccionable.EstadosColeccion.Quitado
+                            Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+                    End Select
+
+                Next
+            End SyncLock
+
+            'SI SE HA QUITADO ALGUN ELEMENTO DE LA COLECCION< DEBEREMOS REACOMODAR LOS INDICES
+            'QUE CADA OBJETO CONOCE DE SI MISMO
+            If mReacomodar Then
+                Me.ReacomodarIndices()
+            End If
+        End Sub
+        Private Sub ReacomodarIndices()
+            'A CADA ELEMENTO DE LA COLECCION LE AVISAMOS CUAL ES SU NUEVO INDICE
+            For Each mT As UsuarioPatente In Me.mUsuarioPatente
+                mT.IndiceColeccion = Me.mUsuarioPatente.IndexOf(mT)
+            Next
+        End Sub
+        Private Sub CargarUsuarioPatente()
+            'AL CARGAR LOS UsuarioPatentes SIMPLEMENTE ASIGAMOS LA COLECCION QUE DEVUELVE EL METODO
+            'LISTAR
+            'INMEDIATAMENTE DESPUES LE AVISAMOS A CADA OBJETO UsuarioPatente QUE INDICE LE TOCO EN LA LISTA
+            If mUsuarioPatente.Count = 0 Then
+                Me.mUsuarioPatente = (New Negocio.UsuarioPatente).Listar(mId)
+            End If
+
+
+            For Each mT As UsuarioPatente In mUsuarioPatente
+                mT.IndiceColeccion = Me.mUsuarioPatente.IndexOf(mT)
+            Next
+        End Sub
+        Private Function FiltrarUsuarioPatenteNoVisibles() As Collections.Generic.List(Of UsuarioPatente)
+            'ESTE METODO PERMITIRA FILTRAR LOS UsuarioPatentes ANTES DE MOSTRARLOS EN UN GRILLA
+            'SE SUPONE QUE EN LA GRILLA NO SE VERAN LOS UsuarioPatentes BORRADOS Y QUITADOS
+            Dim mCol As New Collections.Generic.List(Of UsuarioPatente)
+            CargarUsuarioPatente()
+
+            For Each mT As UsuarioPatente In Me.mUsuarioPatente
+                If mT.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio Then
+                    mCol.Add(mT)
+                End If
+            Next
+            ReacomodarIndices()
+            Return mCol
+        End Function
+        Public Function ObtenerUsuarioPatentePorIndice(ByVal pIndice As Integer) As UsuarioPatente
+            Return Me.mUsuarioPatente(pIndice)
+        End Function
+#End Region
     End Class
 End Namespace

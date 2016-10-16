@@ -64,7 +64,7 @@ Partial Class FamiliaABM
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(287, 448)
+        Me.btnModificar.Location = New System.Drawing.Point(290, 448)
         Me.btnModificar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(141, 38)

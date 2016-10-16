@@ -5,7 +5,7 @@ CREATE TABLE rPedidoBebida (
 	id_bebida int NOT NULL,
 	estado varchar(50) NOT NULL,
 	dvh int NOT NULL
-) 
+)
 ;
 
 CREATE TABLE rPedidoPlato ( 
@@ -89,8 +89,9 @@ ALTER TABLE bPlato
 ;
 CREATE TABLE bTraductor ( 
 	id_idioma int NOT NULL,
-	mensaje varchar(200) NOT NULL,
-	traduccion varchar(200)
+	id_traductor int NOT NULL,
+	tipo varchar(3) NOT NULL,
+	mensaje varchar(200)
 )
 ;
 
@@ -124,6 +125,7 @@ CREATE TABLE bBitacora (
 CREATE TABLE rFamiliaPatente ( 
 	id_familia int NOT NULL,
 	id_patente int NOT NULL,
+	m_negada varchar(1) NOT NULL,
 	id_usuario_alta int  ,
 	dvh int
 )
@@ -149,8 +151,8 @@ CREATE TABLE bFamilia (
 ;
 
 CREATE TABLE rUsuarioPatente ( 
-	id_patente int NOT NULL,
 	id_usuario int NOT NULL,
+	id_patente int NOT NULL,
 	m_negada varchar(1) NOT NULL,
 	id_usuario_alta int  ,
 	dvh int NOT NULL
@@ -195,7 +197,7 @@ CREATE TABLE bUsuario (
 
 
 ALTER TABLE bTraductor ADD CONSTRAINT PK_bTraductor 
-	PRIMARY KEY CLUSTERED (id_idioma, mensaje)
+	PRIMARY KEY CLUSTERED (id_idioma, id_traductor, tipo)
 ;
 
 ALTER TABLE bDigitoVerificadorVertical ADD CONSTRAINT PK_bDigitoVerificadorVertical 
