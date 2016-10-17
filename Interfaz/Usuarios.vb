@@ -24,7 +24,6 @@ Public Class Usuarios
     End Property
 
     Private Sub Usuario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Me.cbId_Propietario.DataSource = (New Negocio.Negocio.Propietario).Listar
         Me.Visible = True
         Me.txtUsuario.Focus()
 
@@ -74,6 +73,47 @@ Public Class Usuarios
                 .Add("cM_negada", "M_negada")
                 .Item(6).DataPropertyName = "M_negada"
                 .Item(6).Visible = True
+            End With
+        End With
+
+        With Me.dgvFamilias
+            .AllowDrop = False
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .AllowUserToResizeColumns = False
+            .AllowUserToResizeRows = False
+            .AutoGenerateColumns = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+
+            With .Columns
+                .Add("cId", "id_usuario")
+                .Item(0).DataPropertyName = "Id_Usuario"
+                .Item(0).Visible = False
+
+                .Add("cid_familia", "id_familia")
+                .Item(1).DataPropertyName = "id_familia"
+                .Item(1).Width = 125
+                .Item(1).Visible = False
+
+                .Add("cDescripcion", "Descripcion")
+                .Item(2).DataPropertyName = "Descripcion"
+                .Item(2).Width = 150
+                .Item(2).Visible = True
+
+                .Add("cdvh", "dvh")
+                .Item(3).DataPropertyName = "dvh"
+                .Item(3).Width = 125
+                .Item(3).Visible = False
+
+                .Add("cEstadoColeccion", "EstadoColeccion")
+                .Item(4).DataPropertyName = "EstadoColeccion"
+                .Item(4).Visible = False
+
+                .Add("cIndiceColeccion", "IndiceColeccion")
+                .Item(5).DataPropertyName = "IndiceColeccion"
+                .Item(5).Visible = False
+
             End With
         End With
 
@@ -157,8 +197,12 @@ Public Class Usuarios
         ActualizarGrilla()
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles btnAgregarFamilia.Click
-        AsocUsuarioPatente.Show()
+    Private Sub btnAgregarFamilia_Click(sender As Object, e As EventArgs) Handles btnAgregarFamilia.Click
+        Dim mForm As New AsocUsuarioFamilia
+        mForm.Operacion = AsocUsuarioFamilia.TipoOperacion.Alta
+        mForm.StartPosition = FormStartPosition.CenterParent
+        mForm.ShowDialog(Me)
+        ActualizarGrilla()
     End Sub
 
     Private Sub ActualizarGrilla()
@@ -168,6 +212,15 @@ Public Class Usuarios
                 Dim mPatente As New Negocio.Negocio.Patente
                 mPatente.Cargar(CInt(dgvPatentes.Rows(i).Cells(1).Value))
                 dgvPatentes.Rows(i).Cells(2).Value = mPatente.descripcionCorta
+            Next
+        End If
+
+        dgvFamilias.DataSource = mUsuario.UsuarioFamilia
+        If dgvFamilias.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvFamilias.Rows.Count - 1
+                Dim mFamilia As New Negocio.Negocio.Familia
+                mFamilia.Cargar(CInt(dgvFamilias.Rows(i).Cells(1).Value))
+                dgvFamilias.Rows(i).Cells(2).Value = mFamilia.descripcionCorta
             Next
         End If
     End Sub
@@ -183,6 +236,18 @@ Public Class Usuarios
             mForm.ShowDialog(Me)
             ActualizarGrilla()
         End If
+    End Sub
 
+    Private Sub btnEliminarFamilia_Click(sender As Object, e As EventArgs) Handles btnEliminarFamilia.Click
+        If Me.dgvFamilias.Rows.Count > 0 AndAlso Me.dgvFamilias.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(dgvFamilias.SelectedRows(0).Cells(5).Value)
+            Dim mForm As New AsocUsuarioFamilia
+            mForm.Operacion = AsocUsuarioFamilia.TipoOperacion.Baja
+
+            mForm.UsuarioFamiliaAEditar = mUsuario.ObtenerUsuarioFamiliaPorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
     End Sub
 End Class

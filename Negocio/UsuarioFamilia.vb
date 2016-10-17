@@ -1,14 +1,14 @@
-﻿Imports Datos.ProveedorDeDatos.DB
+﻿
+Imports Datos.ProveedorDeDatos.DB
 
 Namespace Negocio
 
-    Public Class UsuarioPatente : Implements IColeccionable
+    Public Class UsuarioFamilia : Implements IColeccionable
 
 #Region "Declaraciones"
         Dim mId_usuario As Integer
-        Dim mId_Patente As Integer
+        Dim mId_Familia As Integer
         Dim mId_Usuario_alta As Integer
-        Dim mM_negada As String
         Dim mDvh As Integer
 
 #End Region
@@ -20,18 +20,18 @@ Namespace Negocio
         Public Sub New(ByVal pDr As DataRow)
             Me.Cargar(pDr)
         End Sub
-        Public Sub New(ByVal pDTO As DTO.UsuarioPatenteDTO)
+        Public Sub New(ByVal pDTO As DTO.UsuarioFamiliaDTO)
             Me.Cargar(pDTO)
         End Sub
 #End Region
 
 #Region "Propiedades"
-        Public Property id_patente() As Integer
+        Public Property id_familia() As Integer
             Get
-                Return mId_Patente
+                Return mId_Familia
             End Get
             Set(ByVal value As Integer)
-                mId_Patente = value
+                mId_Familia = value
             End Set
         End Property
 
@@ -63,37 +63,28 @@ Namespace Negocio
             End Set
         End Property
 
-        Public Property m_negada() As String
-            Get
-                Return mM_negada
-            End Get
-            Set(ByVal value As String)
-                mM_negada = value
-            End Set
-        End Property
-
 #End Region
 
 #Region "Métodos"
 
         Public Overridable Sub Guardar()
-            Dim mDTO As New DTO.UsuarioPatenteDTO
+            Dim mDTO As New DTO.UsuarioFamiliaDTO
 
             mDTO.Id_Usuario = Me.id_usuario
-            mDTO.Id_Patente = Me.id_patente
+            mDTO.Id_Familia = Me.id_familia
             mDTO.Id_Usuario_alta = Me.id_usuario_alta
             mDTO.Dvh = Me.dvh
-            mDTO.M_negada = Me.mM_negada
-            Datos.UsuarioPatenteDatos.GuardarNuevo(mDTO)
+
+            Datos.UsuarioFamiliaDatos.GuardarNuevo(mDTO)
 
 
         End Sub
         Public Overridable Sub Cargar()
-            If mId_Patente > 0 Then
-                Dim mDTO As DTO.UsuarioPatenteDTO = Datos.UsuarioPatenteDatos.Obtener(mId_Patente)
+            If mId_Familia > 0 Then
+                Dim mDTO As DTO.UsuarioFamiliaDTO = Datos.UsuarioFamiliaDatos.Obtener(mId_Familia)
                 MyClass.Cargar(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Usuario Patente  sin Id especificado")
+                Throw New ApplicationException("Se intentó cargar un usuario patente  sin Id especificado")
 
             End If
         End Sub
@@ -101,9 +92,8 @@ Namespace Negocio
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mId_usuario = pDr("id_usuario")
-                mId_Patente = pDr("id_patente")
+                mId_Familia = pDr("id_familia")
                 mId_Usuario_alta = pDr("id_usuario_alta")
-                mM_negada = pDr("m_negada")
                 mDvh = pDr("dvh")
 
 
@@ -113,53 +103,53 @@ Namespace Negocio
 
         End Sub
 
-        Public Overridable Sub Cargar(ByVal pId_patente As Integer)
-            If mId_Patente > 0 Then
-                Dim mDTO As DTO.UsuarioPatenteDTO = Datos.UsuarioPatenteDatos.Obtener(pId_patente)
+        Public Overridable Sub Cargar(ByVal pid_familia As Integer)
+            If mId_Familia > 0 Then
+                Dim mDTO As DTO.UsuarioFamiliaDTO = Datos.UsuarioFamiliaDatos.Obtener(pid_familia)
                 MyClass.Cargar(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Usuario Patente  sin Id especificado")
+                Throw New ApplicationException("Se intentó cargar un usuario patente  sin Id especificado")
             End If
         End Sub
 
-        Public Sub Cargar(ByVal pDTO As DTO.UsuarioPatenteDTO)
+        Public Sub Cargar(ByVal pDTO As DTO.UsuarioFamiliaDTO)
             mId_usuario = pDTO.Id_Usuario
-            mId_Patente = pDTO.Id_Patente
+            mId_Familia = pDTO.Id_Familia
             mId_Usuario_alta = pDTO.Id_Usuario_alta
-            mM_negada = pDTO.M_negada
             mDvh = pDTO.Dvh
         End Sub
 
         Public Overridable Sub Eliminar()
-            If mId_Patente > 0 And mId_usuario > 0 Then
+            If mId_Familia > 0 And mId_usuario > 0 Then
                 Try
-                    Datos.UsuarioPatenteDatos.Eliminar(mId_usuario, mId_Patente)
+                    Datos.UsuarioFamiliaDatos.Eliminar(mId_usuario, mId_Familia)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al borrar la Usuario Patente especificada.", ex)
+                    Throw New ApplicationException("Error al borrar la usuario patente especificada.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó eliminar Usuario Patente  sin Id especifico.")
+                Throw New ApplicationException("Se intentó eliminar usuario patente  sin Id especifico.")
             End If
         End Sub
 
-        Public Overridable Function Listar() As Collections.Generic.List(Of UsuarioPatente)
-            Dim mCol As New Collections.Generic.List(Of UsuarioPatente)
-            Dim mColDTO As List(Of DTO.UsuarioPatenteDTO) = Datos.UsuarioPatenteDatos.Listar()
 
-            For Each mDTO As DTO.UsuarioPatenteDTO In mColDTO
-                mCol.Add(New Negocio.UsuarioPatente(mDTO))
+        Public Overridable Function Listar() As Collections.Generic.List(Of UsuarioFamilia)
+            Dim mCol As New Collections.Generic.List(Of UsuarioFamilia)
+            Dim mColDTO As List(Of DTO.UsuarioFamiliaDTO) = Datos.UsuarioFamiliaDatos.Listar()
+
+            For Each mDTO As DTO.UsuarioFamiliaDTO In mColDTO
+                mCol.Add(New Negocio.UsuarioFamilia(mDTO))
             Next
 
             Return mCol
         End Function
 
-        Public Overridable Function Listar(ByVal pid_usuario As Integer) As Collections.Generic.List(Of UsuarioPatente)
-            Dim mCol As New Collections.Generic.List(Of UsuarioPatente)
-            Dim mColDTO As List(Of DTO.UsuarioPatenteDTO) = Datos.UsuarioPatenteDatos.Listar(pid_usuario)
+        Public Overridable Function Listar(ByVal pid_usuario As Integer) As Collections.Generic.List(Of UsuarioFamilia)
+            Dim mCol As New Collections.Generic.List(Of UsuarioFamilia)
+            Dim mColDTO As List(Of DTO.UsuarioFamiliaDTO) = Datos.UsuarioFamiliaDatos.Listar(pid_usuario)
 
-            For Each mDTO As DTO.UsuarioPatenteDTO In mColDTO
-                mCol.Add(New Negocio.UsuarioPatente(mDTO))
+            For Each mDTO As DTO.UsuarioFamiliaDTO In mColDTO
+                mCol.Add(New Negocio.UsuarioFamilia(mDTO))
             Next
 
             Return mCol
@@ -192,3 +182,4 @@ Namespace Negocio
 
     End Class
 End Namespace
+

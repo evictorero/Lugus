@@ -26,6 +26,9 @@ Namespace Negocio
         'Esta coleccion alojara las patentes de cada usuario
         Protected mUsuarioPatente As New Collections.Generic.List(Of UsuarioPatente)
 
+        'Esta coleccion alojara las familia de cada usuario
+        Protected mUsuarioFamilia As New Collections.Generic.List(Of UsuarioFamilia)
+
 #End Region
 
 #Region "Constructores"
@@ -158,9 +161,17 @@ Namespace Negocio
                 mId = value
             End Set
         End Property
+
         Public ReadOnly Property UsuarioPatente() As Collections.Generic.List(Of UsuarioPatente)
             Get
                 Return Me.FiltrarUsuarioPatenteNoVisibles
+            End Get
+        End Property
+
+
+        Public ReadOnly Property UsuarioFamilia() As Collections.Generic.List(Of UsuarioFamilia)
+            Get
+                Return Me.FiltrarUsuarioFamiliaNoVisibles
             End Get
         End Property
 #End Region
@@ -306,6 +317,7 @@ Namespace Negocio
             End If
 
             Me.GuardarUsuarioPatentes()
+            Me.GuardarUsuarioFamilias()
 
         End Sub
         Public Sub ValidarFormato(pid_idioma As Integer)
@@ -330,11 +342,11 @@ Namespace Negocio
                 Try
                     Datos.UsuarioDatos.Eliminar(mId)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al borrar la bebida especificada.", ex)
+                    Throw New ApplicationException("Error al borrar el usuario especificado.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó eliminar una bebida sin Id especifico.")
+                Throw New ApplicationException("Se intentó eliminar un usuario sin Id especifico.")
             End If
         End Sub
 
@@ -343,11 +355,11 @@ Namespace Negocio
                 Try
                     Datos.UsuarioDatos.Rehabilitar(mId)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al activar la bebida especificada.", ex)
+                    Throw New ApplicationException("Error al activar el usuario especificada.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó activar una bebida sin Id especifico.")
+                Throw New ApplicationException("Se intentó activar una usuario sin Id especifico.")
             End If
         End Sub
 
@@ -392,6 +404,7 @@ Namespace Negocio
                 mIndiceColeccion = value
             End Set
         End Property
+
 
 
 #End Region
@@ -492,6 +505,106 @@ Namespace Negocio
         End Function
         Public Function ObtenerUsuarioPatentePorIndice(ByVal pIndice As Integer) As UsuarioPatente
             Return Me.mUsuarioPatente(pIndice)
+        End Function
+#End Region
+
+
+#Region "UsuarioFamilia"
+        Public Sub EliminarUsuarioFamilia(ByVal pUsuarioFamilia As UsuarioFamilia)
+            EliminarUsuarioFamilia(pUsuarioFamilia.IndiceColeccion)
+        End Sub
+        Public Sub EliminarUsuarioFamilia(ByVal pIndice As Integer)
+            If Me.mUsuarioFamilia(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                Me.mUsuarioFamilia(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Quitado
+            Else
+                Me.mUsuarioFamilia(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Borrado
+            End If
+
+        End Sub
+        Public Sub ModificarUsuarioFamilia(ByVal pUsuarioFamilia As UsuarioFamilia)
+            Me.mUsuarioFamilia(pUsuarioFamilia.IndiceColeccion) = pUsuarioFamilia
+            If Not pUsuarioFamilia.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                pUsuarioFamilia.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado
+            End If
+
+        End Sub
+        Public Sub AgregarUsuarioFamilia(ByVal pUsuarioFamilia As UsuarioFamilia)
+            Me.mUsuarioFamilia.Add(pUsuarioFamilia)
+            Dim mInd As Integer = Me.mUsuarioFamilia.IndexOf(pUsuarioFamilia)
+            Me.mUsuarioFamilia(mInd).IndiceColeccion = mInd
+            Me.mUsuarioFamilia(mInd).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado
+
+            'POR ULTIMO EL NUEVO UsuarioFamilia DEBE SABER A QUE Casa PERTENECE
+            Me.mUsuarioFamilia(mInd).id_usuario = mId
+        End Sub
+        Private Sub GuardarUsuarioFamilias()
+            Dim mLock As New Object
+            Dim mReacomodar As Boolean = False
+            SyncLock mLock
+                Dim mEliminados As Integer = 0
+                For x As Integer = 0 To Me.mUsuarioFamilia.Count - 1
+                    Select Case Me.mUsuarioFamilia(x - mEliminados).EstadoColeccion
+                        Case IColeccionable.EstadosColeccion.Agregado, IColeccionable.EstadosColeccion.Modificado
+                            If Me.mUsuarioFamilia(x - mEliminados).id_familia = 0 Then
+                                Me.mUsuarioFamilia(x - mEliminados).id_familia = mId
+                            End If
+                            Me.mUsuarioFamilia(x - mEliminados).Guardar()
+                            Me.mUsuarioFamilia(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
+
+                        Case IColeccionable.EstadosColeccion.Borrado
+                            Me.mUsuarioFamilia(x - mEliminados).Eliminar()
+                            Me.mUsuarioFamilia.RemoveAt(Me.mUsuarioFamilia(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+
+                        Case IColeccionable.EstadosColeccion.Quitado
+                            Me.mUsuarioFamilia.RemoveAt(Me.mUsuarioFamilia(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+                    End Select
+
+                Next
+            End SyncLock
+
+            'SI SE HA QUITADO ALGUN ELEMENTO DE LA COLECCION< DEBEREMOS REACOMODAR LOS INDICES
+            'QUE CADA OBJETO CONOCE DE SI MISMO
+            If mReacomodar Then
+                Me.ReacomodarIndicesFamilia()
+            End If
+        End Sub
+        Private Sub ReacomodarIndicesFamilia()
+            'A CADA ELEMENTO DE LA COLECCION LE AVISAMOS CUAL ES SU NUEVO INDICE
+            For Each mT As UsuarioFamilia In Me.mUsuarioFamilia
+                mT.IndiceColeccion = Me.mUsuarioFamilia.IndexOf(mT)
+            Next
+        End Sub
+        Private Sub CargarUsuarioFamilia()
+            'AL CARGAR LOS UsuarioFamilias SIMPLEMENTE ASIGAMOS LA COLECCION QUE DEVUELVE EL METODO
+            'LISTAR
+            'INMEDIATAMENTE DESPUES LE AVISAMOS A CADA OBJETO UsuarioFamilia QUE INDICE LE TOCO EN LA LISTA
+            If mUsuarioFamilia.Count = 0 Then
+                Me.mUsuarioFamilia = (New Negocio.UsuarioFamilia).Listar(mId)
+            End If
+            For Each mT As UsuarioFamilia In mUsuarioFamilia
+                mT.IndiceColeccion = Me.mUsuarioFamilia.IndexOf(mT)
+            Next
+        End Sub
+        Private Function FiltrarUsuarioFamiliaNoVisibles() As Collections.Generic.List(Of UsuarioFamilia)
+            'ESTE METODO PERMITIRA FILTRAR LOS UsuarioFamilias ANTES DE MOSTRARLOS EN UN GRILLA
+            'SE SUPONE QUE EN LA GRILLA NO SE VERAN LOS UsuarioFamilias BORRADOS Y QUITADOS
+            Dim mCol As New Collections.Generic.List(Of UsuarioFamilia)
+            CargarUsuarioFamilia()
+
+            For Each mT As UsuarioFamilia In Me.mUsuarioFamilia
+                If mT.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio Then
+                    mCol.Add(mT)
+                End If
+            Next
+            ReacomodarIndicesFamilia()
+            Return mCol
+        End Function
+        Public Function ObtenerUsuarioFamiliaPorIndice(ByVal pIndice As Integer) As UsuarioFamilia
+            Return Me.mUsuarioFamilia(pIndice)
         End Function
 #End Region
     End Class

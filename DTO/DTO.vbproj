@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="TraductorDTO.vb" />
     <Compile Include="UsuarioDTO.vb" />
+    <Compile Include="UsuarioFamiliaDTO.vb" />
     <Compile Include="UsuarioPatenteDTO.vb" />
   </ItemGroup>
   <ItemGroup>

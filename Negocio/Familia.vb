@@ -155,7 +155,7 @@ Namespace Negocio
 
         End Sub
         Public Overridable Sub Cargar(ByVal pId As Integer)
-            If mId > 0 Then
+            If pId > 0 Then
                 Dim mDTO As DTO.FamiliaDTO = Datos.FamiliaDatos.Obtener(pId)
                 MyClass.Cargar(mDTO)
             Else
