@@ -32,6 +32,51 @@ Public Class Usuarios
 
         Me.txtId_usuario.Enabled = False
 
+        'Seteo de aspecto de la grilla 
+        With Me.dgvPatentes
+            .AllowDrop = False
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .AllowUserToResizeColumns = False
+            .AllowUserToResizeRows = False
+            .AutoGenerateColumns = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+
+            With .Columns
+                .Add("cId", "id_usuario")
+                .Item(0).DataPropertyName = "Id_Usuario"
+                .Item(0).Visible = False
+
+                .Add("cid_familia", "id_patente")
+                .Item(1).DataPropertyName = "id_patente"
+                .Item(1).Width = 125
+                .Item(1).Visible = False
+
+                .Add("cDescripcion", "Descripcion")
+                .Item(2).DataPropertyName = "Descripcion"
+                .Item(2).Width = 150
+                .Item(2).Visible = True
+
+                .Add("cdvh", "dvh")
+                .Item(3).DataPropertyName = "dvh"
+                .Item(3).Width = 125
+                .Item(3).Visible = False
+
+                .Add("cEstadoColeccion", "EstadoColeccion")
+                .Item(4).DataPropertyName = "EstadoColeccion"
+                .Item(4).Visible = False
+
+                .Add("cIndiceColeccion", "IndiceColeccion")
+                .Item(5).DataPropertyName = "IndiceColeccion"
+                .Item(5).Visible = False
+
+                .Add("cM_negada", "M_negada")
+                .Item(6).DataPropertyName = "M_negada"
+                .Item(6).Visible = True
+            End With
+        End With
+
         Select Case mOperacion
             Case TipoOperacion.Alta
                 Me.txtUsuario.Text = ""
@@ -58,6 +103,9 @@ Public Class Usuarios
         End Select
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+
+        ActualizarGrilla()
+
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -110,7 +158,7 @@ Public Class Usuarios
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles btnAgregarFamilia.Click
-        AsocUsuarioFamilia.Show()
+        AsocUsuarioPatente.Show()
     End Sub
 
     Private Sub ActualizarGrilla()

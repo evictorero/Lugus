@@ -307,6 +307,8 @@ Namespace Negocio
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
             End If
 
+            Me.GuardarUsuarioPatentes()
+
         End Sub
         Private Sub ValidarCampos()
             If (Me.nombre = "") Then
@@ -467,8 +469,6 @@ Namespace Negocio
             If mUsuarioPatente.Count = 0 Then
                 Me.mUsuarioPatente = (New Negocio.UsuarioPatente).Listar(mId)
             End If
-
-
             For Each mT As UsuarioPatente In mUsuarioPatente
                 mT.IndiceColeccion = Me.mUsuarioPatente.IndexOf(mT)
             Next

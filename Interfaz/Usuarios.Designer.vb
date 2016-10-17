@@ -43,14 +43,10 @@ Partial Class Usuarios
         Me.btnEliminarPatente = New System.Windows.Forms.Button()
         Me.btnAgregarPatente = New System.Windows.Forms.Button()
         Me.dgvPatentes = New System.Windows.Forms.DataGridView()
-        Me.Cod_Patente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnEliminarFamilia = New System.Windows.Forms.Button()
         Me.btnAgregarFamilia = New System.Windows.Forms.Button()
         Me.dgvFamilias = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblTitulo = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -260,7 +256,6 @@ Partial Class Usuarios
         'dgvPatentes
         '
         Me.dgvPatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPatentes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cod_Patente, Me.Descripcion})
         Me.dgvPatentes.Location = New System.Drawing.Point(12, 30)
         Me.dgvPatentes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvPatentes.Name = "dgvPatentes"
@@ -268,19 +263,6 @@ Partial Class Usuarios
         Me.dgvPatentes.RowTemplate.Height = 28
         Me.dgvPatentes.Size = New System.Drawing.Size(391, 158)
         Me.dgvPatentes.TabIndex = 0
-        '
-        'Cod_Patente
-        '
-        Me.Cod_Patente.HeaderText = "Patente"
-        Me.Cod_Patente.Name = "Cod_Patente"
-        Me.Cod_Patente.ReadOnly = True
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 150
         '
         'GroupBox3
         '
@@ -319,7 +301,6 @@ Partial Class Usuarios
         'dgvFamilias
         '
         Me.dgvFamilias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvFamilias.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
         Me.dgvFamilias.Location = New System.Drawing.Point(12, 30)
         Me.dgvFamilias.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvFamilias.Name = "dgvFamilias"
@@ -327,19 +308,6 @@ Partial Class Usuarios
         Me.dgvFamilias.RowTemplate.Height = 28
         Me.dgvFamilias.Size = New System.Drawing.Size(391, 158)
         Me.dgvFamilias.TabIndex = 0
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Familia"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Descripción"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Width = 150
         '
         'lblTitulo
         '
@@ -403,9 +371,5 @@ Partial Class Usuarios
     Friend WithEvents btnEliminarFamilia As Button
     Friend WithEvents btnAgregarFamilia As Button
     Friend WithEvents dgvFamilias As DataGridView
-    Friend WithEvents Cod_Patente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblTitulo As Label
 End Class
