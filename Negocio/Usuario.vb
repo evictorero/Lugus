@@ -293,8 +293,6 @@ Namespace Negocio
             mDTO.fechaModif = Me.mFechaModif
 
 
-            ValidarCampos()
-
             If mId = 0 Then
                 mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
                 pass = GenerarPasswordAleatorio()
@@ -310,16 +308,21 @@ Namespace Negocio
             Me.GuardarUsuarioPatentes()
 
         End Sub
-        Private Sub ValidarCampos()
-            If (Me.nombre = "") Then
-                Throw New ApplicationException("Debe completar la descripción corta.")
-            End If
-            If (Me.apellido = "") Then
-                Throw New ApplicationException("Debe completar la descripción larga.")
-            End If
-            If (Me.usuario = "") Then
-                Throw New ApplicationException("Debe completar el campo habilitado.")
-            End If
+        Public Sub ValidarFormato(pid_idioma As Integer)
+            Try
+                If (Me.nombre = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el nombre del usuario."))
+                End If
+                If (Me.apellido = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el apellido del usuario."))
+                End If
+                If (Me.usuario = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Throw
+            End Try
         End Sub
 
         Public Overridable Sub Eliminar()

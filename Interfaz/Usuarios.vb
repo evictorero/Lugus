@@ -123,7 +123,7 @@ Public Class Usuarios
                 mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
                 mUsuario.dvh = 1 'Digito Verificador Celes
                 mUsuario.id_idioma = 1 'Idioma Celes
-
+                mUsuario.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mUsuario.Guardar()
                 Me.Close()
             Case TipoOperacion.Baja
@@ -172,4 +172,17 @@ Public Class Usuarios
         End If
     End Sub
 
+    Private Sub btnEliminarPatente_Click(sender As Object, e As EventArgs) Handles btnEliminarPatente.Click
+        If Me.dgvPatentes.Rows.Count > 0 AndAlso Me.dgvPatentes.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(dgvPatentes.SelectedRows(0).Cells(5).Value)
+            Dim mForm As New AsocUsuarioPatente
+            mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Baja
+
+            mForm.UsuarioPatenteAEditar = mUsuario.ObtenerUsuarioPatentePorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
+
+    End Sub
 End Class
