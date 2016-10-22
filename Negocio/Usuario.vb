@@ -606,6 +606,8 @@ Namespace Negocio
         Public Function ObtenerUsuarioFamiliaPorIndice(ByVal pIndice As Integer) As UsuarioFamilia
             Return Me.mUsuarioFamilia(pIndice)
         End Function
+
+
 #End Region
     End Class
 End Namespace

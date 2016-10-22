@@ -77,6 +77,20 @@ Public Class IdiomaDatos
 
     End Function
 
+    Public Shared Function Obtener(ByVal pDescripcion As String) As DTO.IdiomaDTO
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_idioma, descripcion, fecha_baja FROM bIdioma WHERE descripcion = '" & pDescripcion & "'")
+        If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+            Dim mDTO As New DTO.IdiomaDTO
+            CargarDTO(mDTO, mDs.Tables(0).Rows(0))
+
+            Return mDTO
+        Else
+            Throw New ApplicationException("Fallo al cargar el idioma")
+            Return Nothing
+        End If
+
+    End Function
+
     Public Shared Function Listar() As List(Of DTO.IdiomaDTO)
         Dim mCol As New List(Of DTO.IdiomaDTO)
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_idioma,descripcion,fecha_baja FROM dbo.bIdioma")

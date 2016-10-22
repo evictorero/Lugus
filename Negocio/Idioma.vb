@@ -17,6 +17,9 @@ Namespace Negocio
             mId = pId
             Cargar()
         End Sub
+        Public Sub New(ByVal pDescripcion As String)
+            Cargar(pDescripcion)
+        End Sub
         Public Sub New()
 
         End Sub
@@ -99,6 +102,12 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó cargar un Idioma sin Id especificado")
             End If
         End Sub
+
+        Public Overridable Sub Cargar(ByVal pDescripcion As String)
+            Dim mDTO As DTO.IdiomaDTO = Datos.IdiomaDatos.Obtener(pDescripcion)
+            MyClass.Cargar(mDTO)
+        End Sub
+
         Public Sub Cargar(ByVal pDTO As DTO.IdiomaDTO)
             mId = pDTO.id
             mDescripcion = pDTO.descripcion

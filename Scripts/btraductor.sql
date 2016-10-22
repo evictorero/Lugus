@@ -60,4 +60,5 @@ insert into btraductor values (2,'Error al intentar modificar la bebida seleccio
 insert into btraductor values (2,'Debe completar la descripción corta.','You must complete the short description.');
 insert into btraductor values (2,'Debe completar la descripción larga.','You must complete the long description.');
 insert into btraductor values (2,'Debe completar si el campo esta habilitado en la carta.','You must complete if the field is enabled on the card.');
-select * from btraductor;
+insert into btraductor values (2,'Portugues','Portuguese');
+insert into btraductor values (2,'Inglés','English');

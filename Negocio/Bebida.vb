@@ -116,7 +116,7 @@ Namespace Negocio
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
-
+            mDTO.dvh = (New Negocio.DigitoVerificador()).CalcularDVH(mDTO.descripcionCorta + mDTO.descripcionLarga)
             If mId = 0 Then
                 mDTO.id = Datos.BebidaDatos.ObtenerProximoId()
                 mDTO.dvh = "23423354"
