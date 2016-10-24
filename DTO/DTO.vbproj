@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="DigitoVerificadorDTO.vb" />
     <Compile Include="FamiliaPatenteDTO.vb" />
+    <Compile Include="BackupDTO.vb" />
     <Compile Include="PlatoDTO.vb" />
     <Compile Include="FamiliaDTO.vb" />
     <Compile Include="PatenteDTO.vb" />
