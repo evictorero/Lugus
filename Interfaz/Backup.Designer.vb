@@ -28,7 +28,7 @@ Partial Class Backup
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtCant_volumen = New System.Windows.Forms.TextBox()
+        Me.cmbCantVolumenes = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Button1
@@ -87,20 +87,20 @@ Partial Class Backup
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Cantidad de Volúmenes"
         '
-        'txtCant_volumen
+        'cmbCantVolumenes
         '
-        Me.txtCant_volumen.Location = New System.Drawing.Point(224, 78)
-        Me.txtCant_volumen.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtCant_volumen.Name = "txtCant_volumen"
-        Me.txtCant_volumen.Size = New System.Drawing.Size(89, 22)
-        Me.txtCant_volumen.TabIndex = 6
+        Me.cmbCantVolumenes.FormattingEnabled = True
+        Me.cmbCantVolumenes.Location = New System.Drawing.Point(224, 78)
+        Me.cmbCantVolumenes.Name = "cmbCantVolumenes"
+        Me.cmbCantVolumenes.Size = New System.Drawing.Size(121, 24)
+        Me.cmbCantVolumenes.TabIndex = 6
         '
         'Backup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 172)
-        Me.Controls.Add(Me.txtCant_volumen)
+        Me.Controls.Add(Me.cmbCantVolumenes)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -121,5 +121,5 @@ Partial Class Backup
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents txtCant_volumen As TextBox
+    Friend WithEvents cmbCantVolumenes As ComboBox
 End Class

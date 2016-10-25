@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports Datos.ProveedorDeDatos.DB
+Imports Ionic.Zip
 
 Namespace Negocio
 
@@ -92,14 +93,16 @@ Namespace Negocio
             Dim mDTO As New DTO.BackupDTO
             Dim hora As String = Now.Hour.ToString & Now.Minute.ToString & Now.Second.ToString
             Dim fecha As String = Now.Day & Now.Month & Now.Year
-            Dim nombreArchivo As String = fecha & hora & "_V" & Me.cantVolumen & ".bak"
+            Dim nombreArchivo As String = fecha & hora & "_V" & Me.cantVolumen
+            Dim rutaCompleta As String = Me.ruta & nombreArchivo
 
             If Directory.Exists(ruta) = False Then ' si no existe la carpeta se crea
                 Directory.CreateDirectory(ruta)
             End If
 
+
             mDTO.descripcion = Me.descripcion
-            mDTO.ruta = Me.ruta & nombreArchivo
+            mDTO.ruta = rutaCompleta
             mDTO.fecha = Me.fecha
             mDTO.idUsuarioAlta = Me.idUsuarioAlta
             mDTO.cantVolumen = Me.cantVolumen
@@ -107,6 +110,14 @@ Namespace Negocio
             If mId = 0 Then
                 mDTO.id = Datos.BackupDatos.ObtenerProximoId()
                 Datos.BackupDatos.GuardarNuevo(mDTO)
+            End If
+
+            If File.Exists(mDTO.ruta) Then
+                Using zip As ZipFile = New ZipFile()
+                    zip.AddFile(rutaCompleta)
+                    zip.MaxOutputSegmentSize = Me.cantVolumen
+                    zip.Save(rutaCompleta & ".ZIP")
+                End Using
             End If
 
         End Sub
