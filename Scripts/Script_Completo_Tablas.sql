@@ -89,9 +89,8 @@ ALTER TABLE bPlato
 ;
 CREATE TABLE bTraductor ( 
 	id_idioma int NOT NULL,
-	id_traductor int NOT NULL,
-	tipo varchar(3) NOT NULL,
-	mensaje varchar(200)
+	mensaje varchar(200) NOT NULL , 
+	traduccion varchar(200)
 )
 ;
 
@@ -141,8 +140,8 @@ CREATE TABLE rUsuarioFamilia (
 
 CREATE TABLE bFamilia ( 
 	id_familia int NOT NULL,
-	descripcion_corta varchar(30),
-	descripcion_larga varchar(200),
+	descripcion_corta varchar(100),
+	descripcion_larga varchar(500),
 	dvh int NOT NULL,
 	id_usuario_alta int,
 	fecha_baja date,
@@ -161,8 +160,8 @@ CREATE TABLE rUsuarioPatente (
 
 CREATE TABLE bPatente ( 
 	id_patente int NOT NULL,
-	descripcion_corta varchar(30),
-	descripcion_larga varchar(200),
+	descripcion_corta varchar(50),
+	descripcion_larga varchar(500),
 	dvh int NOT NULL,
 	id_usuario_alta int,
 	fecha_baja date,
@@ -197,7 +196,7 @@ CREATE TABLE bUsuario (
 
 
 ALTER TABLE bTraductor ADD CONSTRAINT PK_bTraductor 
-	PRIMARY KEY CLUSTERED (id_idioma, id_traductor, tipo)
+	PRIMARY KEY CLUSTERED (id_idioma, mensaje)
 ;
 
 ALTER TABLE bDigitoVerificadorVertical ADD CONSTRAINT PK_bDigitoVerificadorVertical 

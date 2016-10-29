@@ -93,8 +93,13 @@ Namespace Negocio
             Dim mDTO As New DTO.BackupDTO
             Dim hora As String = Now.Hour.ToString & Now.Minute.ToString & Now.Second.ToString
             Dim fecha As String = Now.Day & Now.Month & Now.Year
-            Dim nombreArchivo As String = fecha & hora & "_V" & Me.cantVolumen
-            Dim rutaCompleta As String = Me.ruta & nombreArchivo
+            Dim nombreArchivoBak As String = fecha & hora & "_V" & Me.cantVolumen & ".bak"
+            Dim rutaCompletaBak As String = Me.ruta & nombreArchivoBak
+            Dim rutaCompletaTemp As String = rutaCompletaBak.Replace(".bak", ".temp")
+            Dim rutaCompletaZip As String = rutaCompletaBak.Replace(".bak", ".zip")
+            Dim archivoBackup As FileInfo
+            Dim tamanioArchivoBackup As Long
+            Dim maxOutputSegmentSize As Long
 
             If Directory.Exists(ruta) = False Then ' si no existe la carpeta se crea
                 Directory.CreateDirectory(ruta)
@@ -102,7 +107,7 @@ Namespace Negocio
 
 
             mDTO.descripcion = Me.descripcion
-            mDTO.ruta = rutaCompleta
+            mDTO.ruta = rutaCompletaBak
             mDTO.fecha = Me.fecha
             mDTO.idUsuarioAlta = Me.idUsuarioAlta
             mDTO.cantVolumen = Me.cantVolumen
@@ -112,12 +117,42 @@ Namespace Negocio
                 Datos.BackupDatos.GuardarNuevo(mDTO)
             End If
 
-            If File.Exists(mDTO.ruta) Then
+
+            If File.Exists(rutaCompletaBak) Then
+                ' comprimo
                 Using zip As ZipFile = New ZipFile()
-                    zip.AddFile(rutaCompleta)
-                    zip.MaxOutputSegmentSize = Me.cantVolumen
-                    zip.Save(rutaCompleta & ".ZIP")
+                    zip.AddFile(rutaCompletaBak, "")
+                    zip.Save(rutaCompletaTemp)
                 End Using
+
+
+                ' si se creo correctamente busco el tamaño para
+                ' dividirlo en las partes solicitadas
+                archivoBackup = New FileInfo(rutaCompletaTemp)
+                tamanioArchivoBackup = archivoBackup.Length
+
+                maxOutputSegmentSize = Math.Round(tamanioArchivoBackup / Me.cantVolumen)
+                ' el tamaño minimo es 65560
+                If maxOutputSegmentSize < 65560 Then
+                    maxOutputSegmentSize = 65560
+                End If
+
+                ' comprimo nuevamente el archivo final indicando la cantidad de volumenes
+                Using zip As ZipFile = New ZipFile()
+                    zip.AddFile(rutaCompletaBak, "")
+                    zip.MaxOutputSegmentSize = maxOutputSegmentSize
+                    zip.Save(rutaCompletaZip)
+                End Using
+
+                ' elimino archivos .bak y .temp
+                If File.Exists(rutaCompletaBak) Then
+                    File.Delete(rutaCompletaBak)
+                End If
+
+                If File.Exists(rutaCompletaTemp) Then
+                    File.Delete(rutaCompletaTemp)
+                End If
+
             End If
 
         End Sub
@@ -145,7 +180,29 @@ Namespace Negocio
         End Sub
 
         Public Overridable Sub Restaurar(ByVal pRuta As String)
-            Datos.BackupDatos.Restaurar(pRuta)
+            Dim rutaCompletaZip As String = pRuta
+            Dim rutaCompletaBak As String = pRuta.Replace(".zip", ".bak")
+            Dim directorioDestino As String = Path.GetDirectoryName(rutaCompletaZip) & "\"
+
+            Using zip As ZipFile = ZipFile.Read(rutaCompletaZip)
+                'zip.ExtractAll(directorioDestino)
+                For Each arch As Ionic.Zip.ZipEntry In zip
+                    arch.Extract(directorioDestino, ExtractExistingFileAction.OverwriteSilently)
+                Next
+            End Using
+
+            If File.Exists(rutaCompletaBak) Then
+                Datos.BackupDatos.Restaurar(rutaCompletaBak)
+                'If File.Exists(rutaCompletaBak) Then
+                File.Delete(rutaCompletaBak)
+                    'End If
+                Else
+                Throw New ApplicationException("Se produjo un error descomprimiendo el archivo")
+            End If
+
+
+
+
         End Sub
 
         Public Overridable Sub Cargar(ByVal pId As Integer)

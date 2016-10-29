@@ -140,11 +140,13 @@ Public Class Usuarios
 
                     Me.lblTitulo.Text = "Modificación de Usuario"
                 End If
+                ActualizarGrilla()
+
         End Select
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
 
-        ActualizarGrilla()
+
 
     End Sub
 
@@ -175,13 +177,13 @@ Public Class Usuarios
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         'Traducir Celeste
         Select Case mOperacion
-            Case TipoOperacion.Alta, TipoOperacion.Modificacion
-                Dim result As Integer = MessageBox.Show("¿Desea Cancelar la operación de Alta de usuario? ", "Cancelar", MessageBoxButtons.YesNo)
+            Case TipoOperacion.Alta
+                Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Desea Cancelar la operación de Alta de usuario?"), "Cancelar", MessageBoxButtons.YesNo)
                 If result = DialogResult.Yes Then
                     Me.Close()
                 End If
-            Case TipoOperacion.Baja
-                Dim result As Integer = MessageBox.Show("¿Desea Cancelar la operación de Modificacion de Usuario? ", "Cancelar", MessageBoxButtons.YesNo)
+            Case TipoOperacion.Modificacion
+                Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Desea Cancelar la operación de Modificación de Usuario?"), "Cancelar", MessageBoxButtons.YesNo)
                 If result = DialogResult.Yes Then
                     Me.Close()
                 End If

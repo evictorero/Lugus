@@ -20,23 +20,21 @@ Public Class LogIn
                 'Cargar Perfil del Usuario Logueado
                 Principal.estaAutenticado = True
                 Principal.UsuarioEnSesion = mUsuario.ObtenerPorUsuario
-
-                'MsgBox(Principal.UsuarioEnSesion.id_idioma)
-
-                'mUsuario.RegistrarSesionUsuario(u.Id)
                 Principal.Show()
                 Principal.Traducir()
-
-                'Me.Close() Celeste
             ElseIf rta = 2 Then
                 MsgBox("Contraseña Incorrecta.")
+                Dim mUsuarioaLoguearse = New Negocio.Negocio.Usuario
+                mUsuario.usuario = Me.txtUsuario.Text
+                mUsuarioaLoguearse = mUsuario.ObtenerPorUsuario()
+                mUsuarioaLoguearse.IncrementarIntentosLogin()
+                mUsuarioaLoguearse.Guardar()
             ElseIf rta = 3 Then
                 MsgBox("El usuario ingresado es Incorrecto.")
+            ElseIf rta = 4 Then
+                MsgBox("El usuario se encuentra bloqueado.")
             End If
         End If
-
-        'TODO Celeste
-        'Me.Visible = False
 
     End Sub
 

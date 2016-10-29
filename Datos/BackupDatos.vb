@@ -16,7 +16,7 @@ Public Class BackupDatos
 
         mStrCom = "INSERT INTO dbo.bBackup (id_backup, descripcion, ruta, fecha, id_usuario_alta, cant_volumen)" &
         " VALUES " &
-        "(" & pDTO.id & ", '" & pDTO.descripcion & "' , '" & pDTO.ruta & "' , '" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "', " & pDTO.idUsuarioAlta & ", " & pDTO.cantVolumen & ")"
+        "(" & pDTO.id & ", '" & pDTO.descripcion & "' , '" & pDTO.ruta.Replace(".bak", ".zip") & "' , '" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "', " & pDTO.idUsuarioAlta & ", " & pDTO.cantVolumen & ")"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception

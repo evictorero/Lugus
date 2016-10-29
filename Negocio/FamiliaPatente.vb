@@ -79,6 +79,7 @@ Namespace Negocio
 
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.FamiliaPatenteDTO
+            Dim Existe As Boolean = False
 
             mDTO.Id_familia = Me.id_familia
             mDTO.Id_Patente = Me.id_patente
@@ -86,17 +87,12 @@ Namespace Negocio
             mDTO.Dvh = Me.dvh
             mDTO.M_negada = Me.mM_negada
 
-            ValidarCampos() ' Celeste Cambiar
-
-            'If mId = 0 Then
-            '    mDTO.id = Datos.BebidaDatos.ObtenerProximoId()
-            '    mDTO.dvh = "23423354"
-            Datos.FamiliaPatenteDatos.GuardarNuevo(mDTO)
-            'Else
-            '    mDTO.id = Me.id
-            '    mDTO.dvh = "23423433"
-            '    Datos.BebidaDatos.GuardarModificacion(mDTO)
-            'End If
+            Existe = Datos.FamiliaPatenteDatos.Existe(mDTO.Id_familia, mDTO.Id_Patente)
+            If Not Existe Then
+                Datos.FamiliaPatenteDatos.GuardarNuevo(mDTO)
+            Else
+                Throw New ApplicationException("Se intentó cargar una Familia Patente  ya existente.")
+            End If
 
         End Sub
         Public Overridable Sub Cargar()
@@ -152,18 +148,6 @@ Namespace Negocio
             Else
                 Throw New ApplicationException("Se intentó eliminar Familia Patente  sin Id especifico.")
             End If
-        End Sub
-
-        Private Sub ValidarCampos()
-            'If (Me.descripcionCorta = "") Then
-            '    Throw New ApplicationException("Debe completar la descripción corta.")
-            'End If
-            'If (Me.descripcionLarga = "") Then
-            '    Throw New ApplicationException("Debe completar la descripción larga.")
-            'End If
-            'If (Me.habilitado = "") Then
-            '    Throw New ApplicationException("Debe completar el campo habilitado.")
-            'End If
         End Sub
 
         Public Overridable Function Listar() As Collections.Generic.List(Of FamiliaPatente)

@@ -7,7 +7,7 @@
             cmbBackup.Items.Add(mBackup.ruta)
         Next
 
-        cmbBackup.SelectedIndex = 1
+        cmbBackup.SelectedIndex = 0
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub

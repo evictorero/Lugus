@@ -44,7 +44,7 @@ Partial Class Familias
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(277, 468)
+        Me.btnCancelar.Location = New System.Drawing.Point(298, 515)
         Me.btnCancelar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(109, 31)
@@ -54,7 +54,7 @@ Partial Class Familias
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(145, 468)
+        Me.btnGuardar.Location = New System.Drawing.Point(166, 515)
         Me.btnGuardar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(109, 31)
@@ -76,7 +76,7 @@ Partial Class Familias
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox1.Size = New System.Drawing.Size(504, 233)
+        Me.GroupBox1.Size = New System.Drawing.Size(504, 260)
         Me.GroupBox1.TabIndex = 21
         Me.GroupBox1.TabStop = False
         '
@@ -92,7 +92,7 @@ Partial Class Familias
         '
         'txtFecha_baja
         '
-        Me.txtFecha_baja.Location = New System.Drawing.Point(157, 174)
+        Me.txtFecha_baja.Location = New System.Drawing.Point(157, 222)
         Me.txtFecha_baja.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtFecha_baja.Name = "txtFecha_baja"
         Me.txtFecha_baja.Size = New System.Drawing.Size(108, 22)
@@ -102,10 +102,10 @@ Partial Class Familias
         '
         Me.txtDescripcion_larga.Location = New System.Drawing.Point(157, 98)
         Me.txtDescripcion_larga.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtDescripcion_larga.MaxLength = 200
+        Me.txtDescripcion_larga.MaxLength = 500
         Me.txtDescripcion_larga.Multiline = True
         Me.txtDescripcion_larga.Name = "txtDescripcion_larga"
-        Me.txtDescripcion_larga.Size = New System.Drawing.Size(296, 70)
+        Me.txtDescripcion_larga.Size = New System.Drawing.Size(296, 115)
         Me.txtDescripcion_larga.TabIndex = 8
         '
         'txtDescripcion_corta
@@ -129,7 +129,7 @@ Partial Class Familias
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(21, 178)
+        Me.Label5.Location = New System.Drawing.Point(21, 226)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(98, 17)
         Me.Label5.TabIndex = 4
@@ -158,7 +158,7 @@ Partial Class Familias
         Me.GroupBox2.Controls.Add(Me.btnEliminar)
         Me.GroupBox2.Controls.Add(Me.btnAgregar)
         Me.GroupBox2.Controls.Add(Me.dgvFamiliaPatentes)
-        Me.GroupBox2.Location = New System.Drawing.Point(29, 254)
+        Me.GroupBox2.Location = New System.Drawing.Point(29, 293)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -169,7 +169,7 @@ Partial Class Familias
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(412, 121)
+        Me.btnEliminar.Location = New System.Drawing.Point(412, 120)
         Me.btnEliminar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(84, 31)
@@ -179,7 +179,7 @@ Partial Class Familias
         '
         'btnAgregar
         '
-        Me.btnAgregar.Location = New System.Drawing.Point(412, 75)
+        Me.btnAgregar.Location = New System.Drawing.Point(412, 74)
         Me.btnAgregar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(84, 31)
@@ -190,7 +190,7 @@ Partial Class Familias
         'dgvFamiliaPatentes
         '
         Me.dgvFamiliaPatentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvFamiliaPatentes.Location = New System.Drawing.Point(12, 30)
+        Me.dgvFamiliaPatentes.Location = New System.Drawing.Point(12, 29)
         Me.dgvFamiliaPatentes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvFamiliaPatentes.Name = "dgvFamiliaPatentes"
         Me.dgvFamiliaPatentes.RowTemplate.Height = 28
@@ -201,7 +201,7 @@ Partial Class Familias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(552, 510)
+        Me.ClientSize = New System.Drawing.Size(563, 573)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnGuardar)

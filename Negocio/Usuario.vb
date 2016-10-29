@@ -44,7 +44,7 @@ Namespace Negocio
             Me.CargarUsuarioPatente()
         End Sub
         Public Sub New()
-
+            mId = 0
         End Sub
 #End Region
 
@@ -302,7 +302,7 @@ Namespace Negocio
             mDTO.dvh = Me.dvh ' Celes
             mDTO.idUsuarioAlta = Me.idUsuarioAlta
             mDTO.fechaModif = Me.mFechaModif
-
+            mDTO.intentosLogin = Me.intentoLogin
 
             If mId = 0 Then
                 mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
@@ -310,7 +310,7 @@ Namespace Negocio
                 MsgBox("Password Aleatorio" & pass)
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarNuevo(mDTO)
-                EnviarMail(mDTO.usuario, mDTO.contrasenia)
+                EnviarMail(Me.usuario, mDTO.contrasenia)
             Else
                 mDTO.id = Me.id
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
@@ -371,10 +371,11 @@ Namespace Negocio
         End Function
 
         Public Sub EnviarMail(ByVal pNombreUsuario As String, ByVal pPass As String)
-            Dim ruta As String = "C:\" & pNombreUsuario & ".txt"
+            Dim ruta As String = "C:\UsuarioContrasenia\" & pNombreUsuario & ".txt"
             If Not System.IO.File.Exists(ruta) Then
                 System.IO.File.Create(ruta).Dispose()
             End If
+
             Dim Escribir As New System.IO.StreamWriter(ruta, True)
             Escribir.WriteLine("Usuario" & pNombreUsuario)
             Escribir.WriteLine("Contraseña" & pPass)
@@ -382,6 +383,9 @@ Namespace Negocio
 
         End Sub
 
+        Public Sub IncrementarIntentosLogin()
+            Me.intentoLogin = Me.intentoLogin + 1
+        End Sub
 #End Region
 
 #Region "IColeccionable"
@@ -434,7 +438,7 @@ Namespace Negocio
             Me.mUsuarioPatente(mInd).IndiceColeccion = mInd
             Me.mUsuarioPatente(mInd).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado
 
-            'POR ULTIMO EL NUEVO UsuarioPatente DEBE SABER A QUE Casa PERTENECE
+            'POR ULTIMO EL NUEVO UsuarioPatente DEBE SABER A QUE Usuario PERTENECE
             Me.mUsuarioPatente(mInd).id_usuario = mId
         End Sub
         Private Sub GuardarUsuarioPatentes()

@@ -26,20 +26,20 @@ Public Class FamiliaABM
                 '
                 .Add("cdescripcioncorta", "Nombre")
                 .Item(1).DataPropertyName = "DescripcionCorta"
-                .Item(1).Width = 100
+                .Item(1).Width = 150
 
                 .Add("cdescripcionlarga", "Descripción")
                 .Item(2).DataPropertyName = "DescripcionLarga"
-                .Item(2).Width = 100
+                .Item(2).Width = 200
 
                 .Add("cfechaBaja", "Fecha de baja")
                 .Item(3).DataPropertyName = "fechaBaja"
-                .Item(3).Width = 100
+                .Item(3).Width = 80
                 .Item(3).DefaultCellStyle.Format = "dd/MM/yyyy"
 
                 .Add("cfechaModif", "Fecha de modificación")
                 .Item(4).DataPropertyName = "fechaModif"
-                .Item(4).Width = 100
+                .Item(4).Width = 80
                 .Item(4).DefaultCellStyle.Format = "dd/MM/yyyy"
 
                 .Add("cidUsuario", "Usuario Alta/Modif")
@@ -49,7 +49,7 @@ Public Class FamiliaABM
 
                 .Add("cNombreUsuario", "Usuario Alta/Modif")
                 .Item(6).DataPropertyName = "Nombre Usuario"
-                .Item(6).Width = 150
+                .Item(6).Width = 100
                 .Item(6).Visible = True
             End With
 
@@ -85,7 +85,7 @@ Public Class FamiliaABM
             End If
             ActualizarGrilla()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, ex.Message))
         End Try
     End Sub
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
@@ -127,7 +127,7 @@ Public Class FamiliaABM
                 ActualizarGrilla()
             End If
         Catch ex As Exception
-            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la Familia seleccionada"))
+            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, ex.Message))
         End Try
 
 

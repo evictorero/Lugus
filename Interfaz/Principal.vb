@@ -72,7 +72,7 @@ Public Class Principal
         PlatosABM.Show()
     End Sub
 
-    Private Sub AdministrarFamiliasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdministrarFamiliasToolStripMenuItem.Click
+    Private Sub AdministrarFamiliasToolStripMenuItem_Click(sender As Object, e As EventArgs)
         PatenteABM.Show()
     End Sub
 

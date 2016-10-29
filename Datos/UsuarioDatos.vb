@@ -72,22 +72,29 @@ Public Class UsuarioDatos
         Return mCol
     End Function
     Public Shared Function VerificarLogin(pDTO As DTO.UsuarioDTO) As Integer
-        Dim mFuncion As String = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
+        Dim mFuncion As String
         Dim rta As Integer = -1
+
+        mFuncion = " Select count(*) from dbo.bUsuario where intentos_login < 3 and usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
         rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
         If rta > 0 Then
-            Return 1 ' USuario y contrase;a correcto
+            Return 1 ' Usuario y contrasenia correcto
         End If
-        mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "'"
+        mFuncion = " select count(*) from dbo.bUsuario where intentos_login < 3  and usuario = '" & pDTO.usuario & "'"
         rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
         If rta > 0 Then
             mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña <> '" & pDTO.contrasenia & "' "
             rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
             'Intentos login 
             If rta > 0 Then
-                Return 2  ' USuario OK  y contrase;a NOK
+                Return 2  ' USuario OK  y contrasenia NOK
             End If
         Else
+            mFuncion = " select count(*) from dbo.bUsuario where intentos_login > 2  and usuario = '" & pDTO.usuario & "'"
+            rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+            If rta > 0 Then
+                Return 4 'Usuario Bloqueado
+            End If
             Return 3 'Usuario NOK
         End If
         Return rta

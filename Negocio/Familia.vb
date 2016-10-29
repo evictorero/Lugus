@@ -111,7 +111,7 @@ Namespace Negocio
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.FamiliaDTO
 
-            mDTO.descripcionCorta = Me.descripcionCorta
+            mDTO.descripcionCorta = Encriptador.EncriptarDatos(2, Me.descripcionCorta)
             mDTO.descripcionLarga = Me.descripcionLarga
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
@@ -164,7 +164,7 @@ Namespace Negocio
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.FamiliaDTO)
             mId = pDTO.id
-            mDescripcionCorta = pDTO.descripcionCorta
+            mDescripcionCorta = Encriptador.DesencriptarDatos(2, pDTO.descripcionCorta)
             mDescripcionLarga = pDTO.descripcionLarga
             mFechaBaja = pDTO.fechaBaja
             mIdUsuario = pDTO.idUsuario
@@ -215,10 +215,14 @@ Namespace Negocio
         Public Overridable Function Listar() As Collections.Generic.List(Of Familia)
             Dim mCol As New Collections.Generic.List(Of Familia)
             Dim mColDTO As List(Of DTO.FamiliaDTO) = Datos.FamiliaDatos.Listar()
+            Dim miFamilia As Negocio.Familia
 
             For Each mDTO As DTO.FamiliaDTO In mColDTO
-                mCol.Add(New Negocio.Familia(mDTO))
+                miFamilia = New Negocio.Familia(mDTO)
+                miFamilia.descripcionCorta = Encriptador.DesencriptarDatos(2, mDTO.descripcionCorta)
+                mCol.Add(miFamilia)
             Next
+
 
             Return mCol
         End Function

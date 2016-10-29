@@ -30,7 +30,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3AA4F336-B834-4E3E-A14B-BE533FE5D13F}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\bbebida.sql = Scripts\bbebida.sql
+		..\..\..\Google Drive\Diploma\Trabajo Final\Script\bfamilia.sql = ..\..\..\Google Drive\Diploma\Trabajo Final\Script\bfamilia.sql
 		Scripts\bidioma.sql = Scripts\bidioma.sql
+		..\..\..\Google Drive\Diploma\Trabajo Final\Script\bpatente.sql = ..\..\..\Google Drive\Diploma\Trabajo Final\Script\bpatente.sql
 		Scripts\btraductor.sql = Scripts\btraductor.sql
 		Scripts\Script_Completo_Tablas.sql = Scripts\Script_Completo_Tablas.sql
 	EndProjectSection

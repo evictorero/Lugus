@@ -62,3 +62,5 @@ insert into btraductor values (2,'Debe completar la descripción larga.','You mus
 insert into btraductor values (2,'Debe completar si el campo esta habilitado en la carta.','You must complete if the field is enabled on the card.');
 insert into btraductor values (2,'Portugues','Portuguese');
 insert into btraductor values (2,'Inglés','English');
+
+insert into btraductor values (2,'Administrar Patentes','Manage Security');

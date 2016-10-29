@@ -83,9 +83,7 @@ Public Class UsuarioABM
         Try
             Me.dgv_Usuarios.DataSource = (New Negocio.Negocio.Usuario).Listar
             If Me.dgv_Usuarios.RowCount = 0 Then
-                Me.txtMensaje.Text = "No existen Usuarios ingresados en el sistema"
-                Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
-
+                Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Usuarios ingresadas en el sistema")
             Else
                 Me.txtMensaje.Text = ""
             End If
@@ -105,12 +103,10 @@ Public Class UsuarioABM
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
-        'Traducir Celeste
-        Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea dar de baja el usuario seleccionado?", "Eliminar", MessageBoxButtons.YesNo)
+        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja el usuario seleccionado?"), "Eliminar", MessageBoxButtons.YesNo)
         If result = DialogResult.Yes Then
             Usuario.Eliminar()
-            'Traducir Celeste
-            MessageBox.Show("Usuario dado de baja correctamente.")
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario dado de baja correctamente."))
         End If
         ActualizarGrilla()
     End Sub
@@ -119,12 +115,10 @@ Public Class UsuarioABM
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
-        Dim result As Integer = MessageBox.Show("¿Usted se encuentra seguro que desea rehabilitar el usuario seleccionado?", "Rehabilitar", MessageBoxButtons.YesNo)
-        'Traducir Celeste
+        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea rehabilitar el usuario seleccionado?"), "Rehabilitar", MessageBoxButtons.YesNo)
         If result = DialogResult.Yes Then
             Usuario.Rehabilitar()
-            'Traducir Celeste
-            MessageBox.Show("Usuario rehabilitado correctamente.")
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario rehabilitado correctamente."))
         End If
 
         ActualizarGrilla()
@@ -134,6 +128,7 @@ Public Class UsuarioABM
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         Dim mForm As New Usuarios
         mForm.mOperacion = Interfaz.Usuarios.TipoOperacion.Alta
+        mForm.UsuarioAEditar = New Negocio.Negocio.Usuario
         mForm.StartPosition = FormStartPosition.CenterParent
         mForm.ShowDialog(Me)
         ActualizarGrilla()
@@ -170,8 +165,12 @@ Public Class UsuarioABM
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
             If IsNothing(Me.dgv_Usuarios.SelectedRows(0).Cells(5).Value) Then
                 Me.btnEliminar.Enabled = True
+                Me.btnModificar.Enabled = True
+                Me.btnRehabilitar.Enabled = False
             Else
                 Me.btnRehabilitar.Enabled = True
+                Me.btnModificar.Enabled = False
+                Me.btnEliminar.Enabled = False
             End If
         Else
             Me.btnEliminar.Enabled = False
@@ -184,8 +183,4 @@ Public Class UsuarioABM
 #End Region
 
 End Class
-    ' Private Sub UsuarioABM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-'     Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
-'End Sub
 
-'End Class
