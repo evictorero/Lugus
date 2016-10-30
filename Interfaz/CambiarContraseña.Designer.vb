@@ -22,126 +22,122 @@ Partial Class CambiarContraseña
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtContraseniaActual = New System.Windows.Forms.TextBox()
+        Me.txtUsuario = New System.Windows.Forms.TextBox()
+        Me.lblContraseniaActual = New System.Windows.Forms.Label()
+        Me.lblUsuario = New System.Windows.Forms.Label()
+        Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.lblContraseniaNueva = New System.Windows.Forms.Label()
+        Me.txtContraseniaNueva = New System.Windows.Forms.TextBox()
+        Me.txtRepetirContraseniaNueva = New System.Windows.Forms.TextBox()
+        Me.lblRepetirContraseniaNueva = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'TextBox2
+        'txtContraseniaActual
         '
-        Me.TextBox2.Location = New System.Drawing.Point(187, 59)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(137, 20)
-        Me.TextBox2.TabIndex = 11
+        Me.txtContraseniaActual.Location = New System.Drawing.Point(249, 73)
+        Me.txtContraseniaActual.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtContraseniaActual.Name = "txtContraseniaActual"
+        Me.txtContraseniaActual.Size = New System.Drawing.Size(181, 22)
+        Me.txtContraseniaActual.TabIndex = 11
         '
-        'TextBox1
+        'txtUsuario
         '
-        Me.TextBox1.Location = New System.Drawing.Point(187, 33)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(137, 20)
-        Me.TextBox1.TabIndex = 10
+        Me.txtUsuario.Location = New System.Drawing.Point(249, 41)
+        Me.txtUsuario.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtUsuario.Name = "txtUsuario"
+        Me.txtUsuario.Size = New System.Drawing.Size(181, 22)
+        Me.txtUsuario.TabIndex = 10
         '
-        'Label2
+        'lblContraseniaActual
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(34, 63)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(93, 13)
-        Me.Label2.TabIndex = 9
-        Me.Label2.Text = "Contraseña actual"
+        Me.lblContraseniaActual.AutoSize = True
+        Me.lblContraseniaActual.Location = New System.Drawing.Point(45, 78)
+        Me.lblContraseniaActual.Name = "lblContraseniaActual"
+        Me.lblContraseniaActual.Size = New System.Drawing.Size(123, 17)
+        Me.lblContraseniaActual.TabIndex = 9
+        Me.lblContraseniaActual.Text = "Contraseña actual"
         '
-        'Label1
+        'lblUsuario
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(34, 35)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(43, 13)
-        Me.Label1.TabIndex = 8
-        Me.Label1.Text = "Usuario"
+        Me.lblUsuario.AutoSize = True
+        Me.lblUsuario.Location = New System.Drawing.Point(45, 43)
+        Me.lblUsuario.Name = "lblUsuario"
+        Me.lblUsuario.Size = New System.Drawing.Size(57, 17)
+        Me.lblUsuario.TabIndex = 8
+        Me.lblUsuario.Text = "Usuario"
         '
-        'Button2
+        'btnCancelar
         '
-        Me.Button2.Location = New System.Drawing.Point(187, 153)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(87, 27)
-        Me.Button2.TabIndex = 7
-        Me.Button2.Text = "Cancelar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCancelar.Location = New System.Drawing.Point(249, 188)
+        Me.btnCancelar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnCancelar.Name = "btnCancelar"
+        Me.btnCancelar.Size = New System.Drawing.Size(116, 33)
+        Me.btnCancelar.TabIndex = 7
+        Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnAceptar
         '
-        Me.Button1.Location = New System.Drawing.Point(83, 153)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(87, 27)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Aceptar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnAceptar.Location = New System.Drawing.Point(111, 188)
+        Me.btnAceptar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(116, 33)
+        Me.btnAceptar.TabIndex = 6
+        Me.btnAceptar.Text = "Aceptar"
+        Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'Label3
+        'lblContraseniaNueva
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(34, 90)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 13)
-        Me.Label3.TabIndex = 12
-        Me.Label3.Text = "Contraseña nueva"
+        Me.lblContraseniaNueva.AutoSize = True
+        Me.lblContraseniaNueva.Location = New System.Drawing.Point(45, 111)
+        Me.lblContraseniaNueva.Name = "lblContraseniaNueva"
+        Me.lblContraseniaNueva.Size = New System.Drawing.Size(124, 17)
+        Me.lblContraseniaNueva.TabIndex = 12
+        Me.lblContraseniaNueva.Text = "Contraseña nueva"
         '
-        'TextBox3
+        'txtContraseniaNueva
         '
-        Me.TextBox3.Location = New System.Drawing.Point(187, 86)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(137, 20)
-        Me.TextBox3.TabIndex = 13
+        Me.txtContraseniaNueva.Location = New System.Drawing.Point(249, 106)
+        Me.txtContraseniaNueva.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtContraseniaNueva.Name = "txtContraseniaNueva"
+        Me.txtContraseniaNueva.Size = New System.Drawing.Size(181, 22)
+        Me.txtContraseniaNueva.TabIndex = 13
         '
-        'TextBox4
+        'txtRepetirContraseniaNueva
         '
-        Me.TextBox4.Location = New System.Drawing.Point(187, 114)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(137, 20)
-        Me.TextBox4.TabIndex = 15
+        Me.txtRepetirContraseniaNueva.Location = New System.Drawing.Point(249, 140)
+        Me.txtRepetirContraseniaNueva.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtRepetirContraseniaNueva.Name = "txtRepetirContraseniaNueva"
+        Me.txtRepetirContraseniaNueva.Size = New System.Drawing.Size(181, 22)
+        Me.txtRepetirContraseniaNueva.TabIndex = 15
         '
-        'Label4
+        'lblRepetirContraseniaNueva
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(34, 118)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(130, 13)
-        Me.Label4.TabIndex = 14
-        Me.Label4.Text = "Repetir contraseña nueva"
+        Me.lblRepetirContraseniaNueva.AutoSize = True
+        Me.lblRepetirContraseniaNueva.Location = New System.Drawing.Point(45, 145)
+        Me.lblRepetirContraseniaNueva.Name = "lblRepetirContraseniaNueva"
+        Me.lblRepetirContraseniaNueva.Size = New System.Drawing.Size(172, 17)
+        Me.lblRepetirContraseniaNueva.TabIndex = 14
+        Me.lblRepetirContraseniaNueva.Text = "Repetir contraseña nueva"
         '
         'CambiarContraseña
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(357, 200)
-        Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ClientSize = New System.Drawing.Size(476, 246)
+        Me.Controls.Add(Me.txtRepetirContraseniaNueva)
+        Me.Controls.Add(Me.lblRepetirContraseniaNueva)
+        Me.Controls.Add(Me.txtContraseniaNueva)
+        Me.Controls.Add(Me.lblContraseniaNueva)
+        Me.Controls.Add(Me.txtContraseniaActual)
+        Me.Controls.Add(Me.txtUsuario)
+        Me.Controls.Add(Me.lblContraseniaActual)
+        Me.Controls.Add(Me.lblUsuario)
+        Me.Controls.Add(Me.btnCancelar)
+        Me.Controls.Add(Me.btnAceptar)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "CambiarContraseña"
         Me.Text = "Cambiar contraseña"
         Me.ResumeLayout(False)
@@ -149,14 +145,14 @@ Partial Class CambiarContraseña
 
     End Sub
 
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents txtContraseniaActual As TextBox
+    Friend WithEvents txtUsuario As TextBox
+    Friend WithEvents lblContraseniaActual As Label
+    Friend WithEvents lblUsuario As Label
+    Friend WithEvents btnCancelar As Button
+    Friend WithEvents btnAceptar As Button
+    Friend WithEvents lblContraseniaNueva As Label
+    Friend WithEvents txtContraseniaNueva As TextBox
+    Friend WithEvents txtRepetirContraseniaNueva As TextBox
+    Friend WithEvents lblRepetirContraseniaNueva As Label
 End Class

@@ -314,6 +314,7 @@ Namespace Negocio
             mDTO.idUsuarioAlta = Me.idUsuarioAlta
             mDTO.fechaModif = Me.mFechaModif
             mDTO.intentosLogin = Me.intentoLogin
+            mDTO.contrasenia = Me.mPassword
 
             'Recalculo del digito verificador 
             Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
@@ -329,7 +330,6 @@ Namespace Negocio
                     Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Creación de usuario", "Media")
                     mBitacora.Guardar()
                 End If
-
             Else
                 mDTO.id = Me.id
                 If Validar(mDTO) Then
