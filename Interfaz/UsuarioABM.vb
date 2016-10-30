@@ -80,45 +80,40 @@ Public Class UsuarioABM
 #Region "Métodos"
 
     Friend Sub ActualizarGrilla()
-        Try
-            Me.dgv_Usuarios.DataSource = (New Negocio.Negocio.Usuario).Listar
-            If Me.dgv_Usuarios.RowCount = 0 Then
-                Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Usuarios ingresadas en el sistema")
-            Else
-                Me.txtMensaje.Text = ""
-            End If
-            If dgv_Usuarios.Rows.Count > 0 Then
-                For i As Integer = 0 To dgv_Usuarios.Rows.Count - 1
-                    Dim mUsuario As New Negocio.Negocio.Usuario
-                    mUsuario.Cargar(CInt(dgv_Usuarios.Rows(i).Cells(7).Value))
-                    dgv_Usuarios.Rows(i).Cells(8).Value = mUsuario.usuario
-                Next
-            End If
-            'Dim CadenaDigitoVerificador As String
-            'If dgv_Usuarios.Rows.Count > 0 Then
-            '    For i As Integer = 0 To dgv_Usuarios.Rows.Count - 1
-            '        Dim mUSuario As New Negocio.Negocio.Usuario
-            '        mUSuario.Cargar(CInt(dgv_Usuarios.Rows(i).Cells(0).Value))
-            '        CadenaDigitoVerificador = mUSuario.usuario + mUSuario.nombre + mUSuario.apellido + Convert.ToString(mUSuario.fechaModif)
-            '        mUSuario.dvh = Negocio.Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
-            '        mUSuario.Guardar()
-            '    Next
-            'End If
-        Catch ex As Exception
-            MsgBox(ex.message)
-            Throw
-        End Try
+        Me.dgv_Usuarios.DataSource = (New Negocio.Negocio.Usuario).Listar
+        If Me.dgv_Usuarios.RowCount = 0 Then
+            Me.txtMensaje.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Usuarios ingresadas en el sistema")
+        Else
+            Me.txtMensaje.Text = ""
+        End If
+        If dgv_Usuarios.Rows.Count > 0 Then
+            For i As Integer = 0 To dgv_Usuarios.Rows.Count - 1
+                Dim mUsuario As New Negocio.Negocio.Usuario
+                mUsuario.Cargar(CInt(dgv_Usuarios.Rows(i).Cells(7).Value))
+                dgv_Usuarios.Rows(i).Cells(8).Value = mUsuario.usuario
+            Next
+        End If
+        'Dim CadenaDigitoVerificador As String
+        'If dgv_Usuarios.Rows.Count > 0 Then
+        '    For i As Integer = 0 To dgv_Usuarios.Rows.Count - 1
+        '        Dim mUSuario As New Negocio.Negocio.Usuario
+        '        mUSuario.Cargar(CInt(dgv_Usuarios.Rows(i).Cells(0).Value))
+        '        CadenaDigitoVerificador = mUSuario.usuario + mUSuario.nombre + mUSuario.apellido + Convert.ToString(mUSuario.fechaModif)
+        '        mUSuario.dvh = Negocio.Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+        '        mUSuario.Guardar()
+        '    Next
+        'End If
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
-        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja el usuario seleccionado?"), "Eliminar", MessageBoxButtons.YesNo)
-        If result = DialogResult.Yes Then
-            Usuario.Eliminar()
-            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario dado de baja correctamente."))
-        End If
-        ActualizarGrilla()
+            Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja el usuario seleccionado?"), "Eliminar", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                Usuario.Eliminar()
+                MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario dado de baja correctamente."))
+            End If
+            ActualizarGrilla()
     End Sub
 
 
@@ -130,7 +125,6 @@ Public Class UsuarioABM
             Usuario.Rehabilitar()
             MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario rehabilitado correctamente."))
         End If
-
         ActualizarGrilla()
     End Sub
 
@@ -145,26 +139,15 @@ Public Class UsuarioABM
     End Sub
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
-
         If Me.dgv_Usuarios.SelectedRows.Count > 0 Then
-            Try
-                Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
-
-                Dim mForm As New Usuarios
-                mForm.mOperacion = Interfaz.Usuarios.TipoOperacion.Modificacion
-                mForm.UsuarioAEditar = New Negocio.Negocio.Usuario(mId)
-                mForm.StartPosition = FormStartPosition.CenterParent
-                mForm.ShowDialog(Me)
-                ActualizarGrilla()
-            Catch ex As InvalidCastException
-                MsgBox("Error al establecer el identificador del usuario seleccionado.")
-            Catch ex As Exception
-                MsgBox("Error al intentar modificar el usuario seleccionado.")
-            End Try
-
+            Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
+            Dim mForm As New Usuarios
+            mForm.mOperacion = Interfaz.Usuarios.TipoOperacion.Modificacion
+            mForm.UsuarioAEditar = New Negocio.Negocio.Usuario(mId)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
         End If
-
-
     End Sub
 
     Private Sub dgv_Usuarios_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dgv_Usuarios.SelectionChanged

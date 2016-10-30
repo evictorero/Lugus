@@ -297,12 +297,21 @@ Namespace Negocio
             mDTO.apellido = Me.apellido
             mDTO.dni = Me.dni
             mDTO.email = Me.email
-            mDTO.id_idioma = Me.id_idioma
+            'Guarda el idioma por defecto
+            If Me.id_idioma = 0 Then
+                mDTO.id_idioma = 1
+            Else
+                mDTO.id_idioma = Me.id_idioma
+            End If
+
             mDTO.fechaNacimiento = Me.fechaNacimiento
-            mDTO.dvh = Me.dvh ' Celes
             mDTO.idUsuarioAlta = Me.idUsuarioAlta
             mDTO.fechaModif = Me.mFechaModif
             mDTO.intentosLogin = Me.intentoLogin
+
+            'Recalculo del digito verificador 
+            Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
+            mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             If mId = 0 Then
                 mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
@@ -310,7 +319,7 @@ Namespace Negocio
                 MsgBox("Password Aleatorio" & pass)
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarNuevo(mDTO)
-                EnviarMail(Me.usuario, mDTO.contrasenia)
+                EnviarMail(Me.usuario, pass)
             Else
                 mDTO.id = Me.id
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
@@ -321,20 +330,15 @@ Namespace Negocio
 
         End Sub
         Public Sub ValidarFormato(pid_idioma As Integer)
-            Try
-                If (Me.nombre = "") Then
-                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el nombre del usuario."))
-                End If
-                If (Me.apellido = "") Then
+            If (Me.nombre = "") Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el nombre del usuario."))
+            End If
+            If (Me.apellido = "") Then
                     Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el apellido del usuario."))
                 End If
                 If (Me.usuario = "") Then
                     Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
                 End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-                Throw
-            End Try
         End Sub
 
         Public Overridable Sub Eliminar()
@@ -369,7 +373,7 @@ Namespace Negocio
                 MsgBox("Password Aleatorio" & pass)
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
-                EnviarMail(Me.usuario, mDTO.contrasenia)
+                EnviarMail(Me.usuario, pass)
             Catch ex As Exception
                 Throw New ApplicationException("Error al blanquear el usuario especificado.", ex)
             End Try
@@ -397,13 +401,13 @@ Namespace Negocio
 
         Public Sub EnviarMail(ByVal pNombreUsuario As String, ByVal pPass As String)
             Dim ruta As String = "C:\UsuarioContrasenia\" & pNombreUsuario & ".txt"
-            If Not System.IO.File.Exists(ruta) Then
-                System.IO.File.Create(ruta).Dispose()
+            If System.IO.File.Exists(ruta) Then
+                System.IO.File.Delete(ruta)
             End If
-
+            System.IO.File.Create(ruta).Dispose()
             Dim Escribir As New System.IO.StreamWriter(ruta, True)
-            Escribir.WriteLine("Usuario" & pNombreUsuario)
-            Escribir.WriteLine("Contraseña" & pPass)
+            Escribir.WriteLine("Usuario : " & pNombreUsuario)
+            Escribir.WriteLine("Contraseña : " & pPass)
             Escribir.Close()
 
         End Sub

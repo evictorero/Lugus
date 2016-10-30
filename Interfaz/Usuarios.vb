@@ -13,7 +13,6 @@ Public Class Usuarios
         Modificacion = 3
         Rehabilitar = 4
     End Enum
-
     Friend Property UsuarioAEditar() As Negocio.Negocio.Usuario
         Get
             Return mUsuario
@@ -28,7 +27,7 @@ Public Class Usuarios
         Me.txtUsuario.Focus()
         Me.txtFecha_Nacimiento.CustomFormat = "dd/MM/yyyy"
         Me.txtId_usuario.Enabled = False
-
+#Region "Actualizacion Grilla"
         'Seteo de aspecto de la grilla 
         With Me.dgvPatentes
             .AllowDrop = False
@@ -114,7 +113,7 @@ Public Class Usuarios
 
             End With
         End With
-
+#End Region
         Select Case mOperacion
             Case TipoOperacion.Alta
                 Me.txtUsuario.Text = ""
@@ -126,7 +125,6 @@ Public Class Usuarios
                 Me.lblTitulo.Text = "Alta de Usuario"
 
             Case TipoOperacion.Modificacion
-
                 If Not IsNothing(mUsuario) Then
                     Me.txtId_usuario.Text = mUsuario.id
                     Me.txtUsuario.Text = mUsuario.usuario
@@ -144,7 +142,9 @@ Public Class Usuarios
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Select Case mOperacion
+        Try
+
+            Select Case mOperacion
             Case TipoOperacion.Alta, TipoOperacion.Modificacion
                 If IsNothing(mUsuario) Then
                     mUsuario = New Negocio.Negocio.Usuario
@@ -157,12 +157,23 @@ Public Class Usuarios
                 mUsuario.fechaNacimiento = Date.ParseExact(Me.txtFecha_Nacimiento.Text, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
                 mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
                 mUsuario.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
-                mUsuario.Guardar()
-                Me.Close()
-            Case TipoOperacion.Baja
+                    mUsuario.Guardar()
+                    If mOperacion = TipoOperacion.Alta Then
+                        MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario registrado correctamente."))
+                    Else
+                        MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario modificado correctamente."))
+                    End If
+                    Me.Close()
+                Case TipoOperacion.Baja
                 mUsuario.Eliminar()
                 Me.Close()
         End Select
+        Catch ex As InvalidCastException
+        MsgBox("Error al establecer el identificador del usuario seleccionado.")
+        Catch ex As Exception
+        MsgBox(ex.Message)
+        End Try
+
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
