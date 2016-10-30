@@ -129,6 +129,20 @@ Namespace Negocio
 
             Return mCol
         End Function
+
+        Public Overridable Function ListarConFiltro(ByVal pUsuario As Integer,
+                                                    ByVal pFechaDesde As Date,
+                                                    ByVal pFechaHasta As Date,
+                                                    ByVal pCriticidad As String) As Collections.Generic.List(Of Bitacora)
+            Dim mCol As New Collections.Generic.List(Of Bitacora)
+            Dim mColDTO As List(Of DTO.BitacoraDTO) = Datos.BitacoraDatos.ListarConFiltro(pUsuario, pFechaDesde, pFechaHasta, pCriticidad)
+
+            For Each mDTO As DTO.BitacoraDTO In mColDTO
+                mCol.Add(New Negocio.Bitacora(mDTO))
+            Next
+
+            Return mCol
+        End Function
 #End Region
 
 

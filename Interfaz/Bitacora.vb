@@ -1,5 +1,9 @@
-﻿Public Class Bitacora
+﻿Imports Negocio.Negocio.Traductor
+
+Public Class Bitacora
     Private Sub Bitacora_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         Dim listaUsuarios As List(Of Negocio.Negocio.Usuario) = (New Negocio.Negocio.Usuario).Listar
 
         cmbUsuario.DisplayMember = "nombre"
@@ -17,11 +21,57 @@
         chkFechas.Checked = True
         chkCriticidad.Checked = True
 
+        'Seteo de aspecto de la grilla
+        With Me.dvgBitacora
+            .AllowDrop = False
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .AllowUserToResizeColumns = False
+            .AllowUserToResizeRows = False
+            .AutoGenerateColumns = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+
+            With .Columns
+                .Add("cid", "Código")
+                .Item(0).DataPropertyName = "id"
+                '.Item(0).Width = 100
+                .Item(0).Visible = False
+                '
+                .Add("cdescripcionlarga", "Descripcion")
+                .Item(1).DataPropertyName = "DescripcionLarga"
+                .Item(1).Width = 200
+
+                .Add("cfecha", "Fecha")
+                .Item(2).DataPropertyName = "fecha"
+                .Item(2).Width = 150
+                .Item(2).DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss"
+
+                .Add("ccriticidad", "Criticidad")
+                .Item(3).DataPropertyName = "criticidad"
+                .Item(3).Width = 80
+
+
+            End With
+
+        End With
+
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        MessageBox.Show(cmbUsuario.SelectedValue)
+        Dim mBitacora As New Negocio.Negocio.Bitacora
+
+        Me.dvgBitacora.DataSource = (New Negocio.Negocio.Bitacora).ListarConFiltro(Me.cmbUsuario.SelectedValue,
+                                                                                   Me.dtpFechaDesde.Value,
+                                                                                   Me.dtpFechaHasta.Value,
+                                                                                   "Baja")
+
+        If Me.dvgBitacora.RowCount = 0 Then
+            Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen bitácoras ingresadas en el sistema")
+        Else
+            Me.txtMensaje.Text = ""
+        End If
     End Sub
 
     Private Sub chkUsuario_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsuario.CheckedChanged

@@ -23,6 +23,9 @@ Partial Class Bitacora
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.chkCriticidad = New System.Windows.Forms.CheckBox()
+        Me.chkFechas = New System.Windows.Forms.CheckBox()
+        Me.chkUsuario = New System.Windows.Forms.CheckBox()
         Me.rbtnBaja = New System.Windows.Forms.RadioButton()
         Me.rbtnMedia = New System.Windows.Forms.RadioButton()
         Me.dtpFechaHasta = New System.Windows.Forms.DateTimePicker()
@@ -34,16 +37,10 @@ Partial Class Bitacora
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbUsuario = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.id_bitacora = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.id_usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descripcion_larga = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.m_error = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.chkUsuario = New System.Windows.Forms.CheckBox()
-        Me.chkFechas = New System.Windows.Forms.CheckBox()
-        Me.chkCriticidad = New System.Windows.Forms.CheckBox()
+        Me.dvgBitacora = New System.Windows.Forms.DataGridView()
+        Me.txtMensaje = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dvgBitacora, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -70,6 +67,33 @@ Partial Class Bitacora
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtros"
+        '
+        'chkCriticidad
+        '
+        Me.chkCriticidad.AutoSize = True
+        Me.chkCriticidad.Location = New System.Drawing.Point(482, 103)
+        Me.chkCriticidad.Name = "chkCriticidad"
+        Me.chkCriticidad.Size = New System.Drawing.Size(15, 14)
+        Me.chkCriticidad.TabIndex = 21
+        Me.chkCriticidad.UseVisualStyleBackColor = True
+        '
+        'chkFechas
+        '
+        Me.chkFechas.AutoSize = True
+        Me.chkFechas.Location = New System.Drawing.Point(482, 66)
+        Me.chkFechas.Name = "chkFechas"
+        Me.chkFechas.Size = New System.Drawing.Size(15, 14)
+        Me.chkFechas.TabIndex = 20
+        Me.chkFechas.UseVisualStyleBackColor = True
+        '
+        'chkUsuario
+        '
+        Me.chkUsuario.AutoSize = True
+        Me.chkUsuario.Location = New System.Drawing.Point(482, 29)
+        Me.chkUsuario.Name = "chkUsuario"
+        Me.chkUsuario.Size = New System.Drawing.Size(15, 14)
+        Me.chkUsuario.TabIndex = 19
+        Me.chkUsuario.UseVisualStyleBackColor = True
         '
         'rbtnBaja
         '
@@ -179,78 +203,44 @@ Partial Class Bitacora
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Usuario"
         '
-        'DataGridView1
+        'dvgBitacora
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id_bitacora, Me.id_usuario, Me.descripcion_larga, Me.m_error})
-        Me.DataGridView1.Location = New System.Drawing.Point(27, 189)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(536, 156)
-        Me.DataGridView1.TabIndex = 7
+        Me.dvgBitacora.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dvgBitacora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dvgBitacora.Location = New System.Drawing.Point(17, 207)
+        Me.dvgBitacora.Margin = New System.Windows.Forms.Padding(2)
+        Me.dvgBitacora.Name = "dvgBitacora"
+        Me.dvgBitacora.RowTemplate.Height = 28
+        Me.dvgBitacora.Size = New System.Drawing.Size(546, 156)
+        Me.dvgBitacora.TabIndex = 7
         '
-        'id_bitacora
+        'txtMensaje
         '
-        Me.id_bitacora.HeaderText = "Código"
-        Me.id_bitacora.Name = "id_bitacora"
-        '
-        'id_usuario
-        '
-        Me.id_usuario.HeaderText = "Usuario"
-        Me.id_usuario.Name = "id_usuario"
-        '
-        'descripcion_larga
-        '
-        Me.descripcion_larga.HeaderText = "Descripción"
-        Me.descripcion_larga.Name = "descripcion_larga"
-        '
-        'm_error
-        '
-        Me.m_error.HeaderText = "Es Error?"
-        Me.m_error.Name = "m_error"
-        '
-        'chkUsuario
-        '
-        Me.chkUsuario.AutoSize = True
-        Me.chkUsuario.Location = New System.Drawing.Point(482, 29)
-        Me.chkUsuario.Name = "chkUsuario"
-        Me.chkUsuario.Size = New System.Drawing.Size(15, 14)
-        Me.chkUsuario.TabIndex = 19
-        Me.chkUsuario.UseVisualStyleBackColor = True
-        '
-        'chkFechas
-        '
-        Me.chkFechas.AutoSize = True
-        Me.chkFechas.Location = New System.Drawing.Point(482, 66)
-        Me.chkFechas.Name = "chkFechas"
-        Me.chkFechas.Size = New System.Drawing.Size(15, 14)
-        Me.chkFechas.TabIndex = 20
-        Me.chkFechas.UseVisualStyleBackColor = True
-        '
-        'chkCriticidad
-        '
-        Me.chkCriticidad.AutoSize = True
-        Me.chkCriticidad.Location = New System.Drawing.Point(482, 103)
-        Me.chkCriticidad.Name = "chkCriticidad"
-        Me.chkCriticidad.Size = New System.Drawing.Size(15, 14)
-        Me.chkCriticidad.TabIndex = 21
-        Me.chkCriticidad.UseVisualStyleBackColor = True
+        Me.txtMensaje.AutoSize = True
+        Me.txtMensaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMensaje.Location = New System.Drawing.Point(14, 187)
+        Me.txtMensaje.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.txtMensaje.Name = "txtMensaje"
+        Me.txtMensaje.Size = New System.Drawing.Size(54, 13)
+        Me.txtMensaje.TabIndex = 24
+        Me.txtMensaje.Text = "Mensaje"
         '
         'Bitacora
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(601, 374)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.txtMensaje)
+        Me.Controls.Add(Me.dvgBitacora)
         Me.Controls.Add(Me.GroupBox1)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Bitacora"
         Me.Text = "Bitácora"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dvgBitacora, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -260,11 +250,7 @@ Partial Class Bitacora
     Friend WithEvents cmbUsuario As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnBuscar As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents id_bitacora As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents id_usuario As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents descripcion_larga As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents m_error As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents dvgBitacora As DataGridView
     Friend WithEvents dtpFechaHasta As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents dtpFechaDesde As System.Windows.Forms.DateTimePicker
@@ -274,4 +260,5 @@ Partial Class Bitacora
     Friend WithEvents chkCriticidad As System.Windows.Forms.CheckBox
     Friend WithEvents chkFechas As System.Windows.Forms.CheckBox
     Friend WithEvents chkUsuario As System.Windows.Forms.CheckBox
+    Friend WithEvents txtMensaje As System.Windows.Forms.Label
 End Class

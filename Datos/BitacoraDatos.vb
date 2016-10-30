@@ -31,6 +31,31 @@ Public Class BitacoraDatos
         Return mCol
     End Function
 
+    Public Shared Function ListarConFiltro(ByVal pUsuario As Integer,
+                                           ByVal pFechaDesde As Date,
+                                           ByVal pFechaHasta As Date,
+                                           ByVal pCriticidad As String) As List(Of DTO.BitacoraDTO)
+        Dim mCol As New List(Of DTO.BitacoraDTO)
+
+        Dim mStrCom As String
+
+        mStrCom = "SELECT id_bitacora,id_usuario,descripcion_larga,fecha,dvh,criticidad " &
+                                                                      " FROM dbo.bbitacora" &
+                                                                      " WHERE (id_usuario = " & pUsuario & " OR " & pUsuario & " IS NULL)" &
+                                                                      "   AND (fecha BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "' OR '" & pFechaDesde & "' IS NULL) " &
+                                                                      "   AND (criticidad = '" & pCriticidad & "' OR '" & pCriticidad & "' IS NULL)"
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset(mStrCom)
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            Dim mDTO As New DTO.BitacoraDTO
+            CargarDTO(mDTO, mDr)
+
+            mCol.Add(mDTO)
+        Next
+
+        Return mCol
+    End Function
     Public Shared Function ObtenerProximoId() As Integer
         If ProximoId = 0 Then
             ProximoId = Datos.ProveedorDeDatos.DB.ObtenerId("bBitacora")
