@@ -20,6 +20,14 @@ Namespace Negocio
 
         End Sub
 
+        Public Sub New(ByVal pIdUsuario As Integer, ByVal pDescripcionLarga As String, ByRef pCriticidad As String)
+            Dim pDTO As New DTO.BitacoraDTO
+            pDTO.idUsuario = pIdUsuario
+            pDTO.descripcionLarga = pDescripcionLarga
+            pDTO.criticidad = pCriticidad
+            Me.Cargar(pDTO)
+        End Sub
+
         Public Sub New(ByVal pDTO As DTO.BitacoraDTO)
             Me.Cargar(pDTO)
         End Sub
@@ -80,11 +88,14 @@ Namespace Negocio
 
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.BitacoraDTO
+
             mDTO.idUsuario = Me.idUsuario
             mDTO.descripcionLarga = Me.descripcionLarga
-            mDTO.fecha = Me.fecha
+            mDTO.fecha = DateTime.Now
             mDTO.criticidad = Me.criticidad
-            mDTO.dvh = Me.dvh
+
+            Dim CadenaDigitoVerificador As String = mDTO.idUsuario.ToString + mDTO.descripcionLarga + Convert.ToString(mDTO.fecha) + mDTO.criticidad
+            mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             If mId = 0 Then
                 mDTO.id = Datos.BitacoraDatos.ObtenerProximoId()
