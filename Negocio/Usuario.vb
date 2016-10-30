@@ -349,6 +349,31 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó eliminar un usuario sin Id especifico.")
             End If
         End Sub
+        Public Overridable Sub Blanquear()
+            Dim mDTO As New DTO.UsuarioDTO
+            Dim pass As String
+            Try
+                mDTO.id = Me.id
+                mDTO.usuario = Encriptador.EncriptarDatos(2, Me.usuario)
+                mDTO.nombre = Me.nombre
+                mDTO.apellido = Me.apellido
+                mDTO.dni = Me.dni
+                mDTO.email = Me.email
+                mDTO.id_idioma = Me.id_idioma
+                mDTO.fechaNacimiento = Me.fechaNacimiento
+                mDTO.dvh = Me.dvh
+                mDTO.idUsuarioAlta = Me.idUsuarioAlta
+                mDTO.fechaModif = Me.mFechaModif
+                mDTO.intentosLogin = 0
+                pass = GenerarPasswordAleatorio()
+                MsgBox("Password Aleatorio" & pass)
+                mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
+                Datos.UsuarioDatos.GuardarModificacion(mDTO)
+                EnviarMail(Me.usuario, mDTO.contrasenia)
+            Catch ex As Exception
+                Throw New ApplicationException("Error al blanquear el usuario especificado.", ex)
+            End Try
+        End Sub
 
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then

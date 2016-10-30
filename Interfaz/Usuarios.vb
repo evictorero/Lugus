@@ -26,9 +26,7 @@ Public Class Usuarios
     Private Sub Usuario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Visible = True
         Me.txtUsuario.Focus()
-
-        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
-
+        Me.txtFecha_Nacimiento.CustomFormat = "dd/MM/yyyy"
         Me.txtId_usuario.Enabled = False
 
         'Seteo de aspecto de la grilla 
@@ -141,13 +139,8 @@ Public Class Usuarios
                     Me.lblTitulo.Text = "Modificación de Usuario"
                 End If
                 ActualizarGrilla()
-
         End Select
-
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
-
-
-
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -161,10 +154,8 @@ Public Class Usuarios
                 mUsuario.apellido = Me.txtApellido.Text
                 mUsuario.dni = Me.txtDNI.Text
                 mUsuario.email = Me.txtEmail.Text
-                mUsuario.fechaNacimiento = Me.txtFecha_Nacimiento.Text
+                mUsuario.fechaNacimiento = Date.ParseExact(Me.txtFecha_Nacimiento.Text, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
                 mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
-                mUsuario.dvh = 1 'Digito Verificador Celes
-                mUsuario.id_idioma = 1 'Idioma Celes
                 mUsuario.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mUsuario.Guardar()
                 Me.Close()
@@ -175,7 +166,6 @@ Public Class Usuarios
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
-        'Traducir Celeste
         Select Case mOperacion
             Case TipoOperacion.Alta
                 Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Desea Cancelar la operación de Alta de usuario?"), "Cancelar", MessageBoxButtons.YesNo)
@@ -225,6 +215,7 @@ Public Class Usuarios
                 dgvFamilias.Rows(i).Cells(2).Value = mFamilia.descripcionCorta
             Next
         End If
+
     End Sub
 
     Private Sub btnEliminarPatente_Click(sender As Object, e As EventArgs) Handles btnEliminarPatente.Click

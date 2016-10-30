@@ -26,8 +26,11 @@ Public Class Familias
     Private Sub Familia_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.txtId_familia.Enabled = False
         Me.txtFecha_baja.Enabled = False
+        Me.lblFechaBaja.Enabled = False
+
         Me.txtId_familia.Visible = False
         Me.txtFecha_baja.Visible = False
+        Me.lblFechaBaja.Visible = False
 
         'Seteo de aspecto de la grilla 
         With Me.dgvFamiliaPatentes
@@ -120,7 +123,6 @@ Public Class Familias
                 mFamilia.descripcionCorta = Me.txtDescripcion_corta.Text
                 mFamilia.descripcionLarga = Me.txtDescripcion_larga.Text
                 mFamilia.idUsuario = Principal.UsuarioEnSesion.id
-                mFamilia.dvh = 1 'Digito Verificador Celes
                 mFamilia.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mFamilia.Guardar()
                 Me.Close()

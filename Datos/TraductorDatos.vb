@@ -11,9 +11,10 @@ Public Class TraductorDatos
 
     Public Shared Function ObtenerTraduccion(ByVal pIdIdioma As String,
                                              ByVal pMensaje As String) As String
-        Dim l_return As String
-        l_return = "{{" + pMensaje + "}}"
-
+        Dim l_return As String = ""
+        If Not IsNothing(pMensaje) And Not pMensaje.Equals("") Then
+            l_return = "{{" + pMensaje + "}}"
+        End If
         If Not IsNothing(pIdIdioma) Then
             Dim mDs As DataSet
             Try

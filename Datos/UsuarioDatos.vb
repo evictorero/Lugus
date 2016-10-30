@@ -6,7 +6,7 @@ Public Class UsuarioDatos
     Private Shared ProximoId As Integer
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.UsuarioDTO
         If pId > 0 Then
-            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta  FROM dbo.busuario WHERE id_usuario = " & pId)
+            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, FORMAT(fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta  FROM dbo.busuario WHERE id_usuario = " & pId)
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.UsuarioDTO
 
@@ -24,7 +24,7 @@ Public Class UsuarioDatos
     End Function
     Public Shared Function ObtenerPorUsuario(ByVal pUsuario As String) As DTO.UsuarioDTO
         If Not IsNothing(pUsuario) Then
-            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
+            Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, FORMAT(fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE usuario = '" & pUsuario & "'")
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.UsuarioDTO
                 CargarDTO(mDTO, mDs.Tables(0).Rows(0))
@@ -47,7 +47,7 @@ Public Class UsuarioDatos
         pDTO.dni = pDr("dni")
         pDTO.id_idioma = pDr("id_idioma")
         ' probando 
-        pDTO.fechaNacimiento = pDr("fecha_nacimiento")
+        pDTO.fechaNacimiento = DateTime.Parse(pDr("fecha_nacimiento"))
         If Not IsDBNull(pDr("fecha_baja")) Then
             pDTO.fechaBaja = pDr("fecha_baja")
         End If
@@ -59,7 +59,7 @@ Public Class UsuarioDatos
     Public Shared Function Listar() As List(Of DTO.UsuarioDTO)
 
         Dim mCol As New List(Of DTO.UsuarioDTO)
-        Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario "))
+        Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, FORMAT(fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario "))
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.UsuarioDTO
@@ -105,7 +105,7 @@ Public Class UsuarioDatos
 
         mStrCom = "INSERT INTO [dbo].[bUsuario] ([id_usuario],[usuario],[contraseña],[nombre],[apellido],[dni],[email],[id_idioma],[fecha_nacimiento],[dvh],[intentos_login],[fecha_modif],[id_usuario_alta])" &
         " VALUES " &
-        "(" & pDTO.id & ", '" & pDTO.usuario & "' , '" & pDTO.contrasenia & "' , '" & pDTO.nombre & "', '" & pDTO.apellido & "', " & pDTO.dni & ", '" & pDTO.email & "', " & pDTO.id_idioma & ",  '" & pDTO.fechaNacimiento & "', " & pDTO.dvh & ", " & pDTO.intentosLogin & ",'" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "'," & pDTO.idUsuarioAlta & ")"
+        "(" & pDTO.id & ", '" & pDTO.usuario & "' , '" & pDTO.contrasenia & "' , '" & pDTO.nombre & "', '" & pDTO.apellido & "', " & pDTO.dni & ", '" & pDTO.email & "', " & pDTO.id_idioma & ",  '" & Format(pDTO.fechaNacimiento, "yyyy/MM/dd") & "', " & pDTO.dvh & ", " & pDTO.intentosLogin & ",'" & DateTime.Now.ToString("yyyyMMdd HH:mm:ss") & "'," & pDTO.idUsuarioAlta & ")"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception

@@ -94,6 +94,16 @@ Public Class UsuarioABM
                     dgv_Usuarios.Rows(i).Cells(8).Value = mUsuario.usuario
                 Next
             End If
+            'Dim CadenaDigitoVerificador As String
+            'If dgv_Usuarios.Rows.Count > 0 Then
+            '    For i As Integer = 0 To dgv_Usuarios.Rows.Count - 1
+            '        Dim mUSuario As New Negocio.Negocio.Usuario
+            '        mUSuario.Cargar(CInt(dgv_Usuarios.Rows(i).Cells(0).Value))
+            '        CadenaDigitoVerificador = mUSuario.usuario + mUSuario.nombre + mUSuario.apellido + Convert.ToString(mUSuario.fechaModif)
+            '        mUSuario.dvh = Negocio.Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+            '        mUSuario.Guardar()
+            '    Next
+            'End If
         Catch ex As Exception
             MsgBox(ex.message)
             Throw
@@ -145,7 +155,6 @@ Public Class UsuarioABM
                 mForm.UsuarioAEditar = New Negocio.Negocio.Usuario(mId)
                 mForm.StartPosition = FormStartPosition.CenterParent
                 mForm.ShowDialog(Me)
-
                 ActualizarGrilla()
             Catch ex As InvalidCastException
                 MsgBox("Error al establecer el identificador del usuario seleccionado.")
@@ -178,6 +187,17 @@ Public Class UsuarioABM
             Me.btnNuevo.Enabled = True
             Me.btnRehabilitar.Enabled = False
         End If
+    End Sub
+
+    Private Sub btnBlanquear_Click(sender As Object, e As EventArgs) Handles btnBlanquear.Click
+        Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
+        Dim Usuario As New Negocio.Negocio.Usuario(mId)
+        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea blanquear la clave del usuario seleccionado?"), "Blanqueo de Clave", MessageBoxButtons.YesNo)
+        If result = DialogResult.Yes Then
+            Usuario.Blanquear()
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "El blanqueo de clave ha sido exitoso."))
+        End If
+        ActualizarGrilla()
     End Sub
 
 #End Region

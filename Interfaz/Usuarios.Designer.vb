@@ -23,7 +23,6 @@ Partial Class Usuarios
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtFecha_Nacimiento = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -48,6 +47,7 @@ Partial Class Usuarios
         Me.btnAgregarFamilia = New System.Windows.Forms.Button()
         Me.dgvFamilias = New System.Windows.Forms.DataGridView()
         Me.lblTitulo = New System.Windows.Forms.Label()
+        Me.txtFecha_Nacimiento = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvPatentes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,23 +73,15 @@ Partial Class Usuarios
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox1.Size = New System.Drawing.Size(701, 222)
+        Me.GroupBox1.Size = New System.Drawing.Size(722, 222)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Datos Personales"
         '
-        'txtFecha_Nacimiento
-        '
-        Me.txtFecha_Nacimiento.Location = New System.Drawing.Point(593, 143)
-        Me.txtFecha_Nacimiento.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtFecha_Nacimiento.Name = "txtFecha_Nacimiento"
-        Me.txtFecha_Nacimiento.Size = New System.Drawing.Size(89, 22)
-        Me.txtFecha_Nacimiento.TabIndex = 13
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(480, 148)
+        Me.Label6.Location = New System.Drawing.Point(477, 148)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(90, 17)
         Me.Label6.TabIndex = 11
@@ -319,6 +311,17 @@ Partial Class Usuarios
         Me.lblTitulo.TabIndex = 14
         Me.lblTitulo.Text = "Mensaje"
         '
+        'txtFecha_Nacimiento
+        '
+        Me.txtFecha_Nacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.txtFecha_Nacimiento.Location = New System.Drawing.Point(573, 146)
+        Me.txtFecha_Nacimiento.MaxDate = New Date(2016, 10, 29, 19, 41, 14, 0)
+        Me.txtFecha_Nacimiento.MinDate = New Date(1800, 1, 1, 0, 0, 0, 0)
+        Me.txtFecha_Nacimiento.Name = "txtFecha_Nacimiento"
+        Me.txtFecha_Nacimiento.Size = New System.Drawing.Size(110, 22)
+        Me.txtFecha_Nacimiento.TabIndex = 14
+        Me.txtFecha_Nacimiento.Value = New Date(2016, 10, 29, 0, 0, 0, 0)
+        '
         'Usuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -347,7 +350,6 @@ Partial Class Usuarios
     End Sub
 
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents txtFecha_Nacimiento As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
@@ -372,4 +374,5 @@ Partial Class Usuarios
     Friend WithEvents btnAgregarFamilia As Button
     Friend WithEvents dgvFamilias As DataGridView
     Friend WithEvents lblTitulo As Label
+    Friend WithEvents txtFecha_Nacimiento As DateTimePicker
 End Class

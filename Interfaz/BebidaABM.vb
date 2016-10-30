@@ -79,17 +79,26 @@ Public Class BebidaABM
         Else
             Me.txtMensaje.Text = ""
         End If
+        'Dim CadenaDigitoVerificador As String
+        'If dgvBebidas.Rows.Count > 0 Then
+        '    For i As Integer = 0 To dgvBebidas.Rows.Count - 1
+        '        Dim mBebida As New Negocio.Negocio.Bebida
+        '        mBebida.Cargar(CInt(dgvBebidas.Rows(i).Cells(0).Value))
+        '        CadenaDigitoVerificador = mBebida.descripcionCorta + mBebida.descripcionLarga + Convert.ToString(mBebida.fechaModif)
+        '        mBebida.dvh = Negocio.Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+        '        mBebida.Guardar()
+        '    Next
+        'End If
+
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
         Dim bebida As New Negocio.Negocio.Bebida(mId)
-        'Traducir Celeste
         Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja la Bebida seleccionada?"),
                                                 ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Eliminar"),
                                                 MessageBoxButtons.YesNo)
         If result = DialogResult.Yes Then
             bebida.Eliminar()
-            'Traducir Celeste
             MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Bebida eliminada correctamente"))
         End If
         ActualizarGrilla()
@@ -101,10 +110,8 @@ Public Class BebidaABM
         Dim result As Integer = MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea rehabilitar la Bebida seleccionada?"),
                                                 ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Rehabilitar"),
                                                 MessageBoxButtons.YesNo)
-        'Traducir Celeste
         If result = DialogResult.Yes Then
             bebida.Rehabilitar()
-            'Traducir Celeste
             MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Bebida rehabilitada correctamente"))
         End If
 
@@ -120,7 +127,6 @@ Public Class BebidaABM
     End Sub
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
-
         If Me.dgvBebidas.SelectedRows.Count > 0 Then
             Try
                 Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
@@ -130,7 +136,6 @@ Public Class BebidaABM
                 mForm.BebidaAEditar = New Negocio.Negocio.Bebida(mId)
                 mForm.StartPosition = FormStartPosition.CenterParent
                 mForm.ShowDialog(Me)
-
                 ActualizarGrilla()
             Catch ex As Exception
                 'MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Error al intentar modificar la bebida seleccionada"))
@@ -148,10 +153,12 @@ Public Class BebidaABM
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
             If IsNothing(Me.dgvBebidas.SelectedRows(0).Cells(4).Value) Then
                 Me.btnEliminar.Enabled = True
+                Me.btnModificar.Enabled = True
                 Me.btnRehabilitar.Enabled = False
             Else
                 Me.btnRehabilitar.Enabled = True
                 Me.btnEliminar.Enabled = False
+                Me.btnModificar.Enabled = False
             End If
         Else
             Me.btnEliminar.Enabled = False

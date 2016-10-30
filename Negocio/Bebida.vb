@@ -116,14 +116,15 @@ Namespace Negocio
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
-            mDTO.dvh = (New Negocio.DigitoVerificador()).CalcularDVH(mDTO.descripcionCorta + mDTO.descripcionLarga)
+
+            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+            mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+
             If mId = 0 Then
                 mDTO.id = Datos.BebidaDatos.ObtenerProximoId()
-                mDTO.dvh = "23423354"
                 Datos.BebidaDatos.GuardarNuevo(mDTO)
             Else
                 mDTO.id = Me.id
-                mDTO.dvh = "23423433"
                 Datos.BebidaDatos.GuardarModificacion(mDTO)
             End If
 
@@ -153,7 +154,7 @@ Namespace Negocio
 
         End Sub
         Public Overridable Sub Cargar(ByVal pId As Integer)
-            If mId > 0 Then
+            If pId > 0 Then
                 Dim mDTO As DTO.BebidaDTO = Datos.BebidaDatos.Obtener(pId)
                 MyClass.Cargar(mDTO)
             Else

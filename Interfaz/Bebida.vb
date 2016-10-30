@@ -90,7 +90,6 @@ Public Class Bebida
                     mBebida.descripcionLarga = Me.txtDescripcion_larga.Text
                     mBebida.habilitado = Me.cboxHabilitado.Text
                     mBebida.idUsuario = Principal.UsuarioEnSesion.id
-                    mBebida.dvh = 1 'Digito Verificador Celes
                     mBebida.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                     mBebida.Guardar()
                     Me.Close()

@@ -148,10 +148,12 @@ Public Class PlatosABM
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
             If IsNothing(Me.dgvPlatos.SelectedRows(0).Cells(4).Value) Then
                 Me.btnEliminar.Enabled = True
+                Me.btnModificar.Enabled = True
                 Me.btnRehabilitar.Enabled = False
             Else
                 Me.btnRehabilitar.Enabled = True
                 Me.btnEliminar.Enabled = False
+                Me.btnModificar.Enabled = False
             End If
         Else
             Me.btnEliminar.Enabled = False

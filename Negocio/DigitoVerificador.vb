@@ -154,14 +154,23 @@ Namespace Negocio
 
         Public Shared Function CalcularDVH(ByVal pTexto As String) As Integer
             Try
-                'pTexto son todos los campos de la tabla 
-                Dim buffer() As Byte = Convert.FromBase64String(pTexto)
-                Dim des As TripleDESCryptoServiceProvider = New TripleDESCryptoServiceProvider
-                des.Key = Convert.FromBase64String("rpaSPvIvVLlrcmtzPU9/c67Gkj7yL1S5")
-                des.IV = ASCIIEncoding.ASCII.GetBytes("DigitoVerificador")
+                Dim i As Integer = 0
+                Dim result As Integer = 0
+                Dim DVH As Integer = 0
+                Dim multiplo As Integer = 1
 
-                Return Encoding.UTF8.GetString(des.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length()))
-
+                For i = 0 To pTexto.Length - 1
+                    If multiplo = 1 Then
+                        result = Convert.ToInt16(pTexto(i))
+                        DVH = DVH + (result * multiplo)
+                        multiplo = 3
+                    Else
+                        result = Convert.ToInt16(pTexto(i))
+                        DVH = DVH + (result * multiplo)
+                        multiplo = 1
+                    End If
+                Next
+                Return DVH
             Catch ex As Exception
                 Throw ex
             End Try

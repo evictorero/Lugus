@@ -91,32 +91,9 @@ Namespace Negocio
                                    ByVal idIdioma As Integer)
             'traduzco solo si es distinto del default español
             Try
-
                 If idIdioma <> 1 Then
                     ' CAMBIO EL TEXTO DE LA VENTANA
                     Form.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, Form.Text)
-
-                    'Dim allTxt As New List(Of Control)
-
-                    'For Each label As Label In FindControlRecursive(allTxt, Form, GetType(Label))
-                    '    ' CAMBIO LOS TEXTOS DE LOS LABELS
-                    '    label.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, label.Text)
-                    'Next
-
-                    'For Each button As Button In FindControlRecursive(allTxt, Form, GetType(Button))
-                    '    ' CAMBIO LOS TEXTOS DE LOS BOTONES
-                    '    button.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, button.Text)
-                    'Next
-
-                    'For Each dataGridView As DataGridView In FindControlRecursive(allTxt, Form, GetType(DataGridView))
-                    '    ' CAMBIO LOS TEXTOS DE LOS DATA GRID
-                    '    For Each Column In dataGridView.Columns
-                    '        Column.HeaderText = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, Column.HeaderText)
-                    '        If Column.GetType = GetType(System.Windows.Forms.DataGridViewButtonColumn) Then
-                    '            Column.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, Column.Text)
-                    '        End If
-                    '    Next
-                    'Next
                     For Each Control In Form.Controls
                         If Control.GetType = GetType(System.Windows.Forms.DataGridView) Then
                             ' CAMBIO LOS TEXTOS DE LOS BOTONES DE LOS DATAGRIDVIEW 
@@ -135,7 +112,7 @@ Namespace Negocio
                         ElseIf Control.GetType = GetType(System.Windows.Forms.GroupBox) Then
                             'titulo del groupbox
                             Control.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, Control.Text)
-
+                            'Dentro de los Frame
                             For Each SubControl In Control.Controls
                                 If SubControl.GetType = GetType(System.Windows.Forms.DataGridView) Then
                                     ' CAMBIO LOS TEXTOS DE LOS BOTONES DE LOS DATAGRIDVIEW 
@@ -146,17 +123,12 @@ Namespace Negocio
                                         End If
                                     Next
                                 ElseIf SubControl.GetType = GetType(System.Windows.Forms.Label) Then
-                                    ' CAMBIO LOS TEXTOS DE LOS LABELS
+                                    'CAMBIO LOS TEXTOS DE LOS LABELS
                                     SubControl.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, SubControl.Text)
                                 ElseIf SubControl.GetType = GetType(System.Windows.Forms.Button) Then
                                     ' CAMBIO LOS TEXTOS DE LOS BOTONES
                                     SubControl.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, SubControl.Text)
                                 End If
-
-                                'If SubControl.GetType = GetType(System.Windows.Forms.Label) Then
-                                '    ' CAMBIO LOS TEXTOS DE LOS LABELS
-                                '    SubControl.Text = Datos.TraductorDatos.ObtenerTraduccion(idIdioma, SubControl.Text)
-                                'End If
                             Next
                         End If
                     Next

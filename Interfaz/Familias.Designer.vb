@@ -30,7 +30,7 @@ Partial Class Familias
         Me.txtDescripcion_larga = New System.Windows.Forms.TextBox()
         Me.txtDescripcion_corta = New System.Windows.Forms.TextBox()
         Me.txtId_familia = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblFechaBaja = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -69,7 +69,7 @@ Partial Class Familias
         Me.GroupBox1.Controls.Add(Me.txtDescripcion_larga)
         Me.GroupBox1.Controls.Add(Me.txtDescripcion_corta)
         Me.GroupBox1.Controls.Add(Me.txtId_familia)
-        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.lblFechaBaja)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Location = New System.Drawing.Point(29, 17)
@@ -126,14 +126,14 @@ Partial Class Familias
         Me.txtId_familia.Size = New System.Drawing.Size(89, 22)
         Me.txtId_familia.TabIndex = 6
         '
-        'Label5
+        'lblFechaBaja
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(21, 226)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(98, 17)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Fecha de baja"
+        Me.lblFechaBaja.AutoSize = True
+        Me.lblFechaBaja.Location = New System.Drawing.Point(21, 226)
+        Me.lblFechaBaja.Name = "lblFechaBaja"
+        Me.lblFechaBaja.Size = New System.Drawing.Size(98, 17)
+        Me.lblFechaBaja.TabIndex = 4
+        Me.lblFechaBaja.Text = "Fecha de baja"
         '
         'Label3
         '
@@ -224,7 +224,7 @@ Partial Class Familias
     Friend WithEvents txtDescripcion_larga As TextBox
     Friend WithEvents txtDescripcion_corta As TextBox
     Friend WithEvents txtId_familia As TextBox
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblFechaBaja As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox2 As GroupBox

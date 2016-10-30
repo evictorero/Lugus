@@ -116,14 +116,14 @@ Namespace Negocio
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
+            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+            mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             If mId = 0 Then
                 mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
-                mDTO.dvh = "23423354"
                 Datos.FamiliaDatos.GuardarNuevo(mDTO)
             Else
                 mDTO.id = Me.id
-                mDTO.dvh = "23423433"
                 Datos.FamiliaDatos.GuardarModificacion(mDTO)
             End If
 
