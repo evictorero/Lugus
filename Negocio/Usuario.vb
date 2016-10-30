@@ -273,6 +273,12 @@ Namespace Negocio
             If ValidarFormato(mDTO.usuario, mDTO.contrasenia) Then
                 rta = Datos.UsuarioDatos.VerificarLogin(mDTO)
             End If
+
+            If rta = 1 Then
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Inicio de sesión", "Baja")
+                mBitacora.Guardar()
+            End If
+
             Return rta
 
         End Function
@@ -321,16 +327,20 @@ Namespace Negocio
                 If Validar(mDTO) Then
                     Datos.UsuarioDatos.GuardarNuevo(mDTO)
                     EnviarMail(Me.usuario, pass)
+                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Creación de usuario", "Media")
+                    mBitacora.Guardar()
                 End If
             Else
                 mDTO.id = Me.id
                 If Validar(mDTO) Then
                     Datos.UsuarioDatos.GuardarModificacion(mDTO)
+                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario", "Media")
+                    mBitacora.Guardar()
                 End If
             End If
 
             Me.GuardarUsuarioPatentes()
-                Me.GuardarUsuarioFamilias()
+            Me.GuardarUsuarioFamilias()
 
         End Sub
         Public Function Validar(ByVal pDTO As DTO.UsuarioDTO)
@@ -351,11 +361,11 @@ Namespace Negocio
                 Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el nombre del usuario."))
             End If
             If (Me.apellido = "") Then
-                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el apellido del usuario."))
-                End If
-                If (Me.usuario = "") Then
-                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
-                End If
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el apellido del usuario."))
+            End If
+            If (Me.usuario = "") Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
+            End If
         End Sub
 
         Public Overridable Sub Eliminar()

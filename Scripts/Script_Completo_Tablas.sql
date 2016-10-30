@@ -117,7 +117,7 @@ CREATE TABLE bBitacora (
 	descripcion_larga varchar(100),
 	fecha datetime,
 	dvh int NOT NULL,
-	m_error varchar(1) NOT NULL
+	criticidad varchar(5) NOT NULL
 )
 ;
 

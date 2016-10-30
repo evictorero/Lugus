@@ -9,7 +9,7 @@ Public Class BitacoraDatos
 
         mStrCom = "INSERT INTO dbo.bBitacora (id_bitacora,id_usuario,descripcion_larga,fecha,dvh,criticidad)" &
         " VALUES " &
-        "(" & pDTO.id & "," & pDTO.id & ",'" & pDTO.descripcionLarga & "'," & pDTO.fecha & ",1," & pDTO.criticidad & ")"
+        "(" & pDTO.id & "," & pDTO.idUsuario & ",'" & pDTO.descripcionLarga & "','" & Format(pDTO.fecha, "yyyy/MM/dd HH:mm:ss") & "'," & pDTO.dvh & ",'" & pDTO.criticidad & "')"
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
