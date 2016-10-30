@@ -316,19 +316,36 @@ Namespace Negocio
             If mId = 0 Then
                 mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
                 pass = GenerarPasswordAleatorio()
-                MsgBox("Password Aleatorio" & pass)
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
-                Datos.UsuarioDatos.GuardarNuevo(mDTO)
-                EnviarMail(Me.usuario, pass)
+                If Validar(mDTO) Then
+                    Datos.UsuarioDatos.GuardarNuevo(mDTO)
+                    EnviarMail(Me.usuario, pass)
+                End If
+
             Else
                 mDTO.id = Me.id
-                Datos.UsuarioDatos.GuardarModificacion(mDTO)
+                If Validar(mDTO) Then
+                    Datos.UsuarioDatos.GuardarModificacion(mDTO)
+                End If
             End If
 
             Me.GuardarUsuarioPatentes()
-            Me.GuardarUsuarioFamilias()
+                Me.GuardarUsuarioFamilias()
 
         End Sub
+        Public Function Validar(ByVal pDTO As DTO.UsuarioDTO)
+            If Datos.UsuarioDatos.ExisteDNI(pDTO) = True Then
+                Throw New ApplicationException("Usuario Duplicado: El dni ingresado ya existe.")
+            End If
+            If Datos.UsuarioDatos.ExisteEmail(pDTO) = True Then
+                Throw New ApplicationException("Usuario Duplicado: El email ingresado ya existe")
+            End If
+            If Datos.UsuarioDatos.ExisteUsuario(pDTO) = True Then
+                Throw New ApplicationException("Usuario Duplicado: El usuario ya existe.")
+            End If
+            Return True
+        End Function
+
         Public Sub ValidarFormato(pid_idioma As Integer)
             If (Me.nombre = "") Then
                 Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el nombre del usuario."))
@@ -353,6 +370,7 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó eliminar un usuario sin Id especifico.")
             End If
         End Sub
+
         Public Overridable Sub Blanquear()
             Dim mDTO As New DTO.UsuarioDTO
             Dim pass As String
@@ -415,6 +433,13 @@ Namespace Negocio
         Public Sub IncrementarIntentosLogin()
             Me.intentoLogin = Me.intentoLogin + 1
         End Sub
+
+        Public Function ExisteUsuario(ByVal pDTO As DTO.UsuarioDTO)
+            If Datos.UsuarioDatos.ExisteUsuario(pDTO) = True Then
+                Return True
+            End If
+            Return False
+        End Function
 #End Region
 
 #Region "IColeccionable"
@@ -642,5 +667,7 @@ Namespace Negocio
 
 
 #End Region
+
+
     End Class
 End Namespace
