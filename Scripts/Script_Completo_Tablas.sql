@@ -257,5 +257,5 @@ ALTER TABLE bUsuario
 ;
 
 ALTER TABLE bUsuario
-	ADD CONSTRAINT UQ_busuario_email UNIQUE (id_idioma)
+	ADD CONSTRAINT UQ_busuario_email UNIQUE (email)
 ;

@@ -370,7 +370,7 @@ Namespace Negocio
                 mDTO.fechaModif = Me.mFechaModif
                 mDTO.intentosLogin = 0
                 pass = GenerarPasswordAleatorio()
-                MsgBox("Password Aleatorio" & pass)
+                MsgBox("Password Aleatorio " & pass)
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
                 EnviarMail(Me.usuario, pass)

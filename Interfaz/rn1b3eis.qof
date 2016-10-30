@@ -1,0 +1,19 @@
+﻿Public Class Bitacora
+    Private Sub Label1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
+
+    Private Sub Bitacora_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim listaUsuarios As List(Of Negocio.Negocio.Usuario) = (New Negocio.Negocio.Backup).Listar
+        For Each mBackup As Negocio.Negocio.Backup In listaBackups
+            cmbBackup.Items.Add(mBackup.ruta)
+        Next
+
+        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+    End Sub
+
+End Class

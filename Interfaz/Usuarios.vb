@@ -27,7 +27,6 @@ Public Class Usuarios
         Me.txtUsuario.Focus()
         Me.txtFecha_Nacimiento.CustomFormat = "dd/MM/yyyy"
         Me.txtId_usuario.Enabled = False
-#Region "Actualizacion Grilla"
         'Seteo de aspecto de la grilla 
         With Me.dgvPatentes
             .AllowDrop = False
@@ -113,7 +112,7 @@ Public Class Usuarios
 
             End With
         End With
-#End Region
+
         Select Case mOperacion
             Case TipoOperacion.Alta
                 Me.txtUsuario.Text = ""
