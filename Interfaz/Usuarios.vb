@@ -145,18 +145,18 @@ Public Class Usuarios
         Try
 
             Select Case mOperacion
-            Case TipoOperacion.Alta, TipoOperacion.Modificacion
-                If IsNothing(mUsuario) Then
-                    mUsuario = New Negocio.Negocio.Usuario
-                End If
-                mUsuario.usuario = Me.txtUsuario.Text
-                mUsuario.nombre = Me.txtNombre.Text
-                mUsuario.apellido = Me.txtApellido.Text
-                mUsuario.dni = Me.txtDNI.Text
-                mUsuario.email = Me.txtEmail.Text
-                mUsuario.fechaNacimiento = Date.ParseExact(Me.txtFecha_Nacimiento.Text, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-                mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
-                mUsuario.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
+                Case TipoOperacion.Alta, TipoOperacion.Modificacion
+                    If IsNothing(mUsuario) Then
+                        mUsuario = New Negocio.Negocio.Usuario
+                    End If
+                    mUsuario.usuario = Me.txtUsuario.Text
+                    mUsuario.nombre = Me.txtNombre.Text
+                    mUsuario.apellido = Me.txtApellido.Text
+                    mUsuario.dni = Me.txtDNI.Text
+                    mUsuario.email = Me.txtEmail.Text
+                    mUsuario.fechaNacimiento = Date.ParseExact(Me.txtFecha_Nacimiento.Text, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                    mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
+                    mUsuario.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                     mUsuario.Guardar()
                     If mOperacion = TipoOperacion.Alta Then
                         MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario registrado correctamente."))
@@ -165,13 +165,13 @@ Public Class Usuarios
                     End If
                     Me.Close()
                 Case TipoOperacion.Baja
-                mUsuario.Eliminar()
-                Me.Close()
-        End Select
+                    mUsuario.Eliminar()
+                    Me.Close()
+            End Select
         Catch ex As InvalidCastException
-        MsgBox("Error al establecer el identificador del usuario seleccionado.")
+            MsgBox("Error al establecer el identificador del usuario seleccionado.")
         Catch ex As Exception
-        MsgBox(ex.Message)
+            MsgBox(ex.Message)
         End Try
 
     End Sub

@@ -145,6 +145,8 @@ Namespace ProveedorDeDatos
                         mId = "id_familia"
                     Case "bBackup"
                         mId = "id_backup"
+                    Case "bBitacora"
+                        mId = "id_bitacora"
                     Case Else
                         mId = "id"
                 End Select

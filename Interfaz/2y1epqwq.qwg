@@ -23,9 +23,7 @@ Partial Class Bitacora
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rbtn_baja = New System.Windows.Forms.RadioButton()
-        Me.rbtn_media = New System.Windows.Forms.RadioButton()
-        Me.rbtn_alta = New System.Windows.Forms.RadioButton()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.dtp_fecha_desde = New System.Windows.Forms.DateTimePicker()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -33,12 +31,14 @@ Partial Class Bitacora
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmb_usuario = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dtp_fecha_hasta = New System.Windows.Forms.DateTimePicker()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.id_bitacora = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.id_usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.descripcion_larga = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.m_error = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.rbtn_alta = New System.Windows.Forms.RadioButton()
+        Me.rbtn_media = New System.Windows.Forms.RadioButton()
+        Me.rbtn_baja = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -47,8 +47,8 @@ Partial Class Bitacora
         '
         Me.GroupBox1.Controls.Add(Me.rbtn_baja)
         Me.GroupBox1.Controls.Add(Me.rbtn_media)
-        Me.GroupBox1.Controls.Add(Me.dtp_fecha_hasta)
         Me.GroupBox1.Controls.Add(Me.rbtn_alta)
+        Me.GroupBox1.Controls.Add(Me.DateTimePicker2)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.dtp_fecha_desde)
         Me.GroupBox1.Controls.Add(Me.Button1)
@@ -65,38 +65,12 @@ Partial Class Bitacora
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtros"
         '
-        'rbtn_baja
+        'DateTimePicker2
         '
-        Me.rbtn_baja.AutoSize = True
-        Me.rbtn_baja.Location = New System.Drawing.Point(297, 101)
-        Me.rbtn_baja.Name = "rbtn_baja"
-        Me.rbtn_baja.Size = New System.Drawing.Size(46, 17)
-        Me.rbtn_baja.TabIndex = 18
-        Me.rbtn_baja.TabStop = True
-        Me.rbtn_baja.Text = "Baja"
-        Me.rbtn_baja.UseVisualStyleBackColor = True
-        '
-        'rbtn_media
-        '
-        Me.rbtn_media.AutoSize = True
-        Me.rbtn_media.Location = New System.Drawing.Point(201, 101)
-        Me.rbtn_media.Name = "rbtn_media"
-        Me.rbtn_media.Size = New System.Drawing.Size(54, 17)
-        Me.rbtn_media.TabIndex = 17
-        Me.rbtn_media.TabStop = True
-        Me.rbtn_media.Text = "Media"
-        Me.rbtn_media.UseVisualStyleBackColor = True
-        '
-        'rbtn_alta
-        '
-        Me.rbtn_alta.AutoSize = True
-        Me.rbtn_alta.Location = New System.Drawing.Point(105, 101)
-        Me.rbtn_alta.Name = "rbtn_alta"
-        Me.rbtn_alta.Size = New System.Drawing.Size(43, 17)
-        Me.rbtn_alta.TabIndex = 16
-        Me.rbtn_alta.TabStop = True
-        Me.rbtn_alta.Text = "Alta"
-        Me.rbtn_alta.UseVisualStyleBackColor = True
+        Me.DateTimePicker2.Location = New System.Drawing.Point(344, 62)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(124, 20)
+        Me.DateTimePicker2.TabIndex = 15
         '
         'Label4
         '
@@ -164,13 +138,6 @@ Partial Class Bitacora
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Usuario"
         '
-        'dtp_fecha_hasta
-        '
-        Me.dtp_fecha_hasta.Location = New System.Drawing.Point(343, 64)
-        Me.dtp_fecha_hasta.Name = "dtp_fecha_hasta"
-        Me.dtp_fecha_hasta.Size = New System.Drawing.Size(124, 20)
-        Me.dtp_fecha_hasta.TabIndex = 15
-        '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -202,6 +169,39 @@ Partial Class Bitacora
         Me.m_error.HeaderText = "Es Error?"
         Me.m_error.Name = "m_error"
         '
+        'rbtn_alta
+        '
+        Me.rbtn_alta.AutoSize = True
+        Me.rbtn_alta.Location = New System.Drawing.Point(105, 101)
+        Me.rbtn_alta.Name = "rbtn_alta"
+        Me.rbtn_alta.Size = New System.Drawing.Size(43, 17)
+        Me.rbtn_alta.TabIndex = 16
+        Me.rbtn_alta.TabStop = True
+        Me.rbtn_alta.Text = "Alta"
+        Me.rbtn_alta.UseVisualStyleBackColor = True
+        '
+        'rbtn_media
+        '
+        Me.rbtn_media.AutoSize = True
+        Me.rbtn_media.Location = New System.Drawing.Point(201, 101)
+        Me.rbtn_media.Name = "rbtn_media"
+        Me.rbtn_media.Size = New System.Drawing.Size(54, 17)
+        Me.rbtn_media.TabIndex = 17
+        Me.rbtn_media.TabStop = True
+        Me.rbtn_media.Text = "Media"
+        Me.rbtn_media.UseVisualStyleBackColor = True
+        '
+        'rbtn_baja
+        '
+        Me.rbtn_baja.AutoSize = True
+        Me.rbtn_baja.Location = New System.Drawing.Point(297, 101)
+        Me.rbtn_baja.Name = "rbtn_baja"
+        Me.rbtn_baja.Size = New System.Drawing.Size(46, 17)
+        Me.rbtn_baja.TabIndex = 18
+        Me.rbtn_baja.TabStop = True
+        Me.rbtn_baja.Text = "Baja"
+        Me.rbtn_baja.UseVisualStyleBackColor = True
+        '
         'Bitacora
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -230,7 +230,7 @@ Partial Class Bitacora
     Friend WithEvents id_usuario As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents descripcion_larga As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents m_error As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents dtp_fecha_hasta As System.Windows.Forms.DateTimePicker
+    Friend WithEvents DateTimePicker2 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents dtp_fecha_desde As System.Windows.Forms.DateTimePicker
     Friend WithEvents rbtn_baja As System.Windows.Forms.RadioButton
