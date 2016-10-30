@@ -99,7 +99,6 @@ Public Class UsuarioDatos
         End If
         Return rta
     End Function
-
     Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.UsuarioDTO)
         Dim mStrCom As String
 
@@ -128,7 +127,8 @@ Public Class UsuarioDatos
                       "intentos_login = " & pDTO.intentosLogin & "," &
                       "fecha_modif =  '" & Format(DateTime.Now, "yyyy/MM/dd") & "'," &
                       "id_usuario_alta = " & pDTO.idUsuarioAlta &
-                     " where id_usuario = " & pDTO.id
+                      ", contraseña = '" & pDTO.contrasenia &
+                     "' where id_usuario = " & pDTO.id
 
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
@@ -170,5 +170,30 @@ Public Class UsuarioDatos
         End If
         ProximoId += 1
         Return ProximoId
+    End Function
+
+    Public Shared Function ExisteDNI(ByVal pDTO As DTO.UsuarioDTO) As Boolean
+        Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, FORMAT(fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE dni = " & pDTO.dni & " and id_usuario !=" & pDTO.id)
+        If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Public Shared Function ExisteUsuario(ByVal pDTO As DTO.UsuarioDTO) As Boolean
+        Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, FORMAT(fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE usuario = '" & pDTO.usuario & "' and id_usuario != " & pDTO.id)
+        If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Public Shared Function ExisteEmail(ByVal pDTO As DTO.UsuarioDTO) As Boolean
+        Dim mDs As DataSet = DB.ExecuteDataset("SELECT id_usuario, usuario ,contraseña, nombre, apellido, email, dni,id_idioma, FORMAT(fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,fecha_baja,dvh,intentos_login,fecha_modif,id_usuario_alta FROM dbo.busuario WHERE email = '" & pDTO.email & "' and id_usuario !=" & pDTO.id)
+        If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 End Class

@@ -39,7 +39,24 @@ Public Class LogIn
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        msgContraseña.Show()
+        If Me.txtUsuario.Text = "" Then
+            MsgBox("Debe completar con su usuario para poder enviar la nueva contraseña.")
+        End If
+
+
+        Dim mUsuario = New Negocio.Negocio.Usuario
+        mUsuario.usuario = Me.txtUsuario.Text
+        mUsuario = mUsuario.ObtenerPorUsuario
+
+        Dim mdto = New DTO.UsuarioDTO
+        mdto.usuario = Negocio.Negocio.Encriptador.EncriptarDatos(2, mUsuario.usuario)
+        mdto.id = 0
+
+        If mUsuario.ExisteUsuario(mDTO) = True Then
+            mUsuario.Blanquear()
+            msgContraseña.Show()
+        End If
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
