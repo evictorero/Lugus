@@ -46,7 +46,6 @@ Public Class UsuarioDatos
         pDTO.email = pDr("email")
         pDTO.dni = pDr("dni")
         pDTO.id_idioma = pDr("id_idioma")
-        ' probando 
         pDTO.fechaNacimiento = DateTime.Parse(pDr("fecha_nacimiento"))
         If Not IsDBNull(pDr("fecha_baja")) Then
             pDTO.fechaBaja = pDr("fecha_baja")

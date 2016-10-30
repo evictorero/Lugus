@@ -25,7 +25,7 @@ Public Class LogIn
             ElseIf rta = 2 Then
                 MsgBox("Contraseña Incorrecta.")
                 Dim mUsuarioaLoguearse = New Negocio.Negocio.Usuario
-                mUsuario.usuario = Me.txtUsuario.Text
+                mUsuarioaLoguearse.usuario = Me.txtUsuario.Text
                 mUsuarioaLoguearse = mUsuario.ObtenerPorUsuario()
                 mUsuarioaLoguearse.IncrementarIntentosLogin()
                 mUsuarioaLoguearse.Guardar()

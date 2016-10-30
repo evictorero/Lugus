@@ -308,6 +308,7 @@ Namespace Negocio
             mDTO.idUsuarioAlta = Me.idUsuarioAlta
             mDTO.fechaModif = Me.mFechaModif
             mDTO.intentosLogin = Me.intentoLogin
+            mDTO.contrasenia = Me.mPassword
 
             'Recalculo del digito verificador 
             Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
@@ -321,7 +322,6 @@ Namespace Negocio
                     Datos.UsuarioDatos.GuardarNuevo(mDTO)
                     EnviarMail(Me.usuario, pass)
                 End If
-
             Else
                 mDTO.id = Me.id
                 If Validar(mDTO) Then
