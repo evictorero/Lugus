@@ -145,9 +145,9 @@ Namespace Negocio
                 End Using
 
                 ' elimino archivos .bak y .temp
-                If File.Exists(rutaCompletaBak) Then
-                    File.Delete(rutaCompletaBak)
-                End If
+                'If File.Exists(rutaCompletaBak) Then
+                ' File.Delete(rutaCompletaBak)
+                'End If
 
                 If File.Exists(rutaCompletaTemp) Then
                     File.Delete(rutaCompletaTemp)
@@ -194,15 +194,11 @@ Namespace Negocio
             If File.Exists(rutaCompletaBak) Then
                 Datos.BackupDatos.Restaurar(rutaCompletaBak)
                 'If File.Exists(rutaCompletaBak) Then
-                File.Delete(rutaCompletaBak)
+                'File.Delete(rutaCompletaBak)
                     'End If
                 Else
                 Throw New ApplicationException("Se produjo un error descomprimiendo el archivo")
             End If
-
-
-
-
         End Sub
 
         Public Overridable Sub Cargar(ByVal pId As Integer)

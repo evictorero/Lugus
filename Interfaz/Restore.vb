@@ -7,7 +7,9 @@
             cmbBackup.Items.Add(mBackup.ruta)
         Next
 
-        cmbBackup.SelectedIndex = 0
+        If cmbBackup.Items.Count > 1 Then
+            cmbBackup.SelectedIndex = 0
+        End If
 
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
@@ -16,9 +18,14 @@
         If IsNothing(mBackup) Then
             mBackup = New Negocio.Negocio.Backup
         End If
-
+        Me.Cursor = Cursors.WaitCursor
         mBackup.Restaurar(cmbBackup.Text)
+        Me.Cursor = Cursors.Default
+        MessageBox.Show("La copia de respaldo se restauró correctamente")
+        Me.Close()
+    End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Me.Close()
     End Sub
 End Class

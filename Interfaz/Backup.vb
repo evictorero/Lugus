@@ -14,8 +14,9 @@ Public Class Backup
 
         mBackup.cantVolumen = txtCantVolumenes.Text
         mBackup.idUsuarioAlta = Principal.UsuarioEnSesion.id
+        Me.Cursor = Cursors.Default
         mBackup.GuardarNuevo()
-
+        MessageBox.Show("La copia de respaldo se realizó correctamente")
         Me.Close()
     End Sub
 
@@ -37,5 +38,9 @@ Public Class Backup
         'sfd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
         'sfd.FilterIndex = 2
         'sfd.RestoreDirectory = True
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Close()
     End Sub
 End Class
