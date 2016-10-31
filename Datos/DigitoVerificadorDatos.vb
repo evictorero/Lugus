@@ -24,7 +24,7 @@ Public Class DigitoVerificadorDatos
 
         mStrCom = "UPDATE bDigitoVerificadorVertical " &
                       " SET tabla = '" & pDTO.tabla & "'," &
-                      " valor =  " & pDTO.valor & "," &
+                      " valor =  " & pDTO.valor &
                       " WHERE id_dvv = " & pDTO.id
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
@@ -96,6 +96,32 @@ Public Class DigitoVerificadorDatos
         Return mCol
     End Function
 
+    Public Shared Function Listar(ByVal pTabla As String) As List(Of DTO.DigitoVerificadorDTO)
+        Dim mCol As New List(Of DTO.DigitoVerificadorDTO)
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_dvv,tabla,valor FROM dbo.bDigitoVerificadorVertical where tabla ='" & pTabla & "'")
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            Dim mDTO As New DTO.DigitoVerificadorDTO
+
+            CargarDTO(mDTO, mDr)
+
+            mCol.Add(mDTO)
+        Next
+
+        Return mCol
+    End Function
+
+    Public Shared Function GenerarDVV(ByVal pTabla As String) As Integer
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT sum(dvh) FROM " & pTabla)
+        Dim mDVV As Integer
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            mDVV = mDr.Item(0)
+        Next
+        Return mDVV
+
+    End Function
+
     Public Shared Function ObtenerProximoId() As Integer
         If ProximoId = 0 Then
             ProximoId = Datos.ProveedorDeDatos.DB.ObtenerId("bDigitoVerificadorVertical")
@@ -105,7 +131,6 @@ Public Class DigitoVerificadorDatos
     End Function
 
     Private Shared Sub CargarDTO(ByVal pDTO As DTO.DigitoVerificadorDTO, ByVal pDr As DataRow)
-        ' id_dvv,tabla,descripcion_larga,habilitado,fecha_baja,valor,dvh,fecha_modif
         pDTO.id = pDr("id_dvv")
         pDTO.tabla = pDr("tabla")
         pDTO.valor = pDr("valor")

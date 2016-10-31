@@ -27,6 +27,9 @@ Namespace Negocio
         Public Sub New(ByVal pDTO As DTO.DigitoVerificadorDTO)
             Me.Cargar(pDTO)
         End Sub
+        Public Sub New(ByVal pTabla As String)
+            Me.Cargar(pTabla)
+        End Sub
 #End Region
 
 #Region "Propiedades"
@@ -100,6 +103,18 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó cargar un DigitoVerificador sin Id especificado")
             End If
         End Sub
+        Public Overridable Sub Cargar(ByVal pTabla As String)
+            If pTabla <> "" Then
+                Dim mCol As New Collections.Generic.List(Of DigitoVerificador)
+                Dim mColDTO As List(Of DTO.DigitoVerificadorDTO) = Datos.DigitoVerificadorDatos.Listar(pTabla)
+
+                For Each mDTO As DTO.DigitoVerificadorDTO In mColDTO
+                    MyClass.Cargar(mDTO)
+                Next
+            Else
+                Throw New ApplicationException("Se intentó cargar un DigitoVerificador sin Id especificado")
+            End If
+        End Sub
         Public Sub Cargar(ByVal pDTO As DTO.DigitoVerificadorDTO)
             mId = pDTO.id
             mTabla = pDTO.tabla
@@ -149,9 +164,6 @@ Namespace Negocio
             Return mCol
         End Function
 
-
-
-
         Public Shared Function CalcularDVH(ByVal pTexto As String) As Integer
             Try
                 Dim i As Integer = 0
@@ -178,13 +190,10 @@ Namespace Negocio
 
         Public Shared Function CalcularDVV(ByVal pTexto As String) As Integer
             Try
-                'pTexto es el nombre de la tabla de la cual se desea generar el DVV 
-                Dim buffer() As Byte = Convert.FromBase64String(pTexto)
-                Dim des As TripleDESCryptoServiceProvider = New TripleDESCryptoServiceProvider
-                des.Key = Convert.FromBase64String("rpaSPvIvVLlrcmtzPU9/c67Gkj7yL1S5")
-                des.IV = ASCIIEncoding.ASCII.GetBytes("DigitoVerificador")
-                Return Encoding.UTF8.GetString(des.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length()))
-
+                Dim mDVV As Integer
+                mDVV = Datos.DigitoVerificadorDatos.GenerarDVV(pTexto)
+                MsgBox(mDVV)
+                Return mDVV
             Catch ex As Exception
                 Throw ex
             End Try

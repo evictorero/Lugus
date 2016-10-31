@@ -112,6 +112,7 @@ Namespace Negocio
             mDvh = pDTO.dvh
             mCriticidad = pDTO.criticidad
         End Sub
+
         Private Shared Function ObtenerProximoId() As Integer
             If ProximoId = 0 Then
                 Dim mTempId As Object = Datos.BitacoraDatos.ObtenerProximoId()
@@ -119,6 +120,7 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
+
         Public Overridable Function Listar() As Collections.Generic.List(Of Bitacora)
             Dim mCol As New Collections.Generic.List(Of Bitacora)
             Dim mColDTO As List(Of DTO.BitacoraDTO) = Datos.BitacoraDatos.Listar()

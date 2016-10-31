@@ -4,13 +4,11 @@ Imports System.Text
 
 Namespace Negocio
 
-
     Public Class Encriptador
 
-        'Funcion de encriptado
         Public Shared Function EncriptarDatos(ByVal tipo As Integer, ByVal textoAEncriptar As String) As String
             Try
-                'MD5
+                'MD5 Encriptación irreversible Contraseña
                 If tipo = 1 Then
                     Dim contraseniaEncriptada As String
                     contraseniaEncriptada = ""
@@ -30,7 +28,7 @@ Namespace Negocio
 
                     Return contraseniaEncriptada
                 ElseIf tipo = 2 Then
-                    'DES
+                    'DES Encriptación reversible Nombre de Usuario, descripción de la bitácora, la descripción de la familia, la descripción del plato, la descripción de la bebida y del pedido
                     Dim buffer() As Byte = Encoding.UTF8.GetBytes(textoAEncriptar)
                     Dim des As TripleDESCryptoServiceProvider = New TripleDESCryptoServiceProvider
                     des.Key = Convert.FromBase64String("rpaSPvIvVLlrcmtzPU9/c67Gkj7yL1S5")

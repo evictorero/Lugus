@@ -55,10 +55,6 @@ Public Class BitacoraDatos
                                                                       " FROM dbo.bbitacora " &
                                                                         mCondicion
 
-        '" WHERE (id_usuario = " & pUsuario & " OR " & pUsuario & " IS NULL)" &
-        '"   AND (fecha BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "' OR '" & pFechaDesde & "' IS NULL) " &
-        '"   AND (criticidad = '" & pCriticidad & "' OR '" & pCriticidad & "' IS NULL)"
-
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset(mStrCom)
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
@@ -70,6 +66,7 @@ Public Class BitacoraDatos
 
         Return mCol
     End Function
+
     Public Shared Function ObtenerProximoId() As Integer
         If ProximoId = 0 Then
             ProximoId = Datos.ProveedorDeDatos.DB.ObtenerId("bBitacora")

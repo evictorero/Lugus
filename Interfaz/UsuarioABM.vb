@@ -80,7 +80,7 @@ Public Class UsuarioABM
 
             Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
         Else
-            Me.Close()
+                Me.Close()
         MsgBox("Acceso Restringido")
         End If
 
@@ -165,6 +165,7 @@ Public Class UsuarioABM
         Me.btnModificar.Enabled = False
         Me.btnNuevo.Enabled = False
         Me.btnRehabilitar.Enabled = False
+        Me.btnBlanquear.Enabled = False
 
         If Me.dgv_Usuarios.SelectedRows.Count > 0 Then
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
@@ -174,17 +175,20 @@ Public Class UsuarioABM
                 End If
                 If TieneAccesoModif Then
                     Me.btnModificar.Enabled = True
+                    Me.btnBlanquear.Enabled = True
                 End If
             Else
                 If TieneAccesoRehab = True Then
                     Me.btnRehabilitar.Enabled = True
                 End If
             End If
-        Else
-            If TieneAccesoAlta = True Then
-                Me.btnNuevo.Enabled = True
-            End If
         End If
+
+        If TieneAccesoAlta = True Then
+            Me.btnNuevo.Enabled = True
+        End If
+
+
     End Sub
 
     Private Sub btnBlanquear_Click(sender As Object, e As EventArgs) Handles btnBlanquear.Click

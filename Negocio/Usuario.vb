@@ -273,12 +273,10 @@ Namespace Negocio
             If ValidarFormato(mDTO.usuario, mDTO.contrasenia) Then
                 rta = Datos.UsuarioDatos.VerificarLogin(mDTO)
             End If
-
             If rta = 1 Then
                 Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Inicio de sesión", "Baja")
                 mBitacora.Guardar()
             End If
-
             Return rta
 
         End Function
@@ -336,6 +334,11 @@ Namespace Negocio
                     Datos.UsuarioDatos.GuardarModificacion(mDTO)
                     Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario", "Media")
                     mBitacora.Guardar()
+                    Dim mDVV As New Negocio.DigitoVerificador("bUsuario")
+                    mDVV.tabla = "bUsuario"
+                    mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bUsuario")
+                    mDVV.Guardar()
+
                 End If
             End If
 
@@ -465,6 +468,7 @@ Namespace Negocio
                 Throw New ApplicationException("Error al blanquear el usuario especificado.", ex)
             End Try
         End Sub
+
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try

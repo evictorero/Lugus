@@ -105,7 +105,6 @@ Namespace Negocio
                 Directory.CreateDirectory(ruta)
             End If
 
-
             mDTO.descripcion = Me.descripcion
             mDTO.ruta = rutaCompletaBak
             mDTO.fecha = Me.fecha
@@ -114,17 +113,16 @@ Namespace Negocio
 
             If mId = 0 Then
                 mDTO.id = Datos.BackupDatos.ObtenerProximoId()
+                'Genero el .bak
                 Datos.BackupDatos.GuardarNuevo(mDTO)
             End If
 
-
             If File.Exists(rutaCompletaBak) Then
-                ' comprimo
+                ' comprimo para conocer el tamaño
                 Using zip As ZipFile = New ZipFile()
                     zip.AddFile(rutaCompletaBak, "")
                     zip.Save(rutaCompletaTemp)
                 End Using
-
 
                 ' si se creo correctamente busco el tamaño para
                 ' dividirlo en las partes solicitadas
@@ -132,7 +130,7 @@ Namespace Negocio
                 tamanioArchivoBackup = archivoBackup.Length
 
                 maxOutputSegmentSize = Math.Round(tamanioArchivoBackup / Me.cantVolumen)
-                ' el tamaño minimo es 65560
+                ' el tamaño minimo es 65560 - limitacion
                 If maxOutputSegmentSize < 65560 Then
                     maxOutputSegmentSize = 65560
                 End If
@@ -152,10 +150,9 @@ Namespace Negocio
                 If File.Exists(rutaCompletaTemp) Then
                     File.Delete(rutaCompletaTemp)
                 End If
-
             End If
-
         End Sub
+
         Public Overridable Sub Cargar()
             If mId > 0 Then
                 Dim mDTO As DTO.BackupDTO = Datos.BackupDatos.Obtener(mId)
@@ -165,6 +162,7 @@ Namespace Negocio
 
             End If
         End Sub
+
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mDescripcion = pDr("descripcion")
