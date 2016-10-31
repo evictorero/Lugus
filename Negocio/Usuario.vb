@@ -343,6 +343,39 @@ Namespace Negocio
             Me.GuardarUsuarioFamilias()
 
         End Sub
+
+        Public Overridable Sub GuardarNuevaContrasenia()
+            Dim mDTO As New DTO.UsuarioDTO
+            mDTO.usuario = Encriptador.EncriptarDatos(2, Me.usuario)
+            mDTO.nombre = Me.nombre
+            mDTO.apellido = Me.apellido
+            mDTO.dni = Me.dni
+            mDTO.email = Me.email
+            'Guarda el idioma por defecto
+            If Me.id_idioma = 0 Then
+                mDTO.id_idioma = 1
+            Else
+                mDTO.id_idioma = Me.id_idioma
+            End If
+
+            mDTO.fechaNacimiento = Me.fechaNacimiento
+            mDTO.idUsuarioAlta = Me.idUsuarioAlta
+            mDTO.fechaModif = Me.mFechaModif
+            mDTO.intentosLogin = Me.intentoLogin
+            mDTO.contrasenia = Me.mPassword
+
+            'Recalculo del digito verificador 
+            Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
+            mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+
+            mDTO.id = Me.id
+            If Validar(mDTO) Then
+                Datos.UsuarioDatos.GuardarModificacion(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: Nueva Contrasenia", "Media")
+                mBitacora.Guardar()
+            End If
+        End Sub
+
         Public Function Validar(ByVal pDTO As DTO.UsuarioDTO)
             If Datos.UsuarioDatos.ExisteDNI(pDTO) = True Then
                 Throw New ApplicationException("Usuario Duplicado: El dni ingresado ya existe.")
@@ -398,7 +431,6 @@ Namespace Negocio
                 mDTO.fechaModif = Me.mFechaModif
                 mDTO.intentosLogin = 0
                 pass = GenerarPasswordAleatorio()
-                MsgBox("Password Aleatorio " & pass)
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
                 EnviarMail(Me.usuario, pass)
@@ -407,6 +439,32 @@ Namespace Negocio
             End Try
         End Sub
 
+        Public Overridable Sub HaOlvidadoSuContrasenia()
+            Dim mDTO As New DTO.UsuarioDTO
+            Dim pass As String
+            Try
+                mDTO.id = Me.id
+                mDTO.usuario = Encriptador.EncriptarDatos(2, Me.usuario)
+                mDTO.nombre = Me.nombre
+                mDTO.apellido = Me.apellido
+                mDTO.dni = Me.dni
+                mDTO.email = Me.email
+                mDTO.id_idioma = Me.id_idioma
+                mDTO.fechaNacimiento = Me.fechaNacimiento
+                mDTO.dvh = Me.dvh
+                mDTO.idUsuarioAlta = Me.idUsuarioAlta
+                mDTO.fechaModif = Me.mFechaModif
+                mDTO.intentosLogin = 0
+                pass = GenerarPasswordAleatorio()
+                mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
+                Datos.UsuarioDatos.GuardarModificacion(mDTO)
+                EnviarMail(Me.usuario, pass)
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificacion Usuario : Ha Olvidado su contrasenia", "Baja")
+                mBitacora.Guardar()
+            Catch ex As Exception
+                Throw New ApplicationException("Error al blanquear el usuario especificado.", ex)
+            End Try
+        End Sub
         Public Overridable Sub Rehabilitar()
             If mId > 0 Then
                 Try
@@ -449,6 +507,17 @@ Namespace Negocio
                 Return True
             End If
             Return False
+        End Function
+
+        Public Function ListarPatentesDeFamiliaPorUsuario() As List(Of UsuarioPatente)
+            Dim mCol As New List(Of UsuarioPatente)
+            Dim mColDTO As List(Of DTO.UsuarioPatenteDTO) = Datos.UsuarioPatenteDatos.ListarPatentesDeFamiliaPorUsuario(Me.mId)
+            Dim miUsuarioPatente As Negocio.UsuarioPatente
+            For Each mDTO As DTO.UsuarioPatenteDTO In mColDTO
+                miUsuarioPatente = New Negocio.UsuarioPatente(mDTO)
+                mCol.Add(miUsuarioPatente)
+            Next
+            Return mCol
         End Function
 #End Region
 

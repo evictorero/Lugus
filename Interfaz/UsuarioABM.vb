@@ -1,78 +1,88 @@
-﻿
-Imports Negocio.Negocio.Usuario
+﻿Imports Negocio.Negocio.Usuario
+Imports Negocio.Negocio.UsuarioPatente
 
 Public Class UsuarioABM
 
+    Dim TieneAccesoAlta As Boolean = False
+    Dim TieneAccesoModif As Boolean = False
+    Dim TieneAccesoElim As Boolean = False
+    Dim TieneAccesoRehab As Boolean = False
+
 #Region "Eventos Form"
     Private Sub UsuarioABM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Seteo de aspecto de la grilla
-        With Me.dgv_Usuarios
-            .AllowDrop = False
-            .AllowUserToAddRows = False
-            .AllowUserToDeleteRows = False
-            .AllowUserToResizeColumns = False
-            .AllowUserToResizeRows = False
-            .AutoGenerateColumns = False
-            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            .MultiSelect = False
+        If TienePermisoAcceso() = True Then
+            'Seteo de aspecto de la grilla
+            With Me.dgv_Usuarios
+                .AllowDrop = False
+                .AllowUserToAddRows = False
+                .AllowUserToDeleteRows = False
+                .AllowUserToResizeColumns = False
+                .AllowUserToResizeRows = False
+                .AutoGenerateColumns = False
+                .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                .MultiSelect = False
 
-            With .Columns
-                .Add("cid", "Código")
-                .Item(0).DataPropertyName = "id" 'nombre del dto
-                '.Item(0).Width = 100
-                .Item(0).Visible = False
+                With .Columns
+                    .Add("cid", "Código")
+                    .Item(0).DataPropertyName = "id" 'nombre del dto
+                    '.Item(0).Width = 100
+                    .Item(0).Visible = False
 
-                .Add("cUsuario", "Usuario")
-                .Item(1).DataPropertyName = "Usuario"
-                .Item(1).Width = 100
+                    .Add("cUsuario", "Usuario")
+                    .Item(1).DataPropertyName = "Usuario"
+                    .Item(1).Width = 100
 
-                .Add("cdescripcioncorta", "Nombre")
-                .Item(2).DataPropertyName = "nombre"
-                .Item(2).Width = 100
+                    .Add("cdescripcioncorta", "Nombre")
+                    .Item(2).DataPropertyName = "nombre"
+                    .Item(2).Width = 100
 
-                .Add("cdescripcionlarga", "Apellido")
-                .Item(3).DataPropertyName = "Apellido"
-                .Item(3).Width = 100
+                    .Add("cdescripcionlarga", "Apellido")
+                    .Item(3).DataPropertyName = "Apellido"
+                    .Item(3).Width = 100
 
-                .Add("cdni", "dni")
-                .Item(4).DataPropertyName = "dni"
-                .Item(4).Width = 100
+                    .Add("cdni", "dni")
+                    .Item(4).DataPropertyName = "dni"
+                    .Item(4).Width = 100
 
-                .Add("cfechaBaja", "Fecha de baja")
-                .Item(5).DataPropertyName = "fechaBaja"
-                .Item(5).Width = 100
-                .Item(5).DefaultCellStyle.Format = "dd/MM/yyyy"
+                    .Add("cfechaBaja", "Fecha de baja")
+                    .Item(5).DataPropertyName = "fechaBaja"
+                    .Item(5).Width = 100
+                    .Item(5).DefaultCellStyle.Format = "dd/MM/yyyy"
 
-                .Add("cfechaModif", "Fecha de modificación")
-                .Item(6).DataPropertyName = "fechaModif"
-                .Item(6).Width = 100
-                .Item(6).DefaultCellStyle.Format = "dd/MM/yyyy"
+                    .Add("cfechaModif", "Fecha de modificación")
+                    .Item(6).DataPropertyName = "fechaModif"
+                    .Item(6).Width = 100
+                    .Item(6).DefaultCellStyle.Format = "dd/MM/yyyy"
 
-                .Add("cidUsuario", "Usuario Alta/Modif")
-                .Item(7).DataPropertyName = "idUsuarioAlta"
-                .Item(7).Width = 100
-                .Item(7).Visible = False
+                    .Add("cidUsuario", "Usuario Alta/Modif")
+                    .Item(7).DataPropertyName = "idUsuarioAlta"
+                    .Item(7).Width = 100
+                    .Item(7).Visible = False
 
-                .Add("cNombreUsuario", "Usuario Alta/Modif")
-                .Item(8).DataPropertyName = "Nombre Usuario"
-                .Item(8).Width = 150
-                .Item(8).Visible = True
+                    .Add("cNombreUsuario", "Usuario Alta/Modif")
+                    .Item(8).DataPropertyName = "Nombre Usuario"
+                    .Item(8).Width = 150
+                    .Item(8).Visible = True
+                End With
+
             End With
 
-        End With
+            'Seteo de elementos de interfaz
+            Me.btnEliminar.Enabled = False
+            Me.btnModificar.Enabled = False
+            Me.btnNuevo.Enabled = True
+            Me.btnRehabilitar.Enabled = False
 
-        'Seteo de elementos de interfaz
-        Me.btnEliminar.Enabled = False
-        Me.btnModificar.Enabled = False
-        Me.btnNuevo.Enabled = True
-        Me.btnRehabilitar.Enabled = False
+            'Método de carga de datos en la grilla
+            ActualizarGrilla()
 
-        'Método de carga de datos en la grilla
-        ActualizarGrilla()
+            Me.dgv_Usuarios.ClearSelection()
 
-        Me.dgv_Usuarios.ClearSelection()
-
-        Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+            Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+        Else
+            Me.Close()
+        MsgBox("Acceso Restringido")
+        End If
 
     End Sub
 #End Region
@@ -151,24 +161,29 @@ Public Class UsuarioABM
     End Sub
 
     Private Sub dgv_Usuarios_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles dgv_Usuarios.SelectionChanged
+        Me.btnEliminar.Enabled = False
+        Me.btnModificar.Enabled = False
+        Me.btnNuevo.Enabled = False
+        Me.btnRehabilitar.Enabled = False
+
         If Me.dgv_Usuarios.SelectedRows.Count > 0 Then
-            Me.btnModificar.Enabled = True
-            Me.btnNuevo.Enabled = True
             'Se evalua la fecha de baja, si esta vacio, (No se cargo el dto)
             If IsNothing(Me.dgv_Usuarios.SelectedRows(0).Cells(5).Value) Then
-                Me.btnEliminar.Enabled = True
-                Me.btnModificar.Enabled = True
-                Me.btnRehabilitar.Enabled = False
+                If TieneAccesoElim Then
+                    Me.btnEliminar.Enabled = True
+                End If
+                If TieneAccesoModif Then
+                    Me.btnModificar.Enabled = True
+                End If
             Else
-                Me.btnRehabilitar.Enabled = True
-                Me.btnModificar.Enabled = False
-                Me.btnEliminar.Enabled = False
+                If TieneAccesoRehab = True Then
+                    Me.btnRehabilitar.Enabled = True
+                End If
             End If
         Else
-            Me.btnEliminar.Enabled = False
-            Me.btnModificar.Enabled = False
-            Me.btnNuevo.Enabled = True
-            Me.btnRehabilitar.Enabled = False
+            If TieneAccesoAlta = True Then
+                Me.btnNuevo.Enabled = True
+            End If
         End If
     End Sub
 
@@ -182,7 +197,66 @@ Public Class UsuarioABM
         End If
         ActualizarGrilla()
     End Sub
+    Public Function TienePermisoAcceso() As Boolean
+        'Patentes 18 19 20 21
+        Dim tieneAcceso As Boolean = False
+        For x As Integer = 0 To Principal.UsuarioEnSesion.UsuarioPatente.Count - 1
+            Select Case Principal.UsuarioEnSesion.UsuarioPatente(x).id_patente
+                Case 18
+                    If Principal.UsuarioEnSesion.UsuarioPatente(x).m_negada = "N" Then
+                        TieneAccesoAlta = True
+                        tieneAcceso = True
+                    End If
 
+                Case 19
+                    If Principal.UsuarioEnSesion.UsuarioPatente(x).m_negada = "N" Then
+                        TieneAccesoModif = True
+                        tieneAcceso = True
+                    End If
+
+                Case 20
+                    If Principal.UsuarioEnSesion.UsuarioPatente(x).m_negada = "N" Then
+                        TieneAccesoElim = True
+                        tieneAcceso = True
+                    End If
+
+                Case 21
+                    If Principal.UsuarioEnSesion.UsuarioPatente(x).m_negada = "N" Then
+                        TieneAccesoRehab = True
+                        tieneAcceso = True
+                    End If
+            End Select
+        Next
+        Dim mListaPatentesDeFamiliaporUsuario As New List(Of Negocio.Negocio.UsuarioPatente)
+        mListaPatentesDeFamiliaporUsuario = Principal.UsuarioEnSesion.ListarPatentesDeFamiliaPorUsuario
+        For x As Integer = 0 To mListaPatentesDeFamiliaporUsuario.Count - 1
+            Select Case mListaPatentesDeFamiliaporUsuario(x).id_patente
+                Case 18
+                    If mListaPatentesDeFamiliaporUsuario(x).m_negada = "N" Then
+                        TieneAccesoAlta = True
+                        tieneAcceso = True
+                    End If
+
+                Case 19
+                    If mListaPatentesDeFamiliaporUsuario(x).m_negada = "N" Then
+                        TieneAccesoModif = True
+                        tieneAcceso = True
+                    End If
+
+                Case 20
+                    If mListaPatentesDeFamiliaporUsuario(x).m_negada = "N" Then
+                        TieneAccesoElim = True
+                        tieneAcceso = True
+                    End If
+                Case 21
+                    If mListaPatentesDeFamiliaporUsuario(x).m_negada = "N" Then
+                        TieneAccesoRehab = True
+                        tieneAcceso = True
+                    End If
+            End Select
+        Next
+        Return tieneAcceso
+    End Function
 #End Region
 
 End Class

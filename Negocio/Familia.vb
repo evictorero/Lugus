@@ -124,9 +124,13 @@ Namespace Negocio
             If mId = 0 Then
                 mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
                 Datos.FamiliaDatos.GuardarNuevo(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
+                mBitacora.Guardar()
             Else
                 mDTO.id = Me.id
                 Datos.FamiliaDatos.GuardarModificacion(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia", "Media")
+                mBitacora.Guardar()
             End If
 
             Me.GuardarFamiliaPatentes()

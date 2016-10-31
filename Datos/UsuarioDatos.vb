@@ -70,6 +70,7 @@ Public Class UsuarioDatos
 
         Return mCol
     End Function
+
     Public Shared Function VerificarLogin(pDTO As DTO.UsuarioDTO) As Integer
         Dim mFuncion As String
         Dim rta As Integer = -1

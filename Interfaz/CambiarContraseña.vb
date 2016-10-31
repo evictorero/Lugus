@@ -1,4 +1,5 @@
 ﻿Imports Negocio.Negocio.Traductor
+Imports Negocio.Negocio.Encriptador
 
 Public Class CambiarContraseña
     Dim mUsuario As Negocio.Negocio.Usuario
@@ -35,9 +36,9 @@ Public Class CambiarContraseña
             rta = mUsuario.ValidarLogin()
 
             If rta = 1 Then
-                mUsuario.password = Me.txtContraseniaNueva.Text
-                mUsuario.EnviarMail(mUsuario.usuario, mUsuario.password)
-                mUsuario.Guardar()
+                mUsuario.password = Negocio.Negocio.Encriptador.EncriptarDatos(1, Me.txtContraseniaNueva.Text)
+                mUsuario.EnviarMail(mUsuario.usuario, Me.txtContraseniaNueva.Text)
+                mUsuario.GuardarNuevaContrasenia()
                 MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Su nueva contraseña ha sido enviada de forma exitosa a su casilla de email."))
                 Me.Close()
             End If

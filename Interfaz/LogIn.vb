@@ -1,4 +1,5 @@
 ﻿Imports Negocio.Negocio.Usuario
+Imports Negocio.Negocio.Bitacora
 
 Public Class LogIn
 
@@ -43,7 +44,6 @@ Public Class LogIn
             MsgBox("Debe completar con su usuario para poder enviar la nueva contraseña.")
         End If
 
-
         Dim mUsuario = New Negocio.Negocio.Usuario
         mUsuario.usuario = Me.txtUsuario.Text
         mUsuario = mUsuario.ObtenerPorUsuario
@@ -53,7 +53,7 @@ Public Class LogIn
         mdto.id = 0
 
         If mUsuario.ExisteUsuario(mDTO) = True Then
-            mUsuario.Blanquear()
+            mUsuario.HaOlvidadoSuContrasenia()
             msgContraseña.Show()
         End If
 

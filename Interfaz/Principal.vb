@@ -134,6 +134,7 @@ Public Class Principal
                 menuIdioma.Checked = True
             End If
         Next
+        Dim idiomaViejo As Integer = UsuarioEnSesion.id_idioma
 
         ' seteo el nuevo idioma en el usuario en memoria
         UsuarioEnSesion.id_idioma = idioma.id
@@ -141,11 +142,23 @@ Public Class Principal
         ' persisto el nuevo idioma en BD
         UsuarioEnSesion.Guardar()
 
-        MessageBox.Show("Iniciar sesión nuevamente para utilizar el nuevo idioma")
+        MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(idiomaViejo, "El idioma ha sido seleccionado correctamente. Por favor reinicie sesión para visualizar el cambio"), Negocio.Negocio.Traductor.ObtenerTraduccion(idiomaViejo, "Cambio de Idioma"))
+
+        Dim mBitacora As New Negocio.Negocio.Bitacora(UsuarioEnSesion.id, "El usuario a Modificado el idioma.", "Baja")
+        mBitacora.Guardar()
 
         ' cierro para que inicie sesion con el nuevo idioma
         Me.Close()
 
     End Sub
 
+    Private Sub CerrarSesionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CerrarSesionToolStripMenuItem.Click
+        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(UsuarioEnSesion.id_idioma, "¿Esta seguro que desea Cerrar Sesión?"), "Cerrar Sistema", MessageBoxButtons.YesNo)
+        If result = DialogResult.Yes Then
+            Dim mBitacora As New Negocio.Negocio.Bitacora(UsuarioEnSesion.id, "Salio del Sistema", "Baja")
+            mBitacora.Guardar()
+            Me.Close()
+        End If
+        Application.Exit()
+    End Sub
 End Class
