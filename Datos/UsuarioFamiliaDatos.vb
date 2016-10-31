@@ -90,6 +90,19 @@ Public Class UsuarioFamiliaDatos
         pDTO.Dvh = pDr("dvh")
     End Sub
 
+    Public Shared Function Existe(ByVal pId_usuario As Integer, ByVal pId_Familia As Integer) As Boolean
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_familia,id_usuario_alta,dvh FROM dbo.rUsuariofamilia where id_usuario = " & pId_usuario & " and id_familia = " & pId_Familia)
+
+        Dim rta As Boolean = False
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            rta = True
+        Next
+
+        Return rta
+
+    End Function
 End Class
 
 

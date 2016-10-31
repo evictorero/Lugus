@@ -69,14 +69,21 @@ Namespace Negocio
 
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.UsuarioFamiliaDTO
+            Dim Existe As Boolean = False
 
             mDTO.Id_Usuario = Me.id_usuario
             mDTO.Id_Familia = Me.id_familia
             mDTO.Id_Usuario_alta = Me.id_usuario_alta
             mDTO.Dvh = Me.dvh
 
-            Datos.UsuarioFamiliaDatos.GuardarNuevo(mDTO)
+            Existe = Datos.UsuarioFamiliaDatos.Existe(mDTO.Id_Usuario, mDTO.Id_Familia)
 
+            If Not Existe Then
+                Datos.UsuarioFamiliaDatos.GuardarNuevo(mDTO)
+
+            Else
+                Throw New ApplicationException("Se intentó cargar un Usuario Familia ya existente.")
+            End If
 
         End Sub
         Public Overridable Sub Cargar()

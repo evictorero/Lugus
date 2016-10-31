@@ -73,10 +73,12 @@ Partial Class BebidaABM
         '
         'dgvBebidas
         '
+        Me.dgvBebidas.AllowUserToResizeColumns = False
         Me.dgvBebidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvBebidas.Location = New System.Drawing.Point(45, 43)
         Me.dgvBebidas.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvBebidas.Name = "dgvBebidas"
+        Me.dgvBebidas.ReadOnly = True
         Me.dgvBebidas.RowTemplate.Height = 28
         Me.dgvBebidas.Size = New System.Drawing.Size(732, 321)
         Me.dgvBebidas.TabIndex = 22

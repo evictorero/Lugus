@@ -103,5 +103,18 @@ Public Class UsuarioPatenteDatos
         Next
         Return mCol
     End Function
+    Public Shared Function Existe(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_patente,id_usuario_alta,m_negada,dvh FROM dbo.rUsuarioPatente where id_usuario = " & pId_usuario & " and id_patente = " & pId_Patente)
+
+        Dim rta As Boolean = False
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            rta = True
+        Next
+
+        Return rta
+
+    End Function
 End Class
 

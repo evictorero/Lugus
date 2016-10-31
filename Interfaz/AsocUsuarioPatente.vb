@@ -59,8 +59,8 @@ Public Class AsocUsuarioPatente
                         Me.cbDescripcionPatente.Visible = False
                         Me.chbM_Negada.Visible = False
                         Me.lblNegada.Visible = False
-                        Me.lblDescripcion.Text = "¿Esta Seguro que desea eliminar esta asociacion familia patente?"
-                        Me.btnGuardar.Text = "Eliminar"
+                    Me.lblDescripcion.Text = "¿Esta Seguro que desea eliminar esta asociacion Usuario Patente?"
+                    Me.btnGuardar.Text = "Eliminar"
                         Me.btnGuardar.BackColor = Color.Firebrick
                         Me.btnGuardar.ForeColor = Color.AntiqueWhite
                     End If

@@ -77,6 +77,7 @@ Partial Class PlatosABM
         Me.dgvPlatos.Location = New System.Drawing.Point(56, 60)
         Me.dgvPlatos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dgvPlatos.Name = "dgvPlatos"
+        Me.dgvPlatos.ReadOnly = True
         Me.dgvPlatos.RowTemplate.Height = 28
         Me.dgvPlatos.Size = New System.Drawing.Size(732, 316)
         Me.dgvPlatos.TabIndex = 11

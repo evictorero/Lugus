@@ -94,7 +94,7 @@ Public Class Usuarios
 
                 .Add("cDescripcion", "Descripcion")
                 .Item(2).DataPropertyName = "Descripcion"
-                .Item(2).Width = 150
+                .Item(2).Width = 250
                 .Item(2).Visible = True
 
                 .Add("cdvh", "dvh")
@@ -253,4 +253,5 @@ Public Class Usuarios
             ActualizarGrilla()
         End If
     End Sub
+
 End Class

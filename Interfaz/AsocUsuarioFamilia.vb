@@ -45,7 +45,7 @@ Public Class AsocUsuarioFamilia
                 Me.txtid_familia.Text = ""
                 Me.lblDescripcion.Text = "Descripcion"
                 cbDescripcionFamilia.DataSource = (New Negocio.Negocio.Familia).Listar
-                cbDescripcionFamilia.DisplayMember = "descripcionLarga"
+                cbDescripcionFamilia.DisplayMember = "descripcionCorta"
                 cbDescripcionFamilia.ValueMember = "id"
 
             Case TipoOperacion.Baja
@@ -57,7 +57,7 @@ Public Class AsocUsuarioFamilia
                     Me.txtid_usuario.Visible = False
                     Me.cbDescripcionFamilia.SelectedValue = mUsuarioFamilia.id_familia
                     Me.cbDescripcionFamilia.Enabled = False
-                    Me.lblDescripcion.Text = "¿Esta Seguro que desea eliminar esta asociacion familia patente?"
+                    Me.lblDescripcion.Text = "¿Esta Seguro que desea eliminar esta asociacion Usuario Familia?"
                     Me.btnGuardar.Text = "Eliminar"
                     Me.btnGuardar.BackColor = Color.Firebrick
                     Me.btnGuardar.ForeColor = Color.AntiqueWhite

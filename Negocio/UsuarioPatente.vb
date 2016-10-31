@@ -78,14 +78,21 @@ Namespace Negocio
 
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.UsuarioPatenteDTO
+            Dim Existe As Boolean = False
 
             mDTO.Id_Usuario = Me.id_usuario
             mDTO.Id_Patente = Me.id_patente
             mDTO.Id_Usuario_alta = Me.id_usuario_alta
             mDTO.Dvh = Me.dvh
             mDTO.M_negada = Me.mM_negada
-            Datos.UsuarioPatenteDatos.GuardarNuevo(mDTO)
 
+            Existe = Datos.UsuarioPatenteDatos.Existe(mDTO.Id_Usuario, mDTO.Id_Patente)
+
+            If Not Existe Then
+                Datos.UsuarioPatenteDatos.GuardarNuevo(mDTO)
+            Else
+                Throw New ApplicationException("Se intentó cargar un Usuario Patente ya existente.")
+            End If
 
         End Sub
         Public Overridable Sub Cargar()
