@@ -36,14 +36,28 @@ Public Class BitacoraDatos
                                            ByVal pFechaHasta As Date,
                                            ByVal pCriticidad As String) As List(Of DTO.BitacoraDTO)
         Dim mCol As New List(Of DTO.BitacoraDTO)
+        Dim mCondicion As String = "WHERE 1=1"
 
         Dim mStrCom As String
+        If pUsuario <> 0 Then
+            mCondicion = mCondicion & " AND id_usuario = " & pUsuario
+        End If
+
+        If Format(pFechaDesde, "yyyy/MM/dd") <> "0001/01/01" Then
+            mCondicion = mCondicion & " AND fecha BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "'"
+        End If
+
+        If Not IsNothing(pCriticidad) Then
+            mCondicion = mCondicion & " AND criticidad = '" & pCriticidad & "'"
+        End If
 
         mStrCom = "SELECT id_bitacora,id_usuario,descripcion_larga,fecha,dvh,criticidad " &
-                                                                      " FROM dbo.bbitacora" &
-                                                                      " WHERE (id_usuario = " & pUsuario & " OR " & pUsuario & " IS NULL)" &
-                                                                      "   AND (fecha BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "' OR '" & pFechaDesde & "' IS NULL) " &
-                                                                      "   AND (criticidad = '" & pCriticidad & "' OR '" & pCriticidad & "' IS NULL)"
+                                                                      " FROM dbo.bbitacora " &
+                                                                        mCondicion
+
+        '" WHERE (id_usuario = " & pUsuario & " OR " & pUsuario & " IS NULL)" &
+        '"   AND (fecha BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "' OR '" & pFechaDesde & "' IS NULL) " &
+        '"   AND (criticidad = '" & pCriticidad & "' OR '" & pCriticidad & "' IS NULL)"
 
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset(mStrCom)
 

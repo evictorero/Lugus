@@ -39,12 +39,14 @@ Partial Class Bitacora
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dvgBitacora = New System.Windows.Forms.DataGridView()
         Me.txtMensaje = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dvgBitacora, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.chkCriticidad)
         Me.GroupBox1.Controls.Add(Me.chkFechas)
         Me.GroupBox1.Controls.Add(Me.chkUsuario)
@@ -225,6 +227,16 @@ Partial Class Bitacora
         Me.txtMensaje.TabIndex = 24
         Me.txtMensaje.Text = "Mensaje"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(469, 11)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(37, 13)
+        Me.Label5.TabIndex = 22
+        Me.Label5.Text = "Todos"
+        '
         'Bitacora
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -261,4 +273,5 @@ Partial Class Bitacora
     Friend WithEvents chkFechas As System.Windows.Forms.CheckBox
     Friend WithEvents chkUsuario As System.Windows.Forms.CheckBox
     Friend WithEvents txtMensaje As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

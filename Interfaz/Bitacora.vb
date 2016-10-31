@@ -14,12 +14,12 @@ Public Class Bitacora
             cmbUsuario.SelectedIndex = 0
         End If
 
-        dtpFechaDesde.Value = New DateTime(1900, 1, 1)
+        dtpFechaDesde.Value = New DateTime(2016, 1, 1)
         dtpFechaHasta.Value = Date.Now
 
-        chkUsuario.Checked = True
-        chkFechas.Checked = True
-        chkCriticidad.Checked = True
+        chkUsuario.Checked = False
+        chkFechas.Checked = False
+        chkCriticidad.Checked = False
 
         'Seteo de aspecto de la grilla
         With Me.dvgBitacora
@@ -61,11 +61,42 @@ Public Class Bitacora
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Dim mBitacora As New Negocio.Negocio.Bitacora
+        Dim mUsuario As Integer
+        Dim mFechaDesde As Date
+        Dim mFechaHasta As Date
+        Dim mCriticidad As String
 
-        Me.dvgBitacora.DataSource = (New Negocio.Negocio.Bitacora).ListarConFiltro(Me.cmbUsuario.SelectedValue,
-                                                                                   Me.dtpFechaDesde.Value,
-                                                                                   Me.dtpFechaHasta.Value,
-                                                                                   "Baja")
+        ' lleno los parámetros del filtro, si tilda todos envío NULL
+        If chkUsuario.Checked Then
+            mUsuario = Nothing
+        Else
+            mUsuario = Me.cmbUsuario.SelectedValue
+        End If
+
+        If chkFechas.Checked Then
+            mFechaDesde = Nothing
+            mFechaHasta = Nothing
+        Else
+            mFechaDesde = Me.dtpFechaDesde.Value
+            mFechaHasta = Me.dtpFechaHasta.Value
+        End If
+
+        If chkCriticidad.Checked Then
+            mCriticidad = Nothing
+        Else
+            If rbtnAlta.Checked Then
+                mCriticidad = "Alta"
+            ElseIf rbtnMedia.Checked Then
+                mCriticidad = "Media"
+            Else
+                mCriticidad = "Baja"
+            End If
+        End If
+
+        Me.dvgBitacora.DataSource = (New Negocio.Negocio.Bitacora).ListarConFiltro(mUsuario,
+                                                                                   mFechaDesde,
+                                                                                   mFechaHasta,
+                                                                                   mCriticidad)
 
         If Me.dvgBitacora.RowCount = 0 Then
             Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen bitácoras ingresadas en el sistema")
@@ -76,31 +107,31 @@ Public Class Bitacora
 
     Private Sub chkUsuario_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsuario.CheckedChanged
         If chkUsuario.Checked Then
-            cmbUsuario.Enabled = True
-        Else
             cmbUsuario.Enabled = False
+        Else
+            cmbUsuario.Enabled = True
         End If
     End Sub
 
     Private Sub chkFechas_CheckedChanged(sender As Object, e As EventArgs) Handles chkFechas.CheckedChanged
         If chkFechas.Checked Then
-            dtpFechaDesde.Enabled = True
-            dtpFechaHasta.Enabled = True
-        Else
             dtpFechaDesde.Enabled = False
             dtpFechaHasta.Enabled = False
+        Else
+            dtpFechaDesde.Enabled = True
+            dtpFechaHasta.Enabled = True
         End If
     End Sub
 
     Private Sub chkCriticidad_CheckedChanged(sender As Object, e As EventArgs) Handles chkCriticidad.CheckedChanged
         If chkCriticidad.Checked Then
-            rbtnAlta.Enabled = True
-            rbtnMedia.Enabled = True
-            rbtnBaja.Enabled = True
-        Else
             rbtnAlta.Enabled = False
             rbtnMedia.Enabled = False
             rbtnBaja.Enabled = False
+        Else
+            rbtnAlta.Enabled = True
+            rbtnMedia.Enabled = True
+            rbtnBaja.Enabled = True
         End If
     End Sub
 End Class
