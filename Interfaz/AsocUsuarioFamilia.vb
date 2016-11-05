@@ -49,14 +49,14 @@ Public Class AsocUsuarioFamilia
                 cbDescripcionFamilia.ValueMember = "id"
 
             Case TipoOperacion.Baja
-
                 If Not IsNothing(mUsuarioFamilia) Then
-                    Me.txtid_familia.Text = mUsuarioFamilia.id_familia
-                    Me.txtid_familia.Visible = False
+                    Me.txtId_familia.Text = mUsuarioFamilia.id_familia
+                    Me.txtId_familia.Visible = False
                     Me.txtid_usuario.Text = mUsuarioFamilia.id_usuario
                     Me.txtid_usuario.Visible = False
                     Me.cbDescripcionFamilia.SelectedValue = mUsuarioFamilia.id_familia
                     Me.cbDescripcionFamilia.Enabled = False
+                    Me.cbDescripcionFamilia.Visible = False
                     Me.lblDescripcion.Text = "¿Esta Seguro que desea eliminar esta asociacion Usuario Familia?"
                     Me.btnGuardar.Text = "Eliminar"
                     Me.btnGuardar.BackColor = Color.Firebrick
@@ -72,20 +72,26 @@ Public Class AsocUsuarioFamilia
     End Sub
 
     Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
-        Select Case mOperacion
-            Case TipoOperacion.Alta
-                mUsuarioFamilia = New Negocio.Negocio.UsuarioFamilia
-                mUsuarioFamilia.id_familia = cbDescripcionFamilia.SelectedValue
-                mUsuarioFamilia.id_usuario_alta = Principal.UsuarioEnSesion.id
+        Try
+            Select Case mOperacion
+                Case TipoOperacion.Alta
+                    mUsuarioFamilia = New Negocio.Negocio.UsuarioFamilia
+                    mUsuarioFamilia.id_familia = cbDescripcionFamilia.SelectedValue
+                    mUsuarioFamilia.id_usuario_alta = Principal.UsuarioEnSesion.id
+                    CType(Me.Owner, Usuarios).UsuarioAEditar.AgregarUsuarioFamilia(mUsuarioFamilia)
 
-
-                CType(Me.Owner, Usuarios).UsuarioAEditar.AgregarUsuarioFamilia(mUsuarioFamilia)
-
-            Case TipoOperacion.Baja
-                If Not IsNothing(mUsuarioFamilia) Then
-                    CType(Me.Owner, Usuarios).UsuarioAEditar.EliminarUsuarioFamilia(mUsuarioFamilia.IndiceColeccion)
-                End If
-        End Select
+                Case TipoOperacion.Baja
+                    If Not IsNothing(mUsuarioFamilia) Then
+                        Dim rtaFamilia As Boolean = False
+                        rtaFamilia = Negocio.Negocio.UsuarioFamilia.EsFamiliaPatenteEsencial(mUsuarioFamilia.id_usuario, mUsuarioFamilia.id_familia)
+                        If Not rtaFamilia Then
+                            CType(Me.Owner, Usuarios).UsuarioAEditar.EliminarUsuarioFamilia(mUsuarioFamilia.IndiceColeccion)
+                        End If
+                    End If
+            End Select
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
         Me.Close()
     End Sub
 

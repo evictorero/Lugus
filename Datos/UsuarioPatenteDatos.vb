@@ -94,7 +94,21 @@ Public Class UsuarioPatenteDatos
     Public Shared Function ListarPatentesDeFamiliaPorUsuario(ByVal pId As Integer) As List(Of DTO.UsuarioPatenteDTO)
 
         Dim mCol As New List(Of DTO.UsuarioPatenteDTO)
-        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset(("select fp.id_patente ,u.id_usuario, fp.m_negada,fp.id_usuario_alta,fp.dvh from busuario as u , rUsuarioFamilia as uf, rFamiliaPatente as fp  where u.id_usuario = uf.id_usuario and uf.id_familia = fp.id_familia and u.id_usuario =" & pId))
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("select fp.id_patente ,u.id_usuario, fp.m_negada,fp.id_usuario_alta,fp.dvh from busuario as u , rUsuarioFamilia as uf, rFamiliaPatente as fp  where u.id_usuario = uf.id_usuario and uf.id_familia = fp.id_familia and u.id_usuario =" & pId)
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            Dim mDTO As New DTO.UsuarioPatenteDTO
+            CargarDTO(mDTO, mDr)
+            mCol.Add(mDTO)
+        Next
+        Return mCol
+    End Function
+
+
+    Public Shared Function ListarPatentesDeFamiliaPorUsuario(ByVal pId As Integer, ByVal pId_Familia As Integer) As List(Of DTO.UsuarioPatenteDTO)
+
+        Dim mCol As New List(Of DTO.UsuarioPatenteDTO)
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("select fp.id_patente ,u.id_usuario, fp.m_negada,fp.id_usuario_alta,fp.dvh from busuario as u , rUsuarioFamilia as uf, rFamiliaPatente as fp  where u.id_usuario = uf.id_usuario and uf.id_familia = fp.id_familia and u.id_usuario =" & pId & " and uf.id_familia = " & pId_Familia)
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.UsuarioPatenteDTO
@@ -111,6 +125,19 @@ Public Class UsuarioPatenteDatos
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             rta = True
+        Next
+
+        Return rta
+
+    End Function
+    Public Shared Function EsPatenteEsencial(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_patente,id_usuario_alta,m_negada,dvh FROM dbo.rUsuarioPatente where m_negada = 'N' and id_usuario != " & pId_usuario & " and id_patente = " & pId_Patente)
+
+        Dim rta As Boolean = True
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            rta = False
         Next
 
         Return rta

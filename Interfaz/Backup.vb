@@ -12,7 +12,7 @@ Public Class Backup
         ' aseguro que el path siempre termine con la barra
         mBackup.ruta = txtRuta.Text.TrimEnd("\\") & "\"
 
-        mBackup.cantVolumen = txtCantVolumenes.Text
+        mBackup.cantVolumen = Me.cbCantVolumenes.SelectedItem
         mBackup.idUsuarioAlta = Principal.UsuarioEnSesion.id
         Me.Cursor = Cursors.Default
         mBackup.GuardarNuevo()
@@ -21,7 +21,7 @@ Public Class Backup
     End Sub
 
     Private Sub Backup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtCantVolumenes.Text = 5
+        cbCantVolumenes.Text = 5
         txtRuta.Text = "C:\backup\"
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
@@ -32,12 +32,6 @@ Public Class Backup
         If folderDialog.ShowDialog() = DialogResult.OK Then
             txtRuta.Text = folderDialog.SelectedPath
         End If
-
-        'sfd.Title = "Open File Dialog"
-        'sfd.InitialDirectory = "C:\"
-        'sfd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
-        'sfd.FilterIndex = 2
-        'sfd.RestoreDirectory = True
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

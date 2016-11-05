@@ -338,7 +338,6 @@ Namespace Negocio
                     mDVV.tabla = "bUsuario"
                     mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bUsuario")
                     mDVV.Guardar()
-
                 End If
             End If
 
@@ -523,6 +522,16 @@ Namespace Negocio
             Next
             Return mCol
         End Function
+        Public Function ListarPatentesDeFamiliaPorUsuario(ByVal pId_Familia As Integer) As List(Of UsuarioPatente)
+            Dim mCol As New List(Of UsuarioPatente)
+            Dim mColDTO As List(Of DTO.UsuarioPatenteDTO) = Datos.UsuarioPatenteDatos.ListarPatentesDeFamiliaPorUsuario(Me.mId, pId_Familia)
+            Dim miUsuarioPatente As Negocio.UsuarioPatente
+            For Each mDTO As DTO.UsuarioPatenteDTO In mColDTO
+                miUsuarioPatente = New Negocio.UsuarioPatente(mDTO)
+                mCol.Add(miUsuarioPatente)
+            Next
+            Return mCol
+        End Function
 #End Region
 
 #Region "IColeccionable"
@@ -593,10 +602,12 @@ Namespace Negocio
                             Me.mUsuarioPatente(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
 
                         Case IColeccionable.EstadosColeccion.Borrado
+
+
                             Me.mUsuarioPatente(x - mEliminados).Eliminar()
-                            Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
-                            mEliminados += 1
-                            mReacomodar = True
+                                    Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
+                                    mEliminados += 1
+                                    mReacomodar = True
 
                         Case IColeccionable.EstadosColeccion.Quitado
                             Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)

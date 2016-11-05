@@ -80,6 +80,7 @@ Partial Class AsocUsuarioPatente
         '
         'cbDescripcionPatente
         '
+        Me.cbDescripcionPatente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDescripcionPatente.FormattingEnabled = True
         Me.cbDescripcionPatente.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
         Me.cbDescripcionPatente.Location = New System.Drawing.Point(196, 38)
@@ -120,7 +121,7 @@ Partial Class AsocUsuarioPatente
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.cbDescripcionPatente)
         Me.Name = "AsocUsuarioPatente"
-        Me.Text = "AsocUsuarioPatente"
+        Me.Text = "Asociacion Patente"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

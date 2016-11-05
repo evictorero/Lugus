@@ -80,8 +80,8 @@ Public Class UsuarioABM
 
             Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
         Else
-                Me.Close()
-        MsgBox("Acceso Restringido")
+            Me.Close()
+            MsgBox("Acceso Restringido")
         End If
 
     End Sub

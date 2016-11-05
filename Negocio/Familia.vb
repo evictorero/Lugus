@@ -126,11 +126,19 @@ Namespace Negocio
                 Datos.FamiliaDatos.GuardarNuevo(mDTO)
                 Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
                 mBitacora.Guardar()
+                Dim mDVV As New Negocio.DigitoVerificador("bfamilia")
+                mDVV.tabla = "bfamilia"
+                mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bfamilia")
+                mDVV.Guardar()
             Else
                 mDTO.id = Me.id
                 Datos.FamiliaDatos.GuardarModificacion(mDTO)
                 Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia", "Media")
                 mBitacora.Guardar()
+                Dim mDVV As New Negocio.DigitoVerificador("bfamilia")
+                mDVV.tabla = "bfamilia"
+                mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bfamilia")
+                mDVV.Guardar()
             End If
 
             Me.GuardarFamiliaPatentes()

@@ -38,7 +38,9 @@ Partial Class CambiarContraseña
         '
         Me.txtContraseniaActual.Location = New System.Drawing.Point(249, 73)
         Me.txtContraseniaActual.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtContraseniaActual.MaxLength = 10
         Me.txtContraseniaActual.Name = "txtContraseniaActual"
+        Me.txtContraseniaActual.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtContraseniaActual.Size = New System.Drawing.Size(181, 22)
         Me.txtContraseniaActual.TabIndex = 11
         '
@@ -101,7 +103,9 @@ Partial Class CambiarContraseña
         '
         Me.txtContraseniaNueva.Location = New System.Drawing.Point(249, 106)
         Me.txtContraseniaNueva.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtContraseniaNueva.MaxLength = 10
         Me.txtContraseniaNueva.Name = "txtContraseniaNueva"
+        Me.txtContraseniaNueva.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtContraseniaNueva.Size = New System.Drawing.Size(181, 22)
         Me.txtContraseniaNueva.TabIndex = 13
         '
@@ -109,7 +113,9 @@ Partial Class CambiarContraseña
         '
         Me.txtRepetirContraseniaNueva.Location = New System.Drawing.Point(249, 140)
         Me.txtRepetirContraseniaNueva.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtRepetirContraseniaNueva.MaxLength = 10
         Me.txtRepetirContraseniaNueva.Name = "txtRepetirContraseniaNueva"
+        Me.txtRepetirContraseniaNueva.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtRepetirContraseniaNueva.Size = New System.Drawing.Size(181, 22)
         Me.txtRepetirContraseniaNueva.TabIndex = 15
         '

@@ -32,6 +32,7 @@ Partial Class AsocUsuarioFamilia
         '
         'cbDescripcionFamilia
         '
+        Me.cbDescripcionFamilia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDescripcionFamilia.FormattingEnabled = True
         Me.cbDescripcionFamilia.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
         Me.cbDescripcionFamilia.Location = New System.Drawing.Point(164, 35)
@@ -98,7 +99,7 @@ Partial Class AsocUsuarioFamilia
         Me.Controls.Add(Me.cbDescripcionFamilia)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "AsocUsuarioFamilia"
-        Me.Text = "Familia"
+        Me.Text = "Asociacion Familia"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

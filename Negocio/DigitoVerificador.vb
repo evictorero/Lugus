@@ -192,7 +192,6 @@ Namespace Negocio
             Try
                 Dim mDVV As Integer
                 mDVV = Datos.DigitoVerificadorDatos.GenerarDVV(pTexto)
-                MsgBox(mDVV)
                 Return mDVV
             Catch ex As Exception
                 Throw ex

@@ -103,6 +103,19 @@ Public Class UsuarioFamiliaDatos
         Return rta
 
     End Function
+    Public Shared Function EsFamiliaEsencial(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("select fp.id_patente ,u.id_usuario, fp.m_negada,fp.id_usuario_alta,fp.dvh from busuario as u , rUsuarioFamilia as uf, rFamiliaPatente as fp  where u.id_usuario = uf.id_usuario and uf.id_familia = fp.id_familia and fp.m_negada = 'N' and u.id_usuario   != " & pId_usuario & " and fp.id_patente = " & pId_Patente)
+
+        Dim rta As Boolean = True
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            rta = False
+        Next
+
+        Return rta
+
+    End Function
 End Class
 
 

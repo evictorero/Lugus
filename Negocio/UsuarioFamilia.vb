@@ -161,6 +161,28 @@ Namespace Negocio
 
             Return mCol
         End Function
+
+        Public Shared Function EsFamiliaPatenteEsencial(ByVal pId_usuario As Integer, ByVal pId_Familia As Integer) As Boolean
+            Dim mCol As New List(Of UsuarioPatente)
+            Dim mColDTO As List(Of DTO.UsuarioPatenteDTO) = Datos.UsuarioPatenteDatos.ListarPatentesDeFamiliaPorUsuario(pId_usuario, pId_Familia)
+            Dim miUsuarioPatente As Negocio.UsuarioPatente
+            For Each mDTO As DTO.UsuarioPatenteDTO In mColDTO
+                miUsuarioPatente = New Negocio.UsuarioPatente(mDTO)
+                If Datos.UsuarioPatenteDatos.EsPatenteEsencial(pId_usuario, miUsuarioPatente.id_patente) And
+                       Datos.UsuarioFamiliaDatos.EsFamiliaEsencial(pId_usuario, miUsuarioPatente.id_patente) Then
+                    Throw New Exception("Esta intentando eliminar una familia que tiene la patente esencial:" & miUsuarioPatente.id_patente)
+                End If
+            Next
+            Return False
+        End Function
+
+        Public Shared Function EsFamiliaEsencial(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
+
+            Dim rta As Boolean = Datos.UsuarioFamiliaDatos.EsFamiliaEsencial(pId_usuario, pId_Patente)
+
+            Return rta
+
+        End Function
 #End Region
 
 #Region "IColeccionable"

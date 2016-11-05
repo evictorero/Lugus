@@ -74,24 +74,37 @@ Public Class AsocUsuarioPatente
     End Sub
 
     Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
-        Select Case mOperacion
-            Case TipoOperacion.Alta
-                mUsuarioPatente = New Negocio.Negocio.UsuarioPatente
-                mUsuarioPatente.id_patente = cbDescripcionPatente.SelectedValue
-                mUsuarioPatente.id_usuario_alta = Principal.UsuarioEnSesion.id
-                If chbM_Negada.Checked = True Then
-                    mUsuarioPatente.m_negada = "S"
-                Else
-                    mUsuarioPatente.m_negada = "N"
-                End If
+        Try
+            Select Case mOperacion
+                Case TipoOperacion.Alta
+                    mUsuarioPatente = New Negocio.Negocio.UsuarioPatente
+                    mUsuarioPatente.id_patente = cbDescripcionPatente.SelectedValue
+                    mUsuarioPatente.id_usuario_alta = Principal.UsuarioEnSesion.id
+                    If chbM_Negada.Checked = True Then
+                        mUsuarioPatente.m_negada = "S"
+                    Else
+                        mUsuarioPatente.m_negada = "N"
+                    End If
 
-                CType(Me.Owner, Usuarios).UsuarioAEditar.AgregarUsuarioPatente(mUsuarioPatente)
+                    CType(Me.Owner, Usuarios).UsuarioAEditar.AgregarUsuarioPatente(mUsuarioPatente)
 
-            Case TipoOperacion.Baja
-                If Not IsNothing(mUsuarioPatente) Then
-                    CType(Me.Owner, Usuarios).UsuarioAEditar.EliminarUsuarioPatente(mUsuarioPatente.IndiceColeccion)
-                End If
-        End Select
+                Case TipoOperacion.Baja
+                    If Not IsNothing(mUsuarioPatente) Then
+                        Dim rtaPatente As Boolean = False
+                        Dim rtaFamilia As Boolean = False
+                        rtaPatente = Negocio.Negocio.UsuarioPatente.EsPatenteEsencial(mUsuarioPatente.id_usuario, mUsuarioPatente.id_patente)
+                        rtaFamilia = Negocio.Negocio.UsuarioFamilia.EsFamiliaEsencial(mUsuarioPatente.id_usuario, mUsuarioPatente.id_patente)
+
+                        If rtaPatente And rtaFamilia Then
+                            Throw New Exception("Error: La patente que desea eliminar es esencial.")
+                        Else
+                            CType(Me.Owner, Usuarios).UsuarioAEditar.EliminarUsuarioPatente(mUsuarioPatente.IndiceColeccion)
+                        End If
+                    End If
+            End Select
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
         Me.Close()
     End Sub
 

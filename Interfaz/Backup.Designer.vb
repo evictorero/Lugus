@@ -28,15 +28,15 @@ Partial Class Backup
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtCantVolumenes = New System.Windows.Forms.TextBox()
+        Me.cbCantVolumenes = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(139, 98)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Location = New System.Drawing.Point(185, 121)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(119, 27)
+        Me.Button1.Size = New System.Drawing.Size(159, 33)
         Me.Button1.TabIndex = 10
         Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
@@ -44,37 +44,36 @@ Partial Class Backup
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(19, 41)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(25, 50)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(112, 13)
+        Me.Label1.Size = New System.Drawing.Size(146, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Seleccionar ubicación"
         '
         'txtRuta
         '
-        Me.txtRuta.Location = New System.Drawing.Point(168, 39)
-        Me.txtRuta.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtRuta.Location = New System.Drawing.Point(224, 48)
+        Me.txtRuta.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtRuta.Name = "txtRuta"
-        Me.txtRuta.Size = New System.Drawing.Size(248, 20)
+        Me.txtRuta.Size = New System.Drawing.Size(329, 22)
         Me.txtRuta.TabIndex = 1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(289, 98)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button2.Location = New System.Drawing.Point(385, 121)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(127, 27)
+        Me.Button2.Size = New System.Drawing.Size(169, 33)
         Me.Button2.TabIndex = 11
         Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(445, 37)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button3.Location = New System.Drawing.Point(593, 46)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(69, 22)
+        Me.Button3.Size = New System.Drawing.Size(92, 27)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Explorar"
         Me.Button3.UseVisualStyleBackColor = True
@@ -82,34 +81,37 @@ Partial Class Backup
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(21, 63)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(28, 78)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(119, 13)
+        Me.Label2.Size = New System.Drawing.Size(158, 17)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Cantidad de Volúmenes"
         '
-        'txtCantVolumenes
+        'cbCantVolumenes
         '
-        Me.txtCantVolumenes.Location = New System.Drawing.Point(168, 63)
-        Me.txtCantVolumenes.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtCantVolumenes.Name = "txtCantVolumenes"
-        Me.txtCantVolumenes.Size = New System.Drawing.Size(35, 20)
-        Me.txtCantVolumenes.TabIndex = 2
+        Me.cbCantVolumenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCantVolumenes.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCantVolumenes.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.cbCantVolumenes.FormattingEnabled = True
+        Me.cbCantVolumenes.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"})
+        Me.cbCantVolumenes.Location = New System.Drawing.Point(224, 75)
+        Me.cbCantVolumenes.Name = "cbCantVolumenes"
+        Me.cbCantVolumenes.Size = New System.Drawing.Size(121, 24)
+        Me.cbCantVolumenes.TabIndex = 12
         '
         'Backup
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(544, 140)
-        Me.Controls.Add(Me.txtCantVolumenes)
+        Me.ClientSize = New System.Drawing.Size(725, 172)
+        Me.Controls.Add(Me.cbCantVolumenes)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.txtRuta)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "Backup"
         Me.Text = "Backup"
         Me.ResumeLayout(False)
@@ -123,5 +125,5 @@ Partial Class Backup
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents txtCantVolumenes As TextBox
+    Friend WithEvents cbCantVolumenes As ComboBox
 End Class

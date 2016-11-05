@@ -140,8 +140,10 @@ Namespace Negocio
         Public Overridable Sub Eliminar()
             If mId_Patente > 0 And mId_usuario > 0 Then
                 Try
+
                     Datos.UsuarioPatenteDatos.Eliminar(mId_usuario, mId_Patente)
                 Catch ex As Exception
+
                     Throw New ApplicationException("Error al borrar la Usuario Patente especificada.", ex)
                 End Try
 
@@ -170,6 +172,14 @@ Namespace Negocio
             Next
 
             Return mCol
+        End Function
+
+        Public Shared Function EsPatenteEsencial(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
+
+            Dim rta As Boolean = Datos.UsuarioPatenteDatos.EsPatenteEsencial(pId_usuario, pId_Patente)
+
+            Return rta
+
         End Function
 #End Region
 
