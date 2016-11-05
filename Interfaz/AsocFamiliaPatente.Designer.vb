@@ -83,7 +83,7 @@ Partial Class AsocFamiliaPatente
         'cbDescripcionPatente
         '
         Me.cbDescripcionPatente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDescripcionPatente.ForeColor = System.Drawing.SystemColors.Window
+        Me.cbDescripcionPatente.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cbDescripcionPatente.FormattingEnabled = True
         Me.cbDescripcionPatente.Items.AddRange(New Object() {"Alta de Usuario", "Modificacion de Usuario", "Baja de Usuario"})
         Me.cbDescripcionPatente.Location = New System.Drawing.Point(172, 27)

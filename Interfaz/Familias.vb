@@ -126,6 +126,12 @@ Public Class Familias
                 mFamilia.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mFamilia.Guardar()
                 Me.Close()
+
+                If mOperacion = TipoOperacion.Alta Then
+                    MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia registrada correctamente."))
+                Else
+                    MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia modificada correctamente."))
+                End If
         End Select
     End Sub
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
