@@ -1,6 +1,7 @@
 ﻿Imports System.Security.Cryptography
 Imports System.IO
 Imports System.Text
+Imports Negocio
 
 Namespace Negocio
     Public Class DigitoVerificador
@@ -200,7 +201,74 @@ Namespace Negocio
 
         Public Shared Function VerificarIntegridad() As Boolean
             Try
-                'se debe verificar que todos los DVH y DVV sean correctos para poder ingresar al sistema
+                Dim rta As Boolean = True
+                Dim DVH As Integer = 0
+                Dim DVV As Integer = 0
+                Dim NombreTablas(4) As String
+
+                'la tabla de bitácora, patentes, usuarios y familias, así como también en las tablas platos y bebidas.
+                NombreTablas(0) = "bFamilia"
+                NombreTablas(1) = "bUsuario"
+                NombreTablas(2) = "bPlatos"
+                NombreTablas(3) = "bBebida"
+                NombreTablas(4) = "bBtacora"
+
+                For i = 0 To 4
+                    'obtener la tabla x
+                    Dim errores As Integer = 0
+                    Select Case NombreTablas(i)
+                        Case "bFamilia"
+                            Dim mFamilias As List(Of Familia) = (New Negocio.Familia).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mFamilias.Count - 1
+                                Dim CadenaDigitoVerificador As String = Encriptador.EncriptarDatos(2, mFamilias(x).descripcionCorta) + mFamilias(x).descripcionLarga + Convert.ToString(mFamilias(x).fechaModif)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = CalcularDVV("bFamilia")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                        Case "bUsuario"
+                            MsgBox("USUARIO")
+                        'Recalculo del digito verificador 
+                        '  Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+                        '   mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                        Case "bBebida"
+                            Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mBebidas.Count - 1
+                                Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = CalcularDVV("bBebida")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                        Case "bBebida"
+                            Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mBebidas.Count - 1
+                                Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = CalcularDVV("bBebida")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                        Case "bPlatos"
+                            Dim mPlatos As List(Of Plato) = (New Negocio.Plato).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mPlatos.Count - 1
+                                Dim CadenaDigitoVerificador As String = mPlatos(x).descripcionCorta + mPlatos(x).descripcionLarga + Convert.ToString(mPlatos(x).fechaModif)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = CalcularDVV("bPlato")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                    End Select
+
+                Next
 
                 Return True
 

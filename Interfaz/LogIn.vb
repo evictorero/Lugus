@@ -18,11 +18,18 @@ Public Class LogIn
 
             rta = mUsuario.ValidarLogin()
             If rta = 1 Then
+                'Verifica la integridad de DVV
+                If Not (Negocio.Negocio.DigitoVerificador.VerificarIntegridad) Then
+                    MsgBox("Problema de Integridad de Datos.Contacte al administrador del sistema.")
+                    '   Application.Exit()
+                End If
+
                 'Cargar Perfil del Usuario Logueado
                 Principal.estaAutenticado = True
                 Principal.UsuarioEnSesion = mUsuario.ObtenerPorUsuario
                 Principal.Show()
                 Principal.Traducir()
+
             ElseIf rta = 2 Then
                 MsgBox("Contraseña Incorrecta.")
                 Dim mUsuarioaLoguearse = New Negocio.Negocio.Usuario

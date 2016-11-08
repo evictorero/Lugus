@@ -178,6 +178,7 @@ Public Class FamiliaABM
             Next
         End If
 
+        ''GENERAR DIGITO VERIFICADOR
         'Dim CadenaDigitoVerificador As String
         'If dgvFamilias.Rows.Count > 0 Then
         '    For i As Integer = 0 To dgvFamilias.Rows.Count - 1
@@ -188,6 +189,10 @@ Public Class FamiliaABM
         '        mFamilia.Guardar()
         '    Next
         'End If
+        'Dim mDVV As New Negocio.Negocio.DigitoVerificador("bfamilia")
+        'mDVV.tabla = "bfamilia"
+        'mDVV.valor = Negocio.Negocio.DigitoVerificador.CalcularDVV("bfamilia")
+        'mDVV.Guardar()
     End Sub
     Public Function TienePermisoAcceso() As Boolean
         'Patentes 22 23 24 25

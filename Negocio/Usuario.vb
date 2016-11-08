@@ -373,7 +373,7 @@ Namespace Negocio
             mDTO.id = Me.id
             If Validar(mDTO) Then
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
-                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: Nueva Contrasenia", "Media")
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: Nueva Contraseña", "Media")
                 mBitacora.Guardar()
             End If
         End Sub

@@ -126,6 +126,7 @@ Namespace Negocio
                 Datos.FamiliaDatos.GuardarNuevo(mDTO)
                 Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
                 mBitacora.Guardar()
+
                 Dim mDVV As New Negocio.DigitoVerificador("bfamilia")
                 mDVV.tabla = "bfamilia"
                 mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bfamilia")
@@ -236,8 +237,6 @@ Namespace Negocio
                 miFamilia.descripcionCorta = Encriptador.DesencriptarDatos(2, mDTO.descripcionCorta)
                 mCol.Add(miFamilia)
             Next
-
-
             Return mCol
         End Function
 #End Region

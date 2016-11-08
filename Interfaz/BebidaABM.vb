@@ -88,6 +88,7 @@ Public Class BebidaABM
         Else
             Me.txtMensaje.Text = ""
         End If
+        'GENERAR DIGITO VERIFICADOR
         'Dim CadenaDigitoVerificador As String
         'If dgvBebidas.Rows.Count > 0 Then
         '    For i As Integer = 0 To dgvBebidas.Rows.Count - 1
@@ -98,7 +99,10 @@ Public Class BebidaABM
         '        mBebida.Guardar()
         '    Next
         'End If
-
+        'Dim mDVV As New Negocio.Negocio.DigitoVerificador("bBebida")
+        'mDVV.tabla = "bBebida"
+        'mDVV.valor = Negocio.Negocio.DigitoVerificador.CalcularDVV("bBebida")
+        'mDVV.Guardar()
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)
