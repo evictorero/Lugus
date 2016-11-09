@@ -47,6 +47,7 @@ Partial Class Principal
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -139,7 +140,7 @@ Partial Class Principal
         '
         'ServiciosToolStripMenuItem
         '
-        Me.ServiciosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IdiomaToolStripMenuItem1, Me.BackupToolStripMenuItem, Me.BitacoraToolStripMenuItem, Me.CambiarContraseñaToolStripMenuItem})
+        Me.ServiciosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IdiomaToolStripMenuItem1, Me.BackupToolStripMenuItem, Me.BitacoraToolStripMenuItem, Me.RegenerarDigitosVerificadoresToolStripMenuItem, Me.CambiarContraseñaToolStripMenuItem})
         Me.ServiciosToolStripMenuItem.Name = "ServiciosToolStripMenuItem"
         Me.ServiciosToolStripMenuItem.Size = New System.Drawing.Size(83, 24)
         Me.ServiciosToolStripMenuItem.Text = "Servicios "
@@ -147,14 +148,14 @@ Partial Class Principal
         'IdiomaToolStripMenuItem1
         '
         Me.IdiomaToolStripMenuItem1.Name = "IdiomaToolStripMenuItem1"
-        Me.IdiomaToolStripMenuItem1.Size = New System.Drawing.Size(218, 26)
+        Me.IdiomaToolStripMenuItem1.Size = New System.Drawing.Size(294, 26)
         Me.IdiomaToolStripMenuItem1.Text = "Idioma"
         '
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackupToolStripMenuItem1, Me.RestoreToolStripMenuItem})
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
-        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(218, 26)
+        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(294, 26)
         Me.BackupToolStripMenuItem.Text = "Backup"
         '
         'BackupToolStripMenuItem1
@@ -173,7 +174,7 @@ Partial Class Principal
         '
         Me.BitacoraToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaToolStripMenuItem})
         Me.BitacoraToolStripMenuItem.Name = "BitacoraToolStripMenuItem"
-        Me.BitacoraToolStripMenuItem.Size = New System.Drawing.Size(218, 26)
+        Me.BitacoraToolStripMenuItem.Size = New System.Drawing.Size(294, 26)
         Me.BitacoraToolStripMenuItem.Text = "Bitácora"
         '
         'ConsultaToolStripMenuItem
@@ -185,7 +186,7 @@ Partial Class Principal
         'CambiarContraseñaToolStripMenuItem
         '
         Me.CambiarContraseñaToolStripMenuItem.Name = "CambiarContraseñaToolStripMenuItem"
-        Me.CambiarContraseñaToolStripMenuItem.Size = New System.Drawing.Size(218, 26)
+        Me.CambiarContraseñaToolStripMenuItem.Size = New System.Drawing.Size(294, 26)
         Me.CambiarContraseñaToolStripMenuItem.Text = "Cambiar Contraseña"
         '
         'CerrarSesionToolStripMenuItem
@@ -211,6 +212,12 @@ Partial Class Principal
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(25, 24)
         Me.ToolStripMenuItem3.Text = " "
+        '
+        'RegenerarDigitosVerificadoresToolStripMenuItem
+        '
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Name = "RegenerarDigitosVerificadoresToolStripMenuItem"
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Size = New System.Drawing.Size(294, 26)
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Text = "Regenerar Digitos Verificadores"
         '
         'Principal
         '
@@ -254,4 +261,5 @@ Partial Class Principal
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents AdministrarPlatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RegenerarDigitosVerificadoresToolStripMenuItem As ToolStripMenuItem
 End Class

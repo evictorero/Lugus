@@ -92,11 +92,17 @@ Public Class Bebida
                     mBebida.idUsuario = Principal.UsuarioEnSesion.id
                     mBebida.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                     mBebida.Guardar()
+                    If mOperacion = TipoOperacion.Alta Then
+                        MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Bebida registrada correctamente."))
+                    Else
+                        MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Bebida modificada correctamente."))
+                    End If
                     Me.Close()
                 Case TipoOperacion.Baja
                     mBebida.Eliminar()
                     Me.Close()
             End Select
+
         Catch ex As Exception
         End Try
 

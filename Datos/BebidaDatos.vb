@@ -108,18 +108,13 @@ Public Class BebidaDatos
     End Function
 
     Private Shared Sub CargarDTO(ByVal pDTO As DTO.BebidaDTO, ByVal pDr As DataRow)
-        ' id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif
         pDTO.id = pDr("id_bebida")
         pDTO.descripcionCorta = pDr("descripcion_corta")
         pDTO.descripcionLarga = pDr("descripcion_larga")
         pDTO.habilitado = pDr("habilitado")
-        'pDTO.fechaBaja = pDr("fecha_baja")
-        'If Not IsNothing(pDr("fecha_baja")) And pDr("fecha_baja") <> "1900-01-01" Then
         If Not IsDBNull(pDr("fecha_baja")) Then
             pDTO.fechaBaja = pDr("fecha_baja")
         End If
-
-        'End If
         pDTO.idUsuario = pDr("id_usuario")
         pDTO.dvh = pDr("dvh")
         pDTO.fechaModif = pDr("fecha_modif")

@@ -88,9 +88,16 @@ Public Class Platos
                 mPlatos.descripcionLarga = Me.txtDescripcion_larga.Text
                 mPlatos.habilitado = Me.cboxHabilitado.Text
                 mPlatos.idUsuario = Principal.UsuarioEnSesion.id
-                mPlatos.dvh = 1 'Digito Verificador Celes
+                mPlatos.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                 mPlatos.Guardar()
+
+                If mOperacion = TipoOperacion.Alta Then
+                    MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Plato registrado correctamente."))
+                Else
+                    MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Plato modificado correctamente."))
+                End If
                 Me.Close()
+
             Case TipoOperacion.Baja
                 mPlatos.Eliminar()
                 Me.Close()

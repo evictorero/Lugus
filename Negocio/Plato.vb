@@ -2,10 +2,7 @@
 
 Namespace Negocio
 
-    'plato ES UNA ENTIDAD QUE PUEDE PERTENECER A UNA COLECCION
-    'EN UNA RELACION DE AGREGACION, POR ESO IMPLEMENTA LA INTERFAZ ICOLECCIONABLE
     Public Class Plato
-        Implements IColeccionable
 
 #Region "Declaraciones"
         Dim mDescripcionCorta As String
@@ -113,15 +110,17 @@ Namespace Negocio
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.PlatoDTO
 
-            mDTO.descripcionCorta = Me.descripcionCorta
+            mDTO.descripcionCorta = Encriptador.EncriptarDatos(2, Me.descripcionCorta)
             mDTO.descripcionLarga = Me.descripcionLarga
             mDTO.habilitado = Me.habilitado
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
-            mDTO.dvh = Me.dvh
 
-            ValidarCampos()
+            'Recalculo del digito verificador horizontal
+            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+            mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+
 
             If mId = 0 Then
                 mDTO.id = Datos.PlatoDatos.ObtenerProximoId()
@@ -130,6 +129,12 @@ Namespace Negocio
                 mDTO.id = Me.id
                 Datos.PlatoDatos.GuardarModificacion(mDTO)
             End If
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("bPlato")
+            mDVV.tabla = "bplato"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bPlato")
+            mDVV.Guardar()
 
         End Sub
         Public Overridable Sub Cargar()
@@ -151,8 +156,6 @@ Namespace Negocio
                 mIdUsuario = pDr("id_usuario")
                 mDvh = pDr("dvh")
                 mFechaModif = pDr("fecha_modif")
-
-
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
@@ -160,7 +163,7 @@ Namespace Negocio
         End Sub
 
         Public Overridable Sub Cargar(ByVal pId As Integer)
-            If mId > 0 Then
+            If pId > 0 Then
                 Dim mDTO As DTO.PlatoDTO = Datos.PlatoDatos.Obtener(pId)
                 MyClass.Cargar(mDTO)
             Else
@@ -169,7 +172,7 @@ Namespace Negocio
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.PlatoDTO)
             mId = pDTO.id
-            mDescripcionCorta = pDTO.descripcionCorta
+            mDescripcionCorta = Encriptador.DesencriptarDatos(2, pDTO.descripcionCorta)
             mDescripcionLarga = pDTO.descripcionLarga
             mHabilitado = pDTO.habilitado
             mFechaBaja = pDTO.fechaBaja
@@ -183,11 +186,11 @@ Namespace Negocio
                 Try
                     Datos.PlatoDatos.Eliminar(mId)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al borrar la plato especificada.", ex)
+                    Throw New ApplicationException("Error al borrar el plato especificado.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó eliminar una plato sin Id especifico.")
+                Throw New ApplicationException("Se intentó eliminar un plato sin Id especifico.")
             End If
         End Sub
 
@@ -196,11 +199,11 @@ Namespace Negocio
                 Try
                     Datos.PlatoDatos.Rehabilitar(mId)
                 Catch ex As Exception
-                    Throw New ApplicationException("Error al activar la plato especificada.", ex)
+                    Throw New ApplicationException("Error al activar el plato especificado.", ex)
                 End Try
 
             Else
-                Throw New ApplicationException("Se intentó activar una plato sin Id especifico.")
+                Throw New ApplicationException("Se intentó activar un plato sin Id especifico.")
             End If
         End Sub
 
@@ -211,16 +214,23 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
-        Private Sub ValidarCampos()
-            If (Me.descripcionCorta = "") Then
-                Throw New ApplicationException("Debe completar la descripción corta.")
-            End If
-            If (Me.descripcionLarga = "") Then
-                Throw New ApplicationException("Debe completar la descripción larga.")
-            End If
-            If (Me.habilitado = "") Then
-                Throw New ApplicationException("Debe completar el campo habilitado.")
-            End If
+
+        Public Sub ValidarFormato(pid_idioma As Integer)
+            Try
+                If (Me.descripcionCorta = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar la descripción corta."))
+                End If
+                If (Me.descripcionLarga = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar la descripción larga."))
+                End If
+                If (Me.habilitado = "") Then
+                    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el campo habilitado."))
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                Throw
+            End Try
+
         End Sub
         Public Overridable Function Listar() As Collections.Generic.List(Of Plato)
             Dim mCol As New Collections.Generic.List(Of Plato)
@@ -233,29 +243,5 @@ Namespace Negocio
             Return mCol
         End Function
 #End Region
-
-        'IMPLEMENTACION DE LOS MIEMBROS DE LA INTERFAZ ICOLECCIONABLE
-#Region "IColeccionable"
-        Dim mEstado As IColeccionable.EstadosColeccion
-        Public Property EstadoColeccion() As IColeccionable.EstadosColeccion Implements IColeccionable.EstadoColeccion
-            Get
-                Return mEstado
-            End Get
-            Set(ByVal value As IColeccionable.EstadosColeccion)
-                mEstado = value
-            End Set
-        End Property
-        Dim mIndice As Integer
-        Public Property IndiceColeccion() As Integer Implements IColeccionable.IndiceColeccion
-            Get
-                Return mIndice
-            End Get
-            Set(ByVal value As Integer)
-                mIndice = value
-            End Set
-        End Property
-
-#End Region
-
     End Class
 End Namespace

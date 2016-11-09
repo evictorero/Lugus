@@ -74,7 +74,7 @@ Public Class BebidaABM
             TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
         Else
             Me.Close()
-            MsgBox("Acceso Restringido")
+            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Acceso Restringido"))
         End If
     End Sub
 #End Region
@@ -82,19 +82,21 @@ Public Class BebidaABM
 #Region "Métodos"
 
     Friend Sub ActualizarGrilla()
+
         Me.dgvBebidas.DataSource = (New Negocio.Negocio.Bebida).Listar
         If Me.dgvBebidas.RowCount = 0 Then
             Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen Bebidas ingresadas en el sistema")
         Else
             Me.txtMensaje.Text = ""
         End If
-        'GENERAR DIGITO VERIFICADOR
+
+        ''GENERAR DIGITO VERIFICADOR
         'Dim CadenaDigitoVerificador As String
         'If dgvBebidas.Rows.Count > 0 Then
         '    For i As Integer = 0 To dgvBebidas.Rows.Count - 1
         '        Dim mBebida As New Negocio.Negocio.Bebida
         '        mBebida.Cargar(CInt(dgvBebidas.Rows(i).Cells(0).Value))
-        '        CadenaDigitoVerificador = mBebida.descripcionCorta + mBebida.descripcionLarga + Convert.ToString(mBebida.fechaModif)
+        '        CadenaDigitoVerificador = Negocio.Negocio.Encriptador.EncriptarDatos(2, mBebida.descripcionCorta) + mBebida.descripcionLarga + Convert.ToString(mBebida.fechaModif)
         '        mBebida.dvh = Negocio.Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
         '        mBebida.Guardar()
         '    Next
@@ -103,6 +105,8 @@ Public Class BebidaABM
         'mDVV.tabla = "bBebida"
         'mDVV.valor = Negocio.Negocio.DigitoVerificador.CalcularDVV("bBebida")
         'mDVV.Guardar()
+
+
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(0).Value)

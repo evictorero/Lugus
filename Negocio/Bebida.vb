@@ -110,13 +110,14 @@ Namespace Negocio
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.BebidaDTO
 
-            mDTO.descripcionCorta = Me.descripcionCorta
+            mDTO.descripcionCorta = Encriptador.EncriptarDatos(2, Me.descripcionCorta)
             mDTO.descripcionLarga = Me.descripcionLarga
             mDTO.habilitado = Me.habilitado
             mDTO.fechaBaja = Me.fechaBaja
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
 
+            'Recalculo del digito verificador horizontal
             Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
@@ -127,6 +128,12 @@ Namespace Negocio
                 mDTO.id = Me.id
                 Datos.BebidaDatos.GuardarModificacion(mDTO)
             End If
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("bBebida")
+            mDVV.tabla = "bbebida"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bBebida")
+            mDVV.Guardar()
 
         End Sub
         Public Overridable Sub Cargar()
@@ -163,7 +170,7 @@ Namespace Negocio
         End Sub
         Public Sub Cargar(ByVal pDTO As DTO.BebidaDTO)
             mId = pDTO.id
-            mDescripcionCorta = pDTO.descripcionCorta
+            mDescripcionCorta = Encriptador.DesencriptarDatos(2, pDTO.descripcionCorta)
             mDescripcionLarga = pDTO.descripcionLarga
             mHabilitado = pDTO.habilitado
             mFechaBaja = pDTO.fechaBaja
@@ -221,11 +228,13 @@ Namespace Negocio
         Public Overridable Function Listar() As Collections.Generic.List(Of Bebida)
             Dim mCol As New Collections.Generic.List(Of Bebida)
             Dim mColDTO As List(Of DTO.BebidaDTO) = Datos.BebidaDatos.Listar()
+            Dim miBebida As Negocio.Bebida
 
             For Each mDTO As DTO.BebidaDTO In mColDTO
-                mCol.Add(New Negocio.Bebida(mDTO))
+                miBebida = New Negocio.Bebida(mDTO)
+                miBebida.descripcionCorta = Encriptador.DesencriptarDatos(2, mDTO.descripcionCorta)
+                mCol.Add(miBebida)
             Next
-
             Return mCol
         End Function
 #End Region

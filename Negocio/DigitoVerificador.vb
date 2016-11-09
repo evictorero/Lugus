@@ -153,7 +153,6 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
-
         Public Overridable Function Listar() As Collections.Generic.List(Of DigitoVerificador)
             Dim mCol As New Collections.Generic.List(Of DigitoVerificador)
             Dim mColDTO As List(Of DTO.DigitoVerificadorDTO) = Datos.DigitoVerificadorDatos.Listar()
@@ -199,6 +198,16 @@ Namespace Negocio
             End Try
         End Function
 
+        Public Shared Function ObtenerDVV(ByVal pTexto As String) As Integer
+            Try
+                Dim mDVV As Integer
+                mDVV = Datos.DigitoVerificadorDatos.ObtenerDVV(pTexto)
+                Return mDVV
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
         Public Shared Function VerificarIntegridad() As Boolean
             Try
                 Dim rta As Boolean = True
@@ -209,9 +218,9 @@ Namespace Negocio
                 'la tabla de bitácora, patentes, usuarios y familias, así como también en las tablas platos y bebidas.
                 NombreTablas(0) = "bFamilia"
                 NombreTablas(1) = "bUsuario"
-                NombreTablas(2) = "bPlatos"
-                NombreTablas(3) = "bBebida"
-                NombreTablas(4) = "bBtacora"
+                NombreTablas(3) = "bPlato"
+                NombreTablas(2) = "bBebida"
+                NombreTablas(4) = "bBitacora"
 
                 For i = 0 To 4
                     'obtener la tabla x
@@ -224,48 +233,112 @@ Namespace Negocio
                                 Dim CadenaDigitoVerificador As String = Encriptador.EncriptarDatos(2, mFamilias(x).descripcionCorta) + mFamilias(x).descripcionLarga + Convert.ToString(mFamilias(x).fechaModif)
                                 DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
                             Next
-                            DVV = CalcularDVV("bFamilia")
+                            DVV = ObtenerDVV("bFamilia")
                             If DVH <> DVV Then
                                 Return False
                             End If
                         Case "bUsuario"
-                            MsgBox("USUARIO")
-                        'Recalculo del digito verificador 
-                        '  Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
-                        '   mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            'Recalculo del digito verificador 
+                            '  Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+                            '   mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            'Case "bBebida"
+                            '    Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
+                            '    DVH = 0
+                            '    For x As Integer = 0 To mBebidas.Count - 1
+                            '        Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
+                            '        DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            '    Next
+                            '    DVV = CalcularDVV("bBebida")
+                            '    If DVH <> DVV Then
+                            '        Return False
+                            '    End If
                         Case "bBebida"
                             Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
                             DVH = 0
                             For x As Integer = 0 To mBebidas.Count - 1
-                                Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
+                                Dim CadenaDigitoVerificador As String = Encriptador.EncriptarDatos(2, mBebidas(x).descripcionCorta) + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
                                 DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
                             Next
-                            DVV = CalcularDVV("bBebida")
+                            DVV = ObtenerDVV("bBebida")
                             If DVH <> DVV Then
                                 Return False
                             End If
-                        Case "bBebida"
-                            Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
-                            DVH = 0
-                            For x As Integer = 0 To mBebidas.Count - 1
-                                Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
-                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
-                            Next
-                            DVV = CalcularDVV("bBebida")
-                            If DVH <> DVV Then
-                                Return False
-                            End If
-                        Case "bPlatos"
+
+                        Case "bPlato"
                             Dim mPlatos As List(Of Plato) = (New Negocio.Plato).Listar
                             DVH = 0
                             For x As Integer = 0 To mPlatos.Count - 1
-                                Dim CadenaDigitoVerificador As String = mPlatos(x).descripcionCorta + mPlatos(x).descripcionLarga + Convert.ToString(mPlatos(x).fechaModif)
+                                Dim CadenaDigitoVerificador As String = Encriptador.EncriptarDatos(2, mPlatos(x).descripcionCorta) + mPlatos(x).descripcionLarga + Convert.ToString(mPlatos(x).fechaModif)
                                 DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
                             Next
-                            DVV = CalcularDVV("bPlato")
+                            DVV = ObtenerDVV("bPlato")
                             If DVH <> DVV Then
                                 Return False
                             End If
+                    End Select
+
+                Next
+
+                Return True
+
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+        Public Shared Function RegenerarDigitoVerificadores() As Boolean
+            Try
+                Dim rta As Boolean = True
+                Dim DVH As Integer = 0
+                Dim DVV As Integer = 0
+                Dim NombreTablas(4) As String
+
+                'la tabla de bitácora, patentes, usuarios y familias, así como también en las tablas platos y bebidas.
+                NombreTablas(0) = "bFamilia"
+                NombreTablas(1) = "bUsuario"
+                NombreTablas(2) = "bPlato"
+                NombreTablas(3) = "bBebida"
+                NombreTablas(4) = "bBitacora"
+
+                For i = 0 To 4
+                    'obtener la tabla x
+                    Dim errores As Integer = 0
+                    Select Case NombreTablas(i)
+                        Case "bFamilia"
+                            Dim mFamilias As List(Of Familia) = (New Negocio.Familia).Listar
+                            For X As Integer = 0 To mFamilias.Count - 1
+                                Dim mFamilia As New Negocio.Familia
+                                mFamilia.Cargar(mFamilias(X).id)
+                                mFamilia.Guardar()
+                            Next
+                        Case "bUsuario"
+                            'Recalculo del digito verificador 
+                            '  Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+                            '   mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            'Case "bBebida"
+                            '    Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
+                            '    DVH = 0
+                            '    For x As Integer = 0 To mBebidas.Count - 1
+                            '        Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
+                            '        DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            '    Next
+                            '    DVV = CalcularDVV("bBebida")
+                            '    If DVH <> DVV Then
+                            '        Return False
+                            '    End If
+                        Case "bBebida"
+                            Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
+                            For X As Integer = 0 To mBebidas.Count - 1
+                                Dim mBebida As New Negocio.Bebida
+                                mBebida.Cargar(mBebidas(X).id)
+                                mBebida.Guardar()
+                            Next
+                        Case "bPlato"
+                            Dim mPlatos As List(Of Plato) = (New Negocio.Plato).Listar
+                            For X As Integer = 0 To mPlatos.Count - 1
+                                Dim mPlato As New Negocio.Plato
+                                mPlato.Cargar(mPlatos(X).id)
+                                mPlato.Guardar()
+                            Next
                     End Select
 
                 Next

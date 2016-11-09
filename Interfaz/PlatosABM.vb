@@ -74,7 +74,7 @@ Public Class PlatosABM
             TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
         Else
             Me.Close()
-            MsgBox("Acceso Restringido")
+            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Acceso Restringido"))
         End If
 
     End Sub
@@ -90,6 +90,22 @@ Public Class PlatosABM
         Else
             Me.txtMensaje.Text = ""
         End If
+
+        ''GENERAR DIGITO VERIFICADOR
+        'Dim CadenaDigitoVerificador As String
+        'If dgvPlatos.Rows.Count > 0 Then
+        '    For i As Integer = 0 To dgvPlatos.Rows.Count - 1
+        '        Dim mPlato As New Negocio.Negocio.Plato
+        '        mPlato.Cargar(CInt(dgvPlatos.Rows(i).Cells(0).Value))
+        '        CadenaDigitoVerificador = Negocio.Negocio.Encriptador.EncriptarDatos(2, mPlato.descripcionCorta) + mPlato.descripcionLarga + Convert.ToString(mPlato.fechaModif)
+        '        mPlato.dvh = Negocio.Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+        '        mPlato.Guardar()
+        '    Next
+        'End If
+        'Dim mDVV As New Negocio.Negocio.DigitoVerificador("bPlato")
+        'mDVV.tabla = "bPlato"
+        'mDVV.valor = Negocio.Negocio.DigitoVerificador.CalcularDVV("bPlato")
+        'mDVV.Guardar()
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgvPlatos.SelectedRows(0).Cells(0).Value)

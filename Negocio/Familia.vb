@@ -117,7 +117,7 @@ Namespace Negocio
             mDTO.idUsuario = Me.idUsuario
             mDTO.fechaModif = Me.fechaModif
 
-            'Recalculo del digito verificador 
+            'Recalculo del digito verificador horizontal
             Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
@@ -126,21 +126,18 @@ Namespace Negocio
                 Datos.FamiliaDatos.GuardarNuevo(mDTO)
                 Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
                 mBitacora.Guardar()
-
-                Dim mDVV As New Negocio.DigitoVerificador("bfamilia")
-                mDVV.tabla = "bfamilia"
-                mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bfamilia")
-                mDVV.Guardar()
             Else
                 mDTO.id = Me.id
                 Datos.FamiliaDatos.GuardarModificacion(mDTO)
                 Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia", "Media")
                 mBitacora.Guardar()
-                Dim mDVV As New Negocio.DigitoVerificador("bfamilia")
-                mDVV.tabla = "bfamilia"
-                mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bfamilia")
-                mDVV.Guardar()
             End If
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("bfamilia")
+            mDVV.tabla = "bfamilia"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bfamilia")
+            mDVV.Guardar()
 
             Me.GuardarFamiliaPatentes()
 

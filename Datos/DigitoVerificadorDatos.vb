@@ -121,6 +121,16 @@ Public Class DigitoVerificadorDatos
         Return mDVV
 
     End Function
+    Public Shared Function ObtenerDVV(ByVal pTabla As String) As Integer
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT valor FROM bDigitoVerificadorVertical where tabla = '" & pTabla & "'")
+        Dim mDVV As Integer
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            mDVV = mDr.Item(0)
+        Next
+        Return mDVV
+
+    End Function
 
     Public Shared Function ObtenerProximoId() As Integer
         If ProximoId = 0 Then

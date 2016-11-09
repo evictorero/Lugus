@@ -74,7 +74,7 @@ Public Class FamiliaABM
             TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
         Else
             Me.Close()
-            MsgBox("Acceso Restringido")
+            MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Acceso Restringido"))
         End If
 
     End Sub

@@ -21,7 +21,7 @@ Public Class LogIn
                 'Verifica la integridad de DVV
                 If Not (Negocio.Negocio.DigitoVerificador.VerificarIntegridad) Then
                     MsgBox("Problema de Integridad de Datos.Contacte al administrador del sistema.")
-                    '   Application.Exit()
+                    ' Application.Exit()
                 End If
 
                 'Cargar Perfil del Usuario Logueado

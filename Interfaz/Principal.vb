@@ -161,4 +161,14 @@ Public Class Principal
         End If
         Application.Exit()
     End Sub
+
+    Private Sub RegenerarDigitosVerificadoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegenerarDigitosVerificadoresToolStripMenuItem.Click
+        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(UsuarioEnSesion.id_idioma, "¿Esta seguro que desea Regenerar los digitos verificadores?"), "Digito Verificador", MessageBoxButtons.YesNo)
+        If result = DialogResult.Yes Then
+            Dim mBitacora As New Negocio.Negocio.Bitacora(UsuarioEnSesion.id, "Regenero los Digitos Verificadores", "Alta")
+            mBitacora.Guardar()
+            Negocio.Negocio.DigitoVerificador.RegenerarDigitoVerificadores()
+            Me.Close()
+        End If
+    End Sub
 End Class
