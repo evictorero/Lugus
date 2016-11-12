@@ -1,8 +1,14 @@
 ﻿Imports Negocio
+Imports Negocio.Negocio.UsuarioPatente
+Imports Negocio.Negocio.Traductor
 
 Public Class Principal
-
+    Dim TieneAccesoAlta As Boolean = False
+    Dim TieneAccesoModif As Boolean = False
+    Dim TieneAccesoElim As Boolean = False
+    Dim TieneAccesoRehab As Boolean = False
     Public estaAutenticado As Boolean = False
+
     Public UsuarioEnSesion As New Negocio.Negocio.Usuario
 
     Private Sub AdministrarUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -163,12 +169,42 @@ Public Class Principal
     End Sub
 
     Private Sub RegenerarDigitosVerificadoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegenerarDigitosVerificadoresToolStripMenuItem.Click
-        Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(UsuarioEnSesion.id_idioma, "¿Esta seguro que desea Regenerar los digitos verificadores?"), "Digito Verificador", MessageBoxButtons.YesNo)
-        If result = DialogResult.Yes Then
-            Dim mBitacora As New Negocio.Negocio.Bitacora(UsuarioEnSesion.id, "Regenero los Digitos Verificadores", "Alta")
-            mBitacora.Guardar()
-            Negocio.Negocio.DigitoVerificador.RegenerarDigitoVerificadores()
-            Me.Close()
+        If TienePermisoAcceso() = True Then
+            Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(UsuarioEnSesion.id_idioma, "¿Esta seguro que desea Regenerar los digitos verificadores?"), "Digito Verificador", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                Dim mBitacora As New Negocio.Negocio.Bitacora(UsuarioEnSesion.id, "Regenero los Digitos Verificadores", "Alta")
+                mBitacora.Guardar()
+                Negocio.Negocio.DigitoVerificador.RegenerarDigitoVerificadores()
+                Me.Close()
+            End If
+        Else
+            MsgBox(ObtenerTraduccion(UsuarioEnSesion.id_idioma, "Acceso Restringido"))
         End If
     End Sub
+
+    Public Function TienePermisoAcceso() As Boolean
+        'Patentes 28
+        Dim tieneAcceso As Boolean = False
+        For x As Integer = 0 To UsuarioEnSesion.UsuarioPatente.Count - 1
+            Select Case UsuarioEnSesion.UsuarioPatente(x).id_patente
+                Case 28
+                    If UsuarioEnSesion.UsuarioPatente(x).m_negada = "N" Then
+                        TieneAccesoAlta = True
+                        tieneAcceso = True
+                    End If
+            End Select
+        Next
+        Dim mListaPatentesDeFamiliaporUsuario As New List(Of Negocio.Negocio.UsuarioPatente)
+        mListaPatentesDeFamiliaporUsuario = UsuarioEnSesion.ListarPatentesDeFamiliaPorUsuario
+        For x As Integer = 0 To mListaPatentesDeFamiliaporUsuario.Count - 1
+            Select Case mListaPatentesDeFamiliaporUsuario(x).id_patente
+                Case 27
+                    If mListaPatentesDeFamiliaporUsuario(x).m_negada = "N" Then
+                        TieneAccesoAlta = True
+                        tieneAcceso = True
+                    End If
+            End Select
+        Next
+        Return tieneAcceso
+    End Function
 End Class

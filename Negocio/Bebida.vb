@@ -118,7 +118,7 @@ Namespace Negocio
             mDTO.fechaModif = Me.fechaModif
 
             'Recalculo del digito verificador horizontal
-            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             If mId = 0 Then

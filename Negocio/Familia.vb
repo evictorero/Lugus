@@ -118,19 +118,25 @@ Namespace Negocio
             mDTO.fechaModif = Me.fechaModif
 
             'Recalculo del digito verificador horizontal
-            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
+            Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             If mId = 0 Then
-                mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
-                Datos.FamiliaDatos.GuardarNuevo(mDTO)
-                Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
-                mBitacora.Guardar()
+                If Validar(mDTO) Then
+                    mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
+                    Datos.FamiliaDatos.GuardarNuevo(mDTO)
+                    Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
+                    mBitacora.Guardar()
+                End If
+
             Else
                 mDTO.id = Me.id
-                Datos.FamiliaDatos.GuardarModificacion(mDTO)
-                Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia", "Media")
-                mBitacora.Guardar()
+                If Validar(mDTO) Then
+                    Datos.FamiliaDatos.GuardarModificacion(mDTO)
+                    Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia", "Media")
+                    mBitacora.Guardar()
+                End If
+
             End If
 
             'Recalculo del digito verificador vertical
@@ -235,6 +241,13 @@ Namespace Negocio
                 mCol.Add(miFamilia)
             Next
             Return mCol
+        End Function
+
+        Public Function Validar(ByVal pDTO As DTO.FamiliaDTO)
+            If Datos.FamiliaDatos.ExisteDescripcion(pDTO) = True Then
+                Throw New ApplicationException("Familia Duplicado: La descripcion corta ingresada ya existe.")
+            End If
+            Return True
         End Function
 #End Region
 

@@ -42,12 +42,12 @@ Partial Class Principal
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BitacoraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsultaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambiarContraseñaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSesionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RegenerarDigitosVerificadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -140,7 +140,7 @@ Partial Class Principal
         '
         'ServiciosToolStripMenuItem
         '
-        Me.ServiciosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IdiomaToolStripMenuItem1, Me.BackupToolStripMenuItem, Me.BitacoraToolStripMenuItem, Me.RegenerarDigitosVerificadoresToolStripMenuItem, Me.CambiarContraseñaToolStripMenuItem})
+        Me.ServiciosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IdiomaToolStripMenuItem1, Me.CambiarContraseñaToolStripMenuItem, Me.BackupToolStripMenuItem, Me.BitacoraToolStripMenuItem, Me.RegenerarDigitosVerificadoresToolStripMenuItem})
         Me.ServiciosToolStripMenuItem.Name = "ServiciosToolStripMenuItem"
         Me.ServiciosToolStripMenuItem.Size = New System.Drawing.Size(83, 24)
         Me.ServiciosToolStripMenuItem.Text = "Servicios "
@@ -183,6 +183,12 @@ Partial Class Principal
         Me.ConsultaToolStripMenuItem.Size = New System.Drawing.Size(141, 26)
         Me.ConsultaToolStripMenuItem.Text = "Consulta"
         '
+        'RegenerarDigitosVerificadoresToolStripMenuItem
+        '
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Name = "RegenerarDigitosVerificadoresToolStripMenuItem"
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Size = New System.Drawing.Size(294, 26)
+        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Text = "Regenerar Digitos Verificadores"
+        '
         'CambiarContraseñaToolStripMenuItem
         '
         Me.CambiarContraseñaToolStripMenuItem.Name = "CambiarContraseñaToolStripMenuItem"
@@ -212,12 +218,6 @@ Partial Class Principal
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(25, 24)
         Me.ToolStripMenuItem3.Text = " "
-        '
-        'RegenerarDigitosVerificadoresToolStripMenuItem
-        '
-        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Name = "RegenerarDigitosVerificadoresToolStripMenuItem"
-        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Size = New System.Drawing.Size(294, 26)
-        Me.RegenerarDigitosVerificadoresToolStripMenuItem.Text = "Regenerar Digitos Verificadores"
         '
         'Principal
         '

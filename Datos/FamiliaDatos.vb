@@ -132,4 +132,13 @@ Public Class FamiliaDatos
         End If
     End Sub
 
+    Public Shared Function ExisteDescripcion(ByVal pDTO As DTO.FamiliaDTO) As Boolean
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("SELECT id_familia FROM dbo.bfamilia WHERE descripcion_corta = '" & pDTO.descripcionCorta & "' and id_familia != " & pDTO.id)
+        If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 End Class

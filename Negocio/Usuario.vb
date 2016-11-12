@@ -316,24 +316,25 @@ Namespace Negocio
             mDTO.contrasenia = Me.mPassword
 
             'Recalculo del digito verificador horizontal
-            Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
+            Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             If mId = 0 Then
                 mDTO.id = Datos.UsuarioDatos.ObtenerProximoId()
                 pass = GenerarPasswordAleatorio()
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
+
                 If Validar(mDTO) Then
                     Datos.UsuarioDatos.GuardarNuevo(mDTO)
                     EnviarMail(Me.usuario, pass)
-                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Creación de usuario", "Media")
+                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Creación de usuario : " & Me.usuario, "Media")
                     mBitacora.Guardar()
                 End If
             Else
                 mDTO.id = Me.id
                 If Validar(mDTO) Then
                     Datos.UsuarioDatos.GuardarModificacion(mDTO)
-                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario", "Media")
+                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: " & Me.usuario, "Media")
                     mBitacora.Guardar()
                 End If
             End If
@@ -370,7 +371,7 @@ Namespace Negocio
             mDTO.contrasenia = Me.mPassword
 
             'Recalculo del digito verificador 
-            Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
+            Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             mDTO.id = Me.id
@@ -405,9 +406,9 @@ Namespace Negocio
                 Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
             End If
 
-            If ValidarEmail(Me.email) Then
-                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el email del usuario."))
-            End If
+            'If ValidarEmail(Me.email) Then
+            '    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el email del usuario."))
+            'End If
         End Sub
 
         Function ValidarEmail(ByVal email As String) As Boolean
