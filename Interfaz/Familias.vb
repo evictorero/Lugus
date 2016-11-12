@@ -114,25 +114,31 @@ Public Class Familias
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Select Case mOperacion
-            Case TipoOperacion.Alta, TipoOperacion.Modificacion
-                If IsNothing(mFamilia) Then
-                    mFamilia = New Negocio.Negocio.Familia
-                End If
+        Try
+            Select Case mOperacion
+                Case TipoOperacion.Alta, TipoOperacion.Modificacion
+                    If IsNothing(mFamilia) Then
+                        mFamilia = New Negocio.Negocio.Familia
+                    End If
 
-                mFamilia.descripcionCorta = Me.txtDescripcion_corta.Text
-                mFamilia.descripcionLarga = Me.txtDescripcion_larga.Text
-                mFamilia.idUsuario = Principal.UsuarioEnSesion.id
-                mFamilia.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
-                mFamilia.Guardar()
-                Me.Close()
+                    mFamilia.descripcionCorta = Me.txtDescripcion_corta.Text
+                    mFamilia.descripcionLarga = Me.txtDescripcion_larga.Text
+                    mFamilia.idUsuario = Principal.UsuarioEnSesion.id
+                    mFamilia.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
+                    mFamilia.Guardar()
+                    Me.Close()
 
-                If mOperacion = TipoOperacion.Alta Then
-                    MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia registrada correctamente."))
-                Else
-                    MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia modificada correctamente."))
-                End If
-        End Select
+                    If mOperacion = TipoOperacion.Alta Then
+                        MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia registrada correctamente."))
+                    Else
+                        MsgBox(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Familia modificada correctamente."))
+                    End If
+            End Select
+        Catch ex As InvalidCastException
+            MsgBox("Error al establecer el identificador del usuario seleccionado.")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         Me.Close()

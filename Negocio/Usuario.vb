@@ -405,26 +405,32 @@ Namespace Negocio
             If (Me.usuario = "") Then
                 Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
             End If
-
-            If Not ValidarEmail() Then
-                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Ingrese un email válido."))
+            If (Me.email = "") Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el email a utilizar."))
             End If
+            'If Not ValidarEmail() Then
+            '    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Error al querer guardar usuario: El email ingresado no tiene el formato correcto."))
+            'End If
 
             If Not ValidarDNI() Then
-                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Ingrese un DNI válido."))
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Error al querer guardar usuario: El dni ingresado no tiene el formato correcto."))
             End If
 
             If Not ValidarFechaNacimiento() Then
-                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "La fecha de nacimiento debe ser menor a la fecha actual."))
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Error al querer guardar usuario: La fecha de nacimiento ingresada no tiene el formato correcto,debe ser menor a la fecha actual."))
             End If
         End Sub
 
         Function ValidarEmail() As Boolean
             If Me.email = String.Empty Then Return False
+
             ' Compruebo si el formato de la dirección es correcto.
-            Dim re As Regex = New Regex("^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$")
+            Dim re As Regex = New Regex("^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2, 4}$")
+
             Dim m As Match = re.Match(Me.email)
+
             Return (m.Captures.Count <> 0)
+
         End Function
         Function ValidarDNI() As Boolean
             If IsNothing(Me.dni) Or Me.dni < 1 Then Return False
@@ -446,7 +452,6 @@ Namespace Negocio
                 Catch ex As Exception
                     Throw New ApplicationException("Error al borrar el usuario especificado.", ex)
                 End Try
-
             Else
                 Throw New ApplicationException("Se intentó eliminar un usuario sin Id especifico.")
             End If

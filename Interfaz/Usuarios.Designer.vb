@@ -155,6 +155,7 @@ Partial Class Usuarios
         '
         Me.txtDNI.Location = New System.Drawing.Point(107, 146)
         Me.txtDNI.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtDNI.MaxLength = 99999999
         Me.txtDNI.Name = "txtDNI"
         Me.txtDNI.Size = New System.Drawing.Size(171, 22)
         Me.txtDNI.TabIndex = 4
