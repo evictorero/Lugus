@@ -82,12 +82,12 @@ Partial Class Usuarios
         '
         Me.txtFecha_Nacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.txtFecha_Nacimiento.Location = New System.Drawing.Point(573, 146)
-        Me.txtFecha_Nacimiento.MaxDate = New Date(2016, 10, 29, 19, 41, 14, 0)
+        Me.txtFecha_Nacimiento.MaxDate = New Date(2500, 1, 1, 9, 37, 0, 0)
         Me.txtFecha_Nacimiento.MinDate = New Date(1800, 1, 1, 0, 0, 0, 0)
         Me.txtFecha_Nacimiento.Name = "txtFecha_Nacimiento"
         Me.txtFecha_Nacimiento.Size = New System.Drawing.Size(110, 22)
         Me.txtFecha_Nacimiento.TabIndex = 14
-        Me.txtFecha_Nacimiento.Value = New Date(2016, 10, 29, 0, 0, 0, 0)
+        Me.txtFecha_Nacimiento.Value = New Date(2016, 11, 11, 9, 38, 16, 0)
         '
         'Label6
         '

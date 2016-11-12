@@ -238,20 +238,16 @@ Namespace Negocio
                                 Return False
                             End If
                         Case "bUsuario"
-                            'Recalculo del digito verificador 
-                            '  Dim CadenaDigitoVerificador As String = mDTO.descripcionCorta + mDTO.descripcionLarga + Convert.ToString(mDTO.fechaModif)
-                            '   mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
-                            'Case "bBebida"
-                            '    Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
-                            '    DVH = 0
-                            '    For x As Integer = 0 To mBebidas.Count - 1
-                            '        Dim CadenaDigitoVerificador As String = mBebidas(x).descripcionCorta + mBebidas(x).descripcionLarga + Convert.ToString(mBebidas(x).fechaModif)
-                            '        DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
-                            '    Next
-                            '    DVV = CalcularDVV("bBebida")
-                            '    If DVH <> DVV Then
-                            '        Return False
-                            '    End If
+                            Dim mUSuarios As List(Of Usuario) = (New Negocio.Usuario).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mUSuarios.Count - 1
+                                Dim CadenaDigitoVerificador As String = Encriptador.EncriptarDatos(2, mUSuarios(x).usuario) + mUSuarios(x).nombre + mUSuarios(x).apellido + Convert.ToString(mUSuarios(x).fechaModif)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = ObtenerDVV("bUsuario")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
                         Case "bBebida"
                             Dim mBebidas As List(Of Bebida) = (New Negocio.Bebida).Listar
                             DVH = 0

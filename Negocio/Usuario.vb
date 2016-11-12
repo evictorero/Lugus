@@ -1,7 +1,8 @@
 ﻿Imports Microsoft.VisualBasic
 Imports DTO.UsuarioDTO
 Imports Datos.ProveedorDeDatos
-
+Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Namespace Negocio
     Public Class Usuario : Implements IColeccionable
@@ -314,7 +315,7 @@ Namespace Negocio
             mDTO.intentosLogin = Me.intentoLogin
             mDTO.contrasenia = Me.mPassword
 
-            'Recalculo del digito verificador 
+            'Recalculo del digito verificador horizontal
             Dim CadenaDigitoVerificador As String = mDTO.usuario + mDTO.nombre + mDTO.apellido + Convert.ToString(mDTO.fechaModif)
             mDTO.dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
@@ -334,12 +335,14 @@ Namespace Negocio
                     Datos.UsuarioDatos.GuardarModificacion(mDTO)
                     Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario", "Media")
                     mBitacora.Guardar()
-                    Dim mDVV As New Negocio.DigitoVerificador("bUsuario")
-                    mDVV.tabla = "bUsuario"
-                    mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bUsuario")
-                    mDVV.Guardar()
                 End If
             End If
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("bUsuario")
+            mDVV.tabla = "bUsuario"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bUsuario")
+            mDVV.Guardar()
 
             Me.GuardarUsuarioPatentes()
             Me.GuardarUsuarioFamilias()
@@ -401,7 +404,19 @@ Namespace Negocio
             If (Me.usuario = "") Then
                 Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
             End If
+
+            If ValidarEmail(Me.email) Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el email del usuario."))
+            End If
         End Sub
+
+        Function ValidarEmail(ByVal email As String) As Boolean
+            If email = String.Empty Then Return False
+            ' Compruebo si el formato de la dirección es correcto.
+            Dim re As Regex = New Regex("^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$")
+            Dim m As Match = re.Match(email)
+            Return (m.Captures.Count <> 0)
+        End Function
 
         Public Overridable Sub Eliminar()
             If mId > 0 Then

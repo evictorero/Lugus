@@ -27,6 +27,7 @@ Public Class Usuarios
         Me.txtUsuario.Focus()
         Me.txtFecha_Nacimiento.CustomFormat = "dd/MM/yyyy"
         Me.txtId_usuario.Enabled = False
+
         'Seteo de aspecto de la grilla 
         With Me.dgvPatentes
             .AllowDrop = False
