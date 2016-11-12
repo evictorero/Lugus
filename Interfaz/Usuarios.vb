@@ -149,6 +149,8 @@ Public Class Usuarios
                     If IsNothing(mUsuario) Then
                         mUsuario = New Negocio.Negocio.Usuario
                     End If
+
+
                     mUsuario.usuario = Me.txtUsuario.Text
                     mUsuario.nombre = Me.txtNombre.Text
                     mUsuario.apellido = Me.txtApellido.Text
@@ -156,6 +158,7 @@ Public Class Usuarios
                     mUsuario.email = Me.txtEmail.Text
                     mUsuario.fechaNacimiento = Date.ParseExact(Me.txtFecha_Nacimiento.Text, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
                     mUsuario.idUsuarioAlta = Principal.UsuarioEnSesion.id
+
                     mUsuario.ValidarFormato(Principal.UsuarioEnSesion.id_idioma)
                     mUsuario.Guardar()
                     If mOperacion = TipoOperacion.Alta Then

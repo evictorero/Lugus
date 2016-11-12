@@ -406,18 +406,38 @@ Namespace Negocio
                 Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el usuario a utilizar."))
             End If
 
-            'If ValidarEmail(Me.email) Then
-            '    Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Debe completar el email del usuario."))
-            'End If
+            If Not ValidarEmail() Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Ingrese un email válido."))
+            End If
+
+            If Not ValidarDNI() Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "Ingrese un DNI válido."))
+            End If
+
+            If Not ValidarFechaNacimiento() Then
+                Throw New ApplicationException(Negocio.Traductor.ObtenerTraduccion(pid_idioma, "La fecha de nacimiento debe ser menor a la fecha actual."))
+            End If
         End Sub
 
-        Function ValidarEmail(ByVal email As String) As Boolean
-            If email = String.Empty Then Return False
+        Function ValidarEmail() As Boolean
+            If Me.email = String.Empty Then Return False
             ' Compruebo si el formato de la dirección es correcto.
             Dim re As Regex = New Regex("^[\w._%-]+@[\w.-]+\.[a-zA-Z]{2,4}$")
-            Dim m As Match = re.Match(email)
+            Dim m As Match = re.Match(Me.email)
             Return (m.Captures.Count <> 0)
         End Function
+        Function ValidarDNI() As Boolean
+            If IsNothing(Me.dni) Or Me.dni < 1 Then Return False
+
+            Return True
+        End Function
+
+        Function ValidarFechaNacimiento() As Boolean
+            If Me.fechaNacimiento > Date.Today Then Return False
+
+            Return True
+        End Function
+
 
         Public Overridable Sub Eliminar()
             If mId > 0 Then
