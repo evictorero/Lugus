@@ -258,6 +258,29 @@ Namespace Negocio
             Return mCol
         End Function
 
+        Public Overridable Function ListarPorPatente(ByVal idPatente As Integer) As Collections.Generic.List(Of Usuario)
+            Dim mCol As New Collections.Generic.List(Of Usuario)
+            Dim mColDTO As List(Of DTO.UsuarioDTO) = Datos.UsuarioDatos.ListarPorPatente(idPatente)
+            Dim miUsuario As Negocio.Usuario
+            For Each mDTO As DTO.UsuarioDTO In mColDTO
+                miUsuario = New Negocio.Usuario(mDTO)
+                miUsuario.usuario = Encriptador.DesencriptarDatos(2, mDTO.usuario)
+                mCol.Add(miUsuario)
+            Next
+            Return mCol
+        End Function
+        Public Overridable Function ListarPorFamilia(ByVal idFamilia As Integer) As Collections.Generic.List(Of Usuario)
+            Dim mCol As New Collections.Generic.List(Of Usuario)
+            Dim mColDTO As List(Of DTO.UsuarioDTO) = Datos.UsuarioDatos.ListarPorFamilia(idFamilia)
+            Dim miUsuario As Negocio.Usuario
+            For Each mDTO As DTO.UsuarioDTO In mColDTO
+                miUsuario = New Negocio.Usuario(mDTO)
+                miUsuario.usuario = Encriptador.DesencriptarDatos(2, mDTO.usuario)
+                mCol.Add(miUsuario)
+            Next
+            Return mCol
+        End Function
+
         Public Shared Function ValidarFormato(pUsuario As String, pContrasenia As String) As Boolean
             'Celeste
             Return True

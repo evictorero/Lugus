@@ -63,11 +63,14 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -147,6 +150,12 @@
       <DependentUpon>FamiliaABM.vb</DependentUpon>
     </Compile>
     <Compile Include="FamiliaABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReporteUsuarios.Designer.vb">
+      <DependentUpon>ReporteUsuarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LogIn.Designer.vb">
@@ -293,6 +302,10 @@
     <EmbeddedResource Include="FamiliaABM.resx">
       <DependentUpon>FamiliaABM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReporteUsuarios.rdlc" />
+    <EmbeddedResource Include="ReporteUsuarios.resx">
+      <DependentUpon>ReporteUsuarios.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.vb</DependentUpon>
     </EmbeddedResource>
@@ -353,6 +366,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\Negocio.Negocio.Usuario.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
