@@ -125,9 +125,13 @@ Namespace Negocio
             If mId = 0 Then
                 mDTO.id = Datos.PlatoDatos.ObtenerProximoId()
                 Datos.PlatoDatos.GuardarNuevo(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Creacion de Plato: " & mDTO.descripcionCorta, "Media")
+                mBitacora.Guardar()
             Else
                 mDTO.id = Me.id
                 Datos.PlatoDatos.GuardarModificacion(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Modificacion de Plato: " & mDTO.descripcionCorta, "Media")
+                mBitacora.Guardar()
             End If
 
             'Recalculo del digito verificador vertical
@@ -185,6 +189,8 @@ Namespace Negocio
             If mId > 0 Then
                 Try
                     Datos.PlatoDatos.Eliminar(mId)
+                    Dim mBitacora As New Negocio.Bitacora(mId, "Eliminacion de Plato: Id " & mId, "Media")
+                    mBitacora.Guardar()
                 Catch ex As Exception
                     Throw New ApplicationException("Error al borrar el plato especificado.", ex)
                 End Try

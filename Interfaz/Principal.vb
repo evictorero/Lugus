@@ -175,6 +175,7 @@ Public Class Principal
                 Dim mBitacora As New Negocio.Negocio.Bitacora(UsuarioEnSesion.id, "Regenero los Digitos Verificadores", "Alta")
                 mBitacora.Guardar()
                 Negocio.Negocio.DigitoVerificador.RegenerarDigitoVerificadores()
+                MsgBox(ObtenerTraduccion(UsuarioEnSesion.id_idioma, "Digitos verificadores regenerados correctamente."))
                 Me.Close()
             End If
         Else

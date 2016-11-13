@@ -74,7 +74,7 @@ Public Class UsuarioDatos
         Dim mFuncion As String
         Dim rta As Integer = -1
 
-        mFuncion = " Select count(*) from dbo.bUsuario where intentos_login < 3 and usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
+        mFuncion = " Select count(*) from dbo.bUsuario where fecha_baja is null  and intentos_login < 3 and usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
         rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
         If rta > 0 Then
             Return 1 ' Usuario y contrasenia correcto

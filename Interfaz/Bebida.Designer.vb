@@ -134,6 +134,7 @@ Partial Class Bebida
         '
         'cboxHabilitado
         '
+        Me.cboxHabilitado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboxHabilitado.FormattingEnabled = True
         Me.cboxHabilitado.Items.AddRange(New Object() {"S", "N"})
         Me.cboxHabilitado.Location = New System.Drawing.Point(131, 138)

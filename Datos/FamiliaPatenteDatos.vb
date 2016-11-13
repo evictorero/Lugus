@@ -65,6 +65,7 @@ Public Class FamiliaPatenteDatos
 
         Return mCol
     End Function
+
     Public Shared Function Existe(ByVal pId_familia As Integer, ByVal pId_Patente As Integer) As Boolean
 
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,m_negada,dvh FROM dbo.rFamiliaPatente where id_familia = " & pId_familia & " and id_patente = " & pId_Patente)
@@ -78,6 +79,20 @@ Public Class FamiliaPatenteDatos
         Return rta
 
     End Function
+
+    Public Shared Function EsPatenteEsencial(ByVal pId_familia As Integer, ByVal pId_Patente As Integer) As Boolean
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("select fp.id_patente , u.id_usuario, fp.m_negada, fp.id_usuario_alta, fp.dvh From busuario As u , rUsuarioFamilia As uf, rFamiliaPatente As fp Where u.id_usuario = uf.id_usuario And uf.id_familia = fp.id_familia And fp.m_negada = 'N'  and fp.id_patente = " & pId_Patente & " And fp.id_familia = " & pId_familia)
+        Dim rta As Boolean = True
+
+        If mDs.Tables.Count > 1 Then
+            rta = False
+        End If
+
+        Return rta
+
+    End Function
+
     Public Shared Function Listar() As List(Of DTO.FamiliaPatenteDTO)
         Dim mCol As New List(Of DTO.FamiliaPatenteDTO)
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif FROM dbo.bBebida")

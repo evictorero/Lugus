@@ -150,6 +150,8 @@ Namespace Negocio
                 If File.Exists(rutaCompletaTemp) Then
                     File.Delete(rutaCompletaTemp)
                 End If
+                Dim mBitacora As New Negocio.Bitacora(Me.id, "Generacion de Backup : " & rutaCompletaBak, "Alta")
+                mBitacora.Guardar()
             End If
         End Sub
 
@@ -191,10 +193,9 @@ Namespace Negocio
 
             If File.Exists(rutaCompletaBak) Then
                 Datos.BackupDatos.Restaurar(rutaCompletaBak)
-                'If File.Exists(rutaCompletaBak) Then
-                'File.Delete(rutaCompletaBak)
-                    'End If
-                Else
+                Dim mBitacora As New Negocio.Bitacora(Me.id, "Restauracion de Backup : " & rutaCompletaBak, "Alta")
+                mBitacora.Guardar()
+            Else
                 Throw New ApplicationException("Se produjo un error descomprimiendo el archivo")
             End If
         End Sub

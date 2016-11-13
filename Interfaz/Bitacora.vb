@@ -14,8 +14,11 @@ Public Class Bitacora
             cmbUsuario.SelectedIndex = 0
         End If
 
-        dtpFechaDesde.Value = New DateTime(2016, 1, 1)
-        dtpFechaHasta.Value = Date.Now
+        ' dtpFechaDesde.Value = New DateTime(2016, 1, 1)
+        ' dtpFechaHasta.Value = Date.Now
+
+        dtpFechaDesde.CustomFormat = "dd/MM/yyyy"
+        dtpFechaHasta.CustomFormat = "dd/MM/yyyy"
 
         chkUsuario.Checked = False
         chkFechas.Checked = False

@@ -118,12 +118,18 @@ Public Class UsuarioABM
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
+        If SePuedeEliminar(mId) Then
             Dim result As Integer = MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "¿Usted se encuentra seguro que desea dar de baja el usuario seleccionado?"), "Eliminar", MessageBoxButtons.YesNo)
             If result = DialogResult.Yes Then
                 Usuario.Eliminar()
                 MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Usuario dado de baja correctamente."))
             End If
+
             ActualizarGrilla()
+        Else
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "El usuario no puede eliminarse debido a que posee una familia/patente esencial."))
+        End If
+
     End Sub
 
 
@@ -260,6 +266,28 @@ Public Class UsuarioABM
             End Select
         Next
         Return tieneAcceso
+    End Function
+
+    Public Function SePuedeEliminar(ByVal pId As Integer) As Boolean
+        Dim pUsuario As New Negocio.Negocio.Usuario(pId)
+        If pUsuario.UsuarioPatente.Count > 0 Then
+            For x As Integer = 0 To pUsuario.UsuarioPatente.Count - 1
+                If Negocio.Negocio.UsuarioPatente.EsPatenteEsencial(pId, pUsuario.UsuarioPatente(x).id_patente) Then
+                    Return False
+                End If
+            Next
+        End If
+
+        If pUsuario.UsuarioFamilia.Count > 0 Then
+            Dim mListaPatentesDeFamiliaporUsuario As New List(Of Negocio.Negocio.UsuarioPatente)
+            mListaPatentesDeFamiliaporUsuario = pUsuario.ListarPatentesDeFamiliaPorUsuario
+            For x As Integer = 0 To mListaPatentesDeFamiliaporUsuario.Count - 1
+                If Negocio.Negocio.UsuarioFamilia.EsFamiliaPatenteEsencial(pId, pUsuario.UsuarioPatente(x).id_patente) Then
+                    Return False
+                End If
+            Next
+        End If
+        Return True
     End Function
 #End Region
 

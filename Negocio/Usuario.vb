@@ -327,14 +327,14 @@ Namespace Negocio
                 If Validar(mDTO) Then
                     Datos.UsuarioDatos.GuardarNuevo(mDTO)
                     EnviarMail(Me.usuario, pass)
-                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Creación de usuario : " & Me.usuario, "Media")
+                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Creación del usuario : " & Me.usuario, "Media")
                     mBitacora.Guardar()
                 End If
             Else
                 mDTO.id = Me.id
                 If Validar(mDTO) Then
                     Datos.UsuarioDatos.GuardarModificacion(mDTO)
-                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: " & Me.usuario, "Media")
+                    Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación del Usuario: " & Me.usuario, "Media")
                     mBitacora.Guardar()
                 End If
             End If

@@ -124,9 +124,13 @@ Namespace Negocio
             If mId = 0 Then
                 mDTO.id = Datos.BebidaDatos.ObtenerProximoId()
                 Datos.BebidaDatos.GuardarNuevo(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Creacion de Bebida: " & mDTO.descripcionCorta, "Media")
+                mBitacora.Guardar()
             Else
                 mDTO.id = Me.id
                 Datos.BebidaDatos.GuardarModificacion(mDTO)
+                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Modificacion de Bebida: " & mDTO.descripcionCorta, "Media")
+                mBitacora.Guardar()
             End If
 
             'Recalculo del digito verificador vertical
@@ -182,6 +186,8 @@ Namespace Negocio
             If mId > 0 Then
                 Try
                     Datos.BebidaDatos.Eliminar(mId)
+                    Dim mBitacora As New Negocio.Bitacora(mId, "Eliminacion de Bebida: Id " & mId, "Media")
+                    mBitacora.Guardar()
                 Catch ex As Exception
                     Throw New ApplicationException("Error al borrar la bebida especificada.", ex)
                 End Try
