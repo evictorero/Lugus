@@ -191,6 +191,12 @@
     <Compile Include="PatenteABM.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PedidoPlatoABM.Designer.vb">
+      <DependentUpon>PedidoPlatoABM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PedidoPlatoABM.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Pedidos.Designer.vb">
       <DependentUpon>Pedidos.vb</DependentUpon>
     </Compile>
@@ -313,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PatenteABM.resx">
       <DependentUpon>PatenteABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedidoPlatoABM.resx">
+      <DependentUpon>PedidoPlatoABM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pedidos.resx">
       <DependentUpon>Pedidos.vb</DependentUpon>

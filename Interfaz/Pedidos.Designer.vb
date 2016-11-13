@@ -25,9 +25,6 @@ Partial Class Pedidos
         Me.Bebidas = New System.Windows.Forms.GroupBox()
         Me.btnFinalizar_bebidas = New System.Windows.Forms.Button()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.estado2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnEnviar_bebidas = New System.Windows.Forms.Button()
         Me.btnEliminar_bebidas = New System.Windows.Forms.Button()
         Me.btnAgregar_bebidas = New System.Windows.Forms.Button()
@@ -90,31 +87,13 @@ Partial Class Pedidos
         'DataGridView2
         '
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.estado2})
         Me.DataGridView2.Location = New System.Drawing.Point(12, 30)
         Me.DataGridView2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.RowTemplate.Height = 28
         Me.DataGridView2.Size = New System.Drawing.Size(391, 191)
         Me.DataGridView2.TabIndex = 0
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Bebida"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.Width = 60
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Descripción"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 150
-        '
-        'estado2
-        '
-        Me.estado2.HeaderText = "Estado"
-        Me.estado2.Name = "estado2"
-        Me.estado2.Width = 45
         '
         'btnEnviar_bebidas
         '
@@ -440,8 +419,5 @@ Partial Class Pedidos
     Friend WithEvents btnEnviarTodo As Button
     Friend WithEvents btnFinalizar As Button
     Friend WithEvents btnReabrir As Button
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents estado2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblTitulo As Label
 End Class

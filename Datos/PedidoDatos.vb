@@ -36,7 +36,7 @@ Public Class PedidoDatos
     Public Shared Function Listar() As List(Of DTO.PedidoDTO)
 
         Dim mCol As New List(Of DTO.PedidoDTO)
-        Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_pedido, descripcion, estado,fecha_baja,cantidad,fecha_modif,id_usuario_alta FROM dbo.bPedido "))
+        Dim mDs As DataSet = DB.ExecuteDataset(("SELECT id_pedido, descripcion, estado,fecha_baja,cantidad,fecha_modif,id_usuario_alta FROM dbo.bPedido order by estado"))
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.PedidoDTO

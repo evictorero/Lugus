@@ -249,6 +249,7 @@ Public Class FamiliaABM
         Next
         Return tieneAcceso
     End Function
+
 #End Region
 
 End Class
