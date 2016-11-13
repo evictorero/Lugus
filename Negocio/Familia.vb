@@ -272,7 +272,6 @@ Namespace Negocio
             End Set
         End Property
 
-
 #End Region
 
 #Region "FamiliaPAtente"

@@ -1,5 +1,9 @@
 ﻿Imports Negocio.Negocio
+Imports Negocio.Negocio.Traductor
+
+
 Public Class AsocFamiliaPatente
+
 
 #Region "Declaraciones"
 
@@ -90,7 +94,11 @@ Public Class AsocFamiliaPatente
 
             Case TipoOperacion.Baja
                 If Not IsNothing(mFamiliaPatente) Then
-                    CType(Me.Owner, Familias).FamiliaAEditar.EliminarFamiliaPatente(mFamiliaPatente.IndiceColeccion)
+                    If Not Negocio.Negocio.FamiliaPatente.EsFamiliaPatenteEsencial(mFamiliaPatente.id_familia, mFamiliaPatente.id_patente) Then
+                        CType(Me.Owner, Familias).FamiliaAEditar.EliminarFamiliaPatente(mFamiliaPatente.IndiceColeccion)
+                    Else
+                        MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "La pantente que desea eliminar es esencial."))
+                    End If
                 End If
         End Select
         Me.Close()

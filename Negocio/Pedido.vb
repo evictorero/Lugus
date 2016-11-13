@@ -332,7 +332,11 @@ Namespace Negocio
                             If Me.mPedidoPlato(x - mEliminados).id_pedido = 0 Then
                                 Me.mPedidoPlato(x - mEliminados).id_pedido = mId
                             End If
-                            Me.mPedidoPlato(x - mEliminados).Guardar()
+                            If Me.mPedidoPlato(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                                Me.mPedidoPlato(x - mEliminados).Guardar()
+                            Else
+                                Me.mPedidoPlato(x - mEliminados).GuardarModificacion()
+                            End If
                             Me.mPedidoPlato(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
 
                         Case IColeccionable.EstadosColeccion.Borrado

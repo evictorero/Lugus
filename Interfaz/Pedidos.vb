@@ -62,15 +62,20 @@ Imports System.DateTime
 
                 .Add("cEstadoColeccion", "EstadoColeccion")
                 .Item(4).DataPropertyName = "EstadoColeccion"
-                .Item(4).Visible = True
+                .Item(4).Visible = False
 
                 .Add("cIndiceColeccion", "IndiceColeccion")
                 .Item(5).DataPropertyName = "IndiceColeccion"
-                .Item(5).Visible = True
+                .Item(5).Visible = False
 
                 .Add("cM_negada", "Estado")
                 .Item(6).DataPropertyName = "Estado"
-                .Item(6).Visible = True
+                .Item(6).Visible = False
+
+
+                .Add("cM_negada", "Estado")
+                .Item(7).DataPropertyName = "Desc Estado"
+                .Item(7).Visible = True
             End With
         End With
         Me.txtMesero.Text = Principal.UsuarioEnSesion.usuario
@@ -148,22 +153,6 @@ Imports System.DateTime
 
         End Sub
 
-    'Private Sub btnAgregarPatente_Click(sender As Object, e As EventArgs) Handles btnAgregarPatente.Click
-    '    Dim mForm As New AsocUsuarioPatente
-    '    mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Alta
-    '    mForm.StartPosition = FormStartPosition.CenterParent
-    '    mForm.ShowDialog(Me)
-    '    ActualizarGrilla()
-    'End Sub
-
-    'Private Sub btnAgregarFamilia_Click(sender As Object, e As EventArgs) Handles btnAgregarFamilia.Click
-    '    Dim mForm As New AsocUsuarioFamilia
-    '    mForm.Operacion = AsocUsuarioFamilia.TipoOperacion.Alta
-    '    mForm.StartPosition = FormStartPosition.CenterParent
-    '    mForm.ShowDialog(Me)
-    '    ActualizarGrilla()
-    'End Sub
-
     Private Sub ActualizarGrilla()
         dgvPlatos.DataSource = mPedido.PedidoPlato
         If dgvPlatos.Rows.Count > 0 Then
@@ -171,6 +160,7 @@ Imports System.DateTime
                 Dim mPlato As New Negocio.Negocio.Plato
                 mPlato.Cargar(CInt(dgvPlatos.Rows(i).Cells(1).Value))
                 dgvPlatos.Rows(i).Cells(2).Value = mPlato.descripcionCorta
+                dgvPlatos.Rows(i).Cells(7).Value = EstadoPlatoBebida(dgvPlatos.Rows(i).Cells(6).Value)
             Next
         End If
 
@@ -184,32 +174,6 @@ Imports System.DateTime
         'End If
 
     End Sub
-
-    'Private Sub btnEliminarPatente_Click(sender As Object, e As EventArgs) Handles btnEliminarPatente.Click
-    '    If Me.dgvPatentes.Rows.Count > 0 AndAlso Me.dgvPatentes.SelectedRows.Count = 1 Then
-    '        Dim mIndice As Integer = CInt(dgvPatentes.SelectedRows(0).Cells(5).Value)
-    '        Dim mForm As New AsocUsuarioPatente
-    '        mForm.Operacion = AsocUsuarioPatente.TipoOperacion.Baja
-
-    '        mForm.UsuarioPatenteAEditar = mUsuario.ObtenerUsuarioPatentePorIndice(mIndice)
-    '        mForm.StartPosition = FormStartPosition.CenterParent
-    '        mForm.ShowDialog(Me)
-    '        ActualizarGrilla()
-    '    End If
-    'End Sub
-
-    'Private Sub btnEliminarFamilia_Click(sender As Object, e As EventArgs) Handles btnEliminarFamilia.Click
-    '    If Me.dgvFamilias.Rows.Count > 0 AndAlso Me.dgvFamilias.SelectedRows.Count = 1 Then
-    '        Dim mIndice As Integer = CInt(dgvFamilias.SelectedRows(0).Cells(5).Value)
-    '        Dim mForm As New AsocUsuarioFamilia
-    '        mForm.Operacion = AsocUsuarioFamilia.TipoOperacion.Baja
-
-    '        mForm.UsuarioFamiliaAEditar = mUsuario.ObtenerUsuarioFamiliaPorIndice(mIndice)
-    '        mForm.StartPosition = FormStartPosition.CenterParent
-    '        mForm.ShowDialog(Me)
-    '        ActualizarGrilla()
-    '    End If
-    'End Sub
     Public Function TienePermisoAcceso() As Boolean
         'Patentes 9 10 11 12
         Dim tieneAcceso As Boolean = False
@@ -275,6 +239,31 @@ Imports System.DateTime
 
         Return "I"
     End Function
+    Public Function EstadoPlatoBebida(pEstado As String) As String
+        Select Case pEstado
+            Case "INGRESADO"
+                Return "I"
+            Case "PENDIENTE"
+                Return "P"
+            Case "EN PROCESO"
+                Return "E"
+            Case "LISTO"
+                Return "L"
+            Case "FINALIZADO"
+                Return "F"
+            Case "I"
+                Return "INGRESADO"
+            Case "P"
+                Return "PENDIENTE"
+            Case "E"
+                Return "EN PROCESO"
+            Case "L"
+                Return "LISTO"
+            Case "F"
+                Return "FINALIZADO"
+        End Select
+        Return "I"
+    End Function
 
     Private Sub btnFinalizar_Click(sender As Object, e As EventArgs) Handles btnFinalizar.Click
         Dim Pedido As New Negocio.Negocio.Pedido(txtId.Text)
@@ -283,8 +272,8 @@ Imports System.DateTime
             If result = DialogResult.Yes Then
                 Pedido.Eliminar()
                 MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Pedido finalizado correctamente."))
+                Me.Close()
             End If
-
             ActualizarGrilla()
         Else
             MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "El pedido no puede finalizarse debido a que posee una bebida o plato en curso."))
@@ -314,10 +303,23 @@ Imports System.DateTime
     End Sub
 
     Private Sub btnEnviar_plato_Click(sender As Object, e As EventArgs) Handles btnEnviar_plato.Click
+
         If Me.dgvPlatos.Rows.Count > 0 AndAlso Me.dgvPlatos.SelectedRows.Count = 1 Then
-            Dim mIndice As Integer = CInt(Me.dgvPlatos.SelectedRows(0).Cells(4).Value)
+            Dim mIndice As Integer = CInt(Me.dgvPlatos.SelectedRows(0).Cells(5).Value)
             Dim mForm As New AsocPedidoPlato
-            mForm.Operacion = AsocPedidoPlato.TipoOperacion.Modificacion
+            mForm.Operacion = AsocPedidoPlato.TipoOperacion.Enviar
+            mForm.PedidoPlatoAEditar = mPedido.ObtenerPedidoPlatoPorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
+    End Sub
+
+    Private Sub btnFinalizar_plato_Click(sender As Object, e As EventArgs) Handles btnFinalizar_plato.Click
+        If Me.dgvPlatos.Rows.Count > 0 AndAlso Me.dgvPlatos.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(Me.dgvPlatos.SelectedRows(0).Cells(5).Value)
+            Dim mForm As New AsocPedidoPlato
+            mForm.Operacion = AsocPedidoPlato.TipoOperacion.Finalizar
             mForm.PedidoPlatoAEditar = mPedido.ObtenerPedidoPlatoPorIndice(mIndice)
             mForm.StartPosition = FormStartPosition.CenterParent
             mForm.ShowDialog(Me)

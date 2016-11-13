@@ -22,6 +22,9 @@ Namespace Negocio
         Public Sub New(ByVal pDTO As DTO.PedidoPlatoDTO)
             Me.Cargar(pDTO)
         End Sub
+        Public Sub New(ByVal pId_pedido As Integer, ByVal pId_plato As Integer)
+            Me.Cargar(pId_pedido, pId_plato)
+        End Sub
 #End Region
 
 #Region "Propiedades"
@@ -91,8 +94,30 @@ Namespace Negocio
             If Not Existe Then
                 Datos.PedidoPlatoDatos.GuardarNuevo(mDTO)
             Else
-                Datos.PedidoPlatoDatos.GuardarModificacion(mDTO)
+                Throw New ApplicationException("Se intentó cargar un Pedido Plato ya existente.")
             End If
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("rPedidoPlato")
+            mDVV.tabla = "rPedidoPlato"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rPedidoPlato")
+            mDVV.Guardar()
+
+        End Sub
+        Public Overridable Sub GuardarModificacion()
+            Dim mDTO As New DTO.PedidoPlatoDTO
+            Dim Existe As Boolean = False
+
+            mDTO.Id_pedido = Me.id_pedido
+            mDTO.id_plato = Me.Id_Plato
+            mDTO.Id_Usuario_alta = Me.id_usuario_alta
+            mDTO.Estado = Me.mEstado
+
+            'Recalculo del digito verificador horizontal
+            Dim CadenaDigitoVerificador As String = Convert.ToString(mDTO.Id_pedido) + Convert.ToString(mDTO.id_plato)
+            mDTO.Dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+
+            Datos.PedidoPlatoDatos.GuardarModificacion(mDTO)
 
             'Recalculo del digito verificador vertical
             Dim mDVV As New Negocio.DigitoVerificador("rPedidoPlato")
@@ -128,6 +153,14 @@ Namespace Negocio
         Public Overridable Sub Cargar(ByVal pId_Plato As Integer)
             If mId_Plato > 0 Then
                 Dim mDTO As DTO.PedidoPlatoDTO = Datos.PedidoPlatoDatos.Obtener(pId_Plato)
+                MyClass.Cargar(mDTO)
+            Else
+                Throw New ApplicationException("Se intentó cargar un Pedido Plato  sin Id especificado")
+            End If
+        End Sub
+        Public Overridable Sub Cargar(ByVal pId_Pedido As Integer, ByVal pId_Plato As Integer)
+            If pId_Plato > 0 And pId_Pedido > 0 Then
+                Dim mDTO As DTO.PedidoPlatoDTO = Datos.PedidoPlatoDatos.Obtener(pId_Pedido, pId_Plato)
                 MyClass.Cargar(mDTO)
             Else
                 Throw New ApplicationException("Se intentó cargar un Pedido Plato  sin Id especificado")

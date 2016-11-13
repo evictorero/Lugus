@@ -9,7 +9,8 @@ Public Class AsocPedidoPlato
     Friend Enum TipoOperacion
         Alta = 1
         Baja = 2
-        Modificacion = 3
+        Enviar = 3
+        Finalizar = 4
     End Enum
 #End Region
 
@@ -37,7 +38,7 @@ Public Class AsocPedidoPlato
 
     Private Sub AsocPedidoPlato_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
-        Me.txtid_plato.Enabled = False
+        Me.txtId_plato.Enabled = False
         Me.txtEstado.ReadOnly = True
 
         cbDescripcionPatente.DataSource = (New Negocio.Negocio.Plato).Listar
@@ -49,21 +50,47 @@ Public Class AsocPedidoPlato
                 Me.txtId_plato.Text = ""
                 Me.txtEstado.Text = "INGRESADO"
                 Me.lblDescripcion.Text = "Descripcion"
-            Case TipoOperacion.Modificacion
+            Case TipoOperacion.Enviar
                 If Not IsNothing(mPedidoPlato) Then
-                    Me.txtId_plato.Text = mPedidoPlato.Id_Plato
-                    Me.txtid_pedido.Text = mPedidoPlato.id_pedido
-                    Me.txtId_plato.Text = mPedidoPlato.Id_Plato
-                    Me.txtId_plato.Visible = False
-                    Me.txtid_pedido.Text = mPedidoPlato.id_pedido
-                    Me.txtid_pedido.Visible = False
-                    Me.cbDescripcionPatente.SelectedValue = mPedidoPlato.Id_Plato
+                    If mPedidoPlato.Estado = "I" Then
+                        Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                        Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                        Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                        Me.txtId_plato.Visible = False
+                        Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                        Me.txtid_pedido.Visible = False
+                        Me.cbDescripcionPatente.SelectedValue = mPedidoPlato.Id_Plato
+                        Me.cbDescripcionPatente.Enabled = False
+                        Me.txtEstado.Text = "PENDIENTE"
+                    Else
+                        MsgBox("Solo puede Enviar a cocina aquello que este en estado Ingresado.")
+                        Me.Close()
+                    End If
+                End If
+            Case TipoOperacion.Finalizar
+                If Not IsNothing(mPedidoPlato) Then
+                    If mPedidoPlato.Estado = "I" Or mPedidoPlato.Estado = "P" Then
+                        Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                        Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                        Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                        Me.txtId_plato.Visible = False
+                        Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                        Me.txtid_pedido.Visible = False
+                        Me.cbDescripcionPatente.SelectedValue = mPedidoPlato.Id_Plato
+                        Me.cbDescripcionPatente.Enabled = False
+                        Me.txtEstado.Text = "FINALIZADO"
+                    Else
+                        MsgBox("Solo puede Finalizar aquello que este en estado Ingresado o Pendiente.")
+                        Me.Close()
+                    End If
+
+
                 End If
             Case TipoOperacion.Baja
 
                 If Not IsNothing(mPedidoPlato) Then
-                    Me.txtid_plato.Text = mPedidoPlato.Id_Plato
-                    Me.txtid_plato.Visible = False
+                    Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                    Me.txtId_plato.Visible = False
                     Me.txtid_pedido.Text = mPedidoPlato.id_pedido
                     Me.txtid_pedido.Visible = False
                     Me.cbDescripcionPatente.SelectedValue = mPedidoPlato.Id_Plato
@@ -92,15 +119,24 @@ Public Class AsocPedidoPlato
                     mPedidoPlato = New Negocio.Negocio.PedidoPlato
                     mPedidoPlato.Id_Plato = cbDescripcionPatente.SelectedValue
                     mPedidoPlato.id_usuario_alta = Principal.UsuarioEnSesion.id
-                    mPedidoPlato.Estado = txtEstado.Text
+                    mPedidoPlato.Estado = EstadoPlatoBebida(txtEstado.Text)
                     CType(Me.Owner, Pedidos).PedidoAEditar.AgregarPedidoPlato(mPedidoPlato)
 
-                Case TipoOperacion.Modificacion
-
+                Case TipoOperacion.Enviar
                     If Not IsNothing(mPedidoPlato) Then
                         mPedidoPlato.Id_Plato = cbDescripcionPatente.SelectedValue
                         mPedidoPlato.id_usuario_alta = Principal.UsuarioEnSesion.id
                         mPedidoPlato.Estado = txtEstado.Text
+                        mPedidoPlato.Estado = EstadoPlatoBebida(Me.txtEstado.Text)
+                        CType(Me.Owner, Pedidos).PedidoAEditar.ModificarPedidoPlato(mPedidoPlato)
+                    End If
+
+                Case TipoOperacion.Finalizar
+                    If Not IsNothing(mPedidoPlato) Then
+                        mPedidoPlato.Id_Plato = cbDescripcionPatente.SelectedValue
+                        mPedidoPlato.id_usuario_alta = Principal.UsuarioEnSesion.id
+                        mPedidoPlato.Estado = txtEstado.Text
+                        mPedidoPlato.Estado = EstadoPlatoBebida(Me.txtEstado.Text)
                         CType(Me.Owner, Pedidos).PedidoAEditar.ModificarPedidoPlato(mPedidoPlato)
                     End If
                 Case TipoOperacion.Baja

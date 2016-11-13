@@ -124,5 +124,32 @@ Public Class FamiliaPatenteDatos
         pDTO.Dvh = pDr("dvh")
     End Sub
 
+    Public Shared Function EsFamiliaPatenteEsencial(ByVal pId_Familia As Integer, ByVal pId_Patente As Integer) As Boolean
+
+        Dim esPatenteEsencial As Boolean = True
+        Dim esFamiliaEsencial As Boolean = True
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("select up.id_patente ,u.id_usuario from busuario as u , rUsuarioPatente as up where u.id_usuario = up.id_usuario and up.m_negada = 'N' and up.id_patente = " & pId_Patente)
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            esPatenteEsencial = False
+        Next
+
+        mDs = Datos.ProveedorDeDatos.DB.ExecuteDataset("select fp.id_patente ,u.id_usuario " &
+"from busuario as u , rUsuarioFamilia as uf, rFamiliaPatente as fp  " &
+"where u.id_usuario = uf.id_usuario And uf.id_familia = fp.id_familia And fp.m_negada = 'N' " &
+" and fp.id_familia   != " & pId_Familia & " and fp.id_patente = " & pId_Patente)
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            esFamiliaEsencial = False
+        Next
+
+        If esFamiliaEsencial And esPatenteEsencial Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
 End Class
 

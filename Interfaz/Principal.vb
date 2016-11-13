@@ -41,7 +41,7 @@ Public Class Principal
     End Sub
 
     Private Sub AsignarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AsignarToolStripMenuItem.Click
-
+        PedidoPlatoABM.Show()
     End Sub
 
     Private Sub ConsultaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaToolStripMenuItem.Click

@@ -140,7 +140,12 @@ Namespace Negocio
         Public Overridable Sub Eliminar()
             If mId_Patente > 0 And mId_familia > 0 Then
                 Try
-                    Datos.FamiliaPatenteDatos.Eliminar(mId_familia, mId_Patente)
+                    If Not EsFamiliaPatenteEsencial(mId_familia, mId_Patente) Then
+                        Datos.FamiliaPatenteDatos.Eliminar(mId_familia, mId_Patente)
+                    Else
+                        Throw New Exception
+                    End If
+
                 Catch ex As Exception
                     Throw New ApplicationException("Error al borrar la Familia Patente especificada.", ex)
                 End Try
@@ -170,6 +175,14 @@ Namespace Negocio
             Next
 
             Return mCol
+        End Function
+
+        Public Shared Function EsFamiliaPatenteEsencial(ByVal pId_Familia As Integer, ByVal pId_Patente As Integer) As Boolean
+            Dim rta As Boolean = False
+
+            rta = Datos.FamiliaPatenteDatos.EsFamiliaPatenteEsencial(pId_Familia, pId_Patente)
+            Return rta
+
         End Function
 #End Region
 

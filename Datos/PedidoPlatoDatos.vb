@@ -43,7 +43,26 @@ Public Class PedidoPlatoDatos
             Throw New ApplicationException("Se intentó cargar una Pedido Plato sin Id especificado")
             Return Nothing
         End If
+    End Function
 
+    Public Shared Function Obtener(ByVal pId_pedido As Integer, ByVal pId_plato As Integer) As DTO.PedidoPlatoDTO
+        If pId_pedido > 0 Then
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_pedido,id_plato,id_usuario_alta,estado, dvh FROM dbo.rPedidoPlato WHERE id_plato = " & pId_pedido & " and id_pedido = " & pId_plato)
+            If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+                Dim mDTO As New DTO.PedidoPlatoDTO
+
+                CargarDTO(mDTO, mDs.Tables(0).Rows(0))
+
+                Return mDTO
+            Else
+
+                Throw New ApplicationException("Fallo al cargar la Pedido Plato")
+                Return Nothing
+            End If
+        Else
+            Throw New ApplicationException("Se intentó cargar una Pedido Plato sin Id especificado")
+            Return Nothing
+        End If
     End Function
 
     Public Shared Function Listar(ByVal pId_pedido As Integer) As List(Of DTO.PedidoPlatoDTO)
@@ -104,7 +123,7 @@ Public Class PedidoPlatoDatos
                    "SET estado = '" & pDTO.Estado & "'," &
                       "dvh = " & pDTO.Dvh &
                      " where id_pedido = " & pDTO.Id_pedido &
-                      "id_plato = " & pDTO.id_plato
+                      "and id_plato = " & pDTO.id_plato
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
