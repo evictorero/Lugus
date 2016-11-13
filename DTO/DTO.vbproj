@@ -66,6 +66,8 @@
     <Compile Include="FamiliaPatenteDTO.vb" />
     <Compile Include="BackupDTO.vb" />
     <Compile Include="BitacoraDTO.vb" />
+    <Compile Include="PedidoDTO.vb" />
+    <Compile Include="PedidoPlatoDTO.vb" />
     <Compile Include="PlatoDTO.vb" />
     <Compile Include="FamiliaDTO.vb" />
     <Compile Include="PatenteDTO.vb" />

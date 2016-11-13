@@ -149,6 +149,8 @@ Namespace ProveedorDeDatos
                         mId = "id_bitacora"
                     Case "bDigitoVerificadorVertical"
                         mId = "id_dvv"
+                    Case "bPedido"
+                        mId = "id_pedido"
                     Case Else
                         mId = "id"
 

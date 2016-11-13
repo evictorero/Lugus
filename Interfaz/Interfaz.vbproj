@@ -89,6 +89,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsocPedidoPlato.Designer.vb">
+      <DependentUpon>AsocPedidoPlato.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AsocPedidoPlato.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AsocUsuarioPatente.Designer.vb">
       <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
     </Compile>
@@ -185,10 +191,10 @@
     <Compile Include="PatenteABM.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pedido.Designer.vb">
-      <DependentUpon>Pedido.vb</DependentUpon>
+    <Compile Include="Pedidos.Designer.vb">
+      <DependentUpon>Pedidos.vb</DependentUpon>
     </Compile>
-    <Compile Include="Pedido.vb">
+    <Compile Include="Pedidos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PedidoABM.Designer.vb">
@@ -251,6 +257,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AsocPedidoPlato.resx">
+      <DependentUpon>AsocPedidoPlato.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AsocUsuarioPatente.resx">
       <DependentUpon>AsocUsuarioPatente.vb</DependentUpon>
     </EmbeddedResource>
@@ -305,8 +314,8 @@
     <EmbeddedResource Include="PatenteABM.resx">
       <DependentUpon>PatenteABM.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pedido.resx">
-      <DependentUpon>Pedido.vb</DependentUpon>
+    <EmbeddedResource Include="Pedidos.resx">
+      <DependentUpon>Pedidos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PedidoABM.resx">
       <DependentUpon>PedidoABM.vb</DependentUpon>

@@ -73,6 +73,8 @@
     <Compile Include="Familia.vb" />
     <Compile Include="FamiliaPatente.vb" />
     <Compile Include="Patente.vb" />
+    <Compile Include="Pedido.vb" />
+    <Compile Include="PedidoPlato.vb" />
     <Compile Include="Plato.vb" />
     <Compile Include="Backup.vb" />
     <Compile Include="IColeccionable.vb" />
