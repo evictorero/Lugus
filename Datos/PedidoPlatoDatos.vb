@@ -96,5 +96,21 @@ Public Class PedidoPlatoDatos
         Return rta
 
     End Function
+    Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.PedidoPlatoDTO)
+
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE rPedidoPlato " &
+                   "SET estado = '" & pDTO.Estado & "'," &
+                      "dvh = " & pDTO.Dvh &
+                     " where id_pedido = " & pDTO.Id_pedido &
+                      "id_plato = " & pDTO.id_plato
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al modificar el pedido plato.", ex)
+        End Try
+
+    End Sub
 End Class
 

@@ -91,8 +91,9 @@ Namespace Negocio
             If Not Existe Then
                 Datos.PedidoPlatoDatos.GuardarNuevo(mDTO)
             Else
-                Throw New ApplicationException("Se intentó cargar un Pedido Plato ya existente.")
+                Datos.PedidoPlatoDatos.GuardarModificacion(mDTO)
             End If
+
             'Recalculo del digito verificador vertical
             Dim mDVV As New Negocio.DigitoVerificador("rPedidoPlato")
             mDVV.tabla = "rPedidoPlato"
