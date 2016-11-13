@@ -70,6 +70,50 @@ Public Class UsuarioDatos
 
         Return mCol
     End Function
+    Public Shared Function ListarPorFamilia(ByVal idFamilia As Integer) As List(Of DTO.UsuarioDTO)
+
+        Dim mCol As New List(Of DTO.UsuarioDTO)
+        Dim mQuery As String
+
+        mQuery = "SELECT a.id_usuario, a.usuario ,a.contraseña, a.nombre, a.apellido, a.email, a.dni,a.id_idioma, FORMAT(a.fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,a.fecha_baja,a.dvh,a.intentos_login,a.fecha_modif,a.id_usuario_alta " &
+                 "from dbo.busuario a join dbo.rusuariofamilia b on a.id_usuario = b.id_usuario " &
+                 " AND id_familia = " & idFamilia
+
+        Dim mDs As DataSet = DB.ExecuteDataset(mQuery)
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            Dim mDTO As New DTO.UsuarioDTO
+
+            CargarDTO(mDTO, mDr)
+
+            mCol.Add(mDTO)
+        Next
+
+        Return mCol
+    End Function
+
+    Public Shared Function ListarPorPatente(ByVal idPatente As Integer) As List(Of DTO.UsuarioDTO)
+
+        Dim mCol As New List(Of DTO.UsuarioDTO)
+        Dim mQuery As String
+
+        mQuery = "SELECT a.id_usuario, a.usuario ,a.contraseña, a.nombre, a.apellido, a.email, a.dni,a.id_idioma, FORMAT(a.fecha_nacimiento,'yyyy/MM/dd') as fecha_nacimiento,a.fecha_baja,a.dvh,a.intentos_login,a.fecha_modif,a.id_usuario_alta " &
+                 "from dbo.busuario a join dbo.rusuariopatente b on a.id_usuario = b.id_usuario " &
+                 " AND id_patente = " & idPatente
+
+        Dim mDs As DataSet = DB.ExecuteDataset(mQuery)
+
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            Dim mDTO As New DTO.UsuarioDTO
+
+            CargarDTO(mDTO, mDr)
+
+            mCol.Add(mDTO)
+        Next
+
+        Return mCol
+    End Function
+
     Public Shared Function VerificarLogin(pDTO As DTO.UsuarioDTO) As Integer
         Dim mFuncion As String
         Dim rta As Integer = -1

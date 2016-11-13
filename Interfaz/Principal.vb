@@ -208,4 +208,8 @@ Public Class Principal
         Next
         Return tieneAcceso
     End Function
+
+    Private Sub UsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsuariosToolStripMenuItem.Click
+        ReporteUsuarios.Show()
+    End Sub
 End Class
