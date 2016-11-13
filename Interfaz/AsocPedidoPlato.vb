@@ -40,22 +40,32 @@ Public Class AsocPedidoPlato
         Me.txtid_plato.Enabled = False
         Me.txtEstado.ReadOnly = True
 
+        cbDescripcionPatente.DataSource = (New Negocio.Negocio.Plato).Listar
+        cbDescripcionPatente.DisplayMember = "descripcionLarga"
+        cbDescripcionPatente.ValueMember = "id"
+
         Select Case mOperacion
             Case TipoOperacion.Alta
                 Me.txtId_plato.Text = ""
                 Me.txtEstado.Text = "INGRESADO"
                 Me.lblDescripcion.Text = "Descripcion"
-                cbDescripcionPatente.DataSource = (New Negocio.Negocio.Plato).Listar
-                cbDescripcionPatente.DisplayMember = "descripcionLarga"
-                cbDescripcionPatente.ValueMember = "id"
-
+            Case TipoOperacion.Modificacion
+                If Not IsNothing(mPedidoPlato) Then
+                    Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                    Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                    Me.txtId_plato.Text = mPedidoPlato.Id_Plato
+                    Me.txtId_plato.Visible = False
+                    Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                    Me.txtid_pedido.Visible = False
+                    Me.cbDescripcionPatente.SelectedValue = mPedidoPlato.Id_Plato
+                End If
             Case TipoOperacion.Baja
 
                 If Not IsNothing(mPedidoPlato) Then
                     Me.txtid_plato.Text = mPedidoPlato.Id_Plato
                     Me.txtid_plato.Visible = False
-                    Me.txtid_usuario.Text = mPedidoPlato.id_pedido
-                    Me.txtid_usuario.Visible = False
+                    Me.txtid_pedido.Text = mPedidoPlato.id_pedido
+                    Me.txtid_pedido.Visible = False
                     Me.cbDescripcionPatente.SelectedValue = mPedidoPlato.Id_Plato
                     Me.cbDescripcionPatente.Enabled = False
                     Me.cbDescripcionPatente.Visible = False
@@ -83,19 +93,27 @@ Public Class AsocPedidoPlato
                     mPedidoPlato.Id_Plato = cbDescripcionPatente.SelectedValue
                     mPedidoPlato.id_usuario_alta = Principal.UsuarioEnSesion.id
                     mPedidoPlato.Estado = txtEstado.Text
-
                     CType(Me.Owner, Pedidos).PedidoAEditar.AgregarPedidoPlato(mPedidoPlato)
 
+                Case TipoOperacion.Modificacion
+
+                    If Not IsNothing(mPedidoPlato) Then
+                        mPedidoPlato.Id_Plato = cbDescripcionPatente.SelectedValue
+                        mPedidoPlato.id_usuario_alta = Principal.UsuarioEnSesion.id
+                        mPedidoPlato.Estado = txtEstado.Text
+                        CType(Me.Owner, Pedidos).PedidoAEditar.ModificarPedidoPlato(mPedidoPlato)
+                    End If
                 Case TipoOperacion.Baja
                     If Not IsNothing(mPedidoPlato) Then
                         CType(Me.Owner, Pedidos).PedidoAEditar.EliminarPedidoPlato(mPedidoPlato.IndiceColeccion)
                     End If
             End Select
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-            Me.Close()
-        End Sub
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        Me.Close()
+    End Sub
+
     Public Function EstadoPlatoBebida(pEstado As String) As String
         Select Case pEstado
             Case "INGRESADO"
@@ -121,5 +139,6 @@ Public Class AsocPedidoPlato
         End Select
         Return "I"
     End Function
+
 #End Region
 End Class

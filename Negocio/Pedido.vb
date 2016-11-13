@@ -329,8 +329,8 @@ Namespace Negocio
                 For x As Integer = 0 To Me.mPedidoPlato.Count - 1
                     Select Case Me.mPedidoPlato(x - mEliminados).EstadoColeccion
                         Case IColeccionable.EstadosColeccion.Agregado, IColeccionable.EstadosColeccion.Modificado
-                            If Me.mPedidoPlato(x - mEliminados).Id_Plato = 0 Then
-                                Me.mPedidoPlato(x - mEliminados).Id_Plato = mId
+                            If Me.mPedidoPlato(x - mEliminados).id_pedido = 0 Then
+                                Me.mPedidoPlato(x - mEliminados).id_pedido = mId
                             End If
                             Me.mPedidoPlato(x - mEliminados).Guardar()
                             Me.mPedidoPlato(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio

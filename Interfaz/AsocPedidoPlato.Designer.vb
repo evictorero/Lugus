@@ -24,7 +24,7 @@ Partial Class AsocPedidoPlato
     Private Sub InitializeComponent()
         Me.lblEstado = New System.Windows.Forms.Label()
         Me.lblDescripcion = New System.Windows.Forms.Label()
-        Me.txtid_usuario = New System.Windows.Forms.TextBox()
+        Me.txtid_pedido = New System.Windows.Forms.TextBox()
         Me.txtId_plato = New System.Windows.Forms.TextBox()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
@@ -50,13 +50,13 @@ Partial Class AsocPedidoPlato
         Me.lblDescripcion.TabIndex = 33
         Me.lblDescripcion.Text = "Descripcion"
         '
-        'txtid_usuario
+        'txtid_pedido
         '
-        Me.txtid_usuario.Location = New System.Drawing.Point(70, 140)
-        Me.txtid_usuario.Name = "txtid_usuario"
-        Me.txtid_usuario.Size = New System.Drawing.Size(100, 22)
-        Me.txtid_usuario.TabIndex = 32
-        Me.txtid_usuario.Visible = False
+        Me.txtid_pedido.Location = New System.Drawing.Point(70, 140)
+        Me.txtid_pedido.Name = "txtid_pedido"
+        Me.txtid_pedido.Size = New System.Drawing.Size(100, 22)
+        Me.txtid_pedido.TabIndex = 32
+        Me.txtid_pedido.Visible = False
         '
         'txtId_plato
         '
@@ -112,7 +112,7 @@ Partial Class AsocPedidoPlato
         Me.Controls.Add(Me.txtEstado)
         Me.Controls.Add(Me.lblEstado)
         Me.Controls.Add(Me.lblDescripcion)
-        Me.Controls.Add(Me.txtid_usuario)
+        Me.Controls.Add(Me.txtid_pedido)
         Me.Controls.Add(Me.txtId_plato)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnGuardar)
@@ -126,7 +126,7 @@ Partial Class AsocPedidoPlato
 
     Friend WithEvents lblEstado As Label
     Friend WithEvents lblDescripcion As Label
-    Friend WithEvents txtid_usuario As TextBox
+    Friend WithEvents txtid_pedido As TextBox
     Friend WithEvents txtId_plato As TextBox
     Friend WithEvents btnCancelar As Button
     Friend WithEvents btnGuardar As Button
