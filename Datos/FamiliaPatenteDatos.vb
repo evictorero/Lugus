@@ -29,7 +29,6 @@ Public Class FamiliaPatenteDatos
         End Try
     End Sub
 
-
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.FamiliaPatenteDTO
         If pId > 0 Then
             Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,m_negada, dvh FROM dbo.rFamiliaPatente WHERE id_patente = " & pId)
@@ -171,6 +170,7 @@ Public Class FamiliaPatenteDatos
             Return Nothing
         End If
     End Function
+
     Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.FamiliaPatenteDTO)
 
         Dim mStrCom As String

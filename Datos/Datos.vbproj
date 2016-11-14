@@ -70,6 +70,7 @@
     <Compile Include="FamiliaPatenteDatos.vb" />
     <Compile Include="PatenteDatos.vb" />
     <Compile Include="BackupDatos.vb" />
+    <Compile Include="PedidoBebidaDatos.vb" />
     <Compile Include="PedidoDatos.vb" />
     <Compile Include="PedidoPlatoDatos.vb" />
     <Compile Include="PlatoDatos.vb" />

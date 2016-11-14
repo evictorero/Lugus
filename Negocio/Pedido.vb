@@ -19,11 +19,11 @@ Namespace Negocio
         Private Shared ProximoId As Integer
         Dim mId As Integer = 0
 
-        'Esta coleccion alojara las patentes de cada usuario
+        'Esta coleccion alojara los platos de cada pedido
         Protected mPedidoPlato As New Collections.Generic.List(Of PedidoPlato)
 
-        'Esta coleccion alojara las familia de cada usuario
-        'Protected mUsuarioFamilia As New Collections.Generic.List(Of UsuarioFamilia)
+        'Esta coleccion alojara las bebidas de cada pedido
+        Protected mPedidoBebida As New Collections.Generic.List(Of PedidoBebida)
 
 #End Region
 
@@ -38,6 +38,7 @@ Namespace Negocio
         Public Sub New(ByVal pDTO As DTO.PedidoDTO)
             Me.Cargar(pDTO)
             Me.CargarPedidoPlato()
+            Me.CargarPedidoBebida()
         End Sub
         Public Sub New()
             mId = 0
@@ -109,13 +110,12 @@ Namespace Negocio
         End Property
 
 
-        'Public ReadOnly Property UsuarioFamilia() As Collections.Generic.List(Of UsuarioFamilia)
-        '    Get
-        '        Return Me.FiltrarUsuarioFamiliaNoVisibles
-        '    End Get
-        'End Property
+        Public ReadOnly Property PedidoBebida() As Collections.Generic.List(Of PedidoBebida)
+            Get
+                Return Me.FiltrarPedidoBebidaNoVisibles
+            End Get
+        End Property
 #End Region
-
 
 #Region "Métodos"
 
@@ -127,6 +127,7 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó cargar un Pedido sin Id especificado")
             End If
         End Sub
+
         Public Overridable Sub Cargar(ByVal pDr As DataRow)
             Try
                 mId = pDr("id")
@@ -140,6 +141,7 @@ Namespace Negocio
             End Try
 
         End Sub
+
         Public Overridable Sub Cargar(ByVal pId As Integer)
             If pId > 0 Then
                 Dim mDTO As DTO.PedidoDTO = Datos.PedidoDatos.Obtener(pId)
@@ -148,6 +150,7 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó cargar un Pedido sin Id especificado")
             End If
         End Sub
+
         Public Sub Cargar(ByVal pDTO As DTO.PedidoDTO)
             mId = pDTO.id
             mDescripcion = pDTO.descripcion
@@ -157,6 +160,7 @@ Namespace Negocio
             mFechaModif = pDTO.fechaModif
             mIdUsuarioAlta = pDTO.idUsuarioAlta
         End Sub
+
         Private Shared Function ObtenerProximoId() As Integer
             If ProximoId = 0 Then
                 Dim mTempId As Object = DB.ObtenerId("bPedido")
@@ -169,6 +173,7 @@ Namespace Negocio
             ProximoId += 1
             Return ProximoId
         End Function
+
         Public Overridable Function Listar() As Collections.Generic.List(Of Pedido)
             Dim mCol As New Collections.Generic.List(Of Pedido)
             Dim mColDTO As List(Of DTO.PedidoDTO) = Datos.PedidoDatos.Listar()
@@ -179,6 +184,7 @@ Namespace Negocio
             Next
             Return mCol
         End Function
+
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.PedidoDTO
             mDTO.descripcion = Me.Descripcion
@@ -200,7 +206,7 @@ Namespace Negocio
             End If
 
             Me.GuardarPedidoPlatos()
-            'Me.GuardarUsuarioFamilias()
+            Me.GuardarPedidoBebidas()
         End Sub
 
         Public Sub ValidarFormato(pid_idioma As Integer)
@@ -288,8 +294,6 @@ Namespace Negocio
                 mIndiceColeccion = value
             End Set
         End Property
-
-
 
 #End Region
 
@@ -398,8 +402,111 @@ Namespace Negocio
         End Function
 #End Region
 
+#Region "PedidoBebida"
+        Public Sub EliminarPedidoBebida(ByVal pPedidoBebida As PedidoBebida)
+            EliminarPedidoBebida(pPedidoBebida.IndiceColeccion)
+        End Sub
+        Public Sub EliminarPedidoBebida(ByVal pIndice As Integer)
+            If Me.mPedidoBebida(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                Me.mPedidoBebida(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Quitado
+            Else
+                Me.mPedidoBebida(pIndice).EstadoColeccion = IColeccionable.EstadosColeccion.Borrado
+            End If
+
+        End Sub
+        Public Sub ModificarPedidoBebida(ByVal pPedidoBebida As PedidoBebida)
+            Me.mPedidoBebida(pPedidoBebida.IndiceColeccion) = pPedidoBebida
+            If Not pPedidoBebida.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                pPedidoBebida.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado
+            End If
+
+        End Sub
+        Public Sub AgregarPedidoBebida(ByVal pPedidoBebida As PedidoBebida)
+            Me.mPedidoBebida.Add(pPedidoBebida)
+            Dim mInd As Integer = Me.mPedidoBebida.IndexOf(pPedidoBebida)
+            Me.mPedidoBebida(mInd).IndiceColeccion = mInd
+            Me.mPedidoBebida(mInd).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado
+
+            'POR ULTIMO EL NUEVO PedidoBebida DEBE SABER A QUE Usuario PERTENECE
+            Me.mPedidoBebida(mInd).id_pedido = mId
+        End Sub
+        Private Sub GuardarPedidoBebidas()
+            Dim mLock As New Object
+            Dim mReacomodar As Boolean = False
+            SyncLock mLock
+                Dim mEliminados As Integer = 0
+                For x As Integer = 0 To Me.mPedidoBebida.Count - 1
+                    Select Case Me.mPedidoBebida(x - mEliminados).EstadoColeccion
+                        Case IColeccionable.EstadosColeccion.Agregado, IColeccionable.EstadosColeccion.Modificado
+                            If Me.mPedidoBebida(x - mEliminados).id_pedido = 0 Then
+                                Me.mPedidoBebida(x - mEliminados).id_pedido = mId
+                            End If
+                            If Me.mPedidoBebida(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Then
+                                Me.mPedidoBebida(x - mEliminados).Guardar()
+                            Else
+                                Me.mPedidoBebida(x - mEliminados).GuardarModificacion()
+                            End If
+                            Me.mPedidoBebida(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
+
+                        Case IColeccionable.EstadosColeccion.Borrado
 
 
+                            Me.mPedidoBebida(x - mEliminados).Eliminar()
+                            Me.mPedidoBebida.RemoveAt(Me.mPedidoBebida(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+
+                        Case IColeccionable.EstadosColeccion.Quitado
+                            Me.mPedidoBebida.RemoveAt(Me.mPedidoBebida(x - mEliminados).IndiceColeccion)
+                            mEliminados += 1
+                            mReacomodar = True
+                    End Select
+
+                Next
+            End SyncLock
+
+            'SI SE HA QUITADO ALGUN ELEMENTO DE LA COLECCION< DEBEREMOS REACOMODAR LOS INDICES
+            'QUE CADA OBJETO CONOCE DE SI MISMO
+            If mReacomodar Then
+                Me.ReacomodarIndicesBebida()
+            End If
+        End Sub
+
+        Private Sub ReacomodarIndicesBebida()
+            'A CADA ELEMENTO DE LA COLECCION LE AVISAMOS CUAL ES SU NUEVO INDICE
+            For Each mT As PedidoBebida In Me.mPedidoBebida
+                mT.IndiceColeccion = Me.mPedidoBebida.IndexOf(mT)
+            Next
+        End Sub
+        Private Sub CargarPedidoBebida()
+            'AL CARGAR LOS PedidoBebidas SIMPLEMENTE ASIGAMOS LA COLECCION QUE DEVUELVE EL METODO
+            'LISTAR
+            'INMEDIATAMENTE DESPUES LE AVISAMOS A CADA OBJETO PedidoBebida QUE INDICE LE TOCO EN LA LISTA
+            If mPedidoBebida.Count = 0 Then
+                Me.mPedidoBebida = (New Negocio.PedidoBebida).Listar(mId)
+            End If
+            For Each mT As PedidoBebida In mPedidoBebida
+                mT.IndiceColeccion = Me.mPedidoBebida.IndexOf(mT)
+            Next
+        End Sub
+        Private Function FiltrarPedidoBebidaNoVisibles() As Collections.Generic.List(Of PedidoBebida)
+            'ESTE METODO PERMITIRA FILTRAR LOS PedidoBebidas ANTES DE MOSTRARLOS EN UN GRILLA
+            'SE SUPONE QUE EN LA GRILLA NO SE VERAN LOS PedidoBebidas BORRADOS Y QUITADOS
+            Dim mCol As New Collections.Generic.List(Of PedidoBebida)
+            CargarPedidoBebida()
+
+            For Each mT As PedidoBebida In Me.mPedidoBebida
+                If mT.EstadoColeccion = IColeccionable.EstadosColeccion.Agregado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.Modificado Or mT.EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio Then
+                    mCol.Add(mT)
+                End If
+            Next
+            ReacomodarIndices()
+            Return mCol
+        End Function
+        Public Function ObtenerPedidoBebidaPorIndice(ByVal pIndice As Integer) As PedidoBebida
+            Return Me.mPedidoBebida(pIndice)
+        End Function
+#End Region
 
     End Class
 End Namespace

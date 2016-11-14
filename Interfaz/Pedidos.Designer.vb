@@ -24,7 +24,7 @@ Partial Class Pedidos
     Private Sub InitializeComponent()
         Me.Bebidas = New System.Windows.Forms.GroupBox()
         Me.btnFinalizar_bebidas = New System.Windows.Forms.Button()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.dgvBebidas = New System.Windows.Forms.DataGridView()
         Me.btnEnviar_bebidas = New System.Windows.Forms.Button()
         Me.btnEliminar_bebidas = New System.Windows.Forms.Button()
         Me.btnAgregar_bebidas = New System.Windows.Forms.Button()
@@ -52,7 +52,7 @@ Partial Class Pedidos
         Me.btnReabrir = New System.Windows.Forms.Button()
         Me.lblTitulo = New System.Windows.Forms.Label()
         Me.Bebidas.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvBebidas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvPlatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -61,7 +61,7 @@ Partial Class Pedidos
         'Bebidas
         '
         Me.Bebidas.Controls.Add(Me.btnFinalizar_bebidas)
-        Me.Bebidas.Controls.Add(Me.DataGridView2)
+        Me.Bebidas.Controls.Add(Me.dgvBebidas)
         Me.Bebidas.Controls.Add(Me.btnEnviar_bebidas)
         Me.Bebidas.Controls.Add(Me.btnEliminar_bebidas)
         Me.Bebidas.Controls.Add(Me.btnAgregar_bebidas)
@@ -84,16 +84,16 @@ Partial Class Pedidos
         Me.btnFinalizar_bebidas.Text = "Finalizar"
         Me.btnFinalizar_bebidas.UseVisualStyleBackColor = True
         '
-        'DataGridView2
+        'dgvBebidas
         '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Location = New System.Drawing.Point(12, 30)
-        Me.DataGridView2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.RowTemplate.Height = 28
-        Me.DataGridView2.Size = New System.Drawing.Size(391, 191)
-        Me.DataGridView2.TabIndex = 0
+        Me.dgvBebidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvBebidas.Location = New System.Drawing.Point(12, 30)
+        Me.dgvBebidas.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dgvBebidas.Name = "dgvBebidas"
+        Me.dgvBebidas.ReadOnly = True
+        Me.dgvBebidas.RowTemplate.Height = 28
+        Me.dgvBebidas.Size = New System.Drawing.Size(391, 191)
+        Me.dgvBebidas.TabIndex = 0
         '
         'btnEnviar_bebidas
         '
@@ -381,7 +381,7 @@ Partial Class Pedidos
         Me.Name = "Pedidos"
         Me.Text = "Pedido"
         Me.Bebidas.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvBebidas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         CType(Me.dgvPlatos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
@@ -392,7 +392,7 @@ Partial Class Pedidos
     End Sub
 
     Friend WithEvents Bebidas As GroupBox
-    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents dgvBebidas As DataGridView
     Friend WithEvents Label7 As Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnEliminar_platos As Button

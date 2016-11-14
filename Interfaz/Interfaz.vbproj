@@ -92,6 +92,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsocPedidoBebida.Designer.vb">
+      <DependentUpon>AsocPedidoBebida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AsocPedidoBebida.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AsocPedidoPlato.Designer.vb">
       <DependentUpon>AsocPedidoPlato.vb</DependentUpon>
     </Compile>
@@ -272,6 +278,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AsocPedidoBebida.resx">
+      <DependentUpon>AsocPedidoBebida.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AsocPedidoPlato.resx">
       <DependentUpon>AsocPedidoPlato.vb</DependentUpon>
     </EmbeddedResource>

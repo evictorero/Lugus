@@ -14,6 +14,7 @@ Public Class PedidoPlatoDatos
             Throw New ApplicationException("Fallo al insertar la relacion Pedido Plato", ex)
         End Try
     End Sub
+
     Public Shared Sub Eliminar(ByVal pId_pedido As Integer, ByVal pid_plato As Integer)
         Dim mStrCom As String
 
@@ -25,6 +26,7 @@ Public Class PedidoPlatoDatos
             Throw New ApplicationException("Fallo al dar de baja la Pedido Plato", ex)
         End Try
     End Sub
+
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.PedidoPlatoDTO
         If pId > 0 Then
             Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_pedido,id_plato,id_usuario_alta,estado, dvh FROM dbo.rPedidoPlato WHERE id_plato = " & pId)
@@ -79,6 +81,7 @@ Public Class PedidoPlatoDatos
 
         Return mCol
     End Function
+
     Public Shared Function Listar() As List(Of DTO.PedidoPlatoDTO)
         Dim mCol As New List(Of DTO.PedidoPlatoDTO)
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_pedido,id_plato, estado, dvh,id_usuario_alta FROM dbo.rpedidoplato")
@@ -115,6 +118,7 @@ Public Class PedidoPlatoDatos
         Return rta
 
     End Function
+
     Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.PedidoPlatoDTO)
 
         Dim mStrCom As String

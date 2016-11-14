@@ -14,6 +14,7 @@ Public Class UsuarioPatenteDatos
             Throw New ApplicationException("Fallo al insertar la relacion Usuario Patente", ex)
         End Try
     End Sub
+
     Public Shared Sub Eliminar(ByVal pid_usuario As Integer, ByVal pId_Patente As Integer)
         Dim mStrCom As String
 
@@ -25,6 +26,7 @@ Public Class UsuarioPatenteDatos
             Throw New ApplicationException("Fallo al dar de baja la Usuario Patente", ex)
         End Try
     End Sub
+
     Public Shared Function Obtener(ByVal pId As Integer) As DTO.UsuarioPatenteDTO
         If pId > 0 Then
             Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_patente,id_usuario_alta,m_negada, dvh FROM dbo.rUsuarioPatente WHERE id_patente = " & pId)
@@ -60,9 +62,10 @@ Public Class UsuarioPatenteDatos
 
         Return mCol
     End Function
+
     Public Shared Function Listar() As List(Of DTO.UsuarioPatenteDTO)
         Dim mCol As New List(Of DTO.UsuarioPatenteDTO)
-        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif FROM dbo.bBebida")
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_Usuario,id_patente,m_negada,id_usuario_alta,dvh FROM dbo.rUsuarioPatente")
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.UsuarioPatenteDTO
@@ -104,7 +107,6 @@ Public Class UsuarioPatenteDatos
         Return mCol
     End Function
 
-
     Public Shared Function ListarPatentesDeFamiliaPorUsuario(ByVal pId As Integer, ByVal pId_Familia As Integer) As List(Of DTO.UsuarioPatenteDTO)
 
         Dim mCol As New List(Of DTO.UsuarioPatenteDTO)
@@ -117,6 +119,7 @@ Public Class UsuarioPatenteDatos
         Next
         Return mCol
     End Function
+
     Public Shared Function Existe(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
 
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_patente,id_usuario_alta,m_negada,dvh FROM dbo.rUsuarioPatente where id_usuario = " & pId_usuario & " and id_patente = " & pId_Patente)
@@ -130,6 +133,7 @@ Public Class UsuarioPatenteDatos
         Return rta
 
     End Function
+
     Public Shared Function EsPatenteEsencial(ByVal pId_usuario As Integer, ByVal pId_Patente As Integer) As Boolean
 
         Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_patente,id_usuario_alta,m_negada,dvh FROM dbo.rUsuarioPatente where m_negada = 'N' and id_usuario != " & pId_usuario & " and id_patente = " & pId_Patente)
@@ -143,6 +147,7 @@ Public Class UsuarioPatenteDatos
         Return rta
 
     End Function
+
     Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.UsuarioPatenteDTO)
 
         Dim mStrCom As String
@@ -150,7 +155,7 @@ Public Class UsuarioPatenteDatos
         mStrCom = "UPDATE rUsuarioPatente " &
                    "SET m_negada = '" & pDTO.M_negada & "'," &
                       "dvh = " & pDTO.Dvh &
-                     " where is_Usuario = " & pDTO.Id_Usuario &
+                     " where id_Usuario = " & pDTO.Id_Usuario &
                       "and id_patente = " & pDTO.Id_Patente
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
@@ -159,5 +164,25 @@ Public Class UsuarioPatenteDatos
         End Try
 
     End Sub
+
+    Public Shared Function Obtener(ByVal pId_Usuario As Integer, ByVal pId_patente As Integer) As DTO.UsuarioPatenteDTO
+        If pId_Usuario > 0 Then
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_usuario,id_patente,id_usuario_alta,m_negada, dvh FROM dbo.rUsuarioPatente WHERE id_usuario = " & pId_Usuario & " and id_patente = " & pId_patente)
+            If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+                Dim mDTO As New DTO.UsuarioPatenteDTO
+
+                CargarDTO(mDTO, mDs.Tables(0).Rows(0))
+
+                Return mDTO
+            Else
+
+                Throw New ApplicationException("Fallo al cargar la Usuario Patente")
+                Return Nothing
+            End If
+        Else
+            Throw New ApplicationException("Se intentó cargar una Usuario sin Id especificado")
+            Return Nothing
+        End If
+    End Function
 End Class
 

@@ -216,7 +216,7 @@ Namespace Negocio
 
         Public Overridable Sub Cargar(ByVal pId_Usuario As Integer, ByVal pId_patente As Integer)
             If pId_Usuario > 0 And pId_patente > 0 Then
-                Dim mDTO As DTO.FamiliaPatenteDTO = Datos.UsuarioPatenteDatos.Obtener(pId_Usuario, pId_patente)
+                Dim mDTO As DTO.UsuarioPatenteDTO = Datos.UsuarioPatenteDatos.Obtener(pId_Usuario, pId_patente)
                 MyClass.Cargar(mDTO)
             Else
                 Throw New ApplicationException("Se intentó cargar un Pedido Plato  sin Id especificado")

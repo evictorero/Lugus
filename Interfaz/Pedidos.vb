@@ -78,6 +78,57 @@ Imports System.DateTime
                 .Item(7).Visible = True
             End With
         End With
+
+        'Seteo de aspecto de la grilla 
+        With Me.dgvBebidas
+            .AllowDrop = False
+            .AllowUserToAddRows = False
+            .AllowUserToDeleteRows = False
+            .AllowUserToResizeColumns = False
+            .AllowUserToResizeRows = False
+            .AutoGenerateColumns = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .MultiSelect = False
+
+            With .Columns
+                .Add("cId", "id_pedido")
+                .Item(0).DataPropertyName = "Id_pedido"
+                .Item(0).Visible = False
+
+                .Add("cid_bebida", "id_bebida")
+                .Item(1).DataPropertyName = "id_bebida"
+                .Item(1).Width = 125
+                .Item(1).Visible = False
+
+                .Add("cDescripcion", "Descripcion")
+                .Item(2).DataPropertyName = "Descripcion"
+                .Item(2).Width = 150
+                .Item(2).Visible = True
+
+                .Add("cdvh", "dvh")
+                .Item(3).DataPropertyName = "dvh"
+                .Item(3).Width = 125
+                .Item(3).Visible = False
+
+                .Add("cEstadoColeccion", "EstadoColeccion")
+                .Item(4).DataPropertyName = "EstadoColeccion"
+                .Item(4).Visible = False
+
+                .Add("cIndiceColeccion", "IndiceColeccion")
+                .Item(5).DataPropertyName = "IndiceColeccion"
+                .Item(5).Visible = False
+
+                .Add("cM_negada", "Estado")
+                .Item(6).DataPropertyName = "Estado"
+                .Item(6).Visible = False
+
+
+                .Add("cM_negada", "Estado")
+                .Item(7).DataPropertyName = "Desc Estado"
+                .Item(7).Visible = True
+            End With
+        End With
+
         Me.txtMesero.Text = Principal.UsuarioEnSesion.usuario
 
         Select Case mOperacion
@@ -164,14 +215,15 @@ Imports System.DateTime
             Next
         End If
 
-        'dgvFamilias.DataSource = mUsuario.UsuarioFamilia
-        'If dgvFamilias.Rows.Count > 0 Then
-        '    For i As Integer = 0 To dgvFamilias.Rows.Count - 1
-        '        Dim mFamilia As New Negocio.Negocio.Familia
-        '        mFamilia.Cargar(CInt(dgvFamilias.Rows(i).Cells(1).Value))
-        '        dgvFamilias.Rows(i).Cells(2).Value = mFamilia.descripcionCorta
-        '    Next
-        'End If
+        dgvBebidas.DataSource = mPedido.PedidoBebida
+        If dgvBebidas.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvBebidas.Rows.Count - 1
+                Dim mBebida As New Negocio.Negocio.Bebida
+                mBebida.Cargar(CInt(dgvBebidas.Rows(i).Cells(1).Value))
+                dgvBebidas.Rows(i).Cells(2).Value = mBebida.descripcionCorta
+                dgvBebidas.Rows(i).Cells(7).Value = EstadoPlatoBebida(dgvBebidas.Rows(i).Cells(6).Value)
+            Next
+        End If
 
     End Sub
     Public Function TienePermisoAcceso() As Boolean
@@ -325,5 +377,15 @@ Imports System.DateTime
             mForm.ShowDialog(Me)
             ActualizarGrilla()
         End If
+    End Sub
+
+    Private Sub btnAgregar_bebidas_Click(sender As Object, e As EventArgs) Handles btnAgregar_bebidas.Click
+        Me.txtEstado.Text = "EN CURSO"
+        mPedido.Estado = "E"
+        Dim mForm As New AsocPedidoBebida
+        mForm.Operacion = AsocPedidoBebida.TipoOperacion.Alta
+        mForm.StartPosition = FormStartPosition.CenterParent
+        mForm.ShowDialog(Me)
+        ActualizarGrilla()
     End Sub
 End Class

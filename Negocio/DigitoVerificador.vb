@@ -213,7 +213,7 @@ Namespace Negocio
                 Dim rta As Boolean = True
                 Dim DVH As Integer = 0
                 Dim DVV As Integer = 0
-                Dim NombreTablas(4) As String
+                Dim NombreTablas(9) As String
 
                 'la tabla de bitácora, patentes, usuarios y familias, así como también en las tablas platos y bebidas.
                 NombreTablas(0) = "bFamilia"
@@ -221,8 +221,14 @@ Namespace Negocio
                 NombreTablas(3) = "bPlato"
                 NombreTablas(2) = "bBebida"
                 NombreTablas(4) = "bBitacora"
+                NombreTablas(5) = "rUsuarioPatente"
+                NombreTablas(6) = "rUsuarioFamilia"
+                NombreTablas(7) = "rFamiliaPatente"
+                NombreTablas(8) = "rPedidoPlato"
+                NombreTablas(9) = "rPedidoBebida"
 
-                For i = 0 To 4
+
+                For i = 0 To 9
                     'obtener la tabla x
                     Dim errores As Integer = 0
                     Select Case NombreTablas(i)
@@ -268,6 +274,39 @@ Namespace Negocio
                                 DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
                             Next
                             DVV = ObtenerDVV("bPlato")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                        Case "rFamiliaPatente"
+                            Dim mFamiliaPatentes As List(Of FamiliaPatente) = (New Negocio.FamiliaPatente).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mFamiliaPatentes.Count - 1
+                                Dim CadenaDigitoVerificador As String = Convert.ToString(mFamiliaPatentes(x).id_familia) + Convert.ToString(mFamiliaPatentes(x).id_patente)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = ObtenerDVV("rFamiliaPatente")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                        Case "rUsuarioPatente"
+                            Dim mUsuarioPatentes As List(Of UsuarioPatente) = (New Negocio.UsuarioPatente).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mUsuarioPatentes.Count - 1
+                                Dim CadenaDigitoVerificador As String = Convert.ToString(mUsuarioPatentes(x).id_usuario) + Convert.ToString(mUsuarioPatentes(x).id_patente)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = ObtenerDVV("rUsuarioPatente")
+                            If DVH <> DVV Then
+                                Return False
+                            End If
+                        Case "rUsuarioFamilia"
+                            Dim mUsuarioFamilias As List(Of UsuarioFamilia) = (New Negocio.UsuarioFamilia).Listar
+                            DVH = 0
+                            For x As Integer = 0 To mUsuarioFamilias.Count - 1
+                                Dim CadenaDigitoVerificador As String = Convert.ToString(mUsuarioFamilias(x).id_usuario) + Convert.ToString(mUsuarioFamilias(x).id_familia)
+                                DVH = DVH + Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+                            Next
+                            DVV = ObtenerDVV("rUsuarioFamilia")
                             If DVH <> DVV Then
                                 Return False
                             End If
@@ -352,6 +391,13 @@ Namespace Negocio
                                 Dim mUsuarioPatente As New Negocio.UsuarioPatente
                                 mUsuarioPatente.Cargar(mUsuarioPatentes(X).id_usuario, mUsuarioPatentes(X).id_patente)
                                 mUsuarioPatente.GuardarModificacion()
+                            Next
+                        Case "rUsuarioFamilia"
+                            Dim mUsuarioFamilias As List(Of UsuarioFamilia) = (New Negocio.UsuarioFamilia).Listar
+                            For X As Integer = 0 To mUsuarioFamilias.Count - 1
+                                Dim mUsuarioFamilia As New Negocio.UsuarioFamilia
+                                mUsuarioFamilia.Cargar(mUsuarioFamilias(X).id_usuario, mUsuarioFamilias(X).id_familia)
+                                mUsuarioFamilia.GuardarModificacion()
                             Next
                     End Select
 
