@@ -84,8 +84,11 @@ Namespace Negocio
             mDTO.Id_familia = Me.id_familia
             mDTO.Id_Patente = Me.id_patente
             mDTO.Id_Usuario_alta = Me.id_usuario_alta
-            mDTO.Dvh = Me.dvh
             mDTO.M_negada = Me.mM_negada
+
+            'Recalculo del digito verificador horizontal
+            Dim CadenaDigitoVerificador As String = Convert.ToString(mDTO.Id_familia) + Convert.ToString(mDTO.Id_Patente)
+            mDTO.Dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             Existe = Datos.FamiliaPatenteDatos.Existe(mDTO.Id_familia, mDTO.Id_Patente)
             If Not Existe Then
@@ -94,6 +97,31 @@ Namespace Negocio
                 Throw New ApplicationException("Se intentó cargar una Familia Patente  ya existente.")
             End If
 
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("rFamiliaPatente")
+            mDVV.tabla = "rFamiliaPatente"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rFamiliaPatente")
+            mDVV.Guardar()
+        End Sub
+        Public Overridable Sub GuardarModificacion()
+            Dim mDTO As New DTO.FamiliaPatenteDTO
+            Dim Existe As Boolean = False
+
+            mDTO.Id_familia = Me.id_familia
+            mDTO.Id_Patente = Me.id_patente
+            mDTO.Id_Usuario_alta = Me.id_usuario_alta
+            mDTO.M_negada = Me.mM_negada
+
+            'Recalculo del digito verificador horizontal
+            Dim CadenaDigitoVerificador As String = Convert.ToString(mDTO.Id_familia) + Convert.ToString(mDTO.Id_Patente)
+            mDTO.Dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
+            Datos.FamiliaPatenteDatos.GuardarModificacion(mDTO)
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("rFamiliaPatente")
+            mDVV.tabla = "rFamiliaPatente"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rFamiliaPatente")
+            mDVV.Guardar()
         End Sub
         Public Overridable Sub Cargar()
             If mId_Patente > 0 Then
@@ -184,6 +212,14 @@ Namespace Negocio
             Return rta
 
         End Function
+        Public Overridable Sub Cargar(ByVal pId_Familia As Integer, ByVal pId_patente As Integer)
+            If pId_Familia > 0 And pId_patente > 0 Then
+                Dim mDTO As DTO.FamiliaPatenteDTO = Datos.FamiliaPatenteDatos.Obtener(pId_Familia, pId_patente)
+                MyClass.Cargar(mDTO)
+            Else
+                Throw New ApplicationException("Se intentó cargar un Pedido Plato  sin Id especificado")
+            End If
+        End Sub
 #End Region
 
 #Region "IColeccionable"

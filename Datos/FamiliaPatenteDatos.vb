@@ -95,7 +95,7 @@ Public Class FamiliaPatenteDatos
 
     Public Shared Function Listar() As List(Of DTO.FamiliaPatenteDTO)
         Dim mCol As New List(Of DTO.FamiliaPatenteDTO)
-        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_bebida,descripcion_corta,descripcion_larga,habilitado,fecha_baja,id_usuario,dvh,fecha_modif FROM dbo.bBebida")
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,m_negada,id_usuario_alta,dvh FROM dbo.rFamiliaPatente")
 
         For Each mDr As DataRow In mDs.Tables(0).Rows
             Dim mDTO As New DTO.FamiliaPatenteDTO
@@ -151,5 +151,41 @@ Public Class FamiliaPatenteDatos
         End If
 
     End Function
+
+    Public Shared Function Obtener(ByVal pId_familia As Integer, ByVal pId_patente As Integer) As DTO.FamiliaPatenteDTO
+        If pId_familia > 0 Then
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_familia,id_patente,id_usuario_alta,m_negada, dvh FROM dbo.rFamiliaPatente WHERE id_familia = " & pId_familia & " and id_patente = " & pId_patente)
+            If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
+                Dim mDTO As New DTO.FamiliaPatenteDTO
+
+                CargarDTO(mDTO, mDs.Tables(0).Rows(0))
+
+                Return mDTO
+            Else
+
+                Throw New ApplicationException("Fallo al cargar la Familia Patente")
+                Return Nothing
+            End If
+        Else
+            Throw New ApplicationException("Se intentó cargar una Familia sin Id especificado")
+            Return Nothing
+        End If
+    End Function
+    Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.FamiliaPatenteDTO)
+
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE rFamiliaPatente " &
+                   "SET m_negada = '" & pDTO.M_negada & "'," &
+                      "dvh = " & pDTO.Dvh &
+                     " where id_familia = " & pDTO.Id_familia &
+                      "and id_patente = " & pDTO.Id_Patente
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al modificar el familia patente.", ex)
+        End Try
+
+    End Sub
 End Class
 
