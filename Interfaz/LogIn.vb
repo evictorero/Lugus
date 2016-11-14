@@ -43,6 +43,7 @@ Public Class LogIn
                 MsgBox("El usuario se encuentra bloqueado.")
             ElseIf rta = 5 Then
                 MsgBox("No se pudo establecer la conexión con la base de datos, verifique el string de conexión.")
+                Button1.Visible = True
             End If
         End If
 
@@ -77,6 +78,7 @@ Public Class LogIn
         Me.txtUsuario.Focus()
         Me.txtUsuario.Text = "Cgomez"
         Me.txtPassword.Text = "123"
+        Me.Button1.Visible = False
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

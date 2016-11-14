@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Reporting.WinForms
+Imports Negocio.Negocio.Traductor
 
 Public Class ReportePedidos
 
@@ -10,7 +11,8 @@ Public Class ReportePedidos
         cmbEstado.Items.Add(New DictionaryEntry("EN CURSO", "E"))
         cmbEstado.Items.Add(New DictionaryEntry("FINALIZADO", "F"))
 
-
+        dtpFechaDesde.CustomFormat = "dd/MM/yyyy"
+        dtpFechaHasta.CustomFormat = "dd/MM/yyyy"
     End Sub
 
     Private Sub btn_ejecutar_Click(sender As Object, e As EventArgs) Handles btn_ejecutar.Click
@@ -24,6 +26,10 @@ Public Class ReportePedidos
         If chkEstado.Checked Then
             mEstado = Nothing
         Else
+
+            'If Me.cmbEstado.SelectedItem.Value = "" Then
+            '    MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Debe Seleccionar un valor"))
+            'End If
             mEstado = Me.cmbEstado.SelectedItem.Value
         End If
 
@@ -61,5 +67,9 @@ Public Class ReportePedidos
             dtpFechaDesde.Enabled = True
             dtpFechaHasta.Enabled = True
         End If
+    End Sub
+
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
+
     End Sub
 End Class

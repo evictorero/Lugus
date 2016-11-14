@@ -333,13 +333,17 @@ Imports System.DateTime
     End Sub
 
     Private Sub btnAgregar_Platos_Click(sender As Object, e As EventArgs) Handles btnAgregar_Platos.Click
-        Me.txtEstado.Text = "EN CURSO"
-        mPedido.Estado = "E"
-        Dim mForm As New AsocPedidoPlato
-        mForm.Operacion = AsocPedidoPlato.TipoOperacion.Alta
-        mForm.StartPosition = FormStartPosition.CenterParent
-        mForm.ShowDialog(Me)
-        ActualizarGrilla()
+        If Me.txtId.Text = "" Then
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Guarde el pedido para poder agregar."))
+        Else
+            Me.txtEstado.Text = "EN CURSO"
+            mPedido.Estado = "E"
+            Dim mForm As New AsocPedidoPlato
+            mForm.Operacion = AsocPedidoPlato.TipoOperacion.Alta
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
     End Sub
 
     Private Sub btnEliminar_platos_Click(sender As Object, e As EventArgs) Handles btnEliminar_platos.Click
@@ -380,13 +384,17 @@ Imports System.DateTime
     End Sub
 
     Private Sub btnAgregar_bebidas_Click(sender As Object, e As EventArgs) Handles btnAgregar_bebidas.Click
-        Me.txtEstado.Text = "EN CURSO"
-        mPedido.Estado = "E"
-        Dim mForm As New AsocPedidoBebida
-        mForm.Operacion = AsocPedidoBebida.TipoOperacion.Alta
-        mForm.StartPosition = FormStartPosition.CenterParent
-        mForm.ShowDialog(Me)
-        ActualizarGrilla()
+        If Me.txtId.Text = "" Then
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Guarde el pedido para poder agregar."))
+        Else
+            Me.txtEstado.Text = "EN CURSO"
+            mPedido.Estado = "E"
+            Dim mForm As New AsocPedidoBebida
+            mForm.Operacion = AsocPedidoBebida.TipoOperacion.Alta
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
     End Sub
 
     Private Sub btnEnviar_bebidas_Click(sender As Object, e As EventArgs) Handles btnEnviar_bebidas.Click

@@ -49,7 +49,7 @@ Public Class PedidoPlatoDatos
 
     Public Shared Function Obtener(ByVal pId_pedido As Integer, ByVal pId_plato As Integer) As DTO.PedidoPlatoDTO
         If pId_pedido > 0 Then
-            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_pedido,id_plato,id_usuario_alta,estado, dvh FROM dbo.rPedidoPlato WHERE id_plato = " & pId_pedido & " and id_pedido = " & pId_plato)
+            Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset("Select id_pedido,id_plato,id_usuario_alta,estado, dvh FROM dbo.rPedidoPlato WHERE id_plato = " & pId_plato & " and id_pedido = " & pId_pedido)
             If Not IsNothing(mDs) AndAlso mDs.Tables.Count > 0 AndAlso mDs.Tables(0).Rows.Count > 0 Then
                 Dim mDTO As New DTO.PedidoPlatoDTO
 

@@ -15,4 +15,5 @@ Public Interface IColeccionable
     'PROPIEDADES QUE DEBEN IMPLEMENTARSE
     Property EstadoColeccion() As EstadosColeccion
     Property IndiceColeccion() As Integer
+
 End Interface
