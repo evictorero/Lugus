@@ -41,6 +41,8 @@ Public Class LogIn
                 MsgBox("El usuario ingresado es Incorrecto.")
             ElseIf rta = 4 Then
                 MsgBox("El usuario se encuentra bloqueado.")
+            ElseIf rta = 5 Then
+                MsgBox("No se pudo establecer la conexión con la base de datos, verifique el string de conexión.")
             End If
         End If
 
@@ -74,6 +76,10 @@ Public Class LogIn
         Me.Visible = True
         Me.txtUsuario.Focus()
         Me.txtUsuario.Text = "Cgomez"
-        Me.txtPassword.Text = "123"
+        Me.txtPassword.Text = "1739273234"
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Conexion.Show()
     End Sub
 End Class

@@ -48,6 +48,7 @@ Partial Class Principal
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DatosDeConexiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -129,18 +130,18 @@ Partial Class Principal
         'UsuariosToolStripMenuItem
         '
         Me.UsuariosToolStripMenuItem.Name = "UsuariosToolStripMenuItem"
-        Me.UsuariosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.UsuariosToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
         Me.UsuariosToolStripMenuItem.Text = "Usuarios"
         '
         'PedidosToolStripMenuItem
         '
         Me.PedidosToolStripMenuItem.Name = "PedidosToolStripMenuItem"
-        Me.PedidosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PedidosToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
         Me.PedidosToolStripMenuItem.Text = "Pedidos"
         '
         'ServiciosToolStripMenuItem
         '
-        Me.ServiciosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IdiomaToolStripMenuItem1, Me.CambiarContraseñaToolStripMenuItem, Me.BackupToolStripMenuItem, Me.BitacoraToolStripMenuItem, Me.RegenerarDigitosVerificadoresToolStripMenuItem})
+        Me.ServiciosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IdiomaToolStripMenuItem1, Me.CambiarContraseñaToolStripMenuItem, Me.BackupToolStripMenuItem, Me.BitacoraToolStripMenuItem, Me.RegenerarDigitosVerificadoresToolStripMenuItem, Me.DatosDeConexiónToolStripMenuItem})
         Me.ServiciosToolStripMenuItem.Name = "ServiciosToolStripMenuItem"
         Me.ServiciosToolStripMenuItem.Size = New System.Drawing.Size(68, 22)
         Me.ServiciosToolStripMenuItem.Text = "Servicios "
@@ -219,6 +220,12 @@ Partial Class Principal
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(22, 22)
         Me.ToolStripMenuItem3.Text = " "
         '
+        'DatosDeConexiónToolStripMenuItem
+        '
+        Me.DatosDeConexiónToolStripMenuItem.Name = "DatosDeConexiónToolStripMenuItem"
+        Me.DatosDeConexiónToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.DatosDeConexiónToolStripMenuItem.Text = "Datos de conexión"
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -262,4 +269,5 @@ Partial Class Principal
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents AdministrarPlatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegenerarDigitosVerificadoresToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DatosDeConexiónToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

@@ -7,44 +7,11 @@ Namespace ProveedorDeDatos
     Public Class DB
 
         Shared mCon As SqlConnection
-        Public Shared StrConnection As String
-        'Public Shared StrConnection As String = ConfigurationManager.ConnectionStrings("InterfazConnString").ConnectionString
-        Public Shared servidor As String
-        Public Shared instancia As String
-
-        Public Shared Sub obtenercadenaconexion()
-
-            Dim rutaFicheroINI As String
-            rutaFicheroINI = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "configuracion.txt")
-
-            Dim leer As StreamReader
-            'Leer el archivo por la ruta
-            leer = New StreamReader(rutaFicheroINI)
-
-            If File.Exists(rutaFicheroINI) = True Then
-                'Variable de control para leer la primera linea
-                Dim c As Integer = 0
-                'Leer linea a linea hasta el final
-                While c <= 1 And Not leer.EndOfStream
-                    If c = 0 Then
-                        servidor = leer.ReadLine
-                    End If
-
-                    If c = 1 Then
-                        instancia = leer.ReadLine
-                    End If
-                    c += 1
-                End While
-            End If
-
-            StrConnection = "Data Source=" & servidor & "\" & instancia & ";Initial Catalog=lugus;Integrated Security=True"
-
-        End Sub
+        Public Shared StrConnection As String = ConfigurationManager.ConnectionStrings("InterfazConnString").ConnectionString
 
         Public Shared Function ExecuteDataset(ByVal pCommandText As String) As DataSet
             Dim mDs As New DataSet
             Try
-                obtenercadenaconexion()
                 mCon = New SqlConnection(StrConnection)
                 Dim mDa As New SqlDataAdapter(pCommandText, mCon)
                 mCon.Open()
@@ -70,7 +37,6 @@ Namespace ProveedorDeDatos
         End Function
 
         Public Shared Function ExecuteReader(ByVal pCommandText As String) As SqlDataReader
-            obtenercadenaconexion()
 
             Dim mDr As SqlDataReader
             Try
@@ -103,7 +69,6 @@ Namespace ProveedorDeDatos
         End Function
 
         Public Shared Function ExecuteNonQuery(ByVal pCommandText As String) As Integer
-            obtenercadenaconexion()
             Try
                 mCon = New SqlConnection(StrConnection)
                 Dim mCom As New SqlCommand(pCommandText, mCon)
@@ -119,7 +84,6 @@ Namespace ProveedorDeDatos
         End Function
 
         Public Shared Function ExecuteScalar(ByVal pCommandText As String) As Integer
-            obtenercadenaconexion()
             Try
                 mCon = New SqlConnection(StrConnection)
                 Dim mCom As New SqlCommand(pCommandText, mCon)
@@ -135,7 +99,6 @@ Namespace ProveedorDeDatos
         End Function
 
         Public Shared Function Exec_Function(ByVal nomfun As String, ByVal pDTO As DTO.UsuarioDTO) As Object
-            obtenercadenaconexion()
             Dim cn As New SqlConnection(StrConnection)
             Dim cmd As New SqlCommand("SELECT " & nomfun, cn)   'Para ejecutar "SELECT <nombrefuncion>
 
@@ -165,7 +128,6 @@ Namespace ProveedorDeDatos
         End Function
 
         Public Shared Function ObtenerId(ByVal pTabla As String) As Integer
-            obtenercadenaconexion()
             Try
                 Dim mId As String
                 ' obtengo nombre de id según tabla
@@ -208,5 +170,33 @@ Namespace ProveedorDeDatos
             End Try
         End Function
 
+        Public Shared Sub CambiarStringConexion(ByVal pStrConn As String)
+            'Public Shared StrConnection As String = ConfigurationManager.ConnectionStrings("InterfazConnString").ConnectionString
+            ' D:\Users\Celes\Documents\Compartida\V1\OPP-Lugus\Interfaz\bin\Debug\
+            'AppDomain.CurrentDomain.BaseDirectory
+            'Dim configFile As Configuration = ConfigurationManager.OpenExeConfiguration("D:\Users\Celes\Documents\Compartida\V1\OPP-Lugus\Interfaz\")
+
+            Dim configFile As Configuration = ConfigurationManager.OpenExeConfiguration("Interfaz.exe")
+
+            configFile.ConnectionStrings.ConnectionStrings("InterfazConnString").ConnectionString = pStrConn
+            configFile.Save(ConfigurationSaveMode.Modified, True)
+        End Sub
+
+        Public Shared Function StatusConexion() As Boolean
+            Try
+                mCon = New SqlConnection(StrConnection)
+                Dim mDa As New SqlDataAdapter("select 1", mCon)
+                mCon.Open()
+                Return True
+            Catch ex As SqlException
+                Return False
+            Catch ex As Exception
+                Return False
+            Finally
+                mCon.Close()
+                mCon.Dispose()
+            End Try
+
+        End Function
     End Class
 End Namespace
