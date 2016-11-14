@@ -185,6 +185,19 @@ Namespace Negocio
             Return mCol
         End Function
 
+        Public Overridable Function ListarConFiltro(ByVal pEstado As String,
+                                                    ByVal pFechaDesde As Date,
+                                                    ByVal pFechaHasta As Date) As Collections.Generic.List(Of Pedido)
+            Dim mCol As New Collections.Generic.List(Of Pedido)
+            Dim mColDTO As List(Of DTO.PedidoDTO) = Datos.PedidoDatos.ListarConFiltro(pEstado, pFechaDesde, pFechaHasta)
+
+            For Each mDTO As DTO.PedidoDTO In mColDTO
+                mCol.Add(New Negocio.Pedido(mDTO))
+            Next
+
+            Return mCol
+        End Function
+
         Public Overridable Sub Guardar()
             Dim mDTO As New DTO.PedidoDTO
             mDTO.descripcion = Me.Descripcion

@@ -126,7 +126,7 @@ Namespace Negocio
                 mDTO.id = Datos.FamiliaDatos.ObtenerProximoId()
                 If Validar(mDTO) Then
                     Datos.FamiliaDatos.GuardarNuevo(mDTO)
-                    Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia", "Media")
+                    Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Creación de Familia: " & Me.descripcionCorta, "Media")
                     mBitacora.Guardar()
                 End If
 
@@ -134,7 +134,7 @@ Namespace Negocio
                 mDTO.id = Me.id
                 If Validar(mDTO) Then
                     Datos.FamiliaDatos.GuardarModificacion(mDTO)
-                    Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia", "Media")
+                    Dim mBitacora As New Negocio.Bitacora(mDTO.idUsuario, "Modificacion de Familia: " & Me.descripcionCorta, "Media")
                     mBitacora.Guardar()
                 End If
             End If
