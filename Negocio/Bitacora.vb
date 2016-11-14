@@ -102,6 +102,12 @@ Namespace Negocio
                 Datos.BitacoraDatos.GuardarNuevo(mDTO)
             End If
 
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("bBitacora")
+            mDVV.tabla = "bBitacora"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("bBitacora")
+            mDVV.Guardar()
+
         End Sub
 
         Public Sub Cargar(ByVal pDTO As DTO.BitacoraDTO)
