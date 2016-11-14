@@ -212,4 +212,8 @@ Public Class Principal
     Private Sub UsuariosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsuariosToolStripMenuItem.Click
         ReporteUsuarios.Show()
     End Sub
+
+    Private Sub DatosDeConexiónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DatosDeConexiónToolStripMenuItem.Click
+        Conexion.Show()
+    End Sub
 End Class

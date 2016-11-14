@@ -146,6 +146,12 @@
     <Compile Include="AsocUsuarioFamilia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Conexion.Designer.vb">
+      <DependentUpon>Conexion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Familias.Designer.vb">
       <DependentUpon>Familias.vb</DependentUpon>
     </Compile>
@@ -304,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AsocUsuarioFamilia.resx">
       <DependentUpon>AsocUsuarioFamilia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Conexion.resx">
+      <DependentUpon>Conexion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Familias.resx">
       <DependentUpon>Familias.vb</DependentUpon>

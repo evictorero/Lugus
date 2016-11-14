@@ -118,27 +118,34 @@ Public Class UsuarioDatos
         Dim mFuncion As String
         Dim rta As Integer = -1
 
-        mFuncion = " Select count(*) from dbo.bUsuario where fecha_baja is null  and intentos_login < 3 and usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
-        rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
-        If rta > 0 Then
-            Return 1 ' Usuario y contrasenia correcto
-        End If
-        mFuncion = " select count(*) from dbo.bUsuario where intentos_login < 3  and usuario = '" & pDTO.usuario & "'"
-        rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
-        If rta > 0 Then
-            mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña <> '" & pDTO.contrasenia & "' "
+        ' abro y cierro conexión para comprobar que funcione correctamente
+        If DB.StatusConexion() Then
+
+
+            mFuncion = " Select count(*) from dbo.bUsuario where fecha_baja is null  and intentos_login < 3 and usuario = '" & pDTO.usuario & "' and contraseña = '" & pDTO.contrasenia & "' "
             rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
-            'Intentos login 
             If rta > 0 Then
-                Return 2  ' USuario OK  y contrasenia NOK
+                Return 1 ' Usuario y contrasenia correcto
+            End If
+            mFuncion = " select count(*) from dbo.bUsuario where intentos_login < 3  and usuario = '" & pDTO.usuario & "'"
+            rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+            If rta > 0 Then
+                mFuncion = " select count(*) from dbo.bUsuario where usuario = '" & pDTO.usuario & "' and contraseña <> '" & pDTO.contrasenia & "' "
+                rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+                'Intentos login 
+                If rta > 0 Then
+                    Return 2  ' USuario OK  y contrasenia NOK
+                End If
+            Else
+                mFuncion = " select count(*) from dbo.bUsuario where intentos_login > 2  and usuario = '" & pDTO.usuario & "'"
+                rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
+                If rta > 0 Then
+                    Return 4 'Usuario Bloqueado
+                End If
+                Return 3 'Usuario NOK
             End If
         Else
-            mFuncion = " select count(*) from dbo.bUsuario where intentos_login > 2  and usuario = '" & pDTO.usuario & "'"
-            rta = Datos.ProveedorDeDatos.DB.ExecuteScalar(mFuncion)
-            If rta > 0 Then
-                Return 4 'Usuario Bloqueado
-            End If
-            Return 3 'Usuario NOK
+            rta = 5 ' falló la conexión
         End If
         Return rta
     End Function
