@@ -11,6 +11,9 @@ Public Class ReporteUsuarios
         cbDescripcionPatente.DisplayMember = "descripcionLarga"
         cbDescripcionPatente.ValueMember = "id"
 
+        cbDescripcionFamilia.DataSource = (New Negocio.Negocio.Familia).Listar
+        cbDescripcionFamilia.DisplayMember = "descripcionLarga"
+        cbDescripcionFamilia.ValueMember = "id"
     End Sub
 
     Private Sub ReportViewer1_Load(sender As Object, e As EventArgs) Handles ReportViewer1.Load

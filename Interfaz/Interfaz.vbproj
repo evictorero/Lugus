@@ -164,6 +164,12 @@
     <Compile Include="FamiliaABM.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ReportePedidos.Designer.vb">
+      <DependentUpon>ReportePedidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportePedidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReporteUsuarios.Designer.vb">
       <DependentUpon>ReporteUsuarios.vb</DependentUpon>
     </Compile>
@@ -320,6 +326,10 @@
     <EmbeddedResource Include="FamiliaABM.resx">
       <DependentUpon>FamiliaABM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportePedidos.rdlc" />
+    <EmbeddedResource Include="ReportePedidos.resx">
+      <DependentUpon>ReportePedidos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReporteUsuarios.rdlc" />
     <EmbeddedResource Include="ReporteUsuarios.resx">
       <DependentUpon>ReporteUsuarios.vb</DependentUpon>
@@ -384,6 +394,9 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\Negocio.Negocio.Pedido.datasource" />
+    <None Include="My Project\DataSources\Negocio.Negocio.PedidoBebida.datasource" />
+    <None Include="My Project\DataSources\Negocio.Negocio.PedidoPlato.datasource" />
     <None Include="My Project\DataSources\Negocio.Negocio.Usuario.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

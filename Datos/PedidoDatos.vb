@@ -48,6 +48,39 @@ Public Class PedidoDatos
 
         Return mCol
     End Function
+
+    Public Shared Function ListarConFiltro(ByVal pEstado As String,
+                                            ByVal pFechaDesde As Date,
+                                            ByVal pFechaHasta As Date) As List(Of DTO.PedidoDTO)
+
+        Dim mCol As New List(Of DTO.PedidoDTO)
+        Dim mCondicion As String = "WHERE 1=1"
+
+        Dim mStrCom As String
+        If Not IsNothing(pEstado) Then
+            mCondicion = mCondicion & " AND estado = '" & pEstado & "'"
+        End If
+
+        If Format(pFechaDesde, "yyyy/MM/dd") <> "0001/01/01" Then
+            mCondicion = mCondicion & " AND fecha_modif BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "'"
+        End If
+
+        mStrCom = "SELECT id_pedido, descripcion, estado,fecha_baja,cantidad,fecha_modif,id_usuario_alta " &
+                  "FROM dbo.bPedido " &
+                  mCondicion &
+                  "order by estado "
+
+        Dim mDs As DataSet = Datos.ProveedorDeDatos.DB.ExecuteDataset(mStrCom)
+        For Each mDr As DataRow In mDs.Tables(0).Rows
+            Dim mDTO As New DTO.PedidoDTO
+
+            CargarDTO(mDTO, mDr)
+
+            mCol.Add(mDTO)
+        Next
+
+        Return mCol
+    End Function
     Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.PedidoDTO)
         Dim mStrCom As String
 

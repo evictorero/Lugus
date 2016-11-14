@@ -298,7 +298,7 @@ Namespace Negocio
                 rta = Datos.UsuarioDatos.VerificarLogin(mDTO)
             End If
             If rta = 1 Then
-                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Inicio de sesión", "Baja")
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Inicio de sesión Usuario: " & Me.usuario, "Baja")
                 mBitacora.Guardar()
             End If
             Return rta
@@ -400,7 +400,7 @@ Namespace Negocio
             mDTO.id = Me.id
             If Validar(mDTO) Then
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
-                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: Nueva Contraseña", "Media")
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificación de Usuario: Nueva Contraseña usuario: " & Me.usuario, "Media")
                 mBitacora.Guardar()
             End If
         End Sub
@@ -525,7 +525,7 @@ Namespace Negocio
                 mDTO.contrasenia = Encriptador.EncriptarDatos(1, pass)
                 Datos.UsuarioDatos.GuardarModificacion(mDTO)
                 EnviarMail(Me.usuario, pass)
-                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificacion Usuario : Ha Olvidado su contrasenia", "Baja")
+                Dim mBitacora As New Negocio.Bitacora(Me.ObtenerPorUsuario.id, "Modificacion Usuario : Ha Olvidado su contrasenia usuario: " & Me.usuario, "Baja")
                 mBitacora.Guardar()
             Catch ex As Exception
                 Throw New ApplicationException("Error al blanquear el usuario especificado.", ex)
