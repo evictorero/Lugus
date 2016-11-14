@@ -74,7 +74,10 @@ Namespace Negocio
             mDTO.Id_Usuario = Me.id_usuario
             mDTO.Id_Familia = Me.id_familia
             mDTO.Id_Usuario_alta = Me.id_usuario_alta
-            mDTO.Dvh = Me.dvh
+
+            'Recalculo del digito verificador horizontal
+            Dim CadenaDigitoVerificador As String = Convert.ToString(mDTO.Id_Usuario) + Convert.ToString(mDTO.Id_Familia)
+            mDTO.Dvh = Negocio.DigitoVerificador.CalcularDVH(CadenaDigitoVerificador)
 
             Existe = Datos.UsuarioFamiliaDatos.Existe(mDTO.Id_Usuario, mDTO.Id_Familia)
 
@@ -84,6 +87,12 @@ Namespace Negocio
             Else
                 Throw New ApplicationException("Se intentó cargar un Usuario Familia ya existente.")
             End If
+
+            'Recalculo del digito verificador vertical
+            Dim mDVV As New Negocio.DigitoVerificador("rUsuarioFamilia")
+            mDVV.tabla = "rUsuarioFamilia"
+            mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rUsuarioFamilia")
+            mDVV.Guardar()
 
         End Sub
         Public Overridable Sub Cargar()

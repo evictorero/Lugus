@@ -286,7 +286,7 @@ Namespace Negocio
                 Dim rta As Boolean = True
                 Dim DVH As Integer = 0
                 Dim DVV As Integer = 0
-                Dim NombreTablas(4) As String
+                Dim NombreTablas(9) As String
 
                 'la tabla de bitácora, patentes, usuarios y familias, así como también en las tablas platos y bebidas.
                 NombreTablas(0) = "bFamilia"
@@ -294,8 +294,13 @@ Namespace Negocio
                 NombreTablas(2) = "bPlato"
                 NombreTablas(3) = "bBebida"
                 NombreTablas(4) = "bBitacora"
+                NombreTablas(5) = "rUsuarioPatente"
+                NombreTablas(6) = "rUsuarioFamilia"
+                NombreTablas(7) = "rFamiliaPatente"
+                NombreTablas(8) = "rPedidoPlato"
+                NombreTablas(9) = "rPedidoBebida"
 
-                For i = 0 To 4
+                For i = 0 To 9
                     'obtener la tabla x
                     Dim errores As Integer = 0
                     Select Case NombreTablas(i)
@@ -326,6 +331,27 @@ Namespace Negocio
                                 Dim mPlato As New Negocio.Plato
                                 mPlato.Cargar(mPlatos(X).id)
                                 mPlato.Guardar()
+                            Next
+                        Case "rPedidoPlato"
+                            Dim mPedidoPlatos As List(Of PedidoPlato) = (New Negocio.PedidoPlato).Listar
+                            For X As Integer = 0 To mPedidoPlatos.Count - 1
+                                Dim mPedidoPlato As New Negocio.PedidoPlato
+                                mPedidoPlato.Cargar(mPedidoPlatos(X).id_pedido, mPedidoPlatos(X).Id_Plato)
+                                mPedidoPlato.GuardarModificacion()
+                            Next
+                        Case "rFamiliaPatente"
+                            Dim mFamiliaPatentes As List(Of FamiliaPatente) = (New Negocio.FamiliaPatente).Listar
+                            For X As Integer = 0 To mFamiliaPatentes.Count - 1
+                                Dim mFamiliaPAtente As New Negocio.FamiliaPatente
+                                mFamiliaPAtente.Cargar(mFamiliaPatentes(X).id_familia, mFamiliaPatentes(X).id_patente)
+                                mFamiliaPAtente.GuardarModificacion()
+                            Next
+                        Case "rUsuarioPatente"
+                            Dim mUsuarioPatentes As List(Of UsuarioPatente) = (New Negocio.UsuarioPatente).Listar
+                            For X As Integer = 0 To mUsuarioPatentes.Count - 1
+                                Dim mUsuarioPatente As New Negocio.UsuarioPatente
+                                mUsuarioPatente.Cargar(mUsuarioPatentes(X).id_usuario, mUsuarioPatentes(X).id_patente)
+                                mUsuarioPatente.GuardarModificacion()
                             Next
                     End Select
 

@@ -143,5 +143,21 @@ Public Class UsuarioPatenteDatos
         Return rta
 
     End Function
+    Public Shared Sub GuardarModificacion(ByVal pDTO As DTO.UsuarioPatenteDTO)
+
+        Dim mStrCom As String
+
+        mStrCom = "UPDATE rUsuarioPatente " &
+                   "SET m_negada = '" & pDTO.M_negada & "'," &
+                      "dvh = " & pDTO.Dvh &
+                     " where is_Usuario = " & pDTO.Id_Usuario &
+                      "and id_patente = " & pDTO.Id_Patente
+        Try
+            Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
+        Catch ex As Exception
+            Throw New ApplicationException("Fallo al modificar el familia patente.", ex)
+        End Try
+
+    End Sub
 End Class
 
