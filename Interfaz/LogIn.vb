@@ -76,7 +76,7 @@ Public Class LogIn
         Me.Visible = True
         Me.txtUsuario.Focus()
         Me.txtUsuario.Text = "Cgomez"
-        Me.txtPassword.Text = "1739273234"
+        Me.txtPassword.Text = "123"
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

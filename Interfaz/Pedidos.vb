@@ -388,4 +388,62 @@ Imports System.DateTime
         mForm.ShowDialog(Me)
         ActualizarGrilla()
     End Sub
+
+    Private Sub btnEnviar_bebidas_Click(sender As Object, e As EventArgs) Handles btnEnviar_bebidas.Click
+        If Me.dgvBebidas.Rows.Count > 0 AndAlso Me.dgvBebidas.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(5).Value)
+            Dim mForm As New AsocPedidoBebida
+            mForm.Operacion = AsocPedidoBebida.TipoOperacion.Finalizar
+            mForm.PedidoBebidaAEditar = mPedido.ObtenerPedidoBebidaPorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
+    End Sub
+
+    Private Sub btnFinalizar_bebidas_Click(sender As Object, e As EventArgs) Handles btnFinalizar_bebidas.Click
+        If Me.dgvBebidas.Rows.Count > 0 AndAlso Me.dgvBebidas.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(5).Value)
+            Dim mForm As New AsocPedidoBebida
+            mForm.Operacion = AsocPedidoBebida.TipoOperacion.Finalizar
+            mForm.PedidoBebidaAEditar = mPedido.ObtenerPedidoBebidaPorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
+    End Sub
+
+    Private Sub btnEliminar_bebidas_Click(sender As Object, e As EventArgs) Handles btnEliminar_bebidas.Click
+        If Me.dgvBebidas.Rows.Count > 0 AndAlso Me.dgvBebidas.SelectedRows.Count = 1 Then
+            Dim mIndice As Integer = CInt(dgvBebidas.SelectedRows(0).Cells(5).Value)
+            Dim mForm As New AsocPedidoBebida
+            mForm.Operacion = AsocPedidoBebida.TipoOperacion.Baja
+            mForm.PedidoBebidaAEditar = mPedido.ObtenerPedidoBebidaPorIndice(mIndice)
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.ShowDialog(Me)
+            ActualizarGrilla()
+        End If
+    End Sub
+
+    Private Sub btnEnviarTodo_Click(sender As Object, e As EventArgs) Handles btnEnviarTodo.Click
+        dgvPlatos.DataSource = mPedido.PedidoPlato
+        If dgvPlatos.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvPlatos.Rows.Count - 1
+                Dim mPlato As New Negocio.Negocio.Plato
+                mPlato.Cargar(CInt(dgvPlatos.Rows(i).Cells(1).Value))
+                dgvPlatos.Rows(i).Cells(2).Value = mPlato.descripcionCorta
+                dgvPlatos.Rows(i).Cells(7).Value = EstadoPlatoBebida("P")
+            Next
+        End If
+
+        dgvBebidas.DataSource = mPedido.PedidoBebida
+        If dgvBebidas.Rows.Count > 0 Then
+            For i As Integer = 0 To dgvBebidas.Rows.Count - 1
+                Dim mBebida As New Negocio.Negocio.Bebida
+                mBebida.Cargar(CInt(dgvBebidas.Rows(i).Cells(1).Value))
+                dgvBebidas.Rows(i).Cells(2).Value = mBebida.descripcionCorta
+                dgvBebidas.Rows(i).Cells(7).Value = EstadoPlatoBebida("P")
+            Next
+        End If
+    End Sub
 End Class
