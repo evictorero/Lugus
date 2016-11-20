@@ -49,7 +49,7 @@ Public Class Usuarios
                 .Item(1).Width = 125
                 .Item(1).Visible = False
 
-                .Add("cDescripcion", "Descripcion")
+                .Add("cDescripcion", "Descripción")
                 .Item(2).DataPropertyName = "Descripcion"
                 .Item(2).Width = 150
                 .Item(2).Visible = True
@@ -93,7 +93,7 @@ Public Class Usuarios
                 .Item(1).Width = 125
                 .Item(1).Visible = False
 
-                .Add("cDescripcion", "Descripcion")
+                .Add("cDescripcion", "Descripción")
                 .Item(2).DataPropertyName = "Descripcion"
                 .Item(2).Width = 250
                 .Item(2).Visible = True
@@ -138,6 +138,11 @@ Public Class Usuarios
                 End If
                 ActualizarGrilla()
         End Select
+
+        Me.KeyPreview = True
+        AddHandler Me.KeyUp, AddressOf Ayuda
+
+        ToolTip()
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 
@@ -255,6 +260,30 @@ Public Class Usuarios
             mForm.StartPosition = FormStartPosition.CenterParent
             mForm.ShowDialog(Me)
             ActualizarGrilla()
+        End If
+    End Sub
+
+    Sub ToolTip()
+        ToolTip1.SetToolTip(btnAgregarPatente, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar una patente."))
+        ToolTip1.SetToolTip(btnEliminarPatente, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar una patente"))
+        ToolTip1.SetToolTip(btnAgregarFamilia, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar una familia."))
+        ToolTip1.SetToolTip(btnEliminarFamilia, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar una familia."))
+        ToolTip1.SetToolTip(btnGuardar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Guardar los cambios realizados."))
+        ToolTip1.SetToolTip(btnCancelar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Cancelar los cambios realizados."))
+
+        ToolTip1.SetToolTip(txtDNI, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Debe ingresar un numero positivo."))
+        ToolTip1.SetToolTip(txtFecha_Nacimiento, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Debe ingresar una menor al dia de hoy."))
+
+    End Sub
+
+    Private Sub Ayuda(ByVal o As Object, ByVal e As KeyEventArgs)
+        e.SuppressKeyPress = True
+        If e.KeyCode = Keys.F1 Then
+            Dim mForm As New msgMensaje
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los usuarios.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, agregarle y quitarle tanto familias como patentes.")
+            mForm.ShowDialog(Me)
         End If
     End Sub
 

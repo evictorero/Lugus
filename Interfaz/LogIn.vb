@@ -45,7 +45,7 @@ Public Class LogIn
                 MsgBox("No se pudo establecer la conexión con la base de datos, verifique el string de conexión.")
                 Button1.Visible = True
             End If
-        End If
+            End If
 
     End Sub
 

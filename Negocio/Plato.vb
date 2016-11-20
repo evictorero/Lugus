@@ -125,12 +125,12 @@ Namespace Negocio
             If mId = 0 Then
                 mDTO.id = Datos.PlatoDatos.ObtenerProximoId()
                 Datos.PlatoDatos.GuardarNuevo(mDTO)
-                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Creacion de Plato: " & mDTO.descripcionCorta, "Media")
+                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Creacion de Plato: " & mDTO.descripcionLarga, "Media")
                 mBitacora.Guardar()
             Else
                 mDTO.id = Me.id
                 Datos.PlatoDatos.GuardarModificacion(mDTO)
-                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Modificacion de Plato: " & mDTO.descripcionCorta, "Media")
+                Dim mBitacora As New Negocio.Bitacora(mDTO.id, "Modificacion de Plato: " & mDTO.descripcionLarga, "Media")
                 mBitacora.Guardar()
             End If
 

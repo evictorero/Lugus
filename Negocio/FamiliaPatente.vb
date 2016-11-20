@@ -170,6 +170,13 @@ Namespace Negocio
                 Try
                     If Not EsFamiliaPatenteEsencial(mId_familia, mId_Patente) Then
                         Datos.FamiliaPatenteDatos.Eliminar(mId_familia, mId_Patente)
+
+                        'Recalculo del digito verificador vertical
+                        Dim mDVV As New Negocio.DigitoVerificador("rFamiliaPatente")
+                        mDVV.tabla = "rFamiliaPatente"
+                        mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rFamiliaPatente")
+                        mDVV.Guardar()
+
                     Else
                         Throw New Exception
                     End If

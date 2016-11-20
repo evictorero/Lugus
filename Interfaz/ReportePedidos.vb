@@ -11,6 +11,8 @@ Public Class ReportePedidos
         cmbEstado.Items.Add(New DictionaryEntry("EN CURSO", "E"))
         cmbEstado.Items.Add(New DictionaryEntry("FINALIZADO", "F"))
 
+        cmbEstado.SelectedIndex = 0
+
         dtpFechaDesde.CustomFormat = "dd/MM/yyyy"
         dtpFechaHasta.CustomFormat = "dd/MM/yyyy"
     End Sub
@@ -26,10 +28,6 @@ Public Class ReportePedidos
         If chkEstado.Checked Then
             mEstado = Nothing
         Else
-
-            'If Me.cmbEstado.SelectedItem.Value = "" Then
-            '    MessageBox.Show(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Debe Seleccionar un valor"))
-            'End If
             mEstado = Me.cmbEstado.SelectedItem.Value
         End If
 
@@ -69,7 +67,4 @@ Public Class ReportePedidos
         End If
     End Sub
 
-    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
-
-    End Sub
 End Class

@@ -141,9 +141,10 @@ Namespace Negocio
         Public Overridable Function ListarConFiltro(ByVal pUsuario As Integer,
                                                     ByVal pFechaDesde As Date,
                                                     ByVal pFechaHasta As Date,
-                                                    ByVal pCriticidad As String) As Collections.Generic.List(Of Bitacora)
+                                                    ByVal pCriticidad As String,
+                                                    ByVal pOrden As String) As Collections.Generic.List(Of Bitacora)
             Dim mCol As New Collections.Generic.List(Of Bitacora)
-            Dim mColDTO As List(Of DTO.BitacoraDTO) = Datos.BitacoraDatos.ListarConFiltro(pUsuario, pFechaDesde, pFechaHasta, pCriticidad)
+            Dim mColDTO As List(Of DTO.BitacoraDTO) = Datos.BitacoraDatos.ListarConFiltro(pUsuario, pFechaDesde, pFechaHasta, pCriticidad, pOrden)
 
             For Each mDTO As DTO.BitacoraDTO In mColDTO
                 mCol.Add(New Negocio.Bitacora(mDTO))

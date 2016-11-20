@@ -16,10 +16,6 @@ Public Class ReporteUsuarios
         cbDescripcionFamilia.ValueMember = "id"
     End Sub
 
-    Private Sub ReportViewer1_Load(sender As Object, e As EventArgs) Handles ReportViewer1.Load
-
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_ejecutar.Click
         Dim rptDataSource As ReportDataSource
 

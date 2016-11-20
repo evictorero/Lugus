@@ -319,8 +319,10 @@ Namespace Negocio
                         Case IColeccionable.EstadosColeccion.Borrado
                             Me.mFamiliaPatente(x - mEliminados).Eliminar()
                             Me.mFamiliaPatente.RemoveAt(Me.mFamiliaPatente(x - mEliminados).IndiceColeccion)
+
                             mEliminados += 1
-                            mReacomodar = True
+                            ' mReacomodar = True
+                            Me.ReacomodarIndices()
 
                         Case IColeccionable.EstadosColeccion.Quitado
                             Me.mFamiliaPatente.RemoveAt(Me.mFamiliaPatente(x - mEliminados).IndiceColeccion)

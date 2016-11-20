@@ -22,6 +22,7 @@ Partial Class UsuarioABM
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.dgv_Usuarios = New System.Windows.Forms.DataGridView()
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
@@ -31,6 +32,11 @@ Partial Class UsuarioABM
         Me.BackgroundWorker2 = New System.ComponentModel.BackgroundWorker()
         Me.btnBlanquear = New System.Windows.Forms.Button()
         Me.txtMensaje = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip3 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip4 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip5 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.dgv_Usuarios, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -135,4 +141,9 @@ Partial Class UsuarioABM
     Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnBlanquear As Button
     Friend WithEvents txtMensaje As Label
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents ToolTip2 As ToolTip
+    Friend WithEvents ToolTip3 As ToolTip
+    Friend WithEvents ToolTip4 As ToolTip
+    Friend WithEvents ToolTip5 As ToolTip
 End Class

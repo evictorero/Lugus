@@ -27,7 +27,7 @@ Public Class BackupDatos
     Public Shared Sub Restaurar(ByVal pRuta As String)
         Dim mStrCom As String
 
-        mStrCom = "USE [MASTER] ALTER DATABASE [lugus] SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE [lugus] FROM  DISK = N'" & pRuta & "' WITH  FILE = 1,  NOUNLOAD,  STATS = 5 ALTER DATABASE [lugus] SET MULTI_USER "
+        mStrCom = "USE [MASTER] ALTER DATABASE [lugus] SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE [lugus] FROM  DISK = N'" & pRuta & "' WITH  FILE = 1,  REPLACE, NOUNLOAD,  STATS = 5 ALTER DATABASE [lugus] SET MULTI_USER "
 
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)

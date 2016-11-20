@@ -174,6 +174,12 @@ Namespace Negocio
                 Try
 
                     Datos.UsuarioPatenteDatos.Eliminar(mId_usuario, mId_Patente)
+                    'Recalculo del digito verificador vertical
+                    Dim mDVV As New Negocio.DigitoVerificador("rUsuarioPatente")
+                    mDVV.tabla = "rUsuarioPatente"
+                    mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rUsuarioPatente")
+                    mDVV.Guardar()
+
                 Catch ex As Exception
 
                     Throw New ApplicationException("Error al borrar la Usuario Patente especificada.", ex)

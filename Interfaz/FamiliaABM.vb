@@ -77,6 +77,10 @@ Public Class FamiliaABM
             MsgBox(ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Acceso Restringido"))
         End If
 
+        Me.KeyPreview = True
+        AddHandler Me.KeyUp, AddressOf Ayuda
+
+        ToolTip()
     End Sub
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Try
@@ -161,6 +165,7 @@ Public Class FamiliaABM
         If TieneAccesoAlta = True Then
             Me.btnNuevo.Enabled = True
         End If
+
     End Sub
 #End Region
 
@@ -249,6 +254,25 @@ Public Class FamiliaABM
         Next
         Return tieneAcceso
     End Function
+
+    Sub ToolTip()
+        ToolTip1.SetToolTip(btnNuevo, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Crear una familia nueva."))
+        ToolTip1.SetToolTip(btnModificar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Modificar una familia."))
+        ToolTip1.SetToolTip(btnEliminar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Dar de baja una familia."))
+        ToolTip1.SetToolTip(btnRehabilitar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Rehabilitar una familia."))
+    End Sub
+
+    Private Sub Ayuda(ByVal o As Object, ByVal e As KeyEventArgs)
+        e.SuppressKeyPress = True
+        If e.KeyCode = Keys.F1 Then
+            Dim mForm As New msgMensaje
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar las familias.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar una nueva familia, modificarla, eliminarla y rehabilitarla.")
+            mForm.ShowDialog(Me)
+        End If
+    End Sub
 
 #End Region
 

@@ -112,6 +112,11 @@ Public Class Familias
         End Select
         ActualizarBotones()
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+
+        Me.KeyPreview = True
+        AddHandler Me.KeyUp, AddressOf Ayuda
+
+        ToolTip()
     End Sub
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
@@ -181,6 +186,28 @@ Public Class Familias
             mForm.ShowDialog(Me)
             ActualizarGrilla()
         End If
+    End Sub
+
+    Sub ToolTip()
+        ToolTip1.SetToolTip(btnAgregar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar una patente."))
+        ToolTip1.SetToolTip(btnEliminar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar una patente"))
+        ToolTip1.SetToolTip(btnGuardar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Guardar los cambios realizados."))
+        ToolTip1.SetToolTip(btnCancelar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Cancelar los cambios realizados."))
+    End Sub
+
+    Private Sub Ayuda(ByVal o As Object, ByVal e As KeyEventArgs)
+        e.SuppressKeyPress = True
+        If e.KeyCode = Keys.F1 Then
+            Dim mForm As New msgMensaje
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar las familias.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar una nueva familia, modificarla, agregarle y quitarle patentes.")
+            mForm.ShowDialog(Me)
+        End If
+    End Sub
+
+    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+
     End Sub
 #End Region
 

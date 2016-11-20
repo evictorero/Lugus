@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class msgMensaje
+Partial Class ReporteBitacora
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,31 +22,16 @@ Partial Class msgMensaje
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(44, 35)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(569, 248)
-        Me.TextBox1.TabIndex = 0
-        '
-        'msgMensaje
+        'ReporteBitacora
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(650, 317)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Name = "msgMensaje"
-        Me.Text = "Ayuda"
+        Me.ClientSize = New System.Drawing.Size(965, 559)
+        Me.Name = "ReporteBitacora"
+        Me.Text = "ReporteBitacora"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents TextBox1 As TextBox
 End Class

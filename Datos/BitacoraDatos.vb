@@ -7,9 +7,13 @@ Public Class BitacoraDatos
     Public Shared Sub GuardarNuevo(ByVal pDTO As DTO.BitacoraDTO)
         Dim mStrCom As String
 
+        'Facultad
+        ' "(" & pDTO.id & "," & pDTO.idUsuario & ",'" & pDTO.descripcionLarga & "','" & Format(pDTO.fecha, "dd/MM/yyyy HH:mm:ss") & "'," & pDTO.dvh & ",'" & pDTO.criticidad & "')"
+        'Casa
         mStrCom = "INSERT INTO dbo.bBitacora (id_bitacora,id_usuario,descripcion_larga,fecha,dvh,criticidad)" &
         " VALUES " &
         "(" & pDTO.id & "," & pDTO.idUsuario & ",'" & pDTO.descripcionLarga & "','" & Format(pDTO.fecha, "yyyy/MM/dd HH:mm:ss") & "'," & pDTO.dvh & ",'" & pDTO.criticidad & "')"
+
         Try
             Datos.ProveedorDeDatos.DB.ExecuteNonQuery(mStrCom)
         Catch ex As Exception
@@ -34,7 +38,8 @@ Public Class BitacoraDatos
     Public Shared Function ListarConFiltro(ByVal pUsuario As Integer,
                                            ByVal pFechaDesde As Date,
                                            ByVal pFechaHasta As Date,
-                                           ByVal pCriticidad As String) As List(Of DTO.BitacoraDTO)
+                                           ByVal pCriticidad As String,
+                                           ByVal pOrden As String) As List(Of DTO.BitacoraDTO)
         Dim mCol As New List(Of DTO.BitacoraDTO)
         Dim mCondicion As String = "WHERE 1=1"
 
@@ -43,12 +48,16 @@ Public Class BitacoraDatos
             mCondicion = mCondicion & " AND id_usuario = " & pUsuario
         End If
 
-        If Format(pFechaDesde, "yyyy/MM/dd") <> "0001/01/01" Then
-            mCondicion = mCondicion & " AND fecha BETWEEN '" & Format(pFechaDesde, "yyyy/MM/dd") & "' AND '" & Format(pFechaHasta, "yyyy/MM/dd") & "'"
+        If Format(pFechaDesde, "dd/MM/yyyy") <> "01/01/0001" Then
+            mCondicion = mCondicion & " AND fecha BETWEEN '" & Format(pFechaDesde, "dd/MM/yyyy") & "' AND '" & Format(pFechaHasta, "dd/MM/yyyy") & "'"
         End If
 
         If Not IsNothing(pCriticidad) Then
             mCondicion = mCondicion & " AND criticidad = '" & pCriticidad & "'"
+        End If
+
+        If Not IsNothing(pOrden) Then
+            mCondicion = mCondicion & " order by   '" & pOrden & "'"
         End If
 
         mStrCom = "SELECT id_bitacora,id_usuario,descripcion_larga,fecha,dvh,criticidad " &

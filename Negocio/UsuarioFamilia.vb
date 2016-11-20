@@ -170,6 +170,13 @@ Namespace Negocio
             If mId_Familia > 0 And mId_usuario > 0 Then
                 Try
                     Datos.UsuarioFamiliaDatos.Eliminar(mId_usuario, mId_Familia)
+
+                    'Recalculo del digito verificador vertical
+                    Dim mDVV As New Negocio.DigitoVerificador("rUsuarioFamilia")
+                    mDVV.tabla = "rUsuarioFamilia"
+                    mDVV.valor = Negocio.DigitoVerificador.CalcularDVV("rUsuarioFamilia")
+                    mDVV.Guardar()
+
                 Catch ex As Exception
                     Throw New ApplicationException("Error al borrar la usuario patente especificada.", ex)
                 End Try

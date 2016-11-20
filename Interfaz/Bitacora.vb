@@ -1,8 +1,16 @@
 ﻿Imports Negocio.Negocio.Traductor
+Imports System.Data.OleDb
+Imports Excel = Microsoft.Office.Interop.Excel
+Imports System.IO
+
 
 Public Class Bitacora
-    Private Sub Bitacora_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Dim APP As New Excel.Application
+    Dim worksheet As Excel.Worksheet
+    Dim workbook As Excel.Workbook
+    Dim excelLocation As String = "C:\Celes\test.xlsx"
 
+    Private Sub Bitacora_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim listaUsuarios As List(Of Negocio.Negocio.Usuario) = (New Negocio.Negocio.Usuario).Listar
 
@@ -68,6 +76,7 @@ Public Class Bitacora
         Dim mFechaDesde As Date
         Dim mFechaHasta As Date
         Dim mCriticidad As String
+        Dim mOrden As String
 
         ' lleno los parámetros del filtro, si tilda todos envío NULL
         If chkUsuario.Checked Then
@@ -96,10 +105,19 @@ Public Class Bitacora
             End If
         End If
 
+        If OrdenarCriticidad.Checked Then
+            mOrden = "criticidad"
+        ElseIf OrdenarFecha.Checked Then
+            mOrden = "fecha"
+        Else
+            mOrden = "id_usuario"
+        End If
+
         Me.dvgBitacora.DataSource = (New Negocio.Negocio.Bitacora).ListarConFiltro(mUsuario,
                                                                                    mFechaDesde,
                                                                                    mFechaHasta,
-                                                                                   mCriticidad)
+                                                                                   mCriticidad,
+                                                                                   mOrden)
 
         If Me.dvgBitacora.RowCount = 0 Then
             Me.txtMensaje.Text = ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen bitácoras ingresadas en el sistema")
@@ -108,7 +126,7 @@ Public Class Bitacora
         End If
     End Sub
 
-    Private Sub chkUsuario_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsuario.CheckedChanged
+    Private Sub chkUsuario_CheckedChanged(sender As Object, e As EventArgs)
         If chkUsuario.Checked Then
             cmbUsuario.Enabled = False
         Else
@@ -116,7 +134,7 @@ Public Class Bitacora
         End If
     End Sub
 
-    Private Sub chkFechas_CheckedChanged(sender As Object, e As EventArgs) Handles chkFechas.CheckedChanged
+    Private Sub chkFechas_CheckedChanged(sender As Object, e As EventArgs)
         If chkFechas.Checked Then
             dtpFechaDesde.Enabled = False
             dtpFechaHasta.Enabled = False
@@ -126,7 +144,7 @@ Public Class Bitacora
         End If
     End Sub
 
-    Private Sub chkCriticidad_CheckedChanged(sender As Object, e As EventArgs) Handles chkCriticidad.CheckedChanged
+    Private Sub chkCriticidad_CheckedChanged(sender As Object, e As EventArgs)
         If chkCriticidad.Checked Then
             rbtnAlta.Enabled = False
             rbtnMedia.Enabled = False
@@ -137,4 +155,62 @@ Public Class Bitacora
             rbtnBaja.Enabled = True
         End If
     End Sub
+
+    Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
+
+
+        Dim folderDialog As FolderBrowserDialog = New FolderBrowserDialog()
+        If folderDialog.ShowDialog() = DialogResult.OK Then
+            excelLocation = folderDialog.SelectedPath
+
+            excelLocation = excelLocation.TrimEnd("\\") & "\"
+
+
+            If Directory.Exists(excelLocation) = False Then ' si no existe la carpeta se crea
+                Directory.CreateDirectory(excelLocation)
+            End If
+
+            excelLocation = excelLocation & "ReporteBitacora.xls"
+
+            If Dir(excelLocation) = "" Then
+
+                With APP
+                    '.Visible = True
+                    'Asi creas el Libro de Excel
+                    .Workbooks.Add()
+                    'Asi Guardas el Libro de Excel
+                    .ActiveWorkbook.SaveAs(excelLocation)
+                End With
+            End If
+
+            workbook = APP.Workbooks.Open(excelLocation)
+            worksheet = workbook.Worksheets("sheet1")
+
+            'Export Header Names Start
+            Dim columnsCount As Integer = dvgBitacora.Columns.Count
+            For Each column In dvgBitacora.Columns
+                worksheet.Cells(1, column.Index + 1).Value = column.Name
+            Next
+            'Export Header Name End
+            Me.Cursor = Cursors.WaitCursor
+
+            'Export Each Row Start
+            For i As Integer = 0 To dvgBitacora.Rows.Count - 1
+                Dim columnIndex As Integer = 0
+                Do Until columnIndex = columnsCount
+                    worksheet.Cells(i + 2, columnIndex + 1).Value = dvgBitacora.Item(columnIndex, i).Value.ToString
+                    columnIndex += 1
+                Loop
+            Next
+
+            Me.Cursor = Cursors.Default
+
+            'Export Each Row End
+            workbook.Save()
+            workbook.Close()
+
+            MsgBox("Exportado correctamente")
+        End If
+    End Sub
+
 End Class

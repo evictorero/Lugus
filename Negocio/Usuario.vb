@@ -666,13 +666,11 @@ Namespace Negocio
                             Me.mUsuarioPatente(x - mEliminados).EstadoColeccion = IColeccionable.EstadosColeccion.SinCambio
 
                         Case IColeccionable.EstadosColeccion.Borrado
-
-
                             Me.mUsuarioPatente(x - mEliminados).Eliminar()
-                                    Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
+                            Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
                                     mEliminados += 1
-                                    mReacomodar = True
-
+                            '  mReacomodar = True
+                            Me.ReacomodarIndices()
                         Case IColeccionable.EstadosColeccion.Quitado
                             Me.mUsuarioPatente.RemoveAt(Me.mUsuarioPatente(x - mEliminados).IndiceColeccion)
                             mEliminados += 1
@@ -771,7 +769,8 @@ Namespace Negocio
                             Me.mUsuarioFamilia(x - mEliminados).Eliminar()
                             Me.mUsuarioFamilia.RemoveAt(Me.mUsuarioFamilia(x - mEliminados).IndiceColeccion)
                             mEliminados += 1
-                            mReacomodar = True
+                            'mReacomodar = True
+                            Me.ReacomodarIndices()
 
                         Case IColeccionable.EstadosColeccion.Quitado
                             Me.mUsuarioFamilia.RemoveAt(Me.mUsuarioFamilia(x - mEliminados).IndiceColeccion)

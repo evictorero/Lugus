@@ -22,6 +22,7 @@ Partial Class Pedidos
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Bebidas = New System.Windows.Forms.GroupBox()
         Me.btnFinalizar_bebidas = New System.Windows.Forms.Button()
         Me.dgvBebidas = New System.Windows.Forms.DataGridView()
@@ -51,6 +52,7 @@ Partial Class Pedidos
         Me.btnFinalizar = New System.Windows.Forms.Button()
         Me.btnReabrir = New System.Windows.Forms.Button()
         Me.lblTitulo = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Bebidas.SuspendLayout()
         CType(Me.dgvBebidas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -420,4 +422,5 @@ Partial Class Pedidos
     Friend WithEvents btnFinalizar As Button
     Friend WithEvents btnReabrir As Button
     Friend WithEvents lblTitulo As Label
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

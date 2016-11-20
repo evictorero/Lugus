@@ -22,6 +22,7 @@ Partial Class Familias
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -37,6 +38,8 @@ Partial Class Familias
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.dgvFamiliaPatentes = New System.Windows.Forms.DataGridView()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgvFamiliaPatentes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -197,11 +200,21 @@ Partial Class Familias
         Me.dgvFamiliaPatentes.Size = New System.Drawing.Size(391, 158)
         Me.dgvFamiliaPatentes.TabIndex = 0
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(563, 25)
+        Me.ToolStrip1.TabIndex = 25
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
         'Familias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(563, 573)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnGuardar)
@@ -214,6 +227,7 @@ Partial Class Familias
         Me.GroupBox2.ResumeLayout(False)
         CType(Me.dgvFamiliaPatentes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -232,4 +246,6 @@ Partial Class Familias
     Friend WithEvents btnAgregar As Button
     Friend WithEvents dgvFamiliaPatentes As DataGridView
     Friend WithEvents lblTitulo As Label
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents ToolStrip1 As ToolStrip
 End Class

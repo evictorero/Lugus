@@ -28,7 +28,7 @@ Imports Negocio.Negocio.UsuarioPatente
                     '.Item(0).Width = 100
                     .Item(0).Visible = False
 
-                    .Add("cDescripcion", "Descripcion")
+                    .Add("cDescripcion", "Descripción")
                     .Item(1).DataPropertyName = "descripcion"
                     .Item(1).Width = 100
 
@@ -42,7 +42,7 @@ Imports Negocio.Negocio.UsuarioPatente
                     .Item(3).Width = 100
                     .Item(3).Visible = True
 
-                    .Add("cfechaBaja", "Fecha de baja")
+                    .Add("cfechaBaja", "Fecha de Finalización")
                     .Item(4).DataPropertyName = "fechaBaja"
                     .Item(4).Width = 100
                     .Item(4).DefaultCellStyle.Format = "dd/MM/yyyy"
@@ -77,6 +77,10 @@ Imports Negocio.Negocio.UsuarioPatente
             Me.dgvPedidos.ClearSelection()
 
             Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
+            Me.KeyPreview = True
+            AddHandler Me.KeyUp, AddressOf Ayuda
+
+            ToolTip()
         Else
             Me.Close()
             MsgBox("Acceso Restringido")
@@ -277,6 +281,25 @@ Imports Negocio.Negocio.UsuarioPatente
 
         Return "I"
     End Function
+
+    Sub ToolTip()
+        ToolTip1.SetToolTip(btnNuevo, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Crear un pedido nuevo."))
+        ToolTip1.SetToolTip(btnModificar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Modificar un pedido."))
+        ToolTip1.SetToolTip(btnFinalizar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Dar por finalizado un pedido."))
+        ToolTip1.SetToolTip(btnReabrir, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Reabrir un pedido."))
+    End Sub
+
+    Private Sub Ayuda(ByVal o As Object, ByVal e As KeyEventArgs)
+        e.SuppressKeyPress = True
+        If e.KeyCode = Keys.F1 Then
+            Dim mForm As New msgMensaje
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los Pedidos.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo pedido, modificarlo y reabrirlo.")
+            mForm.ShowDialog(Me)
+        End If
+    End Sub
 #End Region
 
 End Class

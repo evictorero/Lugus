@@ -40,7 +40,7 @@ Public Class UsuarioABM
                     .Item(3).DataPropertyName = "Apellido"
                     .Item(3).Width = 100
 
-                    .Add("cdni", "dni")
+                    .Add("cdni", "DNI")
                     .Item(4).DataPropertyName = "dni"
                     .Item(4).Width = 100
 
@@ -84,6 +84,10 @@ Public Class UsuarioABM
             MsgBox("Acceso Restringido")
         End If
 
+        Me.KeyPreview = True
+        AddHandler Me.KeyUp, AddressOf Ayuda
+
+        ToolTip()
     End Sub
 #End Region
 
@@ -132,7 +136,6 @@ Public Class UsuarioABM
 
     End Sub
 
-
     Private Sub btnRehabilitar_Click(sender As Object, e As EventArgs) Handles btnRehabilitar.Click
         Dim mId As Integer = CInt(Me.dgv_Usuarios.SelectedRows(0).Cells(0).Value)
         Dim Usuario As New Negocio.Negocio.Usuario(mId)
@@ -143,7 +146,6 @@ Public Class UsuarioABM
         End If
         ActualizarGrilla()
     End Sub
-
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         Dim mForm As New Usuarios
@@ -207,6 +209,7 @@ Public Class UsuarioABM
         End If
         ActualizarGrilla()
     End Sub
+
     Public Function TienePermisoAcceso() As Boolean
         'Patentes 18 19 20 21
         Dim tieneAcceso As Boolean = False
@@ -289,6 +292,27 @@ Public Class UsuarioABM
         End If
         Return True
     End Function
+
+    Sub ToolTip()
+        ToolTip1.SetToolTip(btnNuevo, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Crear un usuario nuevo."))
+        ToolTip2.SetToolTip(btnModificar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Modificar un usuario."))
+        ToolTip3.SetToolTip(btnEliminar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Dar de baja un usuario."))
+        ToolTip4.SetToolTip(btnRehabilitar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Rehabilitar un usuario."))
+        ToolTip5.SetToolTip(btnBlanquear, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para blanquear clave de usuario e intentos inválidos."))
+    End Sub
+
+    Private Sub Ayuda(ByVal o As Object, ByVal e As KeyEventArgs)
+        e.SuppressKeyPress = True
+        If e.KeyCode = Keys.F1 Then
+            Dim mForm As New msgMensaje
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los usuarios.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, eliminarlo, rehabilitarlo y blanquear su clave.")
+            mForm.ShowDialog(Me)
+        End If
+    End Sub
+
 #End Region
 
 End Class

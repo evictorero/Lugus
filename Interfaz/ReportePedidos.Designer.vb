@@ -38,6 +38,7 @@ Partial Class ReportePedidos
         Me.btn_ejecutar = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         CType(Me.PedidoBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -60,9 +61,9 @@ Partial Class ReportePedidos
         Me.GroupBox2.Controls.Add(Me.cmbEstado)
         Me.GroupBox2.Controls.Add(Me.btn_ejecutar)
         Me.GroupBox2.Location = New System.Drawing.Point(16, 15)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(953, 121)
         Me.GroupBox2.TabIndex = 29
         Me.GroupBox2.TabStop = False
@@ -107,7 +108,7 @@ Partial Class ReportePedidos
         '
         Me.chkFechas.AutoSize = True
         Me.chkFechas.Location = New System.Drawing.Point(664, 84)
-        Me.chkFechas.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkFechas.Margin = New System.Windows.Forms.Padding(4)
         Me.chkFechas.Name = "chkFechas"
         Me.chkFechas.Size = New System.Drawing.Size(18, 17)
         Me.chkFechas.TabIndex = 27
@@ -117,7 +118,7 @@ Partial Class ReportePedidos
         '
         Me.chkEstado.AutoSize = True
         Me.chkEstado.Location = New System.Drawing.Point(664, 38)
-        Me.chkEstado.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkEstado.Margin = New System.Windows.Forms.Padding(4)
         Me.chkEstado.Name = "chkEstado"
         Me.chkEstado.Size = New System.Drawing.Size(18, 17)
         Me.chkEstado.TabIndex = 26
@@ -127,7 +128,7 @@ Partial Class ReportePedidos
         '
         Me.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFechaHasta.Location = New System.Drawing.Point(411, 80)
-        Me.dtpFechaHasta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFechaHasta.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFechaHasta.Name = "dtpFechaHasta"
         Me.dtpFechaHasta.Size = New System.Drawing.Size(111, 22)
         Me.dtpFechaHasta.TabIndex = 25
@@ -137,7 +138,7 @@ Partial Class ReportePedidos
         '
         Me.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFechaDesde.Location = New System.Drawing.Point(143, 80)
-        Me.dtpFechaDesde.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFechaDesde.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFechaDesde.Name = "dtpFechaDesde"
         Me.dtpFechaDesde.Size = New System.Drawing.Size(111, 22)
         Me.dtpFechaDesde.TabIndex = 24
@@ -157,7 +158,7 @@ Partial Class ReportePedidos
         'btn_ejecutar
         '
         Me.btn_ejecutar.Location = New System.Drawing.Point(809, 82)
-        Me.btn_ejecutar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_ejecutar.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_ejecutar.Name = "btn_ejecutar"
         Me.btn_ejecutar.Size = New System.Drawing.Size(100, 28)
         Me.btn_ejecutar.TabIndex = 21
@@ -168,9 +169,9 @@ Partial Class ReportePedidos
         '
         Me.GroupBox1.Controls.Add(Me.ReportViewer1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 138)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(957, 380)
         Me.GroupBox1.TabIndex = 28
         Me.GroupBox1.TabStop = False
@@ -184,7 +185,7 @@ Partial Class ReportePedidos
         Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource1)
         Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "Interfaz.ReportePedidos.rdlc"
         Me.ReportViewer1.Location = New System.Drawing.Point(4, 19)
-        Me.ReportViewer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ReportViewer1.Margin = New System.Windows.Forms.Padding(4)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.Size = New System.Drawing.Size(949, 357)
         Me.ReportViewer1.TabIndex = 0
@@ -196,7 +197,7 @@ Partial Class ReportePedidos
         Me.ClientSize = New System.Drawing.Size(992, 546)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ReportePedidos"
         Me.Text = "ReportePedidos"
         CType(Me.PedidoBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -220,4 +221,5 @@ Partial Class ReportePedidos
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Private WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

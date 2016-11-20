@@ -22,12 +22,14 @@ Partial Class FamiliaABM
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.dgvFamilias = New System.Windows.Forms.DataGridView()
         Me.btnRehabilitar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
         Me.txtMensaje = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.dgvFamilias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -117,4 +119,5 @@ Partial Class FamiliaABM
     Friend WithEvents btnModificar As Button
     Friend WithEvents btnNuevo As Button
     Friend WithEvents txtMensaje As Label
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

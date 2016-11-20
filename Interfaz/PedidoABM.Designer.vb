@@ -22,12 +22,14 @@ Partial Class PedidoABM
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnReabrir = New System.Windows.Forms.Button()
         Me.btnFinalizar = New System.Windows.Forms.Button()
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
         Me.dgvPedidos = New System.Windows.Forms.DataGridView()
         Me.txtMensaje = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.dgvPedidos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -117,4 +119,5 @@ Partial Class PedidoABM
     Friend WithEvents btnNuevo As Button
     Friend WithEvents dgvPedidos As DataGridView
     Friend WithEvents txtMensaje As Label
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

@@ -9,21 +9,22 @@ Imports System.DateTime
     Friend mOperacion As TipoOperacion
 
     Friend Enum TipoOperacion
-            Alta = 1
-            Baja = 2
-            Modificacion = 3
-            Rehabilitar = 4
-        End Enum
-        Friend Property PedidoAEditar() As Negocio.Negocio.Pedido
-            Get
-                Return mPedido
-            End Get
-            Set(ByVal value As Negocio.Negocio.Pedido)
-                mPedido = value
-            End Set
-        End Property
+        Alta = 1
+        Baja = 2
+        Modificacion = 3
+        Rehabilitar = 4
+    End Enum
 
-        Private Sub Pedidos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Friend Property PedidoAEditar() As Negocio.Negocio.Pedido
+        Get
+            Return mPedido
+        End Get
+        Set(ByVal value As Negocio.Negocio.Pedido)
+            mPedido = value
+        End Set
+    End Property
+
+    Private Sub Pedidos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Visible = True
         Me.txtDescripcion.Focus()
 
@@ -147,6 +148,12 @@ Imports System.DateTime
                 End If
                 ActualizarGrilla()
         End Select
+
+        Me.KeyPreview = True
+        AddHandler Me.KeyUp, AddressOf Ayuda
+
+        ToolTip()
+
         Negocio.Negocio.Traductor.TraducirVentana(Me, Principal.UsuarioEnSesion.id_idioma)
     End Sub
 
@@ -188,6 +195,7 @@ Imports System.DateTime
         End Try
 
     End Sub
+
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
             Select Case mOperacion
                 Case TipoOperacion.Alta
@@ -226,6 +234,7 @@ Imports System.DateTime
         End If
 
     End Sub
+
     Public Function TienePermisoAcceso() As Boolean
         'Patentes 9 10 11 12
         Dim tieneAcceso As Boolean = False
@@ -257,6 +266,7 @@ Imports System.DateTime
         Next
         Return tieneAcceso
     End Function
+
     Public Function SePuedeEliminar(ByVal pId As Integer) As Boolean
         'Dim pUsuario As New Negocio.Negocio.Usuario(pId)
         'If pUsuario.UsuarioPatente.Count > 0 Then
@@ -291,6 +301,7 @@ Imports System.DateTime
 
         Return "I"
     End Function
+
     Public Function EstadoPlatoBebida(pEstado As String) As String
         Select Case pEstado
             Case "INGRESADO"
@@ -401,7 +412,7 @@ Imports System.DateTime
         If Me.dgvBebidas.Rows.Count > 0 AndAlso Me.dgvBebidas.SelectedRows.Count = 1 Then
             Dim mIndice As Integer = CInt(Me.dgvBebidas.SelectedRows(0).Cells(5).Value)
             Dim mForm As New AsocPedidoBebida
-            mForm.Operacion = AsocPedidoBebida.TipoOperacion.Finalizar
+            mForm.Operacion = AsocPedidoBebida.TipoOperacion.Enviar
             mForm.PedidoBebidaAEditar = mPedido.ObtenerPedidoBebidaPorIndice(mIndice)
             mForm.StartPosition = FormStartPosition.CenterParent
             mForm.ShowDialog(Me)
@@ -434,24 +445,63 @@ Imports System.DateTime
     End Sub
 
     Private Sub btnEnviarTodo_Click(sender As Object, e As EventArgs) Handles btnEnviarTodo.Click
+        Dim mPedidoPlato As Negocio.Negocio.PedidoPlato
+
         dgvPlatos.DataSource = mPedido.PedidoPlato
         If dgvPlatos.Rows.Count > 0 Then
             For i As Integer = 0 To dgvPlatos.Rows.Count - 1
-                Dim mPlato As New Negocio.Negocio.Plato
-                mPlato.Cargar(CInt(dgvPlatos.Rows(i).Cells(1).Value))
-                dgvPlatos.Rows(i).Cells(2).Value = mPlato.descripcionCorta
-                dgvPlatos.Rows(i).Cells(7).Value = EstadoPlatoBebida("P")
+                Dim mIndice As Integer = CInt(Me.dgvPlatos.Rows(i).Cells(5).Value)
+                mPedidoPlato = mPedido.ObtenerPedidoPlatoPorIndice(mIndice)
+                If mPedidoPlato.Estado = "I" Then
+                    mPedidoPlato.Estado = "P"
+                    mPedido.ModificarPedidoPlato(mPedidoPlato)
+                End If
+                ActualizarGrilla()
             Next
         End If
 
+        Dim mPedidoBebida As Negocio.Negocio.PedidoBebida
         dgvBebidas.DataSource = mPedido.PedidoBebida
         If dgvBebidas.Rows.Count > 0 Then
             For i As Integer = 0 To dgvBebidas.Rows.Count - 1
-                Dim mBebida As New Negocio.Negocio.Bebida
-                mBebida.Cargar(CInt(dgvBebidas.Rows(i).Cells(1).Value))
-                dgvBebidas.Rows(i).Cells(2).Value = mBebida.descripcionCorta
-                dgvBebidas.Rows(i).Cells(7).Value = EstadoPlatoBebida("P")
+                Dim mIndice As Integer = CInt(Me.dgvBebidas.Rows(i).Cells(5).Value)
+                mPedidoBebida = mPedido.ObtenerPedidoBebidaPorIndice(mIndice)
+                If mPedidoBebida.Estado = "I" Then
+                    mPedidoBebida.Estado = "P"
+                    mPedido.ModificarPedidoBebida(mPedidoBebida)
+                End If
+                ActualizarGrilla()
             Next
+        End If
+    End Sub
+
+    Sub ToolTip()
+        ToolTip1.SetToolTip(btnAgregar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar una bebida."))
+        ToolTip1.SetToolTip(btnAgregar_Platos, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar un plato."))
+
+        ToolTip1.SetToolTip(btnFinalizar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar una bebida."))
+        ToolTip1.SetToolTip(btnFinalizar_plato, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar un plato."))
+
+        ToolTip1.SetToolTip(btnEnviar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Enviar la bebida a cocina."))
+        ToolTip1.SetToolTip(btnEnviar_plato, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Enviar el plato a cocina."))
+
+        ToolTip1.SetToolTip(btnEliminar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Finalizar la bebida."))
+        ToolTip1.SetToolTip(btnEliminar_platos, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Finalizar el Plato."))
+
+        ToolTip1.SetToolTip(btnFinalizar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Dar por Finalizado el pedido."))
+        ToolTip1.SetToolTip(btnEnviarTodo, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Enviar todo el Pedido Pendiente a Cocina."))
+        ToolTip1.SetToolTip(btnGuardar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Guardar los cambios realizados."))
+        ToolTip1.SetToolTip(btnCancelar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Cancelar los cambios realizados."))
+    End Sub
+
+    Private Sub Ayuda(ByVal o As Object, ByVal e As KeyEventArgs)
+        e.SuppressKeyPress = True
+        If e.KeyCode = Keys.F1 Then
+            Dim mForm As New msgMensaje
+            mForm.StartPosition = FormStartPosition.CenterParent
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los Pedidos.") & "
+" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, agregarle y quitarle tanto familias como patentes.")
+            mForm.ShowDialog(Me)
         End If
     End Sub
 End Class
