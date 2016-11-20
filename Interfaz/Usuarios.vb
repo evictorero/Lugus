@@ -281,8 +281,8 @@ Public Class Usuarios
         If e.KeyCode = Keys.F1 Then
             Dim mForm As New msgMensaje
             mForm.StartPosition = FormStartPosition.CenterParent
-            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los usuarios.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, agregarle y quitarle tanto familias como patentes.")
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los usuarios.") & Environment.NewLine &
+                                   Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, agregarle y quitarle tanto familias como patentes.")
             mForm.ShowDialog(Me)
         End If
     End Sub

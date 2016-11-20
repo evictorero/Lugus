@@ -267,9 +267,9 @@ Public Class FamiliaABM
         If e.KeyCode = Keys.F1 Then
             Dim mForm As New msgMensaje
             mForm.StartPosition = FormStartPosition.CenterParent
-            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar las familias.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar una nueva familia, modificarla, eliminarla y rehabilitarla.")
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar las familias.") & Environment.NewLine &
+            Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & Environment.NewLine &
+            Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar una nueva familia, modificarla, eliminarla y rehabilitarla.")
             mForm.ShowDialog(Me)
         End If
     End Sub

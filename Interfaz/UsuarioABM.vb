@@ -306,9 +306,9 @@ Public Class UsuarioABM
         If e.KeyCode = Keys.F1 Then
             Dim mForm As New msgMensaje
             mForm.StartPosition = FormStartPosition.CenterParent
-            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los usuarios.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, eliminarlo, rehabilitarlo y blanquear su clave.")
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los usuarios.") & Environment.NewLine &
+                                Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Los botones se habilitarán según los permisos asignados.") & Environment.NewLine &
+                                 Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, eliminarlo, rehabilitarlo y blanquear su clave.")
             mForm.ShowDialog(Me)
         End If
     End Sub

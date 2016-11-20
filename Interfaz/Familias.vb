@@ -200,8 +200,8 @@ Public Class Familias
         If e.KeyCode = Keys.F1 Then
             Dim mForm As New msgMensaje
             mForm.StartPosition = FormStartPosition.CenterParent
-            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar las familias.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar una nueva familia, modificarla, agregarle y quitarle patentes.")
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar las familias.") & Environment.NewLine &
+                                 Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar una nueva familia, modificarla, agregarle y quitarle patentes.")
             mForm.ShowDialog(Me)
         End If
     End Sub
