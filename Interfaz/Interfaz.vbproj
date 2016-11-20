@@ -332,6 +332,7 @@
     <EmbeddedResource Include="FamiliaABM.resx">
       <DependentUpon>FamiliaABM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReporteBitacora.rdlc" />
     <EmbeddedResource Include="ReporteBitacora.resx">
       <DependentUpon>ReporteBitacora.vb</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +404,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\Negocio.Negocio.Bitacora.datasource" />
     <None Include="My Project\DataSources\Negocio.Negocio.Pedido.datasource" />
     <None Include="My Project\DataSources\Negocio.Negocio.PedidoBebida.datasource" />
     <None Include="My Project\DataSources\Negocio.Negocio.PedidoPlato.datasource" />

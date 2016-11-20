@@ -23,24 +23,36 @@ Partial Class msgMensaje
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(44, 35)
+        Me.TextBox1.Location = New System.Drawing.Point(33, 28)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(569, 248)
-        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Size = New System.Drawing.Size(426, 193)
+        Me.TextBox1.TabIndex = 2
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(380, 226)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(61, 24)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Volver"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'msgMensaje
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(650, 317)
+        Me.ClientSize = New System.Drawing.Size(488, 258)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox1)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "msgMensaje"
         Me.Text = "Ayuda"
         Me.ResumeLayout(False)
@@ -49,4 +61,5 @@ Partial Class msgMensaje
     End Sub
 
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

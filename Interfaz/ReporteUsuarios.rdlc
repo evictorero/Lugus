@@ -358,11 +358,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <DataSetName>DataSetUsuarios</DataSetName>
         <Top>0.3175cm</Top>
         <Left>0.36724cm</Left>
-        <Height>1.22646cm</Height>
-        <Width>17.31543cm</Width>
+        <Height>1.2cm</Height>
+        <Width>17.31545cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

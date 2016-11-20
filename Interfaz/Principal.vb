@@ -19,10 +19,6 @@ Public Class Principal
 
     End Sub
 
-    Private Sub AdministracionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdministracionToolStripMenuItem.Click
-
-    End Sub
-
     Private Sub AdministrarUsuarioToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AdministrarUsuarioToolStripMenuItem1.Click
         UsuarioABM.Show()
 
@@ -219,5 +215,9 @@ Public Class Principal
 
     Private Sub PedidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PedidosToolStripMenuItem.Click
         ReportePedidos.Show()
+    End Sub
+
+    Private Sub BitacoraToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles BitacoraToolStripMenuItem1.Click
+        ReporteBitacora.Show()
     End Sub
 End Class

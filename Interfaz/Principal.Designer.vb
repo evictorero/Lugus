@@ -35,6 +35,7 @@ Partial Class Principal
         Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsuariosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BitacoraToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ServiciosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IdiomaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CambiarContraseñaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -122,7 +123,7 @@ Partial Class Principal
         '
         'ReportesToolStripMenuItem
         '
-        Me.ReportesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsuariosToolStripMenuItem, Me.PedidosToolStripMenuItem})
+        Me.ReportesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsuariosToolStripMenuItem, Me.PedidosToolStripMenuItem, Me.BitacoraToolStripMenuItem1})
         Me.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem"
         Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
         Me.ReportesToolStripMenuItem.Text = "Reportes"
@@ -138,6 +139,12 @@ Partial Class Principal
         Me.PedidosToolStripMenuItem.Name = "PedidosToolStripMenuItem"
         Me.PedidosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PedidosToolStripMenuItem.Text = "Pedidos"
+        '
+        'BitacoraToolStripMenuItem1
+        '
+        Me.BitacoraToolStripMenuItem1.Name = "BitacoraToolStripMenuItem1"
+        Me.BitacoraToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.BitacoraToolStripMenuItem1.Text = "Bitácora"
         '
         'ServiciosToolStripMenuItem
         '
@@ -270,4 +277,5 @@ Partial Class Principal
     Friend WithEvents AdministrarPlatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RegenerarDigitosVerificadoresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DatosDeConexiónToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BitacoraToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class
