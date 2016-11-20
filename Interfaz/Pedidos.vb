@@ -446,7 +446,7 @@ Imports System.DateTime
 
     Private Sub btnEnviarTodo_Click(sender As Object, e As EventArgs) Handles btnEnviarTodo.Click
         Dim mPedidoPlato As Negocio.Negocio.PedidoPlato
-
+        Dim ContadorPlatos As Integer = 0
         dgvPlatos.DataSource = mPedido.PedidoPlato
         If dgvPlatos.Rows.Count > 0 Then
             For i As Integer = 0 To dgvPlatos.Rows.Count - 1
@@ -455,12 +455,15 @@ Imports System.DateTime
                 If mPedidoPlato.Estado = "I" Then
                     mPedidoPlato.Estado = "P"
                     mPedido.ModificarPedidoPlato(mPedidoPlato)
+                    ContadorPlatos = 1
                 End If
                 ActualizarGrilla()
             Next
         End If
 
         Dim mPedidoBebida As Negocio.Negocio.PedidoBebida
+        Dim ContadorBebidas As Integer = 0
+
         dgvBebidas.DataSource = mPedido.PedidoBebida
         If dgvBebidas.Rows.Count > 0 Then
             For i As Integer = 0 To dgvBebidas.Rows.Count - 1
@@ -469,9 +472,16 @@ Imports System.DateTime
                 If mPedidoBebida.Estado = "I" Then
                     mPedidoBebida.Estado = "P"
                     mPedido.ModificarPedidoBebida(mPedidoBebida)
+                    ContadorBebidas = 1
                 End If
                 ActualizarGrilla()
             Next
+        End If
+        If ContadorPlatos = 0 Then
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen platos Ingresados para Enviar a Pendiente."))
+        End If
+        If ContadorBebidas = 0 Then
+            MessageBox.Show(Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "No existen bebidas Ingresadas para Enviar a Pendiente."))
         End If
     End Sub
 
@@ -479,14 +489,14 @@ Imports System.DateTime
         ToolTip1.SetToolTip(btnAgregar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar una bebida."))
         ToolTip1.SetToolTip(btnAgregar_Platos, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Agregar un plato."))
 
-        ToolTip1.SetToolTip(btnFinalizar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar una bebida."))
-        ToolTip1.SetToolTip(btnFinalizar_plato, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar un plato."))
+        ToolTip1.SetToolTip(btnEliminar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar una bebida."))
+        ToolTip1.SetToolTip(btnEliminar_platos, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Eliminar un plato."))
 
         ToolTip1.SetToolTip(btnEnviar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Enviar la bebida a cocina."))
         ToolTip1.SetToolTip(btnEnviar_plato, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Enviar el plato a cocina."))
 
-        ToolTip1.SetToolTip(btnEliminar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Finalizar la bebida."))
-        ToolTip1.SetToolTip(btnEliminar_platos, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Finalizar el Plato."))
+        ToolTip1.SetToolTip(btnFinalizar_bebidas, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Finalizar la bebida."))
+        ToolTip1.SetToolTip(btnFinalizar_plato, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Finalizar el Plato."))
 
         ToolTip1.SetToolTip(btnFinalizar, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Dar por Finalizado el pedido."))
         ToolTip1.SetToolTip(btnEnviarTodo, Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Presione para Enviar todo el Pedido Pendiente a Cocina."))
@@ -499,8 +509,8 @@ Imports System.DateTime
         If e.KeyCode = Keys.F1 Then
             Dim mForm As New msgMensaje
             mForm.StartPosition = FormStartPosition.CenterParent
-            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los Pedidos.") & "
-" & Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, agregarle y quitarle tanto familias como patentes.")
+            mForm.TextBox1.Text = Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Este formulario permitirá administrar los Pedidos.") & Environment.NewLine &
+                                   Negocio.Negocio.Traductor.ObtenerTraduccion(Principal.UsuarioEnSesion.id_idioma, "Podrá generar un nuevo usuario, modificarlo, agregarle y quitarle tanto familias como patentes.") & Environment.NewLine
             mForm.ShowDialog(Me)
         End If
     End Sub
