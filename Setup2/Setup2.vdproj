@@ -688,7 +688,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup2"
+        "ProductName" = "8:Lugus"
         "ProductCode" = "8:{87F7579C-30AA-4913-80D9-CDB18C6554B7}"
         "PackageCode" = "8:{C212A69E-7EEF-4839-9CD9-3532B085B837}"
         "UpgradeCode" = "8:{74819496-28A6-498C-A59E-61DE1547EA47}"
